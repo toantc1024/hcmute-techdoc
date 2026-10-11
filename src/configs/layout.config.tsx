@@ -1,5 +1,5 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
-import { brandConfig, gitConfig } from './app.config';
+import { brandConfig } from './app.config';
 
 export function baseOptions(): BaseLayoutProps {
   return {
@@ -12,6 +12,12 @@ export function baseOptions(): BaseLayoutProps {
         </span>
       ),
     },
-    githubUrl: 'https://github.com/' + gitConfig.user + '/' + gitConfig.repo,
+    links: [
+      {
+        text: 'Hệ thống Website Đơn vị',
+        url: '/docs/08-truy-cap-nhanh-he-thong-website/01-danh-sach-website-chinh-thuc',
+        active: 'nested-url',
+      },
+    ],
   };
 }
