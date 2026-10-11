@@ -17,7 +17,9 @@ import {
   LifeBuoy,
   Keyboard,
   ExternalLink,
-  Users
+  Users,
+  Printer,
+  Download
 } from 'lucide-react';
 
 // 6 Thẻ tác vụ thường dùng với tên gần gũi thực tế
@@ -208,6 +210,135 @@ export default function HomePage() {
                 </div>
               </Link>
             ))}
+          </div>
+        </section>
+
+        {/* KHỐI NỔI BẬT: SỔ TAY QUẢN TRỊ BỎ TÚI 2 TRANG A4 (POCKET GUIDE) */}
+        <section className="w-full mb-20 text-left">
+          <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 via-card/90 to-card p-6 sm:p-8 backdrop-blur-xs shadow-md">
+            
+            {/* Vòng sáng trang trí nền */}
+            <div className="pointer-events-none absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-primary/10 blur-3xl -z-10" />
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              
+              {/* Cột thông tin giới thiệu */}
+              <div className="lg:col-span-7">
+                <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/15 px-3 py-1 text-xs font-semibold text-primary mb-3.5">
+                  <Sparkles className="size-3.5" />
+                  <span>Sổ tay bỏ túi 2 trang A4 · Phiên bản v2.4 (Tháng 10/2026)</span>
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight leading-snug mb-3">
+                  Sổ tay Quản trị Website Bỏ túi (Pocket Guide)
+                </h3>
+
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-5">
+                  Cẩm nang cô đọng chuẩn hóa dành cho Thầy/Cô Biên tập viên và Quản trị viên: tóm tắt 3 cấu trúc cốt lõi, quy trình 3 luồng tác vụ, bảng phím tắt &amp; thông số vàng, checklist 7 điểm kiểm soát xuất bản và bảng tra cứu xử lý 7 sự cố thường gặp.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-medium text-foreground/90 mb-6">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="size-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                    <span>In ấn chuẩn 2 trang A4 để bàn làm việc</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="size-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                    <span>Bảng phím tắt &amp; kích thước ảnh 16:9</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="size-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                    <span>Checklist 7 điểm vàng trước khi công bố</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="size-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                    <span>Khắc phục 7 sự cố dứt điểm trong 30 giây</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3">
+                  <Link
+                    href="/pocket-guide"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs sm:text-sm shadow-md hover:opacity-90 active:scale-95 transition-all"
+                  >
+                    <Printer className="size-4" />
+                    <span>Mở Sổ tay &amp; In / Tải PDF (2 Trang)</span>
+                  </Link>
+
+                  <Link
+                    href="/docs/06-kiem-tra-va-tro-ly/02-checklist-kiem-tra-cong-bo"
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-border bg-card/80 hover:bg-muted font-semibold text-xs sm:text-sm text-foreground transition-all"
+                  >
+                    <span>Checklist 7 điểm chi tiết</span>
+                    <ArrowRight className="size-3.5" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Cột mô phỏng 2 trang A4 trực quan */}
+              <div className="lg:col-span-5 flex justify-center">
+                <Link
+                  href="/pocket-guide"
+                  className="group relative flex items-center justify-center p-4 transition-transform hover:scale-105"
+                  title="Bấm để xem và in Sổ tay bỏ túi 2 trang"
+                >
+                  {/* Trang 1 mockup */}
+                  <div className="w-36 sm:w-44 h-52 sm:h-64 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-xl p-3 flex flex-col justify-between transform -rotate-3 transition-transform group-hover:-rotate-6">
+                    <div>
+                      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-1.5 mb-2">
+                        <span className="text-[8px] font-black text-[#0072BC]">HCM-UTE</span>
+                        <span className="text-[7px] font-bold px-1 bg-blue-100 dark:bg-blue-900/60 text-blue-800 dark:text-blue-300 rounded">TRANG 1/2</span>
+                      </div>
+                      <div className="text-[9px] font-bold text-slate-800 dark:text-slate-200 leading-tight mb-1">
+                        SỔ TAY QUẢN TRỊ BỎ TÚI
+                      </div>
+                      <div className="space-y-1">
+                        <div className="h-1.5 bg-blue-100 dark:bg-blue-950 rounded w-full" />
+                        <div className="h-1.5 bg-slate-100 dark:bg-slate-800 rounded w-5/6" />
+                        <div className="h-1.5 bg-emerald-100 dark:bg-emerald-950 rounded w-4/6" />
+                      </div>
+                      <div className="mt-2 text-[7px] text-slate-500 font-mono">
+                        • 3 Luồng tác vụ chính<br />
+                        • Bảng phím tắt vàng<br />
+                        • Kích thước ảnh 16:9
+                      </div>
+                    </div>
+                    <div className="text-[6.5px] text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-1">
+                      doc.utehub.vn
+                    </div>
+                  </div>
+
+                  {/* Trang 2 mockup */}
+                  <div className="w-36 sm:w-44 h-52 sm:h-64 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-2xl p-3 flex flex-col justify-between transform rotate-3 -ml-10 transition-transform group-hover:rotate-6">
+                    <div>
+                      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-1.5 mb-2">
+                        <span className="text-[8px] font-black text-[#0072BC]">HCM-UTE</span>
+                        <span className="text-[7px] font-bold px-1 bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 rounded">TRANG 2/2</span>
+                      </div>
+                      <div className="text-[9px] font-bold text-slate-800 dark:text-slate-200 leading-tight mb-1">
+                        CHECKLIST &amp; XỬ LÝ SỰ CỐ
+                      </div>
+                      <div className="space-y-1">
+                        <div className="h-1.5 bg-amber-100 dark:bg-amber-950 rounded w-full" />
+                        <div className="h-1.5 bg-slate-100 dark:bg-slate-800 rounded w-4/6" />
+                        <div className="h-1.5 bg-rose-100 dark:bg-rose-950 rounded w-5/6" />
+                      </div>
+                      <div className="mt-2 text-[7px] text-slate-500 font-mono">
+                        • Checklist 7 điểm vàng<br />
+                        • Bảng 7 sự cố 30 giây<br />
+                        • Danh bạ BMC / TTMT
+                      </div>
+                    </div>
+                    <div className="text-[6.5px] text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-1">
+                      doc.utehub.vn
+                    </div>
+                  </div>
+
+                </Link>
+              </div>
+
+            </div>
+
           </div>
         </section>
 

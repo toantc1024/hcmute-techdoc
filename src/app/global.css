@@ -372,3 +372,42 @@ img, svg, video, iframe {
   overflow-wrap: break-word !important;
   line-height: 1.45 !important;
 }
+
+
+/* =========================================================================
+   SỔ TAY QUẢN TRỊ BỎ TÚI (POCKET GUIDE - 2 TRANG A4)
+   ========================================================================= */
+.no-print {
+  /* Hiển thị trên màn hình bình thường */
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .pocket-guide-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .pocket-page {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .pocket-page:last-child {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+}

@@ -15,6 +15,7 @@ import { getPageImageUrl, getPageMarkdownUrl, gitConfig } from '@/lib/shared';
 import { ExportPdfButton } from '@/components/ExportPdfButton';
 import { MobileOverviewTrigger } from '@/components/MobileOverviewTrigger';
 import { DocumentMetaBar } from '@/components/DocumentMetaBar';
+import { ArticleFeedback } from '@/components/ArticleFeedback';
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
@@ -58,6 +59,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
           })}
         />
       </DocsBody>
+      <ArticleFeedback articleTitle={page.data.title} />
     </DocsPage>
   );
 }
