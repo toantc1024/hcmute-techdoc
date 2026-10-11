@@ -32,7 +32,14 @@ Vì bạn chạy trong môi trường tự chủ (Agent-First):
 2. **Review qua Artifacts:** Khi tạo code mới, hãy đảm bảo hiển thị rõ ràng qua Artifact Review để user kiểm tra nhanh bằng `Ctrl + R` (hoặc `Cmd + R`).
 3. **Xử lý lỗi (Error Handling):** Bọc các đoạn code bất đồng bộ hoặc gọi API bằng block `try/catch`. Luôn log lỗi chi tiết ra console để dễ debug qua Terminal.
 4. **Tự động chạy thử:** Sau khi viết code, hãy chủ động gọi Terminal để chạy lệnh test (`pytest`, `npm test`...) nhằm xác nhận code chạy đúng trước khi bàn giao cho user.
+5. **Kiểm tra chính tả & Viết hoa:** Trước khi xuất kết quả (code comment, tài liệu Markdown, chat), hãy tự quét lại toàn bộ văn bản để sửa tất cả các từ bị lỗi viết hoa bừa bãi (phải đưa về dạng "Chữ cái đầu cụm từ viết hoa, các chữ sau viết thường").
 
 ## 5. NGUYÊN TẮC PHẢN HỒI
 - Luôn trả lời bằng **Tiếng Việt** (trừ tên biến, tên hàm, log và comment trong code phải viết bằng Tiếng Anh).
 - Đi thẳng vào vấn đề, đưa ra giải pháp code trước, giải thích ngắn gọn lý do sau.
+- **Quy tắc viết hoa (Capitalization Rule):** 
+  - Khi viết tài liệu, comment, tài liệu hướng dẫn (documentation), hay phản hồi bằng Tiếng Việt, bạn PHẢI tuân thủ quy tắc viết hoa thông thường (Sentence case).
+  - CHỈ viết hoa chữ cái đầu tiên của câu hoặc của cụm từ. 
+  - Tuyệt đối KHÔNG viết hoa chữ cái đầu của tất cả các từ trong cụm (Title case) trừ khi đó là Tên riêng hoặc Danh từ riêng được định nghĩa cụ thể.
+  - Ví dụ sai: "Cấu Trúc Thư Mục", "Bộ Tài Liệu", "Quy Trình Làm Việc".
+  - Ví dụ đúng: "Cấu trúc thư mục", "Bộ tài liệu", "Quy trình làm việc".
