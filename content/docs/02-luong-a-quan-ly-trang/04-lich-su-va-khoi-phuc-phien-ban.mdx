@@ -39,3 +39,15 @@ Hệ thống tự động lưu trữ các mốc thay đổi của trang, giúp n
 2. Kiểm tra tên trang, thời điểm và nội dung hiển thị thử nghiệm.
 3. Bấm nút **Khôi phục**.
 4. Hệ thống cập nhật Canvas về trạng thái cũ; kiểm tra lại tổng thể rồi bấm **Lưu thay đổi** hoặc **Xuất bản**.
+
+---
+
+## 3. Các tình huống thường gặp và cách xử lý
+
+### Tình huống 1: Làm sao để kiểm tra ai đã sửa đổi bố cục trang và vào thời gian nào?
+* **Nguyên nhân:** Hệ thống ghi nhận nhật ký kiểm toán bất biến (*Immutable Audit Logging* - tiêu chuẩn SC.1 và Revision Snapshots - tiêu chuẩn PW.11).
+* **Cách xử lý:** Vào tab **Lịch sử phiên bản**, danh sách hiển thị chi tiết tên người sửa, email `@hcmute.edu.vn`, địa chỉ IP và thời gian chính xác đến từng giây.
+
+### Tình huống 2: Khôi phục phiên bản cũ có làm mất các phiên bản mới hơn đã tạo không?
+* **Nguyên nhân:** Cơ chế an toàn dữ liệu không bao giờ ghi đè làm mất lịch sử (*Non-destructive Version Restoration*).
+* **Cách xử lý:** Khi bấm **Khôi phục về phiên bản này**, hệ thống sẽ tạo thêm một bản ghi phiên bản mới nhất mang nội dung của bản cũ. Toàn bộ lịch sử các bản sửa đổi trước đó vẫn được lưu giữ đầy đủ để Thầy/Cô có thể quay lại bất cứ lúc nào.

@@ -42,3 +42,22 @@ Chức năng **Ban hành văn bản** phục vụ việc công khai các văn b�
     * Bấm **Lưu** (lưu nháp) hoặc **Lưu & Hiện ngay** nếu văn bản đã sẵn sàng công khai trên cổng thông tin.
   </Step>
 </Steps>
+
+---
+
+## Các tình huống thường gặp và cách xử lý
+
+### Tình huống 1: Tải tệp văn bản PDF lên bị hệ thống từ chối hoặc tự động xóa?
+* **Nguyên nhân:** Hệ thống áp dụng quy trình kiểm soát an ninh đa tầng (*ClamAV Antivirus Zero-Trust Pipeline* - tiêu chuẩn FM.1). Toàn bộ tệp tải lên đều được tự động quét virus và mã độc. Các tệp chứa mã macro đáng ngờ, tệp bị hỏng cấu trúc hoặc tệp thực thi đội lốt sẽ bị chặn ngay lập tức để bảo vệ an toàn cho thiết bị của người tải về.
+* **Cách xử lý:** Thầy/Cô kiểm tra lại tệp tin, xuất lại file PDF chuẩn từ phần mềm Microsoft Word hoặc Adobe Acrobat sạch trước khi tải lên lại.
+
+### Tình huống 2: Sao chép đường link tệp gửi qua Zalo thì người khác bấm vào báo hết hạn hoặc không xem được?
+* **Nguyên nhân:** Đối với các văn bản nội bộ cần bảo vệ, hệ thống áp dụng cơ chế cấp liên kết có thời hạn an toàn (*Presigned URL Strategy* - tiêu chuẩn FM.5) nhằm ngăn chặn tình trạng lộ lọt tài liệu mật ra ngoài internet.
+* **Cách xử lý:** Người nhận văn bản cần truy cập trực tiếp vào website và đăng nhập bằng tài khoản nội bộ có thẩm quyền để mở tệp. Đối với văn bản công khai cho sinh viên, đảm bảo đã chọn chế độ "Công khai toàn trường".
+
+### Tình huống 3: Làm sao đảm bảo tệp quyết định tải về không bị can thiệp tráo đổi số hiệu?
+* **Nguyên nhân:** Hệ thống tự động gắn mã băm vân tay số (*SHA-256 Checksum Validation* - tiêu chuẩn FM.3) ngay khi tệp được tải lên.
+* **Cách xử lý:** Mỗi lần người dùng tải tệp về, hệ thống đối soát mã băm để đảm bảo tính toàn vẹn 100% nguyên bản, phục vụ công tác đối chiếu pháp lý và kiểm định học thuật.
+
+### Tình huống 4: Muốn tải gói lưu trữ toàn bộ văn bản và bài viết để in ấn báo cáo cuối năm?
+* **Cách xử lý:** Hệ thống hỗ trợ tính năng xuất bản tài liệu đa định dạng (*OpenPDF, Apache POI, Zip Archiver* - tiêu chuẩn PW.15), cho phép cán bộ tải về file Word (DOCX), PDF tổng hợp hoặc gói nén ZIP đầy đủ chỉ bằng 1 cú nhấp chuột.

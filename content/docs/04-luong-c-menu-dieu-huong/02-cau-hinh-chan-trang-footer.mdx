@@ -22,3 +22,15 @@ Tại `Website` → `Header & Footer` → Chọn tab **Chân trang**:
    * Địa chỉ trụ sở đơn vị (Số phòng, Tòa nhà, Số 01 Võ Văn Ngân, TP. Thủ Đức, TP.HCM).
    * Số điện thoại hotline, email công vụ `@hcmute.edu.vn`.
    * Khung nhúng bản đồ Google Maps chỉ đường.
+
+---
+
+## Các tình huống thường gặp và cách xử lý
+
+### Tình huống 1: Cập nhật logo hoặc số hotline của Khoa ở chân trang nhưng ra web vẫn hiện thông tin cũ?
+* **Nguyên nhân:** Thông tin thương hiệu chân trang được lưu trữ dạng siêu dữ liệu tập trung (*Redis Metadata Storage & Branding Injection* - tiêu chuẩn MT.2).
+* **Cách xử lý:** Sau khi bấm **Lưu cấu hình Chân trang**, bộ nhớ đệm sẽ tự xóa trong 1 phút. Hãy kiểm tra lại ở tab ẩn danh (Incognito) hoặc xóa cache trình duyệt để kiểm chứng kết quả.
+
+### Tình huống 2: Chân trang trên điện thoại di động hiển thị như thế nào?
+* **Nguyên nhân:** Giao diện chân trang được thiết kế đáp ứng hoàn toàn (*Responsive Design*).
+* **Cách xử lý:** Khi xem trên màn hình nhỏ, các cột liên kết sẽ tự động xếp chồng thông minh theo chiều dọc, số điện thoại hotline có thể bấm để gọi trực tiếp và bản đồ Google Maps tự co giãn vừa vặn với chiều rộng màn hình.

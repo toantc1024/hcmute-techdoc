@@ -44,3 +44,18 @@ Vào menu bên trái chọn **Người dùng**. Hệ thống định nghĩa 4 va
 * **Bộ lọc trạng thái:** *Tất cả, Hoạt động, Chờ xác minh, Đã khóa*.
 * **Thông tin hiển thị:** Họ tên, email trường, nhóm quyền, ngày tham gia và trạng thái.
 * **Nguyên tắc phân quyền:** Chỉ cấp quyền theo đúng chức năng nhiệm vụ được Lãnh đạo đơn vị phân công.
+
+---
+
+## Các tình huống thường gặp và cách xử lý
+
+### Tình huống 1: Phân quyền mới cho cán bộ thì sau bao lâu tài khoản có hiệu lực?
+* **Nguyên nhân:** Hệ thống áp dụng cơ chế làm mới phân quyền thời gian thực (*Dynamic Group Management & L1/L2 Cache Eviction* - tiêu chuẩn AA.4).
+* **Cách xử lý:** Phân quyền có hiệu lực ngay tức thì. Cán bộ được phân quyền không cần đăng xuất, chỉ cần bấm tải lại trang (`F5`) là thanh menu sẽ hiển thị đầy đủ các tính năng mới được cấp.
+
+### Tình huống 2: Người quản trị có thể xóa lịch sử duyệt bài hoặc nhật ký hoạt động của tài khoản không?
+* **Nguyên nhân:** Hệ thống ghi nhận nhật ký kiểm toán bất biến (*Immutable Audit Logging* - tiêu chuẩn SC.1).
+* **Cách xử lý:** Không một vai trò nào (kể cả Quản trị viên cấp cao) có quyền chỉnh sửa hoặc xóa nhật ký kiểm toán. Điều này đảm bảo tính minh bạch tuyệt đối, phục vụ công tác thanh tra đối soát và bảo vệ dữ liệu Nhà trường theo Luật An ninh mạng.
+
+### Tình huống 3: Cán bộ chuyển sang đơn vị công tác mới thì xử lý tài khoản như thế nào?
+* **Cách xử lý:** Quản trị viên chỉ cần vào màn hình quản lý người dùng, chọn thu hồi vai trò tại đơn vị cũ và gán vai trò tại đơn vị mới. Toàn bộ hồ sơ danh tính Google Workspace và lịch sử bài viết cũ của cán bộ vẫn được bảo lưu trọn vẹn.

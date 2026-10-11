@@ -45,3 +45,19 @@ Giao diện trình thiết kế chia làm 3 cột rõ ràng:
 * Bấm chọn khối trên Canvas → Nhìn sang bảng bên phải:
   * **Tab Nội dung:** Cập nhật tiêu đề, chữ hiệu ứng, link YouTube, nhãn badge, số liệu thống kê.
   * **Tab Kiểu dáng:** Căn lề, màu nền, khoảng cách đệm.
+
+---
+
+## 4. Các tình huống thường gặp và cách xử lý
+
+### Tình huống 1: Hình ảnh tải lên khối banner hoặc trình chiếu bị vỡ hạt hoặc méo tỷ lệ?
+* **Nguyên nhân:** Hệ thống áp dụng quy trình tự động xử lý hình ảnh (*Image Processing Pipeline* - tiêu chuẩn FM.2) theo tỷ lệ chuẩn **16:9** cho banner và **4:3** cho khối tin tức.
+* **Cách xử lý:** Tải ảnh có độ phân giải ngang tối thiểu 1200px (khuyến nghị 1920×1080px). Sử dụng công cụ cắt ảnh trực quan tích hợp sẵn trong trình duyệt để chọn đúng vùng trọng tâm.
+
+### Tình huống 2: Giao diện trên máy tính rất đẹp nhưng khi xem trên điện thoại các khối bị tràn viền?
+* **Nguyên nhân:** Một số khối có thể chứa hình ảnh hoặc bảng biểu có chiều rộng cố định.
+* **Cách xử lý:** Sử dụng nút **Xem trước (Preview) ở chế độ Mobile (75% - 100%)** ngay trên thanh công cụ phía trên để kiểm tra trước. Ưu tiên sử dụng các khối linh hoạt (flex/grid) có sẵn trong thư viện mẫu.
+
+### Tình huống 3: Đang dựng khối dở thì trình duyệt bị tắt đột ngột do mất điện?
+* **Nguyên nhân:** Hệ thống có tính năng tự động lưu nháp ngầm định kỳ (*Debounced Auto-save* - tiêu chuẩn PW.10).
+* **Cách xử lý:** Khi mở lại trang, hệ thống sẽ tự động hiển thị thanh thông báo: *"Phát hiện bản nháp chưa công bố lúc [giờ:phút]. Bạn có muốn khôi phục không?"* → bấm **Khôi phục** để tiếp tục công việc.

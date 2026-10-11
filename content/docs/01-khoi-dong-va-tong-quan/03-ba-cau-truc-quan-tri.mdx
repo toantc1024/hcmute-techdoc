@@ -45,3 +45,19 @@ Khi đơn vị muốn người đọc bấm vào Menu để xem toàn bộ Biể
     Khối hiển thị tự động lọc tất cả các văn bản thuộc `Chuyên mục VĂN BẢN` → `Biểu mẫu` để hiển thị danh sách cho người đọc tải về.
   </Step>
 </Steps>
+
+---
+
+## 3. Các tình huống thường gặp và cách xử lý
+
+### Tình huống 1: Tại sao bài viết của Khoa A không thể hiển thị trong chuyên mục của Khoa B?
+* **Nguyên nhân:** Hệ thống áp dụng cơ chế cách ly dữ liệu nội bộ nghiêm ngặt (*Row-Level Security & Storage Isolation* theo tiêu chuẩn MT.4). Toàn bộ bài viết, tệp tin và chuyên mục của đơn vị nào sẽ được bảo mật và tách biệt hoàn toàn với đơn vị khác.
+* **Cách xử lý:** Mỗi đơn vị chỉ quản lý không gian web của mình. Nếu muốn chia sẻ bài viết sang trang chủ Trường hoặc đơn vị khác, sử dụng tính năng **Quảng bá bài viết** (PW.13).
+
+### Tình huống 2: Tạo chuyên mục mới nhưng quên gắn bài viết thì trang hiển thị thế nào?
+* **Nguyên nhân:** Chuyên mục đóng vai trò như một thư mục phân loại. Nếu chuyên mục chưa có bài viết nào được xuất bản, khối hiển thị ngoài web sẽ để trống.
+* **Cách xử lý:** Sau khi tạo chuyên mục, Thầy/Cô cần vào soạn bài viết và tick chọn chuyên mục đó, hoặc gán các bài viết cũ vào chuyên mục mới.
+
+### Tình huống 3: Đã tạo trang và viết bài nhưng người đọc vào web lại không thấy ở đâu?
+* **Nguyên nhân:** Trang web và Menu là 2 cấu trúc độc lập. Việc tạo trang mới chỉ tạo ra đường dẫn URL, chứ hệ thống không tự động thêm nút bấm lên thanh điều hướng.
+* **Cách xử lý:** Vào **Luồng C: Cấu hình Menu** để thêm nút liên kết trỏ đến trang mới vừa tạo.

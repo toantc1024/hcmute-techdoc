@@ -65,3 +65,10 @@ Vào `Website` → `Header & Footer` → Chọn tab **Đầu trang**. Thư việ
 > * **Thêm / Sửa liên kết:** Bắt buộc nhập tên hiển thị và chọn đích đến (*Trang đã có* hoặc *Đường dẫn khác / Tab mới*).
 > * **Đổi thứ tự / Xóa:** Có thể dùng mũi tên di chuyển hoặc nút thùng rác rồi đi thẳng đến **Lưu thay đổi**.
 > * **Kiểm tra đa thiết bị:** Luôn mở website bấm thử liên kết trên cả **máy tính** và **điện thoại** để đảm bảo menu bung mở mượt mà.
+
+### Tình huống 1: Đổi thứ tự hoặc thêm liên kết trên Menu nhưng ra ngoài trang chủ chưa thấy thay đổi?
+* **Nguyên nhân:** Hệ thống áp dụng cơ chế bộ nhớ đệm đa tầng (*L1/L2 Cache Eviction*) để tối ưu tốc độ tải trang cực nhanh cho người dùng.
+* **Cách xử lý:** Sau khi bấm **Lưu thay đổi**, hệ thống sẽ tự động làm mới bộ nhớ đệm trong vòng 10 - 30 giây. Thầy/Cô có thể tải lại trang bằng tổ hợp phím `Ctrl + F5` (Windows) hoặc `Cmd + Shift + R` (Mac) để xem ngay giao diện mới nhất.
+
+### Tình huống 2: Liên kết dẫn đến các trang bên ngoài (như Cổng đăng ký học phần, Facebook) có cần lưu ý gì?
+* **Cách xử lý:** Bắt buộc bật công tắc **Mở tab mới (`_blank`)**. Thao tác này giúp người đọc không bị chuyển hẳn khỏi website của Trường, duy trì trải nghiệm liền mạch và giữ chân độc giả.

@@ -56,3 +56,38 @@ Vào menu trái `Quản lý nội dung` → chọn `Văn bản và bài viết`:
     Kiểm tra 4 chỉ báo: *Tiêu đề, Chuyên mục, Ảnh bìa, Nội dung*. Bấm **Xem trước** rồi bấm **Lưu** (Lưu nháp hoặc Gửi duyệt/Xuất bản theo quyền tài khoản).
   </Step>
 </Steps>
+
+---
+
+## 3. Quy trình duyệt bài và các tính năng nâng cao
+
+Hệ thống quản lý nội dung tích hợp các tiêu chuẩn kiểm duyệt và vận hành hiện đại:
+
+* **Khóa biên tập chống xung đột (PW.10):** Khi một cán bộ đang mở sửa bài viết, hệ thống tự động khóa tạm thời và cảnh báo cho người khác biết. Khi người trước kết thúc phiên làm việc hoặc lưu bài, khóa tự động giải phóng.
+* **Nhận xét trực tiếp trên văn bản (PW.7):** Người duyệt có thể bôi đen bất kỳ đoạn văn bản nào để để lại lời nhắn yêu cầu chỉnh sửa tương tự Google Docs. Tác giả nhận thông báo chuông và phản hồi trực tiếp.
+* **Hoàn trả bài viết theo cấp độ (PW.8):** Khi phát hiện lỗi biên tập nhỏ, người duyệt có thể trả bài viết về đúng cấp trước đó để sửa, không bắt buộc tác giả phải làm lại từ đầu quy trình.
+* **Cơ chế duyệt tin đồng thuận (PW.6):** Đối với các bài viết quan trọng yêu cầu hội đồng cùng duyệt, bài viết chỉ chuyển trạng thái xuất bản khi toàn bộ thành viên đều đồng thuận.
+* **Duyệt vượt cấp khẩn cấp (PW.9):** Lãnh đạo hoặc Quản trị viên cấp cao có thẩm quyền duyệt hỏa tốc để xuất bản ngay các thông tin đột xuất. Toàn bộ thao tác đều được ghi nhật ký kiểm toán minh bạch.
+* **Lập lịch xuất bản tự động (PW.14):** Cài đặt chính xác ngày và giờ hiển thị công khai bài viết trong tương lai (rất hữu ích cho các chiến dịch tuyển sinh hoặc sự kiện đúng giờ G).
+* **Quảng bá lên trang chủ Trường (PW.13):** Tích chọn đề xuất tin nổi bật của Khoa lên Cổng thông tin chính `hcmute.edu.vn`.
+
+---
+
+## 4. Các tình huống thường gặp và cách xử lý
+
+### Tình huống 1: Mở bài viết ra thấy thông báo "Bài viết đang được chỉnh sửa bởi [Tên cán bộ]"?
+* **Nguyên nhân:** Cơ chế khóa biên tập (*Redis Distributed Locking* - tiêu chuẩn PW.10) đang bảo vệ bài viết để tránh trường hợp 2 người cùng sửa rồi ghi đè làm mất nội dung của nhau.
+* **Cách xử lý:** Thầy/Cô có thể liên hệ nhanh với đồng nghiệp để nhắc lưu và đóng bài, hoặc chờ sau ít phút khi phiên làm việc của người trước hết hạn, hệ thống sẽ tự động mở khóa.
+
+### Tình huống 2: Người duyệt bài muốn chỉ rõ câu từ cần sửa thì thao tác thế nào?
+* **Cách xử lý:** Tại màn hình duyệt bài, bôi đen đoạn chữ cần sửa → biểu tượng nhận xét (*Comment*) hiện lên → nhập nội dung góp ý → bấm **Gửi nhận xét**. Tác giả bài viết sẽ nhận được chuông thông báo đẩy (*Server-Sent Events* - tiêu chuẩn NI.1) và nhìn thấy chính xác vị trí cần chỉnh sửa.
+
+### Tình huống 3: Bài viết chỉ sai một lỗi chính tả nhỏ, trả bài về có bắt duyệt lại từ đầu không?
+* **Nguyên nhân:** Cơ chế hoàn trả từng phần (*Partial Workflow Rewind* - tiêu chuẩn PW.8) cho phép trả về linh hoạt.
+* **Cách xử lý:** Người duyệt chọn **Hoàn trả về bước trước** (thay vì Từ chối toàn bộ). Tác giả sửa xong gửi thẳng lại người duyệt đó để xuất bản, tiết kiệm tối đa thời gian hành chính.
+
+### Tình huống 4: Làm thế nào để hẹn giờ tự động xuất bản tin tức vào lúc 08:00 sáng mai?
+* **Cách xử lý:** Tại mục lưu bài viết, chọn **Lập lịch xuất bản** → chọn ngày và giờ mong muốn → bấm Lưu. Đúng thời điểm cài đặt, hệ thống tác vụ chạy nền (*RabbitMQ Worker* - tiêu chuẩn PW.14) sẽ tự động kích hoạt hiển thị công khai trên website.
+
+### Tình huống 5: Làm thế nào để đề xuất bài viết xuất sắc của Khoa lên trang chủ Trường (hcmute.edu.vn)?
+* **Cách xử lý:** Trước khi xuất bản, Quản trị viên đơn vị tích chọn ô **Đề xuất lên trang chủ Trường**. Bài viết sẽ tự động xuất hiện trong hàng đợi phê duyệt của Ban biên tập trang chủ Nhà trường qua cơ chế nhân bản an toàn (*Cross-tenant Promotion* - tiêu chuẩn PW.13).

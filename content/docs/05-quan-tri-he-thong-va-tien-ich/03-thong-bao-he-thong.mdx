@@ -17,3 +17,19 @@ Biểu tượng **Chuông thông báo** ở góc trên bên phải giúp cán b�
    * Tài khoản thực hiện liên quan.
    * Thời điểm ghi nhận.
 3. Thanh công cụ có nút **Xóa tất cả** để dọn dẹp các thông báo đã đọc.
+
+---
+
+## Các tình huống thường gặp và cách xử lý
+
+### Tình huống 1: Có bài viết gửi duyệt nhưng không mở trình duyệt thì có biết được không?
+* **Nguyên nhân:** Hệ thống tích hợp kênh thông báo kép: Thông báo đẩy thời gian thực (*Server-Sent Events* - tiêu chuẩn NI.1) và Email thông báo tự động (*Thymeleaf HTML Email* - tiêu chuẩn NI.2).
+* **Cách xử lý:** Ngay khi bài viết được gửi duyệt, hệ thống tự động gửi email thông báo kèm đường link trực tiếp đến hộp thư của người duyệt. Lãnh đạo chỉ cần bấm vào liên kết trong email là mở thẳng bài viết để xem và phê duyệt trên điện thoại.
+
+### Tình huống 2: Khi Nhà trường phát đi thông báo khẩn cấp (nghỉ bão, sự kiện lớn), website của đơn vị hiển thị thế nào?
+* **Nguyên nhân:** Tính năng quản trị banner khẩn cấp toàn trường (*Global System Banner Manager* - tiêu chuẩn NI.4).
+* **Cách xử lý:** Banner cảnh báo màu đỏ hoặc vàng nổi bật sẽ tự động xuất hiện đồng bộ ở vị trí trên cùng của toàn bộ hàng trăm website con trực thuộc. Quản trị viên đơn vị không cần thao tác gì và banner sẽ tự đóng khi hết hạn thông báo.
+
+### Tình huống 3: Thao tác bấm nút lưu liên tục bị xuất hiện cảnh báo "Vui lòng chờ đợi giây lát"?
+* **Nguyên nhân:** Cơ chế giới hạn tần suất yêu cầu (*Distributed Rate Limiting* - tiêu chuẩn SC.3) để chống lại các hành vi spam hoặc tấn công từ chối dịch vụ (DoS).
+* **Cách xử lý:** Thông báo bằng ngôn ngữ tự nhiên (*UX Microcopy* - tiêu chuẩn NI.5) sẽ hướng dẫn Thầy/Cô nghỉ tay trong 5 - 10 giây trước khi tiếp tục thao tác.

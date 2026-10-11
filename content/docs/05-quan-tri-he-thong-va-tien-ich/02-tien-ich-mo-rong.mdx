@@ -48,3 +48,15 @@ Phân hệ **Tiện ích mở rộng** cho phép tập hợp các liên kết d�
     click Step1 href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong#1-t%E1%BA%A1o-nh%C3%B3m-ti%E1%BB%87n-%C3%ADch-m%E1%BB%9Bi" "Xem cách tạo nhóm tiện ích"
     click Step2 href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong#2-th%C3%AAm-ti%E1%BB%87n-%C3%ADch-v%C3%A0o-nh%C3%B3m" "Xem cách thêm tiện ích"
     click Step4 href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong" "Xem phân loại hiển thị"`}</Mermaid>
+
+---
+
+## 4. Các tình huống thường gặp và cách xử lý
+
+### Tình huống 1: Tìm kiếm bài viết bằng từ khóa không dấu có ra kết quả chính xác không?
+* **Nguyên nhân:** Công cụ tìm kiếm tích hợp cụm tìm kiếm chuyên sâu (*Elasticsearch Full-text Search* - tiêu chuẩn IU.4).
+* **Cách xử lý:** Người dùng nhập tiếng Việt có dấu hoặc không dấu (ví dụ: `tuyen sinh dai hoc` hay `tuyển sinh đại học`) đều nhận được kết quả chính xác trong vòng chưa đầy 100ms, hỗ trợ tìm kiếm cả trong nội dung file PDF đính kèm.
+
+### Tình huống 2: Nếu một tiện ích liên kết ngoài bị bảo trì thì website đơn vị có bị ảnh hưởng không?
+* **Nguyên nhân:** Kiến trúc hệ thống phân tách theo dạng module độc lập (*Modular Monolith & DDD* - tiêu chuẩn EX.3).
+* **Cách xử lý:** Khi một cổng dịch vụ bên ngoài gặp sự cố, hệ thống sẽ tự động cô lập dịch vụ đó và hiển thị nhãn "Đang bảo trì", hoàn toàn không gây ảnh hưởng đến tốc độ hay hoạt động của website chính.
