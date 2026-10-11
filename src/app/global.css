@@ -15,13 +15,13 @@
   --destructive-foreground: oklch(0.9801 0.0096 252.8096);
 
   /* Light mode: Toàn bộ chữ chính đều dùng --hcmute-navy rgb(0, 71, 118) */
-  --background: oklch(100% 0.00011 271.152);
+  --background: oklch(0.992 0.004 88); /* Trắng ngà thanh lịch, dịu mắt */
   --foreground: rgb(0, 71, 118);
   --muted: oklch(0.95 0.012 245);
   --muted-foreground: oklch(0.42 0.08 250); /* Xanh xám nhạt cho chữ phụ trợ */
   --card: oklch(1 0 0);
   --card-foreground: rgb(0, 71, 118);
-  --border: oklch(0.93 0.03 264);
+  --border: oklch(0.925 0.015 250); /* Viền mảnh trang nhã */
   --input: oklch(95% 0.005 245);
   --ring: oklch(0.632 0.1979 260.8448);
 
