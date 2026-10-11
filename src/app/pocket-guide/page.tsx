@@ -90,13 +90,7 @@ export default function PocketGuidePage() {
           {/* LƯỚI TỌA ĐỘ KỸ THUẬT BLUEPRINT CHUẨN HCM-UTE (GÓC DƯỚI PHẢI FADE-BR) */}
           <div className="pointer-events-none absolute inset-0 ute-blueprint-grid ute-mask-fade-br opacity-80 -z-0" />
 
-          {/* ORBITAL RINGS NỀN TRANG TRÍ (THEO SKILL HCM-UTE) */}
-          <div className="pointer-events-none absolute top-0 right-0 w-80 h-80 opacity-20 -z-0">
-            <svg viewBox="0 0 300 300" className="w-full h-full stroke-[#0072BC]" fill="none">
-              <ellipse cx="200" cy="80" rx="140" ry="50" strokeWidth="1.2" strokeDasharray="4 6" transform="rotate(-25 200 80)" />
-              <ellipse cx="200" cy="80" rx="180" ry="70" strokeWidth="1.5" transform="rotate(-25 200 80)" />
-            </svg>
-          </div>
+
 
           <div className="relative z-10">
 
@@ -110,7 +104,7 @@ export default function PocketGuidePage() {
                 />
                 <div>
                   <div className="text-[10px] font-bold uppercase tracking-wider text-[#536B7D]">
-                    Trường Đại học Công nghệ Kỹ thuật TP. Hồ Chí Minh · Cổng thông tin HCM-UTE
+                    Trường Đại học Công nghệ Kỹ thuật TP.HCM · P. Quản trị thương hiệu & Truyền thông · TT. Thông tin - Máy tính
                   </div>
                   <h2 className="text-xl sm:text-2xl font-black text-[#004776] uppercase tracking-tight leading-none mt-1">
                     SỔ TAY QUẢN TRỊ WEBSITE BỎ TÚI
@@ -391,7 +385,7 @@ export default function PocketGuidePage() {
 
             {/* CHÂN TRANG 1 */}
             <footer className="mt-5 pt-3 border-t border-slate-200 flex items-center justify-between text-[10px] text-[#536B7D]">
-              <span>Trường Đại học Công nghệ Kỹ thuật TP. Hồ Chí Minh · Ban Biên tập Cổng thông tin</span>
+              <span>Trường ĐH Công nghệ Kỹ thuật TP.HCM · P. Quản trị thương hiệu & Truyền thông (BMC) · TT. Thông tin - Máy tính (TTMT)</span>
               <span>Trang 1 / 2 · Tra cứu trực tuyến: http://doc.utehub.vn</span>
             </footer>
 
@@ -408,13 +402,7 @@ export default function PocketGuidePage() {
           {/* LƯỚI TỌA ĐỘ KỸ THUẬT BLUEPRINT CHUẨN HCM-UTE */}
           <div className="pointer-events-none absolute inset-0 ute-blueprint-grid ute-mask-fade-br opacity-80 -z-0" />
 
-          {/* ORBITAL RINGS NỀN TRANG TRÍ TRANG 2 */}
-          <div className="pointer-events-none absolute top-0 left-0 w-80 h-80 opacity-20 -z-0">
-            <svg viewBox="0 0 300 300" className="w-full h-full stroke-[#0072BC]" fill="none">
-              <ellipse cx="100" cy="80" rx="140" ry="50" strokeWidth="1.2" strokeDasharray="4 6" transform="rotate(25 100 80)" />
-              <ellipse cx="100" cy="80" rx="180" ry="70" strokeWidth="1.5" transform="rotate(25 100 80)" />
-            </svg>
-          </div>
+
 
           <div className="relative z-10">
 
@@ -428,7 +416,7 @@ export default function PocketGuidePage() {
                 />
                 <div>
                   <div className="text-[10px] font-bold uppercase tracking-wider text-[#536B7D]">
-                    Trường Đại học Công nghệ Kỹ thuật TP. Hồ Chí Minh · Cổng thông tin HCM-UTE
+                    Trường Đại học Công nghệ Kỹ thuật TP.HCM · P. Quản trị thương hiệu & Truyền thông · TT. Thông tin - Máy tính
                   </div>
                   <h2 className="text-xl sm:text-2xl font-black text-[#004776] uppercase tracking-tight leading-none mt-1">
                     CHECKLIST XUẤT BẢN &amp; XỬ LÝ SỰ CỐ
@@ -596,28 +584,28 @@ export default function PocketGuidePage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[11px]">
                 
-                {/* Ban Truyền thông */}
+                {/* Phòng Quản trị thương hiệu & Truyền thông (BMC) */}
                 <div className="rounded-xl border border-slate-200/90 bg-[#F7FBFF] p-3">
                   <div className="font-bold text-xs text-[#004776] mb-1.5 flex items-center gap-1.5">
                     <Building2 className="size-3.5 text-[#0072BC]" />
-                    <span>Ban Truyền thông (BMC)</span>
+                    <span>Phòng Quản trị thương hiệu &amp; Truyền thông (BMC)</span>
                   </div>
                   <div className="space-y-0.5 text-[#536B7D] leading-snug">
-                    <div><strong>Nhiệm vụ:</strong> Duyệt phát ngôn, chuẩn nhận diện &amp; cây menu</div>
-                    <div><strong>Email:</strong> truyenthong@hcmute.edu.vn</div>
+                    <div><strong>Nhiệm vụ:</strong> Duyệt phát ngôn, chuẩn nhận diện thương hiệu &amp; cây menu</div>
+                    <div><strong>Email:</strong> bmc@hcmute.edu.vn</div>
                     <div><strong>Vị trí:</strong> Phòng A1-201, Tòa nhà Trung tâm</div>
                   </div>
                 </div>
 
-                {/* Trung tâm Máy tính */}
+                {/* Trung tâm Thông tin - Máy tính (TTMT) */}
                 <div className="rounded-xl border border-slate-200/90 bg-[#F7FBFF] p-3">
                   <div className="font-bold text-xs text-[#004776] mb-1.5 flex items-center gap-1.5">
                     <ShieldCheck className="size-3.5 text-[#0072BC]" />
-                    <span>Trung tâm Máy tính (TTMT)</span>
+                    <span>Trung tâm Thông tin - Máy tính (TTMT)</span>
                   </div>
                   <div className="space-y-0.5 text-[#536B7D] leading-snug">
-                    <div><strong>Nhiệm vụ:</strong> Hạ tầng kỹ thuật, tài khoản SSO &amp; tên miền</div>
-                    <div><strong>Email:</strong> ttmt@hcmute.edu.vn</div>
+                    <div><strong>Nhiệm vụ:</strong> Hạ tầng kỹ thuật, tài khoản SSO Trường, quản lý DNS &amp; tên miền</div>
+                    <div><strong>Email:</strong> ttmt@hcmute.edu.vn · <strong>Site:</strong> iic.hcmute.edu.vn</div>
                     <div><strong>Vị trí:</strong> Tầng 3, Tòa nhà Trung tâm</div>
                   </div>
                 </div>
@@ -640,7 +628,7 @@ export default function PocketGuidePage() {
 
             {/* CHÂN TRANG 2 */}
             <footer className="mt-5 pt-3 border-t border-slate-200 flex items-center justify-between text-[10px] text-[#536B7D]">
-              <span>Trường Đại học Công nghệ Kỹ thuật TP. Hồ Chí Minh · Bản quyền thuộc Nhà trường</span>
+              <span>Trường ĐH Công nghệ Kỹ thuật TP.HCM · P. Quản trị thương hiệu & Truyền thông (BMC) · TT. Thông tin - Máy tính (TTMT)</span>
               <span>Trang 2 / 2 · Cổng hướng dẫn quản trị HCM-UTE · Lưu hành nội bộ toàn Trường</span>
             </footer>
 

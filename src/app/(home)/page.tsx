@@ -11,7 +11,6 @@ import {
   FileUp, 
   LayoutTemplate, 
   SearchCheck, 
-  RotateCcw,
   ShieldCheck,
   LifeBuoy,
   Keyboard,
@@ -21,53 +20,47 @@ import {
   Download
 } from 'lucide-react';
 
-// 6 Thẻ tác vụ thường dùng với tên gần gũi thực tế
+// 6 Thẻ tác vụ thường dùng với 3D Glass Icons chuẩn hóa HCM-UTE
 const QUICK_ACTIONS = [
   {
     title: "Đăng tin mới",
     desc: "Soạn thảo tin tức sự kiện, thông báo học vụ, đặt ảnh bìa 16:9 và gửi duyệt xuất bản.",
-    icon: Newspaper,
-    iconBg: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20",
+    image: "/images/actions/dang-tin-moi.png",
     href: "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban",
     actionLabel: "Xem hướng dẫn",
   },
   {
     title: "Đăng văn bản / PDF",
     desc: "Nhập trích yếu, số hiệu, đính kèm tệp PDF toàn văn và công khai cho người học tải về.",
-    icon: FileUp,
-    iconBg: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20",
+    image: "/images/actions/dang-van-ban.png",
     href: "/docs/03-luong-b-chuyen-muc-noi-dung/02-ban-hanh-van-ban-bieu-mau",
     actionLabel: "Xem hướng dẫn",
   },
   {
     title: "Tạo trang giới thiệu",
     desc: "Nhân bản từ mẫu trang con có sẵn, chỉnh sửa các khối nội dung và công bố lên cây website.",
-    icon: LayoutTemplate,
-    iconBg: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20",
+    image: "/images/actions/tao-trang.png",
     href: "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang",
     actionLabel: "Xem hướng dẫn",
   },
   {
     title: "Sửa menu",
     desc: "Cập nhật thanh Mega Menu đầu trang, phân chia cột nhóm và gắn liên kết mở trang đích.",
-    icon: Compass,
-    iconBg: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20",
+    image: "/images/actions/sua-menu.png",
     href: "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong",
     actionLabel: "Xem hướng dẫn",
   },
   {
     title: "Bài chưa hiển thị",
     desc: "Đối soát chuyên mục gán vào bài viết, kiểm tra ngày xuất bản và xóa bộ nhớ đệm trình duyệt.",
-    icon: SearchCheck,
-    iconBg: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20",
+    image: "/images/actions/bai-chua-hien-thi.png",
     href: "/docs/06-kiem-tra-va-tro-ly/05-trung-tam-xu-ly-su-co#tình-huống-21-bài-viết-đã-xuất-bản-thành-công-nhưng-ra-trang-chủ-đơn-vị-không-thấy-hiển-thị",
     actionLabel: "Khắc phục ngay",
   },
   {
     title: "Khôi phục sửa nhầm",
     desc: "Tra cứu lịch sử phiên bản của trang, xem trực quan bản dựng trước đó và khôi phục an toàn.",
-    icon: RotateCcw,
-    iconBg: "bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20",
+    image: "/images/actions/khoi-phuc.png",
     href: "/docs/02-luong-a-quan-ly-trang/04-lich-su-va-khoi-phuc-phien-ban",
     actionLabel: "Xem khôi phục",
   },
@@ -187,12 +180,19 @@ export default function HomePage() {
               <Link
                 key={idx}
                 href={action.href}
-                className="group relative flex flex-col justify-between rounded-xl border border-border/70 bg-card p-5 sm:p-6 shadow-2xs transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-primary/50 active:scale-[0.99]"
+                className="group relative flex flex-col justify-between rounded-xl border border-border/70 bg-card p-5 sm:p-6 shadow-2xs transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:border-primary/50 active:scale-[0.99] overflow-hidden"
               >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`size-10 rounded-xl flex items-center justify-center transition-transform group-hover:scale-105 ${action.iconBg}`}>
-                      <action.icon className="size-5" />
+                {/* Lưới kỹ thuật Blueprint chìm góc dưới phải */}
+                <div className="pointer-events-none absolute bottom-0 right-0 w-28 h-28 ute-blueprint-grid ute-mask-fade-br opacity-40 -z-0" />
+
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-3.5">
+                    <div className="size-14 rounded-2xl bg-[#F0F7FD] dark:bg-slate-800/60 border border-[#0072BC]/15 dark:border-sky-500/20 p-1.5 flex items-center justify-center transition-transform duration-200 group-hover:scale-110 shadow-xs">
+                      <img 
+                        src={action.image} 
+                        alt={action.title} 
+                        className="w-full h-full object-contain" 
+                      />
                     </div>
                   </div>
 
@@ -205,7 +205,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="mt-5 pt-3.5 border-t border-border/40 flex items-center justify-between text-xs font-semibold text-primary">
+                <div className="relative z-10 mt-5 pt-3.5 border-t border-border/40 flex items-center justify-between text-xs font-semibold text-primary">
                   <span>{action.actionLabel}</span>
                   <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
                 </div>
@@ -327,7 +327,7 @@ export default function HomePage() {
                       <div className="mt-2 text-[7px] text-slate-500 font-mono">
                         • Checklist 7 điểm vàng<br />
                         • Bảng 7 sự cố 30 giây<br />
-                        • Danh bạ BMC / TTMT
+                        • Danh bạ BMC / TT. Thông tin - Máy tính
                       </div>
                     </div>
                     <div className="text-[6.5px] text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-1">
