@@ -15,8 +15,8 @@ Mô hình hóa quy trình phân luồng giữa website trường và website đ�
 <Mermaid caption="Sơ đồ 1: Quy trình đăng nhập và điều hướng quản trị (Bấm vào khối để mở HDSD tác vụ tương ứng)">{`flowchart TD
     Start(["Bắt đầu truy cập"]) --> CheckDomain{"Loại website"}
 
-    CheckDomain -->|"Website đơn vị"| UnitUrl["Truy cập: {ten-don-vi}.hcmutertic.com"]
-    CheckDomain -->|"Website trường"| SchoolUrl["Truy cập: hcmute.edu.vn / beta.hcmute.edu.vn"]
+    CheckDomain -->|"Website đơn vị"| UnitUrl["Truy cập: {ten-don-vi}.hcmute.edu.vn"]
+    CheckDomain -->|"Website trường"| SchoolUrl["Truy cập: hcmute.edu.vn / hcmute.edu.vn"]
 
     UnitUrl --> LoginChoice{"Hình thức đăng nhập"}
     SchoolUrl --> LoginChoice

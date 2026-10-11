@@ -287,16 +287,19 @@ export default function HomePage() {
         <div className="mt-16 w-full border-t border-border pt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs sm:text-sm text-muted-foreground">
           <div className="flex items-center justify-center gap-2">
             <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
-            <span>Tích hợp 7 sơ đồ thao tác chuẩn HCM-UTE</span>
+            <span>Tích hợp 8 sơ đồ khối thao tác chuẩn HCM-UTE</span>
           </div>
           <div className="flex items-center justify-center gap-2">
             <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
             <span>Hỗ trợ Trợ lý UTE theo ngữ cảnh</span>
           </div>
-          <div className="flex items-center justify-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
-            <span>Tìm kiếm tức thì với phím tắt ⌘K</span>
-          </div>
+          <Link 
+            href="/docs/06-kiem-tra-va-tro-ly/04-tra-cuu-thuat-ngu-va-phim-tat"
+            className="flex items-center justify-center gap-2 hover:text-primary transition-colors group cursor-pointer"
+          >
+            <CheckCircle2 className="w-4 h-4 text-primary shrink-0 group-hover:scale-110 transition-transform" />
+            <span>Phím tắt & Thuật ngữ tra cứu (<kbd className="font-mono bg-muted/80 px-1.5 py-0.5 rounded border border-border text-[11px] font-semibold">⌘K</kbd>)</span>
+          </Link>
         </div>
 
       </div>

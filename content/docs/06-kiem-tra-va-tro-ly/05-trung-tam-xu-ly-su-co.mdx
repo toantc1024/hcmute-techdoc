@@ -1,0 +1,118 @@
+---
+title: Trung tâm xử lý sự cố và lỗi thường gặp (Gặp lỗi gì?)
+description: Tổng hợp toàn bộ các tình huống lỗi phổ biến nhất trong quá trình quản trị website HCM-UTE và cẩm nang khắc phục tức thì
+order: 5
+---
+
+Trong quá trình quản trị và vận hành cổng thông tin điện tử của đơn vị, Quý Thầy/Cô có thể gặp phải một số vướng mắc thao tác. Dưới đây là bảng tổng hợp các tình huống thường gặp nhất và quy trình xử lý tức thì:
+
+---
+
+## 📌 Bảng tra cứu sự cố nhanh
+
+| Nhóm sự cố | Hiện tượng nhận biết | Nguyên nhân cốt lõi | Cách xử lý nhanh |
+| :--- | :--- | :--- | :--- |
+| **1. Quyền tài khoản** | Không thấy nút *Tạo bài / Xuất bản* | Chưa được gán quyền *Biên tập viên* hoặc *Lãnh đạo* | Liên hệ Quản trị viên đơn vị cấp vai trò |
+| **2. Hiển thị bài viết** | Đã xuất bản nhưng trang chủ không thấy bài | Sai chuyên mục hoặc ngày xuất bản ở tương lai | Kiểm tra lại chuyên mục & xóa cache (`Ctrl + F5`) |
+| **3. Tải tệp biểu mẫu** | Sinh viên báo lỗi 403 / không tải được PDF | Tệp đính kèm bị để ở chế độ *"Nội bộ"* | Đổi quyền xem tệp sang *"Công khai"* |
+| **4. Menu điều hướng** | Bấm menu nhảy ra trang 404 hoặc link cũ | Nhập sai slug hoặc chưa bấm *Lưu thay đổi* | Vào *Header & Footer* sửa lại URL đích |
+| **5. Định dạng văn bản** | Chữ bị to nhỏ lạ lẫm, màu xám mờ | Dán trực tiếp từ Word mang theo mã rác | Bấm `Ctrl + Shift + V` hoặc *Xóa định dạng* |
+| **6. Bộ nhớ đệm (Cache)** | Sửa xong nhưng người xem vẫn thấy bản cũ | Trình duyệt người xem lưu bản cache cũ | Bấm `Ctrl + F5` hoặc `Cmd + Shift + R` |
+| **7. Sửa nhầm dữ liệu** | Lỡ tay xóa hoặc sửa đè bố cục trang | Thao tác ghi đè khi chỉnh sửa | Mở tab *Lịch sử* → bấm *Khôi phục bản dựng* |
+
+---
+
+## 1. Nhóm sự cố về quyền thao tác và tài khoản
+
+### Tình huống 1.1: Đăng nhập được bằng email Trường nhưng không thấy các nút chức năng?
+* **Hiện tượng:** Sau khi đăng nhập bằng Google với email `@hcmute.edu.vn`, Thầy/Cô không thấy nút *Tạo bài viết*, *Tạo trang* hoặc mục *Quản lý nội dung* bị mờ.
+* **Nguyên nhân:** Đăng nhập bằng email Trường chứng thực danh tính cá nhân nhưng hệ thống chưa được gán nhóm quyền tương ứng tại đơn vị.
+* **Quy trình xử lý:**
+  1. Liên hệ **Quản trị viên đơn vị (Unit Admin)** của Khoa/Phòng mình.
+  2. Quản trị viên vào menu trái `Người dùng` → chọn tài khoản của Thầy/Cô.
+  3. Gán đúng vai trò nghiệp vụ: **Biên tập viên (Unit Editor)** đối với cán bộ viết bài, hoặc **Lãnh đạo đơn vị (Unit Leader)** đối với cán bộ duyệt bài.
+  4. Thầy/Cô đăng xuất và đăng nhập lại để cập nhật quyền mới.
+
+---
+
+## 2. Nhóm sự cố về xuất bản tin tức và hiển thị nội dung
+
+### Tình huống 2.1: Bài viết đã xuất bản thành công nhưng ra trang chủ đơn vị không thấy hiển thị?
+* **Hiện tượng:** Trong danh sách bài viết hiển thị trạng thái xanh lá *"Đã xuất bản"*, nhưng khi ra ngoài trang chủ của Khoa không thấy bài đâu.
+* **Nguyên nhân cốt lõi:**
+  * **Sai chuyên mục:** Khối tin tức trên trang chủ chỉ được cấu hình để hút bài từ một số chuyên mục chỉ định (ví dụ: chỉ hút từ chuyên mục *Tin nổi bật* hoặc *Thông báo học vụ*). Nếu bài viết chọn chuyên mục khác, khối sẽ không lấy bài đó.
+  * **Ngày xuất bản:** Nếu mốc thời gian xuất bản bị đặt nhầm vào một giờ trong tương lai, hệ thống sẽ đợi đến đúng thời điểm đó mới công bố.
+* **Quy trình xử lý:**
+  1. Mở lại bài viết cần kiểm tra.
+  2. Tại cột bên phải, kiểm tra mục **Chuyên mục**: Tích chọn thêm chuyên mục chính đang hiển thị ở trang chủ.
+  3. Kiểm tra mục **Ngày xuất bản**: Đảm bảo thời gian bằng hoặc trước thời điểm hiện tại.
+  4. Bấm **Cập nhật**, sau đó ra trang chủ bấm `Ctrl + F5` để kiểm tra.
+
+---
+
+## 3. Nhóm sự cố về tệp đính kèm và biểu mẫu PDF
+
+### Tình huống 3.1: Sinh viên phản hồi không thể tải về tệp PDF thông báo / biểu mẫu?
+* **Hiện tượng:** Sinh viên bấm vào nút tải tệp toàn văn thì bị báo lỗi *"Bạn không có quyền xem tài liệu này (403)"* hoặc mở ra trang trắng.
+* **Nguyên nhân cốt lõi:** Khi ban hành văn bản, ô **Quyền xem** đang bị chọn mặc định là *"Nội bộ"* (chỉ viên chức đăng nhập mới xem được) thay vì *"Công khai"*.
+* **Quy trình xử lý:**
+  1. Vào menu `Quản lý nội dung` → chọn `Văn bản và bài viết`.
+  2. Mở văn bản bị phản ánh.
+  3. Chuyển quyền xem từ **Nội bộ** sang **Công khai (Tất cả mọi người)**.
+  4. Bấm **Lưu thay đổi**. Kiểm tra lại bằng cách mở liên kết trong cửa sổ ẩn danh trình duyệt.
+
+---
+
+## 4. Nhóm sự cố về liên kết và thanh điều hướng Menu
+
+### Tình huống 4.1: Bấm vào mục menu trên Header báo lỗi "Trang không tồn tại (404)"?
+* **Hiện tượng:** Thầy/Cô cấu hình thêm mục mới trên Menu chính hoặc Mega Menu, nhưng người đọc bấm vào bị báo lỗi 404 Not Found.
+* **Nguyên nhân:**
+  * Đường dẫn trang đích (Slug) bị gõ sai chính tả hoặc thiếu dấu gạch chéo `/` ở đầu (ví dụ gõ `gioi-thieu` thay vì `/gioi-thieu`).
+  * Trang đích chưa được bấm **Xuất bản** (vẫn đang ở trạng thái *Bản nháp*).
+* **Quy trình xử lý:**
+  1. Kiểm tra trang đích trong `Website` → `Trang`, đảm bảo trang có trạng thái xanh lá *"Đã xuất bản"*.
+  2. Vào `Website` → `Header & Footer` → tab **Đầu trang**.
+  3. Chọn mục menu bị lỗi, gán lại liên kết chính xác bằng cách chọn trực tiếp từ danh sách trang có sẵn trong hệ thống (thay vì gõ tay URL).
+  4. Bấm **Lưu thay đổi**.
+
+---
+
+## 5. Nhóm sự cố về định dạng văn bản và giao diện
+
+### Tình huống 5.1: Chữ trong bài viết bị to nhỏ thất thường, lệch font và có màu nền xám mờ?
+* **Hiện tượng:** Nội dung bài viết hiển thị trên web trông lộn xộn, font chữ không đồng nhất với phong cách chung của HCM-UTE.
+* **Nguyên nhân:** Thầy/Cô sao chép văn bản từ Microsoft Word hoặc website khác và dán trực tiếp (`Ctrl + V`). Phần mềm Word tự động gắn kèm các mã màu sắc, khoảng cách dòng cứng gây xung đột giao diện web.
+* **Quy trình xử lý:**
+  1. Trong khung soạn thảo, bôi đen toàn bộ đoạn văn bị lỗi.
+  2. Bấm nút **Xóa định dạng (Clear Formatting - biểu tượng chữ T gạch chéo)** trên thanh công cụ.
+  3. Dùng các định dạng chuẩn của website: Tiêu đề H2, Tiêu đề H3, Danh sách gạch đầu dòng.
+  4. **Kinh nghiệm vàng:** Trong tương lai, luôn sử dụng tổ hợp phím **`Ctrl + Shift + V`** (Windows) hoặc **`Cmd + Shift + V`** (macOS) để dán văn bản thuần túy sạch mã rác.
+
+---
+
+## 6. Nhóm sự cố về bộ nhớ đệm (Cache)
+
+### Tình huống 6.1: Đã sửa xong nội dung nhưng người khác xem vẫn thấy giao diện cũ?
+* **Hiện tượng:** Thầy/Cô vừa cập nhật số điện thoại liên hệ hoặc chỉnh sửa bài viết thành công, nhưng khi đồng nghiệp hoặc sinh viên mở web vẫn thấy thông tin cũ trước khi sửa.
+* **Nguyên nhân:** Để tăng tốc độ mở trang, trình duyệt web tự động lưu một bản sao tạm (cache). Trình duyệt người xem chưa kịp tải bản mới từ máy chủ.
+* **Quy trình xử lý:**
+  * Hướng dẫn người xem bấm tổ hợp phím:
+    * **Windows:** Bấm **`Ctrl + F5`** (hoặc giữ `Ctrl` và bấm nút Tải lại trên trình duyệt).
+    * **macOS:** Bấm **`Cmd + Shift + R`**.
+  * Hoặc mở thử website bằng **Cửa sổ ẩn danh (Incognito Window)** để thấy ngay giao diện mới nhất.
+
+---
+
+## 7. Nhóm sự cố về phục hồi dữ liệu
+
+### Tình huống 7.1: Lỡ tay chỉnh sửa hỏng bố cục trang hoặc xóa nhầm nội dung quan trọng?
+* **Hiện tượng:** Khi chỉnh sửa trang web bằng Page Builder, Thầy/Cô vô tình xóa mất một khối thông tin quan trọng và lỡ bấm Lưu.
+* **Nguyên nhân:** Thao tác nhầm lẫn trong quá trình biên tập.
+* **Quy trình xử lý:**
+  1. Vào menu `Website` → chọn `Trang`.
+  2. Bấm mở trang web bị lỗi.
+  3. Chọn tab **Lịch sử** ở đầu trang.
+  4. Duyệt danh sách các mốc thời gian ở cột bên trái (chọn mốc trước lúc xảy ra sự cố).
+  5. Chọn chế độ xem **Bản dựng** để nhìn lại giao diện chuẩn xác.
+  6. Bấm nút màu xanh **Khôi phục bản dựng này** → Xác nhận → Bấm **Xuất bản**.
