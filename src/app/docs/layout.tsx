@@ -8,7 +8,7 @@ export default function Layout({ children }: LayoutProps<'/docs'>) {
     <DocsLayout
       tree={source.getPageTree()}
       sidebar={{
-        defaultOpenLevel: 1,
+        defaultOpenLevel: 0,
         banner: <SidebarOverviewBanner />,
       }}
       {...baseOptions()}

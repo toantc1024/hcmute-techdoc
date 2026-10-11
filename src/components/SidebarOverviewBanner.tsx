@@ -1,32 +1,62 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronsUpDown, ChevronsDownUp } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 export function SidebarOverviewBanner() {
-  const [isExpanded, setIsExpanded] = useState<boolean>(true);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const pathname = usePathname();
+
+  // Helper lấy danh sách các nút đóng/mở chương trong sidebar (loại trừ nút drawer của khung)
+  const getFolderTriggers = () => {
+    if (typeof document === 'undefined') return [];
+    return Array.from(
+      document.querySelectorAll<HTMLButtonElement>('aside button[aria-expanded], [data-sidebar] button[aria-expanded]')
+    ).filter((btn) => {
+      const text = btn.textContent?.trim() || '';
+      const ariaLabel = btn.getAttribute('aria-label') || '';
+      return text.length > 0 && !ariaLabel.includes('Sidebar');
+    });
+  };
+
+  // Đồng bộ trạng thái thực tế sau khi tải trang hoặc chuyển trang
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const triggers = getFolderTriggers();
+      const opened = triggers.filter((btn) => btn.getAttribute('aria-expanded') === 'true');
+      // Nếu có từ 3 chương trở lên đang mở thì nút là "Thu gọn tất cả"
+      if (opened.length >= 3) {
+        setIsExpanded(true);
+      } else {
+        setIsExpanded(false);
+      }
+    }, 150);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   const handleToggle = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (typeof document === 'undefined') return;
+
+    const triggers = getFolderTriggers();
+    if (triggers.length === 0) return;
 
     if (isExpanded) {
-      // Đang mở -> Thu gọn tất cả
-      const openedTriggers = document.querySelectorAll(
-        'aside button[aria-expanded="true"], [data-sidebar] button[aria-expanded="true"]'
-      );
-      openedTriggers.forEach((btn) => {
-        (btn as HTMLElement).click();
+      // Đang mở nhiều -> Thu gọn tất cả các chương
+      triggers.forEach((btn) => {
+        if (btn.getAttribute('aria-expanded') === 'true') {
+          btn.click();
+        }
       });
       setIsExpanded(false);
     } else {
-      // Đang thu gọn -> Mở rộng tất cả
-      const closedTriggers = document.querySelectorAll(
-        'aside button[aria-expanded="false"], [data-sidebar] button[aria-expanded="false"]'
-      );
-      closedTriggers.forEach((btn) => {
-        (btn as HTMLElement).click();
+      // Đang thu gọn -> Mở rộng tất cả các chương
+      triggers.forEach((btn) => {
+        if (btn.getAttribute('aria-expanded') === 'false') {
+          btn.click();
+        }
       });
       setIsExpanded(true);
     }
