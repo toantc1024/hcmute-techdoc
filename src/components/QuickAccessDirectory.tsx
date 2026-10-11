@@ -138,7 +138,7 @@ export function QuickAccessDirectory() {
       {/* Top Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-border">
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
               Chính thức 2026
             </span>
@@ -146,7 +146,7 @@ export function QuickAccessDirectory() {
               Theo Đề xuất 09/ĐX-QTTHTT
             </span>
           </div>
-          <h3 className="text-xl font-bold tracking-tight mt-1 text-foreground">
+          <h3 className="text-lg sm:text-xl font-bold tracking-tight mt-1 text-foreground">
             Danh bạ website chính thức hệ thống HCM-UTE
           </h3>
           <p className="text-sm text-muted-foreground mt-0.5">
@@ -218,7 +218,7 @@ export function QuickAccessDirectory() {
                 key={g.key}
                 type="button"
                 onClick={() => setActiveGroup(g.key)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                className={`px-3 py-1.5 sm:py-1.5 min-h-[34px] sm:min-h-0 rounded-lg text-xs font-medium transition-all ${
                   isActive
                     ? 'bg-primary text-primary-foreground shadow-sm'
                     : 'bg-muted/70 text-muted-foreground hover:bg-muted hover:text-foreground'
@@ -289,7 +289,7 @@ export function QuickAccessDirectory() {
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition shadow-sm"
+                  className="flex-1 inline-flex min-h-[36px] items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition shadow-sm"
                 >
                   <span>Truy cập</span>
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -300,7 +300,7 @@ export function QuickAccessDirectory() {
                   type="button"
                   onClick={() => handleCopy(item)}
                   title="Sao chép liên kết"
-                  className="inline-flex items-center justify-center px-2.5 py-1.5 rounded-lg text-xs font-medium border border-input bg-background hover:bg-muted text-foreground transition"
+                  className="inline-flex min-h-[36px] min-w-[36px] items-center justify-center px-2.5 py-1.5 rounded-lg text-xs font-medium border border-input bg-background hover:bg-muted text-foreground transition"
                 >
                   {copiedId === item.id ? (
                     <span className="text-emerald-600 dark:text-emerald-400 text-[11px] font-semibold">Đã chép</span>
@@ -315,8 +315,8 @@ export function QuickAccessDirectory() {
           ))}
         </div>
       ) : (
-        <div className="mt-4 overflow-x-auto rounded-xl border border-border">
-          <table className="w-full text-left text-xs sm:text-sm">
+        <div className="mt-4 overflow-x-auto rounded-xl border border-border [webkit-overflow-scrolling:touch]">
+          <table className="w-full text-left text-xs sm:text-sm min-w-[620px]">
             <thead className="bg-muted text-muted-foreground font-semibold border-b border-border">
               <tr>
                 <th className="px-3 py-2.5 w-12 text-center">STT</th>

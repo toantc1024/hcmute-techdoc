@@ -257,3 +257,29 @@ a, button {
     font-size: 1.1rem !important;
   }
 }
+
+
+/* Tối ưu chống tràn cho hình ảnh và phần tử đa phương tiện */
+img, svg, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ngắt từ an toàn cho đoạn mã ngắn inline tránh đẩy giãn layout di động */
+.prose :not(pre) > code {
+  word-break: break-word;
+  white-space: normal;
+}
+
+/* Tối ưu cuộn ngang mượt mà cho bảng Fumadocs trên thiết bị cảm ứng */
+.relative.overflow-auto,
+.prose table {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Đảm bảo khung mã nguồn Shiki không gây tràn viewport trên thiết bị hẹp */
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}

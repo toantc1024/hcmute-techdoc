@@ -330,18 +330,19 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 pb-2 border-b border-slate-100 dark:border-slate-800">
           {/* Tiêu đề sơ đồ khối */}
-          <div className="flex items-center gap-2 text-xs font-semibold text-[#0072BC]">
+          <div className="flex items-center gap-2 text-xs font-semibold text-[#0072BC] flex-wrap">
             <span>Sơ đồ khối</span>
             {hasClickableNodes && (
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950/40 text-[#0072BC] dark:text-sky-300 font-medium text-[11px] border border-sky-200 dark:border-sky-800">
-                <MousePointerClick className="size-3" />
-                <span>Bấm vào khối để mở HDSD tác vụ tương ứng</span>
+                <MousePointerClick className="size-3 shrink-0" />
+                <span className="hidden sm:inline">Bấm vào khối để mở HDSD tác vụ tương ứng</span>
+                <span className="sm:hidden">Bấm khối để xem HDSD</span>
               </span>
             )}
           </div>
 
           {/* Thanh công cụ: Thu phóng (zoom in/out/reset), Toàn màn hình & Sao chép mã */}
-          <div className="flex items-center gap-1.5 sm:gap-2 self-end sm:self-auto flex-wrap">
+          <div className="flex items-center gap-1.5 sm:gap-2 self-start sm:self-auto flex-wrap">
             {/* Bộ điều khiển thu phóng mượt mà ở ngoài */}
             <div className="inline-flex items-center gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-0.5 border border-slate-200 dark:border-slate-700">
               <button
@@ -453,8 +454,8 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
             className="fixed inset-0 z-[9999] flex flex-col bg-slate-950/95 backdrop-blur-md p-3 sm:p-6 animate-in fade-in duration-150"
           >
             {/* Header modal toàn màn hình */}
-            <div className="flex items-center justify-between gap-3 pb-3 border-b border-slate-800 text-white">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 pb-3 border-b border-slate-800 text-white">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className="font-bold text-sm sm:text-base text-sky-400">Sơ đồ khối</span>
                 {caption && (
                   <span className="text-xs sm:text-sm text-slate-300 hidden md:inline truncate max-w-lg">
@@ -463,8 +464,9 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
                 )}
                 {hasClickableNodes && (
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-950 text-sky-300 text-[11px] border border-sky-800">
-                    <MousePointerClick className="size-3" />
-                    <span>Bấm vào khối để mở HDSD</span>
+                    <MousePointerClick className="size-3 shrink-0" />
+                    <span className="hidden sm:inline">Bấm vào khối để mở HDSD</span>
+                    <span className="sm:hidden">Chạm khối để mở</span>
                   </span>
                 )}
               </div>
@@ -530,10 +532,10 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
               onMouseMove={handleModalMouseMove}
               onMouseUp={handleModalMouseUp}
               onMouseLeave={handleModalMouseUp}
-              className={`overflow-auto flex-1 flex justify-center items-start p-4 sm:p-8 select-none ${
+              className={`overflow-auto flex-1 flex justify-center items-start p-2 sm:p-8 select-none [webkit-overflow-scrolling:touch] touch-pan-x touch-pan-y ${
                 modalZoom > 1 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'
               }`}
-              title="Kéo chuột để di chuyển khi phóng to, hoặc bấm vào khối để mở HDSD"
+              title="Kéo chuột hoặc vuốt chạm để di chuyển khi phóng to, hoặc bấm vào khối để mở HDSD"
             >
               <div
                 style={{

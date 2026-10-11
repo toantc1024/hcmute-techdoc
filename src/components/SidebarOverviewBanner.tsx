@@ -12,7 +12,7 @@ export function SidebarOverviewBanner() {
   const getFolderTriggers = () => {
     if (typeof document === 'undefined') return [];
     return Array.from(
-      document.querySelectorAll<HTMLButtonElement>('aside button[aria-expanded], [data-sidebar] button[aria-expanded]')
+      document.querySelectorAll<HTMLButtonElement>('aside button[aria-expanded], [data-sidebar] button[aria-expanded], [data-sidebar-panel] button[aria-expanded], [role="dialog"] button[aria-expanded]')
     ).filter((btn) => {
       const text = btn.textContent?.trim() || '';
       const ariaLabel = btn.getAttribute('aria-label') || '';
