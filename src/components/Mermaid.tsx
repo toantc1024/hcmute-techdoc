@@ -2,7 +2,7 @@
 
 import React, { useEffect, useId, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { Copy, Check, Sparkles, MousePointerClick } from 'lucide-react';
+import { Copy, Check, MousePointerClick, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 import { withBasePath } from '@/configs/app.config';
 
 interface MermaidProps {
@@ -17,8 +17,22 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
   const [svgContent, setSvgContent] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState<boolean>(false);
+  const [zoom, setZoom] = useState<number>(1);
   const containerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+
+  // Mặc định zoom là 1 (100% kích thước chuẩn)
+  const handleZoomIn = () => {
+    setZoom((prev) => Math.min(Math.round((prev + 0.2) * 10) / 10, 2.2));
+  };
+
+  const handleZoomOut = () => {
+    setZoom((prev) => Math.max(Math.round((prev - 0.2) * 10) / 10, 0.6));
+  };
+
+  const handleResetZoom = () => {
+    setZoom(1);
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -38,7 +52,6 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
             fontSize: '13px',
             darkMode: isDark,
             // Bảng màu chuẩn thương hiệu HCM-UTE
-            // Xanh dương chủ đạo: #0072BC, Xanh đậm Navy: #003D66, Đỏ điểm nhấn: #ED1C24
             background: isDark ? '#020617' : '#FFFFFF',
             mainBkg: isDark ? '#0F172A' : '#FFFFFF',
             nodeBorder: isDark ? '#0284C7' : '#0072BC',
@@ -120,8 +133,8 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
   return (
     <figure className="my-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 sm:p-5 shadow-sm hover:shadow-md transition">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 pb-2 border-b border-slate-100 dark:border-slate-800">
+        {/* Tiêu đề sơ đồ khối (đã bỏ icon Sparkles theo yêu cầu) */}
         <div className="flex items-center gap-2 text-xs font-semibold text-[#0072BC]">
-          <Sparkles className="size-4 shrink-0" />
           <span>Sơ đồ khối</span>
           {hasClickableNodes && (
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950/40 text-[#0072BC] dark:text-sky-300 font-medium text-[11px] border border-sky-200 dark:border-sky-800">
@@ -131,20 +144,58 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
           )}
         </div>
 
-        <button
-          type="button"
-          onClick={handleCopy}
-          className="inline-flex min-h-[36px] items-center gap-1.5 self-end sm:self-auto px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition cursor-pointer active:scale-95"
-          title="Sao chép mã nguồn Mermaid"
-        >
-          {copied ? <Check className="size-3.5 text-[#16A34A]" /> : <Copy className="size-3.5" />}
-          <span>{copied ? 'Đã sao chép' : 'Sao chép mã'}</span>
-        </button>
+        {/* Thanh công cụ: Thu phóng (Zoom in/out/reset) và Sao chép */}
+        <div className="flex items-center gap-2 self-end sm:self-auto">
+          {/* Bộ nút thu phóng */}
+          <div className="inline-flex items-center gap-0.5 bg-slate-100 dark:bg-slate-800/90 rounded-lg p-0.5 border border-slate-200 dark:border-slate-700">
+            <button
+              type="button"
+              onClick={handleZoomOut}
+              disabled={zoom <= 0.6}
+              className="inline-flex min-h-[30px] min-w-[30px] items-center justify-center rounded-md text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer active:scale-95"
+              title="Thu nhỏ sơ đồ (Zoom out)"
+              aria-label="Thu nhỏ sơ đồ"
+            >
+              <ZoomOut className="size-3.5" />
+            </button>
+
+            <button
+              type="button"
+              onClick={handleResetZoom}
+              className="inline-flex min-h-[30px] px-2 items-center justify-center rounded-md text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-slate-100 transition cursor-pointer active:scale-95 min-w-[46px] text-center"
+              title="Nhấp để đặt lại kích thước mặc định (100%)"
+            >
+              {Math.round(zoom * 100)}%
+            </button>
+
+            <button
+              type="button"
+              onClick={handleZoomIn}
+              disabled={zoom >= 2.2}
+              className="inline-flex min-h-[30px] min-w-[30px] items-center justify-center rounded-md text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer active:scale-95"
+              title="Phóng to sơ đồ (Zoom in)"
+              aria-label="Phóng to sơ đồ"
+            >
+              <ZoomIn className="size-3.5" />
+            </button>
+          </div>
+
+          {/* Nút sao chép mã */}
+          <button
+            type="button"
+            onClick={handleCopy}
+            className="inline-flex min-h-[32px] items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition cursor-pointer active:scale-95"
+            title="Sao chép mã nguồn Mermaid"
+          >
+            {copied ? <Check className="size-3.5 text-[#16A34A]" /> : <Copy className="size-3.5" />}
+            <span>{copied ? 'Đã sao chép' : 'Sao chép mã'}</span>
+          </button>
+        </div>
       </div>
 
       <div
         ref={containerRef}
-        className="overflow-x-auto rounded-lg bg-slate-50 dark:bg-slate-950 p-2 sm:p-4 flex justify-center [webkit-overflow-scrolling:touch]"
+        className="overflow-auto max-h-[85vh] rounded-lg bg-slate-50 dark:bg-slate-950 p-2 sm:p-4 flex justify-center [webkit-overflow-scrolling:touch]"
       >
         {error ? (
           <div className="text-xs text-red-500 p-4">
@@ -154,7 +205,10 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
           </div>
         ) : svgContent ? (
           <div
-            className="w-full flex justify-center [&>svg]:max-w-full [&>svg]:h-auto [&_a]:cursor-pointer [&_a:hover_rect]:stroke-[#0072BC] [&_a:hover_rect]:stroke-[2.5px] [&_a:hover_polygon]:stroke-[#0072BC] [&_a:hover_polygon]:stroke-[2.5px] [&_a:hover_circle]:stroke-[#0072BC] [&_a:hover]:filter [&_a:hover]:drop-shadow-md transition"
+            style={{
+              zoom: zoom !== 1 ? zoom : undefined,
+            }}
+            className="w-full flex justify-center [&>svg]:max-w-full [&>svg]:h-auto [&_a]:cursor-pointer [&_a:hover_rect]:stroke-[#0072BC] [&_a:hover_rect]:stroke-[2.5px] [&_a:hover_polygon]:stroke-[#0072BC] [&_a:hover_polygon]:stroke-[2.5px] [&_a:hover_circle]:stroke-[#0072BC] [&_a:hover]:filter [&_a:hover]:drop-shadow-md transition-all duration-150"
             dangerouslySetInnerHTML={{ __html: svgContent }}
           />
         ) : (
