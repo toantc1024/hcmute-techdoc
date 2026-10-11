@@ -130,6 +130,21 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
               filter: drop-shadow(0 4px 10px ${isDark ? 'rgba(56, 189, 248, 0.4)' : 'rgba(0, 114, 188, 0.3)'}) !important;
               transition: stroke 0.15s ease, stroke-width 0.15s ease, filter 0.15s ease !important;
             }
+            /* Đệm khoảng cách cho tiêu đề khối subgraph, tránh dính sát đường viền đỉnh */
+            .cluster-label foreignObject {
+              overflow: visible !important;
+            }
+            .cluster-label p {
+              margin-top: 10px !important;
+              margin-bottom: 4px !important;
+              font-weight: 700 !important;
+              letter-spacing: 0.02em !important;
+              color: ${isDark ? '#38BDF8' : '#0072BC'} !important;
+            }
+            .node p {
+              margin: 0 !important;
+              line-height: 1.4 !important;
+            }
           `,
           themeVariables: {
             fontFamily: 'inherit',
@@ -279,7 +294,7 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
   return (
     <>
       <figure className="my-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 sm:p-5 shadow-sm hover:shadow-md transition">
-        {/* Style cục bộ đảm bảo triệt tiêu gạch chân trên mọi trình duyệt */}
+        {/* Style cục bộ đảm bảo triệt tiêu gạch chân và tạo khoảng đệm thẩm mỹ cho tiêu đề khối */}
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -291,6 +306,23 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
               }
               figure svg a, [role="dialog"] svg a {
                 cursor: pointer !important;
+              }
+              /* Khắc phục lỗi chữ dính sát viền đỉnh của các khối nhóm (subgraph) do Tailwind reset margin */
+              figure svg .cluster-label foreignObject,
+              [role="dialog"] svg .cluster-label foreignObject {
+                overflow: visible !important;
+              }
+              figure svg .cluster-label p,
+              [role="dialog"] svg .cluster-label p {
+                margin-top: 10px !important;
+                margin-bottom: 4px !important;
+                font-weight: 700 !important;
+                letter-spacing: 0.02em !important;
+              }
+              figure svg .node p,
+              [role="dialog"] svg .node p {
+                margin: 0 !important;
+                line-height: 1.4 !important;
               }
             `,
           }}
