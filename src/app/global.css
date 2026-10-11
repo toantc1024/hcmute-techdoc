@@ -490,3 +490,13 @@ img, svg, video, iframe {
   background-color: rgba(15, 23, 42, 0.7);
   border-color: rgba(56, 199, 244, 0.16);
 }
+
+/* =========================================================================
+   BẢO VỆ TIÊU ĐỀ THƯƠNG HIỆU HCM-UTE TECH DOC (CHỐNG NGẮT DÒNG VÀ RỚT TỪ)
+   ========================================================================= */
+aside a[href="/"],
+header a[href="/"],
+#nd-subnav a:first-child {
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}

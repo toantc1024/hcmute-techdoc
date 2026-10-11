@@ -5,10 +5,16 @@ export function baseOptions(): BaseLayoutProps {
   return {
     nav: {
       title: (
-        <span className="flex items-center gap-2.5 font-bold text-base tracking-tight">
-          <img src={brandConfig.logoUrl} alt="HCM-UTE Logo" className="w-7 h-7 object-contain" />
-          <span className="text-[#0072BC] dark:text-sky-400">HCM-UTE</span>
-          <span className="text-foreground font-extrabold tracking-wide">TECH DOC</span>
+        <span className="inline-flex items-center gap-2 font-bold tracking-tight whitespace-nowrap shrink-0 select-none">
+          <img
+            src={brandConfig.logoUrl}
+            alt="HCM-UTE Logo"
+            className="size-7 object-contain shrink-0"
+          />
+          <span className="inline-flex items-center gap-1.5 text-sm sm:text-[15px] font-bold tracking-tight whitespace-nowrap shrink-0">
+            <span className="text-[#0072BC] dark:text-sky-400 whitespace-nowrap">HCM-UTE</span>
+            <span className="text-foreground font-extrabold whitespace-nowrap">TECH DOC</span>
+          </span>
         </span>
       ),
     },
