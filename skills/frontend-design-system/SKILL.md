@@ -13,6 +13,20 @@ description: Quy chuẩn hệ thống thiết kế giao diện Frontend (Design 
 
 ## 1. Color System (OKLCH)
 
+### 1.0 QUY TẮC BẮT BUỘC: THAY THẾ CHỮ ĐEN BẰNG MÀU XANH THẪM RGB(0, 71, 118)
+
+> [!IMPORTANT]
+> **QUY CHUẨN THƯƠNG HIỆU HCMUTE (Tham chiếu chính thức: https://beta.hcmute.edu.vn)**:
+> * Trong toàn bộ hệ thống giao diện (Light Theme), **TUYỆT ĐỐI KHÔNG DÙNG MÀU ĐEN THUẦN (`#000000`, `text-black`, `text-slate-900`, `text-gray-900`)** cho tiêu đề và nội dung văn bản.
+> * **MÀU CHỮ TIÊU CHUẨN:** Bắt buộc sử dụng màu Xanh thẫm thương hiệu HCMUTE: **`rgb(0, 71, 118)`** (HEX: **`#004776`**).
+> * **Phạm vi áp dụng:**
+>   * Toàn bộ thẻ tiêu đề: `h1, h2, h3, h4, h5, h6`
+>   - Nội dung đoạn văn, danh sách, bảng: `p, li, span, td, th`
+>   - Chữ in đậm: `strong, b`
+>   - Tên menu điều hướng, nhãn form, tiêu đề thẻ (Card titles)
+> * **Trong Dark Theme:** Tự động chuyển sang màu sáng tương phản cao `--foreground: oklch(0.9411 0.019 248.0297)`.
+
+
 The entire color palette uses **OKLCH color space** (perceptually uniform, modern CSS standard). All colors are defined as CSS variables in `:root` and `.dark` scopes.
 
 ### 1.1 Primary Color Palette
@@ -33,7 +47,7 @@ The entire color palette uses **OKLCH color space** (perceptually uniform, moder
 | Variable | Light | Dark | Usage |
 |----------|-------|------|-------|
 | `--background` | oklch(100% 0.00011 271.152) | oklch(0.1621 0.0472 251.0579) | Full-page background |
-| `--foreground` | rgb(0, 71, 118) | oklch(0.9411 0.019 248.0297) | Primary text |
+| `--foreground` | rgb(0, 71, 118) (#004776) | oklch(0.9411 0.019 248.0297) | Primary text |
 | `--muted` | oklch(0.9205 0.0146 244.7261) | oklch(0.2386 0.0395 251.1373) | Muted backgrounds, disabled |
 | `--muted-foreground` | oklch(38.082% 0.08041 252.8) | oklch(0.7211 0.0295 248.2358) | Secondary text, hints |
 | `--card` | oklch(1 0 0) | oklch(0.2011 0.0502 250.7748) | Card/panel backgrounds |

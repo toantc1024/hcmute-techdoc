@@ -3,24 +3,26 @@
 @import 'fumadocs-ui/css/preset.css';
 
 :root {
-  /* HCMUTE Design System V2 - OKLCH Light Theme */
+  /* HCMUTE Design System V2 - Signature Brand Colors (Ref: https://beta.hcmute.edu.vn) */
+  --hcmute-navy: rgb(0, 71, 118); /* #004776 - Chuẩn màu chữ thay thế toàn bộ màu đen */
   --primary: oklch(0.5505 0.2485 262.5896);
   --primary-foreground: oklch(0.9801 0.0096 252.8096);
   --secondary: oklch(0.9404 0.0197 245.6429);
-  --secondary-foreground: oklch(0.2993 0.0609 251.2891);
+  --secondary-foreground: rgb(0, 71, 118);
   --accent: oklch(0.97 0.014 254.604);
-  --accent-foreground: oklch(0.421 0.1203 261.7139);
+  --accent-foreground: rgb(0, 71, 118);
   --destructive: oklch(0.6207 0.2306 24.9164);
   --destructive-foreground: oklch(0.9801 0.0096 252.8096);
 
+  /* Light mode: Toàn bộ chữ chính đều dùng --hcmute-navy rgb(0, 71, 118) */
   --background: oklch(100% 0.00011 271.152);
   --foreground: rgb(0, 71, 118);
-  --muted: oklch(0.9205 0.0146 244.7261);
-  --muted-foreground: oklch(38.082% 0.08041 252.8);
+  --muted: oklch(0.95 0.012 245);
+  --muted-foreground: oklch(0.42 0.08 250); /* Xanh xám nhạt cho chữ phụ trợ */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2602 0.0703 254.8723);
+  --card-foreground: rgb(0, 71, 118);
   --border: oklch(0.93 0.03 264);
-  --input: oklch(91.513% 0.00323 15.446);
+  --input: oklch(95% 0.005 245);
   --ring: oklch(0.632 0.1979 260.8448);
 
   /* Layout tokens */
@@ -33,8 +35,13 @@
   /* Fumadocs Theme Overrides */
   --color-fd-primary: var(--primary);
   --color-fd-primary-foreground: var(--primary-foreground);
+  --color-fd-foreground: rgb(0, 71, 118);
+  --color-fd-card-foreground: rgb(0, 71, 118);
+  --color-fd-popover-foreground: rgb(0, 71, 118);
+  --color-fd-secondary-foreground: rgb(0, 71, 118);
+  --color-fd-muted-foreground: oklch(0.42 0.08 250);
   --color-fd-accent: var(--accent);
-  --color-fd-accent-foreground: var(--accent-foreground);
+  --color-fd-accent-foreground: rgb(0, 71, 118);
   --color-fd-border: var(--border);
   --color-fd-ring: var(--ring);
 }
@@ -60,13 +67,65 @@
   --input: oklch(0.2707 0.0499 250.1517);
   --ring: oklch(0.6633 0.1802 257.7933);
 
-  /* Fumadocs Theme Overrides */
+  /* Fumadocs Theme Overrides in Dark Mode */
   --color-fd-primary: var(--primary);
   --color-fd-primary-foreground: var(--primary-foreground);
+  --color-fd-foreground: var(--foreground);
+  --color-fd-card-foreground: var(--card-foreground);
+  --color-fd-popover-foreground: var(--foreground);
+  --color-fd-secondary-foreground: var(--secondary-foreground);
+  --color-fd-muted-foreground: var(--muted-foreground);
   --color-fd-accent: var(--accent);
   --color-fd-accent-foreground: var(--accent-foreground);
   --color-fd-border: var(--border);
   --color-fd-ring: var(--ring);
+}
+
+/* --- QUY CHUẨN THAY TOÀN BỘ CHỮ ĐEN THÀNH MÀU RGB(0, 71, 118) --- */
+:root:not(.dark) {
+  color: rgb(0, 71, 118);
+}
+
+:root:not(.dark) body {
+  color: rgb(0, 71, 118);
+}
+
+:root:not(.dark) h1,
+:root:not(.dark) h2,
+:root:not(.dark) h3,
+:root:not(.dark) h4,
+:root:not(.dark) h5,
+:root:not(.dark) h6,
+:root:not(.dark) strong,
+:root:not(.dark) b {
+  color: rgb(0, 71, 118) !important;
+}
+
+/* Áp dụng vào toàn bộ bài viết MDX & Fumadocs Prose */
+:root:not(.dark) .prose {
+  color: rgb(0, 71, 118);
+}
+
+:root:not(.dark) .prose h1,
+:root:not(.dark) .prose h2,
+:root:not(.dark) .prose h3,
+:root:not(.dark) .prose h4,
+:root:not(.dark) .prose strong,
+:root:not(.dark) .prose b,
+:root:not(.dark) .prose th,
+:root:not(.dark) .prose td {
+  color: rgb(0, 71, 118) !important;
+}
+
+/* Sidebar navigation & Headers */
+:root:not(.dark) nav,
+:root:not(.dark) header,
+:root:not(.dark) aside {
+  color: rgb(0, 71, 118);
+}
+
+:root:not(.dark) aside a:not([data-active="true"]) {
+  color: rgb(0, 71, 118);
 }
 
 html {
