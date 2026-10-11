@@ -19,6 +19,24 @@ Vào menu bên trái chọn **Người dùng**. Hệ thống định nghĩa 4 va
 | **Unit Leader** | Lãnh đạo đơn vị | Phê duyệt bài viết, ký duyệt công bố văn bản, bấm xuất bản trực tiếp lên website. |
 | **Unit Admin** | Quản trị viên đơn vị | Toàn quyền cấu hình trang, thiết kế Header/Footer, phân quyền tài khoản và quản lý tiện ích. |
 
+<Mermaid caption="Sơ đồ phân cấp 4 nhóm quyền và nghiệp vụ tương ứng (Bấm vào khối để mở bài học)">{`flowchart TD
+    Users["Quản lý người dùng (@hcmute.edu.vn)"] --> Roles{"Phân nhóm quyền"}
+
+    Roles --> R1["Cộng tác viên / Biên tập viên"]
+    Roles --> R2["Lãnh đạo đơn vị / Người duyệt"]
+    Roles --> R3["Quản trị viên đơn vị"]
+    Roles --> R4["Quản trị hệ thống (Trường)"]
+
+    R1 --> A1["Soạn tin tức, bài viết, tải ảnh"]
+    R2 --> A2["Phê duyệt, ban hành văn bản & bài viết"]
+    R3 --> A3["Quản trị cây trang, sửa Mega Menu, quản lý tiện ích"]
+    R4 --> A4["Toàn quyền thiết lập và cấu hình hệ thống"]
+
+    click A1 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem nghiệp vụ soạn bài viết"
+    click A2 href "/docs/03-luong-b-chuyen-muc-noi-dung/02-ban-hanh-van-ban-bieu-mau" "Xem nghiệp vụ ban hành văn bản"
+    click A3 href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem hướng dẫn quản trị trang & menu"`}</Mermaid>
+
+
 ---
 
 ## Quản lý danh sách tài khoản

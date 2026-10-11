@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Layers, Image as ImageIcon, MoveHorizontal } from 'lucide-react';
+import { Layers, Image as ImageIcon, MoveHorizontal, Sparkles } from 'lucide-react';
 import { Diagram01Overview } from './diagrams/Diagram01Overview';
 import { Diagram02Actions } from './diagrams/Diagram02Actions';
 import { Diagram03Relations } from './diagrams/Diagram03Relations';
@@ -9,6 +9,8 @@ import { Diagram04PageFlow } from './diagrams/Diagram04PageFlow';
 import { Diagram05ContentFlow } from './diagrams/Diagram05ContentFlow';
 import { Diagram06MenuFlow } from './diagrams/Diagram06MenuFlow';
 import { Diagram07UteAssistant } from './diagrams/Diagram07UteAssistant';
+import { Mermaid } from './Mermaid';
+import { mermaidDiagrams } from './diagrams/mermaidData';
 import { withBasePath } from '@/configs/app.config';
 
 interface DiagramProps {
@@ -16,9 +18,10 @@ interface DiagramProps {
   caption?: string;
   alt?: string;
   id?: string;
+  initialMode?: 'vector' | 'mermaid' | 'image';
 }
 
-export function Diagram({ src = '', caption, alt, id }: DiagramProps) {
+export function Diagram({ src = '', caption, alt, id, initialMode }: DiagramProps) {
   // Nhận diện sơ đồ theo id hoặc tên tệp src
   const diagramKey = (() => {
     if (id === '01' || src.includes('01-tong-quan-to-chuc')) return '01';
@@ -32,10 +35,11 @@ export function Diagram({ src = '', caption, alt, id }: DiagramProps) {
   })();
 
   const hasVectorComponent = Boolean(diagramKey);
+  const hasMermaidComponent = Boolean(diagramKey && mermaidDiagrams[diagramKey]);
 
-  // Mặc định luôn ưu tiên hiển thị sơ đồ khối vector
-  const [viewMode, setViewMode] = useState<'vector' | 'image'>(
-    hasVectorComponent ? 'vector' : 'image'
+  // Chế độ xem: ưu tiên 'vector' mặc định, hoặc 'mermaid' nếu có yêu cầu
+  const [viewMode, setViewMode] = useState<'vector' | 'mermaid' | 'image'>(
+    initialMode || (hasVectorComponent ? 'vector' : 'image')
   );
 
   const renderVectorDiagram = () => {
@@ -61,32 +65,51 @@ export function Diagram({ src = '', caption, alt, id }: DiagramProps) {
 
   return (
     <figure className="my-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2.5 sm:p-4 shadow-sm hover:shadow-md transition">
-      {hasVectorComponent && (
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2 pb-2 border-b border-slate-100 dark:border-slate-800">
+      {(hasVectorComponent || hasMermaidComponent) && (
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-2 pb-2 border-b border-slate-100 dark:border-slate-800">
           {/* Hướng dẫn trên di động */}
-          <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 sm:hidden">
-            <MoveHorizontal className="size-3.5 text-[#0072BC]" />
-            <span>Vuốt ngang để xem toàn bộ sơ đồ</span>
+          <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+            <MoveHorizontal className="size-3.5 text-[#0072BC] shrink-0" />
+            <span className="hidden sm:inline">Chọn chế độ xem phù hợp hoặc bấm vào khối trong sơ đồ Mermaid để mở bài học</span>
+            <span className="sm:hidden">Vuốt ngang để xem toàn bộ sơ đồ</span>
           </div>
 
           {/* Nút chuyển đổi chế độ xem */}
-          <div className="flex items-center gap-2 self-end sm:self-auto ml-auto">
-            <button
-              type="button"
-              onClick={() => setViewMode('vector')}
-              className={`inline-flex min-h-[44px] sm:min-h-[34px] items-center gap-1.5 px-3.5 sm:px-2.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer active:scale-95 ${
-                viewMode === 'vector'
-                  ? 'bg-[#0072BC] text-white shadow-xs'
-                  : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700'
-              }`}
-            >
-              <Layers className="size-3.5" />
-              <span>Sơ đồ khối vector</span>
-            </button>
+          <div className="flex flex-wrap items-center gap-1.5 self-end lg:self-auto ml-auto">
+            {hasVectorComponent && (
+              <button
+                type="button"
+                onClick={() => setViewMode('vector')}
+                className={`inline-flex min-h-[44px] sm:min-h-[34px] items-center gap-1.5 px-3 sm:px-2.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer active:scale-95 ${
+                  viewMode === 'vector'
+                    ? 'bg-[#0072BC] text-white shadow-xs'
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700'
+                }`}
+              >
+                <Layers className="size-3.5" />
+                <span>Sơ đồ khối vector</span>
+              </button>
+            )}
+
+            {hasMermaidComponent && (
+              <button
+                type="button"
+                onClick={() => setViewMode('mermaid')}
+                className={`inline-flex min-h-[44px] sm:min-h-[34px] items-center gap-1.5 px-3 sm:px-2.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer active:scale-95 ${
+                  viewMode === 'mermaid'
+                    ? 'bg-[#0072BC] text-white shadow-xs'
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700'
+                }`}
+              >
+                <Sparkles className="size-3.5" />
+                <span>Sơ đồ Mermaid (Điều hướng)</span>
+              </button>
+            )}
+
             <button
               type="button"
               onClick={() => setViewMode('image')}
-              className={`inline-flex min-h-[44px] sm:min-h-[34px] items-center gap-1.5 px-3.5 sm:px-2.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer active:scale-95 ${
+              className={`inline-flex min-h-[44px] sm:min-h-[34px] items-center gap-1.5 px-3 sm:px-2.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer active:scale-95 ${
                 viewMode === 'image'
                   ? 'bg-[#0072BC] text-white shadow-xs'
                   : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700'
@@ -100,7 +123,11 @@ export function Diagram({ src = '', caption, alt, id }: DiagramProps) {
       )}
 
       <div className="overflow-x-auto rounded-lg bg-slate-50 dark:bg-slate-950 flex justify-center [webkit-overflow-scrolling:touch]">
-        {hasVectorComponent && viewMode === 'vector' ? (
+        {viewMode === 'mermaid' && hasMermaidComponent ? (
+          <div className="w-full">
+            <Mermaid chart={mermaidDiagrams[diagramKey!]} />
+          </div>
+        ) : viewMode === 'vector' && hasVectorComponent ? (
           <div className="w-full min-w-[720px] md:min-w-0">
             {renderVectorDiagram()}
           </div>

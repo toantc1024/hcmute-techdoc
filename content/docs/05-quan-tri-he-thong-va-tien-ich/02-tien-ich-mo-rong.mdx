@@ -27,3 +27,24 @@ Phân hệ **Tiện ích mở rộng** cho phép tập hợp các liên kết d�
    * **Biểu tượng (Icon / Logo):** Tải lên logo định dạng PNG hoặc SVG nền trong suốt (kích thước tối ưu `64×64` hoặc `128×128`).
    * **Công tắc Công khai:** Bật để hiện công khai, tắt để chuyển sang *Chế độ nội bộ*.
 3. Bấm **Tạo tiện ích**.
+
+---
+
+## 3. Sơ đồ quy trình nghiệp vụ tiện ích
+
+<Mermaid caption="Sơ đồ quy trình tạo nhóm và thiết lập tiện ích số (Bấm vào khối để mở bài học)">{`flowchart LR
+    Step1["1. Tạo nhóm tiện ích
+(Đặt tên & Mô tả)"] --> Step2["2. Thêm tiện ích
+(URL & Tab mới)"]
+    Step2 --> Step3["3. Gắn biểu tượng
+(Logo / Icon PNG/SVG)"]
+    Step3 --> Step4{"4. Chế độ hiển thị"}
+
+    Step4 -->|"Bật Công khai"| Public["Cổng dịch vụ số công khai
+(Sinh viên & Giảng viên)"]
+    Step4 -->|"Tắt Công khai"| Private["Chế độ nội bộ
+(Chỉ xem trong Quản trị)"]
+
+    click Step1 href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong#1-t%E1%BA%A1o-nh%C3%B3m-ti%E1%BB%87n-%C3%ADch-m%E1%BB%9Bi" "Xem cách tạo nhóm tiện ích"
+    click Step2 href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong#2-th%C3%AAm-ti%E1%BB%87n-%C3%ADch-v%C3%A0o-nh%C3%B3m" "Xem cách thêm tiện ích"
+    click Step4 href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong" "Xem phân loại hiển thị"`}</Mermaid>

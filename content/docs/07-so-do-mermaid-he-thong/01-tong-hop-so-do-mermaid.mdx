@@ -1,20 +1,18 @@
 ---
 title: Tổng hợp sơ đồ khối Mermaid
-description: Toàn bộ 8 sơ đồ luồng nghiệp vụ hệ thống website HCM-UTE được mô hình hóa bằng Mermaid
+description: Toàn bộ 8 sơ đồ luồng nghiệp vụ hệ thống website HCM-UTE được mô hình hóa bằng Mermaid có liên kết điều hướng
 order: 1
 ---
 
-Bộ sơ đồ khối dưới đây được trích xuất và chuẩn hóa từ tài liệu **Hướng dẫn sử dụng website HCM-UTE (Tháng 10/2026)**. Toàn bộ sơ đồ được mô hình hóa bằng cú pháp **Mermaid**, cho phép Thầy/Cô và đội ngũ kỹ thuật có thể dễ dàng sao chép mã nguồn, chỉnh sửa nhanh hoặc nhúng vào các báo cáo và tài liệu khác.
-
-
-> **Quy chuẩn:** Tuân thủ quy tắc viết hoa thông thường (**Sentence case**), nhận diện thương hiệu **HCM-UTE**, sẵn sàng nhúng trực tiếp vào tài liệu Markdown, Notion, GitHub hoặc hệ thống báo cáo.
+Bộ sơ đồ khối dưới đây được trích xuất và chuẩn hóa từ tài liệu **Hướng dẫn sử dụng website HCM-UTE (Tháng 10/2026)**. Toàn bộ sơ đồ được trang bị **tính năng điều hướng thông minh**: Thầy/Cô chỉ cần **nhấp chuột vào bất kỳ khối nào trong sơ đồ** để mở ngay bài hướng dẫn nghiệp vụ tương ứng.
 
 ---
 
 ## 1. Sơ đồ luồng đăng nhập & cấu trúc điều hướng quản trị
 
-<Mermaid caption="Sơ đồ Mermaid: 1. Sơ đồ luồng đăng nhập & cấu trúc điều hướng quản trị">
-{`flowchart TD
+Mô hình hóa quy trình phân luồng giữa website trường và website đơn vị, cơ chế xác thực Google SSO và các khu vực chức năng chính.
+
+<Mermaid caption="Sơ đồ 1: Quy trình đăng nhập và điều hướng quản trị (Bấm vào khối để mở bài học)">{`flowchart TD
     Start(["Bắt đầu truy cập"]) --> CheckDomain{"Loại website"}
 
     CheckDomain -->|"Website đơn vị"| UnitUrl["Truy cập: {ten-don-vi}.hcmutertic.com"]
@@ -36,31 +34,39 @@ Bộ sơ đồ khối dưới đây được trích xuất và chuẩn hóa từ
     Dashboard --> M3["3. Quản lý website (Trang, header & footer, cấu hình)"]
     Dashboard --> M4["4. Quản lý người dùng & Phân quyền"]
     Dashboard --> M5["5. Tiện ích mở rộng (Cổng dịch vụ số)"]
-    Dashboard --> M6["6. Thông báo & Trợ lý UTE"]`}
-</Mermaid>
+    Dashboard --> M6["6. Thông báo & Trợ lý UTE"]
+
+    click GoogleLogin href "/docs/01-khoi-dong-va-tong-quan/01-dang-nhap-va-khu-vuc-chinh" "Xem hướng dẫn Đăng nhập"
+    click M1 href "/docs/01-khoi-dong-va-tong-quan/02-tong-quan-va-thong-ke" "Xem mục Tổng quan & Thống kê"
+    click M2 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem mục Quản lý nội dung"
+    click M3 href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem mục Quản trị website"
+    click M4 href "/docs/05-quan-tri-he-thong-va-tien-ich/01-nguoi-dung-va-nhom-quyen" "Xem mục Người dùng & Quyền"
+    click M5 href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong" "Xem mục Tiện ích mở rộng"
+    click M6 href "/docs/06-kiem-tra-va-tro-ly/01-tro-ly-ute-theo-tac-vu" "Xem mục Trợ lý UTE"`}</Mermaid>
 
 ---
 
 ## 2. Luồng A – Quản trị và xây dựng trang (Page Builder)
 
-<Mermaid caption="Sơ đồ Mermaid: 2. Luồng A – Quản trị và xây dựng trang (Page Builder)">
-{`flowchart TD
+Quy trình quản lý vòng đời của một trang web: từ danh sách trang, khởi tạo, thiết kế khối nội dung với Page Builder đến xuất bản.
+
+<Mermaid caption="Sơ đồ 2: Luồng A – Quản trị và xây dựng trang (Bấm vào khối để mở bài học)">{`flowchart TD
     StartPage["Vào Website → Trang → Sơ đồ trang"] --> ActionChoice{"Thao tác cần làm"}
 
     ActionChoice -->|"Tạo trang mới"| CreateNew["Bấm Tạo trang mới"]
     ActionChoice -->|"Thêm trang con"| AddSub["Chọn trang cha → Bấm Thêm trang con"]
     ActionChoice -->|"Nhân bản mẫu"| CloneTpl["Chọn Nhân bản trang mẫu từ thư viện"]
 
-    CreateNew --> FormInfo["Điền thông tin trang: Tên trang, Trang cha, Mô tả ngắn"]
+    CreateNew --> FormInfo["Điền thông tin: Tên trang, Trang cha, Mô tả ngắn"]
     AddSub --> FormInfo
     CloneTpl --> FormInfo
 
     FormInfo --> PageBuilder["Mở trình thiết kế Page Builder"]
 
-    PageBuilder --> BlockOps["Thao tác khối nội dung: Thêm khối mới · Sắp xếp thứ tự · Xóa khối"]
-    BlockOps --> ConfigBlock["Cấu hình nội dung khối: Chọn nguồn dữ liệu · Gắn chuyên mục · Chỉnh kiểu dáng"]
+    PageBuilder --> BlockOps["Thao tác khối: Thêm khối mới · Sắp xếp thứ tự · Xóa khối"]
+    BlockOps --> ConfigBlock["Cấu hình khối: Chọn nguồn dữ liệu · Gắn chuyên mục · Chỉnh kiểu dáng"]
 
-    ConfigBlock --> ResponsiveCheck["Kiểm tra giao diện: Desktop · Tablet · Mobile (Thu phóng 75% - 100%)"]
+    ConfigBlock --> ResponsiveCheck["Kiểm tra giao diện: Desktop · Tablet · Mobile"]
 
     ResponsiveCheck --> Preview["Mở xem trước (Preview)"]
 
@@ -69,15 +75,23 @@ Bộ sơ đồ khối dưới đây được trích xuất và chuẩn hóa từ
     IsApproved -->|"Lưu nháp"| SaveDraft["Lưu nháp (Chỉ hiển thị trong quản trị)"]
     IsApproved -->|"Công bố"| Publish["Xuất bản công bố (Hiển thị ra website công khai)"]
 
-    Publish --> ConnectMenu["Liên kết trang vào Menu đầu trang (Mega Menu)"]`}
-</Mermaid>
+    Publish --> ConnectMenu["Liên kết trang vào Menu đầu trang (Mega Menu)"]
+
+    click CreateNew href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem hướng dẫn Tạo trang mới"
+    click AddSub href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem hướng dẫn Thêm trang con"
+    click CloneTpl href "/docs/02-luong-a-quan-ly-trang/02-nhan-ban-tu-thu-vien-mau" "Xem hướng dẫn Nhân bản mẫu"
+    click PageBuilder href "/docs/02-luong-a-quan-ly-trang/03-trinh-thiet-ke-page-builder" "Xem hướng dẫn Page Builder"
+    click BlockOps href "/docs/02-luong-a-quan-ly-trang/03-trinh-thiet-ke-page-builder" "Xem cách quản lý khối nội dung"
+    click SaveDraft href "/docs/02-luong-a-quan-ly-trang/04-lich-su-va-khoi-phuc-phien-ban" "Xem Lịch sử phiên bản"
+    click ConnectMenu href "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong" "Xem hướng dẫn Gắn vào Mega Menu"`}</Mermaid>
 
 ---
 
 ## 3. Luồng B – Soạn, duyệt và công bố nội dung (Tin tức & Văn bản)
 
-<Mermaid caption="Sơ đồ Mermaid: 3. Luồng B – Soạn, duyệt và công bố nội dung (Tin tức & Văn bản)">
-{`flowchart TD
+Phân tách rõ ràng giữa hai nhánh nghiệp vụ cốt lõi: Bài viết tin tức (tích hợp trợ lý AI Copilot) và Ban hành văn bản/biểu mẫu PDF.
+
+<Mermaid caption="Sơ đồ 3: Luồng B – Soạn, duyệt và công bố nội dung (Bấm vào khối để mở bài học)">{`flowchart TD
     StartContent["Vào Quản lý nội dung → Văn bản và bài viết"] --> ContentType{"Loại nội dung cần đăng"}
 
     %% Nhánh bài viết
@@ -86,8 +100,8 @@ Bộ sơ đồ khối dưới đây được trích xuất và chuẩn hóa từ
     PostInfo --> PostBody["Soạn nội dung bài viết"]
 
     PostBody --> UseAI{"Dùng AI Copilot?"}
-    UseAI -->|"Có"| AICopilot["Bôi đen đoạn văn → Kích hoạt Copilot: Viết lại · Rút gọn · Bản dịch song ngữ"]
-    UseAI -->|"Không"| CheckPost["Kiểm tra các chỉ báo: Tiêu đề, Chuyên mục, Ảnh bìa, Nội dung"]
+    UseAI -->|"Có"| AICopilot["Bôi đen văn bản → Kích hoạt Copilot: Viết lại · Rút gọn · Dịch song ngữ"]
+    UseAI -->|"Không"| CheckPost["Kiểm tra chỉ báo: Tiêu đề, Chuyên mục, Ảnh bìa, Nội dung"]
     AICopilot --> CheckPost
 
     CheckPost --> PostState{"Quyền hạn & Mục đích"}
@@ -106,15 +120,21 @@ Bộ sơ đồ khối dưới đây được trích xuất và chuẩn hóa từ
     UploadPDF --> DocCategory["Chọn chuyên mục: VĂN BẢN hoặc BIỂU MẪU"]
     DocCategory --> DocSave{"Hình thức lưu"}
     DocSave -->|"Lưu nháp"| DocDraft["Lưu bản ghi nội bộ"]
-    DocSave -->|"Hiện ngay"| DocPublish["Lưu & Hiện ngay (Công khai tệp PDF cho người xem)"]`}
-</Mermaid>
+    DocSave -->|"Hiện ngay"| DocPublish["Lưu & Hiện ngay (Công khai tệp PDF cho người xem)"]
+
+    click NewPost href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem hướng dẫn Tạo bài viết"
+    click AICopilot href "/docs/03-luong-b-chuyen-muc-noi-dung/03-tro-ly-ai-copilot-song-ngu" "Xem hướng dẫn AI Copilot"
+    click PostSubmit href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem quy trình duyệt tin bài"
+    click NewDoc href "/docs/03-luong-b-chuyen-muc-noi-dung/02-ban-hanh-van-ban-bieu-mau" "Xem hướng dẫn Ban hành văn bản"
+    click UploadPDF href "/docs/03-luong-b-chuyen-muc-noi-dung/02-ban-hanh-van-ban-bieu-mau" "Xem quy chuẩn tệp PDF"`}</Mermaid>
 
 ---
 
 ## 4. Luồng C – Cấu hình Menu đầu trang và Chân trang (Navigation & Footer)
 
-<Mermaid caption="Sơ đồ Mermaid: 4. Luồng C – Cấu hình Menu đầu trang và Chân trang (Navigation & Footer)">
-{`flowchart TD
+Quy trình quản lý thanh điều hướng đầu trang (Mega Menu) và chân trang (Footer), gán liên kết thông minh với các trang có sẵn.
+
+<Mermaid caption="Sơ đồ 4: Luồng C – Cấu hình Mega Menu và Chân trang (Bấm vào khối để mở bài học)">{`flowchart TD
     StartNav["Vào Website → Header & Footer"] --> NavArea{"Khu vực cần sửa"}
 
     %% Nhánh Mega Menu
@@ -138,15 +158,19 @@ Bộ sơ đồ khối dưới đây được trích xuất và chuẩn hóa từ
     FooterSetting --> SaveFooter["Lưu thay đổi chân trang"]
 
     SaveHeader --> TestSite["Kiểm tra trực quan trên website công khai"]
-    SaveFooter --> TestSite`}
-</Mermaid>
+    SaveFooter --> TestSite
+
+    click HeaderNav href "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong" "Xem hướng dẫn Mega Menu"
+    click PickPage href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem hướng dẫn Chọn trang"
+    click FooterNav href "/docs/04-luong-c-menu-dieu-huong/02-cau-hinh-chan-trang-footer" "Xem hướng dẫn Chân trang"`}</Mermaid>
 
 ---
 
 ## 5. Mô hình quan hệ giữa ba cấu trúc quản trị (Trang - Menu - Chuyên mục)
 
-<Mermaid caption="Sơ đồ Mermaid: 5. Mô hình quan hệ giữa ba cấu trúc quản trị (Trang - Menu - Chuyên mục)">
-{`flowchart LR
+Minh họa cơ chế liên kết dữ liệu giữa Cây trang, Menu đầu trang và Cây chuyên mục tin bài.
+
+<Mermaid caption="Sơ đồ 5: Mô hình quan hệ giữa ba cấu trúc quản trị (Bấm vào khối để mở bài học)">{`flowchart LR
     subgraph S1["1. SƠ ĐỒ TRANG (Cấu trúc giao diện)"]
         PageRoot["Trang chủ (/)"]
         PageIntro["Giới thiệu (/gioi-thieu)"]
@@ -178,15 +202,19 @@ Bộ sơ đồ khối dưới đây được trích xuất và chuẩn hóa từ
     PageDoc -.->|"2. Nhúng khối hiển thị"| BlockDisplay["Khối danh sách văn bản / biểu mẫu"]
     BlockDisplay -.->|"3. Lấy dữ liệu nguồn từ"| CatSubDoc
 
-    classDef note fill:#FEF3C7,stroke:#D97706,stroke-width:1px,color:#92400E;`}
-</Mermaid>
+    click PageIntro href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem quản lý cây trang"
+    click PageDoc href "/docs/02-luong-a-quan-ly-trang/03-trinh-thiet-ke-page-builder" "Xem dựng khối trang"
+    click CatPost href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem chuyên mục tin bài"
+    click CatDoc href "/docs/03-luong-b-chuyen-muc-noi-dung/02-ban-hanh-van-ban-bieu-mau" "Xem chuyên mục văn bản"
+    click MenuLink href "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong" "Xem liên kết menu"`}</Mermaid>
 
 ---
 
 ## 6. Sơ đồ quy trình phân quyền và quản trị người dùng
 
-<Mermaid caption="Sơ đồ Mermaid: 6. Sơ đồ quy trình phân quyền và quản trị người dùng">
-{`flowchart TD
+Mô hình phân loại người dùng và 4 nhóm quyền hạn chính sách vận hành trong hệ thống quản trị HCM-UTE.
+
+<Mermaid caption="Sơ đồ 6: Quy trình phân quyền và quản trị người dùng (Bấm vào khối để mở bài học)">{`flowchart TD
     StartUser["Vào Quản lý người dùng"] --> FilterUser["Lọc danh sách: Tất cả · Hoạt động · Chờ xác minh · Đã khóa"]
     FilterUser --> UserAction{"Nghiệp vụ cần xử lý"}
 
@@ -197,15 +225,20 @@ Bộ sơ đồ khối dưới đây được trích xuất và chuẩn hóa từ
     AssignRole --> R1["Biên tập viên (Soạn bài, đăng tin, gửi duyệt)"]
     AssignRole --> R2["Trưởng đơn vị / Người duyệt (Phê duyệt, ban hành nội dung)"]
     AssignRole --> R3["Quản trị viên đơn vị (Quản trị trang, menu, tiện ích đơn vị)"]
-    AssignRole --> R4["Quản trị hệ thống (Toàn quyền thiết lập và cấu hình cấp trường)"]`}
-</Mermaid>
+    AssignRole --> R4["Quản trị hệ thống (Toàn quyền thiết lập và cấu hình cấp trường)"]
+
+    click VerifyUser href "/docs/05-quan-tri-he-thong-va-tien-ich/01-nguoi-dung-va-nhom-quyen" "Xem hướng dẫn quản lý người dùng"
+    click R1 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem nghiệp vụ Biên tập viên"
+    click R2 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem quy trình duyệt"
+    click R3 href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem quyền Quản trị đơn vị"`}</Mermaid>
 
 ---
 
 ## 7. Quy trình quản trị tiện ích mở rộng (Cổng dịch vụ số)
 
-<Mermaid caption="Sơ đồ Mermaid: 7. Quy trình quản trị tiện ích mở rộng (Cổng dịch vụ số)">
-{`flowchart TD
+Quy trình tạo nhóm tiện ích, cấu hình liên kết số hóa và kiểm soát trạng thái hiển thị công khai / nội bộ.
+
+<Mermaid caption="Sơ đồ 7: Quy trình quản trị tiện ích mở rộng (Bấm vào khối để mở bài học)">{`flowchart TD
     StartUtil["Vào Tiện ích mở rộng"] --> UtilChoice{"Nghiệp vụ tiện ích"}
 
     UtilChoice -->|"Tạo nhóm tiện ích"| NewGroup["Bấm Tạo nhóm mới"]
@@ -222,15 +255,19 @@ Bộ sơ đồ khối dưới đây được trích xuất và chuẩn hóa từ
     ItemAccess -->|"Nội bộ (Internal)"| PrivItem["Ẩn khỏi cổng công khai, chỉ xem trong giao diện quản trị"]
 
     PubItem --> SaveItem["Lưu tiện ích"]
-    PrivItem --> SaveItem`}
-</Mermaid>
+    PrivItem --> SaveItem
+
+    click NewGroup href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong" "Xem hướng dẫn nhóm tiện ích"
+    click NewItem href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong" "Xem hướng dẫn thêm tiện ích"
+    click PubItem href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong" "Xem chế độ hiển thị"`}</Mermaid>
 
 ---
 
 ## 8. Quy trình tương tác hướng dẫn qua Trợ lý UTE (On-screen Tour)
 
-<Mermaid caption="Sơ đồ Mermaid: 8. Quy trình tương tác hướng dẫn qua Trợ lý UTE (On-screen Tour)">
-{`flowchart TD
+Các bước kích hoạt trợ lý ngữ cảnh thông minh và theo dõi hướng dẫn tương tác trực quan ngay trên màn hình.
+
+<Mermaid caption="Sơ đồ 8: Quy trình tương tác hướng dẫn qua Trợ lý UTE (Bấm vào khối để mở bài học)">{`flowchart TD
     Trigger["Bấm biểu tượng Trợ lý UTE (Góc trên bên phải)"] --> OpenCenter["Mở Trung tâm Hỗ trợ & Thiết lập Website HCM-UTE"]
 
     OpenCenter --> SelectTopic{"Lựa chọn nhu cầu hướng dẫn"}
@@ -255,5 +292,8 @@ Bộ sơ đồ khối dưới đây được trích xuất và chuẩn hóa từ
     StepNav -->|"Dấu nhân (×)"| CloseTour["Đóng trợ lý và thao tác thực tế"]
 
     NextStep --> StepHighlight
-    PrevStep --> StepHighlight`}
-</Mermaid>
+    PrevStep --> StepHighlight
+
+    click TopicChecklist href "/docs/06-kiem-tra-va-tro-ly/02-checklist-kiem-tra-cong-bo" "Xem Checklist kiểm tra"
+    click TopicGuides href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem hướng dẫn tạo bài"
+    click StartTour href "/docs/06-kiem-tra-va-tro-ly/01-tro-ly-ute-theo-tac-vu" "Xem chi tiết Trợ lý UTE"`}</Mermaid>
