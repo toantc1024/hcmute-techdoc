@@ -13,6 +13,7 @@ import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { getPageImageUrl, getPageMarkdownUrl, gitConfig } from '@/lib/shared';
 import { ExportPdfButton } from '@/components/ExportPdfButton';
+import { MobileOverviewTrigger } from '@/components/MobileOverviewTrigger';
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
@@ -33,6 +34,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
           githubUrl={`https://github.com/${gitConfig.user}/${gitConfig.repo}/blob/${gitConfig.branch}/content/docs/${page.path}`}
         />
         <ExportPdfButton />
+        <MobileOverviewTrigger />
       </div>
       <DocsBody>
         <MDX
