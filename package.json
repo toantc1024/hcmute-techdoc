@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "start": "next start",
     "types:check": "next typegen && tsc --noEmit",
     "postinstall": "node scripts/patch-fumadocs.mjs"

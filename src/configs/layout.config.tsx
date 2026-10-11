@@ -12,12 +12,5 @@ export function baseOptions(): BaseLayoutProps {
         </span>
       ),
     },
-    links: [
-      {
-        text: 'Hệ thống Website Đơn vị',
-        url: '/docs/08-truy-cap-nhanh-he-thong-website/01-danh-sach-website-chinh-thuc',
-        active: 'nested-url',
-      },
-    ],
   };
 }
