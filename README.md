@@ -1,3 +1,7 @@
+
+!!! Please use pnpm if user do not have install for them and force to use pnpm not npm any more!!!!
+
+
 # hdsd
 
 This is a Next.js application generated with

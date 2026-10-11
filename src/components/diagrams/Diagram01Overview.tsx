@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { brandConfig } from '@/configs/app.config';
 
 export const diagram01Content = {
   school: 'HCM-UTE · TRƯỜNG ĐẠI HỌC CÔNG NGHỆ KỸ THUẬT TP. HỒ CHÍ MINH',
@@ -77,7 +78,7 @@ export function Diagram01Overview() {
         <rect width="1024" height="820" fill="#FFFFFF" rx="12" />
 
         {/* ================= HEADER BANNER ================= */}
-        <image href="/logo-hcm-ute.png" x="25" y="22" width="48" height="48" />
+        <image href={brandConfig.logoUrl} x="25" y="22" width="48" height="48" />
 
         <text x="85" y="44" fill="#004776" fontSize="21" fontWeight="700" letterSpacing="-0.3">
           {diagram01Content.title}

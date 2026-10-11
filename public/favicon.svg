@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="hcmute-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="50%" stop-color="#0369a1"/>
+      <stop offset="100%" stop-color="#004b87"/>
+    </linearGradient>
+    <linearGradient id="hcmute-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Background Shield / Rounded Badge -->
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="url(#hcmute-blue)" filter="url(#glow)"/>
+  <rect x="10" y="10" width="108" height="108" rx="26" fill="none" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.4"/>
+
+  <!-- Official HCMUTE Flower & Gear Emblem in White and Gold -->
+  <g transform="translate(64,64)">
+    <!-- Central Outer Gear Ring -->
+    <circle r="36" fill="none" stroke="#ffffff" stroke-width="3" stroke-dasharray="4 6" opacity="0.45"/>
+    
+    <!-- 8 Symmetrical Stylized Petals / Technology Elements -->
+    <g fill="#ffffff" opacity="0.95">
+      <path d="M 0,-40 C -7,-24 -12,-15 0,-6 C 12,-15 7,-24 0,-40 Z"/>
+      <path d="M 0,40 C -7,24 -12,15 0,6 C 12,15 7,24 0,40 Z"/>
+      <path d="M -40,0 C -24,-7 -15,-12 -6,0 C -15,12 -24,7 -40,0 Z"/>
+      <path d="M 40,0 C 24,-7 15,-12 6,0 C 15,12 24,7 40,0 Z"/>
+      <path d="M -28,-28 C -14,-22 -9,-11 0,0 C -11,-9 -22,-14 -28,-28 Z"/>
+      <path d="M 28,-28 C 14,-22 9,-11 0,0 C 11,-9 22,-14 28,-28 Z"/>
+      <path d="M -28,28 C -14,22 -9,11 0,0 C -11,9 -22,14 -28,28 Z"/>
+      <path d="M 28,28 C 14,22 9,11 0,0 C 11,9 22,14 28,28 Z"/>
+    </g>
+
+    <!-- Golden Center Core -->
+    <circle r="12" fill="url(#hcmute-gold)" stroke="#ffffff" stroke-width="2"/>
+    <circle r="5" fill="#ffffff"/>
+  </g>
+</svg>
