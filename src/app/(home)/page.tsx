@@ -142,8 +142,8 @@ export default function HomePage() {
           <span>Trường Đại học Công nghệ Kỹ thuật TP.HCM · Cổng hướng dẫn quản trị HCM-UTE</span>
         </div>
 
-        {/* 1. Tiêu đề lớn ở giữa */}
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-foreground tracking-tight leading-tight max-w-3xl mb-4">
+        {/* 1. Tiêu đề chính: gọn gàng trên 1 dòng duy nhất */}
+        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-foreground tracking-tight leading-tight mb-3 whitespace-nowrap">
           Thầy/Cô cần hướng dẫn gì?
         </h1>
 
