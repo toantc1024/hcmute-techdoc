@@ -23,7 +23,7 @@ interface MermaidProps {
 
 export function Mermaid({ chart, children, caption }: MermaidProps) {
   const content = (chart || (typeof children === 'string' ? children : '')).trim();
-  const uniqueId = `mermaid-${useId().replace(/[:]/g, '')}`;
+  const renderId = `mermaidRender${useId().replace(/[^a-zA-Z0-9]/g, '')}`;
   const [svgContent, setSvgContent] = useState<string>('');
   const [naturalWidth, setNaturalWidth] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -113,6 +113,24 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
           startOnLoad: false,
           theme: 'base',
           securityLevel: 'loose',
+          themeCSS: `
+            /* Bỏ triệt để đường gạch chân cho link tương tác trong Mermaid */
+            g.clickable, g.clickable a, g.clickable text, g.clickable tspan,
+            a, a text, a tspan {
+              text-decoration: none !important;
+            }
+            g.clickable, a[href] {
+              cursor: pointer !important;
+            }
+            /* Hiệu ứng viền nổi bật & đổ bóng khi rê chuột vào khối tác vụ */
+            g.clickable:hover rect, g.clickable:hover polygon, g.clickable:hover circle,
+            a[href]:hover rect, a[href]:hover polygon, a[href]:hover circle {
+              stroke: ${isDark ? '#38BDF8' : '#0072BC'} !important;
+              stroke-width: 2.5px !important;
+              filter: drop-shadow(0 4px 10px ${isDark ? 'rgba(56, 189, 248, 0.4)' : 'rgba(0, 114, 188, 0.3)'}) !important;
+              transition: stroke 0.15s ease, stroke-width 0.15s ease, filter 0.15s ease !important;
+            }
+          `,
           themeVariables: {
             fontFamily: 'inherit',
             fontSize: '13px',
@@ -138,7 +156,7 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
           },
         });
 
-        const { svg } = await mermaid.render(uniqueId, content);
+        const { svg } = await mermaid.render(renderId, content);
         if (isMounted) {
           // Trích xuất chiều rộng gốc từ viewBox
           const vbMatch = svg.match(/viewBox=["']\s*(-?[0-9.]+)\s+(-?[0-9.]+)\s+([0-9.]+)\s+([0-9.]+)["']/i);
@@ -171,7 +189,7 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
       isMounted = false;
       observer.disconnect();
     };
-  }, [content, uniqueId]);
+  }, [content, renderId]);
 
   // Xử lý click điều hướng cho các khối interactive ở ngoài
   useEffect(() => {
@@ -261,6 +279,23 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
   return (
     <>
       <figure className="my-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 sm:p-5 shadow-sm hover:shadow-md transition">
+        {/* Style cục bộ đảm bảo triệt tiêu gạch chân trên mọi trình duyệt */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              figure svg a, figure svg a text, figure svg a tspan,
+              figure svg .clickable text, figure svg .clickable tspan,
+              [role="dialog"] svg a, [role="dialog"] svg a text, [role="dialog"] svg a tspan,
+              [role="dialog"] svg .clickable text, [role="dialog"] svg .clickable tspan {
+                text-decoration: none !important;
+              }
+              figure svg a, [role="dialog"] svg a {
+                cursor: pointer !important;
+              }
+            `,
+          }}
+        />
+
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 pb-2 border-b border-slate-100 dark:border-slate-800">
           {/* Tiêu đề sơ đồ khối */}
           <div className="flex items-center gap-2 text-xs font-semibold text-[#0072BC]">
@@ -342,7 +377,7 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
           </div>
         </div>
 
-        {/* Khung hiển thị sơ đồ ở ngoài: KHÔNG có max-h gây cắt cụt, tự nhiên, cuộn ngang an toàn khi phóng to */}
+        {/* Khung hiển thị sơ đồ ở ngoài: KHÔNG gạch chân, viền nổi bật & đổ bóng khi hover */}
         <div
           ref={containerRef}
           className="w-full overflow-x-auto rounded-lg bg-slate-50 dark:bg-slate-950 p-2 sm:p-4 text-center [webkit-overflow-scrolling:touch]"
@@ -362,7 +397,7 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
                 maxWidth: inlineZoom === 1 && naturalWidth ? `${naturalWidth}px` : 'none',
                 transition: 'width 0.2s ease, min-width 0.2s ease',
               }}
-              className="text-center [&>svg]:mx-auto [&>svg]:w-full [&>svg]:max-w-full [&>svg]:h-auto [&_a]:cursor-pointer [&_a:hover_rect]:stroke-[#0072BC] [&_a:hover_rect]:stroke-[2.5px] [&_a:hover_polygon]:stroke-[#0072BC] [&_a:hover_polygon]:stroke-[2.5px] [&_a:hover_circle]:stroke-[#0072BC] [&_a:hover]:filter [&_a:hover]:drop-shadow-md"
+              className="text-center [&>svg]:mx-auto [&>svg]:w-full [&>svg]:max-w-full [&>svg]:h-auto [&_a]:!no-underline [&_a_text]:!no-underline [&_a_tspan]:!no-underline [&_a]:cursor-pointer [&_a:hover_rect]:!stroke-[#0072BC] [&_a:hover_rect]:!stroke-[2.5px] [&_a:hover_polygon]:!stroke-[#0072BC] [&_a:hover_polygon]:!stroke-[2.5px] [&_a:hover_circle]:!stroke-[#0072BC] [&_a:hover_circle]:!stroke-[2.5px] [&_a:hover]:filter [&_a:hover]:drop-shadow-[0_4px_10px_rgba(0,114,188,0.35)]"
               dangerouslySetInnerHTML={{ __html: svgContent }}
             />
           ) : (
@@ -475,7 +510,7 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
                   maxWidth: modalZoom === 1 && naturalWidth ? `${naturalWidth}px` : 'none',
                   transition: 'width 0.15s ease, min-width 0.15s ease',
                 }}
-                className="flex justify-center [&>svg]:!max-w-none [&>svg]:!w-full [&>svg]:!h-auto [&_a]:cursor-pointer [&_a:hover_rect]:stroke-sky-400 [&_a:hover_rect]:stroke-[2.5px] [&_a:hover_polygon]:stroke-sky-400 [&_a:hover_polygon]:stroke-[2.5px] [&_a:hover_circle]:stroke-sky-400 [&_a:hover]:filter [&_a:hover]:drop-shadow-md"
+                className="flex justify-center [&>svg]:!max-w-none [&>svg]:!w-full [&>svg]:!h-auto [&_a]:!no-underline [&_a_text]:!no-underline [&_a_tspan]:!no-underline [&_a]:cursor-pointer [&_a:hover_rect]:!stroke-sky-400 [&_a:hover_rect]:!stroke-[2.5px] [&_a:hover_polygon]:!stroke-sky-400 [&_a:hover_polygon]:!stroke-[2.5px] [&_a:hover_circle]:!stroke-sky-400 [&_a:hover_circle]:!stroke-[2.5px] [&_a:hover]:filter [&_a:hover]:drop-shadow-[0_4px_12px_rgba(56,189,248,0.4)]"
                 dangerouslySetInnerHTML={{ __html: svgContent }}
               />
             </div>

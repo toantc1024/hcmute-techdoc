@@ -21,7 +21,7 @@ Mô hình hóa quy trình phân luồng giữa website trường và website đ�
     UnitUrl --> LoginChoice{"Hình thức đăng nhập"}
     SchoolUrl --> LoginChoice
 
-    LoginChoice -->|"Email trường cấp"| GoogleLogin["Đăng nhập bằng Google (@hcmute.edu.vn)"]
+    LoginChoice -->|"Email trường cấp"| GoogleLogin["Đăng nhập bằng Google (@hcmute.edu.vn) ↗"]
     LoginChoice -->|"Tài khoản quản trị"| AdminLogin["Tài khoản được Ban Quản trị cấp"]
 
     GoogleLogin --> CheckUnit["Kiểm tra mục Đơn vị trên thanh công cụ"]
@@ -29,12 +29,12 @@ Mô hình hóa quy trình phân luồng giữa website trường và website đ�
 
     CheckUnit --> Dashboard["Bảng điều khiển trung tâm"]
 
-    Dashboard --> M1["1. Tổng quan & Thống kê"]
-    Dashboard --> M2["2. Quản lý nội dung (Văn bản, bài viết, chuyên mục, media)"]
-    Dashboard --> M3["3. Quản lý website (Trang, header & footer, cấu hình)"]
-    Dashboard --> M4["4. Quản lý người dùng & Phân quyền"]
-    Dashboard --> M5["5. Tiện ích mở rộng (Cổng dịch vụ số)"]
-    Dashboard --> M6["6. Thông báo & Trợ lý UTE"]
+    Dashboard --> M1["1. Tổng quan & Thống kê ↗"]
+    Dashboard --> M2["2. Quản lý nội dung (Văn bản, bài viết, chuyên mục, media) ↗"]
+    Dashboard --> M3["3. Quản lý website (Trang, header & footer, cấu hình) ↗"]
+    Dashboard --> M4["4. Quản lý người dùng & Phân quyền ↗"]
+    Dashboard --> M5["5. Tiện ích mở rộng (Cổng dịch vụ số) ↗"]
+    Dashboard --> M6["6. Thông báo & Trợ lý UTE ↗"]
 
     click GoogleLogin href "/docs/01-khoi-dong-va-tong-quan/01-dang-nhap-va-khu-vuc-chinh" "Xem hướng dẫn Đăng nhập"
     click M1 href "/docs/01-khoi-dong-va-tong-quan/02-tong-quan-va-thong-ke" "Xem mục Tổng quan & Thống kê"
@@ -53,17 +53,17 @@ Quy trình quản lý vòng đời của một trang web: từ danh sách trang,
 <Mermaid caption="Sơ đồ 2: Luồng A – Quản trị và xây dựng trang (Bấm vào khối để mở HDSD tác vụ tương ứng)">{`flowchart TD
     StartPage["Vào Website → Trang → Sơ đồ trang"] --> ActionChoice{"Thao tác cần làm"}
 
-    ActionChoice -->|"Tạo trang mới"| CreateNew["Bấm Tạo trang mới"]
-    ActionChoice -->|"Thêm trang con"| AddSub["Chọn trang cha → Bấm Thêm trang con"]
-    ActionChoice -->|"Nhân bản mẫu"| CloneTpl["Chọn Nhân bản trang mẫu từ thư viện"]
+    ActionChoice -->|"Tạo trang mới"| CreateNew["Bấm Tạo trang mới ↗"]
+    ActionChoice -->|"Thêm trang con"| AddSub["Chọn trang cha → Bấm Thêm trang con ↗"]
+    ActionChoice -->|"Nhân bản mẫu"| CloneTpl["Chọn Nhân bản trang mẫu từ thư viện ↗"]
 
     CreateNew --> FormInfo["Điền thông tin: Tên trang, Trang cha, Mô tả ngắn"]
     AddSub --> FormInfo
     CloneTpl --> FormInfo
 
-    FormInfo --> PageBuilder["Mở trình thiết kế Page Builder"]
+    FormInfo --> PageBuilder["Mở trình thiết kế Page Builder ↗"]
 
-    PageBuilder --> BlockOps["Thao tác khối: Thêm khối mới · Sắp xếp thứ tự · Xóa khối"]
+    PageBuilder --> BlockOps["Thao tác khối: Thêm khối mới · Sắp xếp thứ tự · Xóa khối ↗"]
     BlockOps --> ConfigBlock["Cấu hình khối: Chọn nguồn dữ liệu · Gắn chuyên mục · Chỉnh kiểu dáng"]
 
     ConfigBlock --> ResponsiveCheck["Kiểm tra giao diện: Desktop · Tablet · Mobile"]
@@ -72,10 +72,10 @@ Quy trình quản lý vòng đời của một trang web: từ danh sách trang,
 
     Preview --> IsApproved{"Đã hoàn thiện?"}
     IsApproved -->|"Chưa"| PageBuilder
-    IsApproved -->|"Lưu nháp"| SaveDraft["Lưu nháp (Chỉ hiển thị trong quản trị)"]
+    IsApproved -->|"Lưu nháp"| SaveDraft["Lưu nháp (Chỉ hiển thị trong quản trị) ↗"]
     IsApproved -->|"Công bố"| Publish["Xuất bản công bố (Hiển thị ra website công khai)"]
 
-    Publish --> ConnectMenu["Liên kết trang vào Menu đầu trang (Mega Menu)"]
+    Publish --> ConnectMenu["Liên kết trang vào Menu đầu trang (Mega Menu) ↗"]
 
     click CreateNew href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem hướng dẫn Tạo trang mới"
     click AddSub href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem hướng dẫn Thêm trang con"
@@ -95,18 +95,18 @@ Phân tách rõ ràng giữa hai nhánh nghiệp vụ cốt lõi: Bài viết ti
     StartContent["Vào Quản lý nội dung → Văn bản và bài viết"] --> ContentType{"Loại nội dung cần đăng"}
 
     %% Nhánh bài viết
-    ContentType -->|"Bài viết / Tin tức"| NewPost["Bấm Tạo bài viết"]
+    ContentType -->|"Bài viết / Tin tức"| NewPost["Bấm Tạo bài viết ↗"]
     NewPost --> PostInfo["Điền thông tin: Tiêu đề, Chuyên mục, Tác giả, Ảnh bìa 16:9"]
     PostInfo --> PostBody["Soạn nội dung bài viết"]
 
     PostBody --> UseAI{"Dùng AI Copilot?"}
-    UseAI -->|"Có"| AICopilot["Bôi đen văn bản → Kích hoạt Copilot: Viết lại · Rút gọn · Dịch song ngữ"]
+    UseAI -->|"Có"| AICopilot["Bôi đen văn bản → Kích hoạt Copilot: Viết lại · Rút gọn · Dịch song ngữ ↗"]
     UseAI -->|"Không"| CheckPost["Kiểm tra chỉ báo: Tiêu đề, Chuyên mục, Ảnh bìa, Nội dung"]
     AICopilot --> CheckPost
 
     CheckPost --> PostState{"Quyền hạn & Mục đích"}
     PostState -->|"Lưu tạm"| PostDraft["Lưu nháp (Bản nháp nội bộ)"]
-    PostState -->|"Chờ duyệt"| PostSubmit["Gửi duyệt (Chờ lãnh đạo / Trưởng đơn vị xét duyệt)"]
+    PostState -->|"Chờ duyệt"| PostSubmit["Gửi duyệt (Chờ lãnh đạo / Trưởng đơn vị xét duyệt) ↗"]
     PostState -->|"Công bố"| PostPublish["Xuất bản công bố (Hiển thị trên website)"]
 
     PostPublish --> Promote{"Quảng bá trang chủ?"}
@@ -114,9 +114,9 @@ Phân tách rõ ràng giữa hai nhánh nghiệp vụ cốt lõi: Bài viết ti
     Promote -->|"Không"| DonePost(["Hoàn tất đăng tin"])
 
     %% Nhánh văn bản
-    ContentType -->|"Văn bản / Biểu mẫu"| NewDoc["Bấm Ban hành văn bản"]
+    ContentType -->|"Văn bản / Biểu mẫu"| NewDoc["Bấm Ban hành văn bản ↗"]
     NewDoc --> DocInfo["Điền trích yếu, số hiệu, cơ quan ban hành, ngày ký"]
-    DocInfo --> UploadPDF["Tải lên tệp PDF toàn văn hoặc chọn từ thư viện Media"]
+    DocInfo --> UploadPDF["Tải lên tệp PDF toàn văn hoặc chọn từ thư viện Media ↗"]
     UploadPDF --> DocCategory["Chọn chuyên mục: VĂN BẢN hoặc BIỂU MẪU"]
     DocCategory --> DocSave{"Hình thức lưu"}
     DocSave -->|"Lưu nháp"| DocDraft["Lưu bản ghi nội bộ"]
@@ -138,13 +138,13 @@ Quy trình quản lý thanh điều hướng đầu trang (Mega Menu) và chân 
     StartNav["Vào Website → Header & Footer"] --> NavArea{"Khu vực cần sửa"}
 
     %% Nhánh Mega Menu
-    NavArea -->|"Menu đầu trang"| HeaderNav["Chọn Đầu trang (Mega Menu)"]
+    NavArea -->|"Menu đầu trang"| HeaderNav["Chọn Đầu trang (Mega Menu) ↗"]
     HeaderNav --> SelectMenu["Chọn mục menu chính (Ví dụ: Giới thiệu, Đào tạo, Tuyển sinh)"]
     SelectMenu --> SelectCol["Chọn cột thuộc menu (Ví dụ: Cột Tổng quan, Quản trị, Công khai)"]
     SelectCol --> ColSetting["Sửa tên cột & Loại nội dung cột (Danh mục liên kết)"]
 
     ColSetting --> LinkAction{"Thao tác liên kết"}
-    LinkAction -->|"Liên kết đến trang có sẵn"| PickPage["Dùng nút Chọn trang để gán tự động URL"]
+    LinkAction -->|"Liên kết đến trang có sẵn"| PickPage["Dùng nút Chọn trang để gán tự động URL ↗"]
     LinkAction -->|"Nhập liên kết ngoài"| CustomUrl["Điền tên hiển thị, URL đích, chọn mở Tab mới"]
     LinkAction -->|"Sắp xếp / Xóa"| Reorder["Dùng mũi tên lên/xuống hoặc bấm Thùng rác để gỡ"]
 
@@ -153,7 +153,7 @@ Quy trình quản lý thanh điều hướng đầu trang (Mega Menu) và chân 
     Reorder --> SaveHeader
 
     %% Nhánh Footer
-    NavArea -->|"Chân trang"| FooterNav["Chọn Chân trang"]
+    NavArea -->|"Chân trang"| FooterNav["Chọn Chân trang ↗"]
     FooterNav --> FooterSetting["Cập nhật: Logo đơn vị, Địa chỉ liên hệ, Điện thoại, Email, Mạng xã hội"]
     FooterSetting --> SaveFooter["Lưu thay đổi chân trang"]
 
@@ -173,15 +173,15 @@ Minh họa cơ chế liên kết dữ liệu giữa Cây trang, Menu đầu tran
 <Mermaid caption="Sơ đồ 5: Mô hình quan hệ giữa ba cấu trúc quản trị (Bấm vào khối để mở HDSD tác vụ tương ứng)">{`flowchart LR
     subgraph S1["1. SƠ ĐỒ TRANG (Cấu trúc giao diện)"]
         PageRoot["Trang chủ (/)"]
-        PageIntro["Giới thiệu (/gioi-thieu)"]
-        PageDoc["Văn bản - Biểu mẫu (/van-ban-bieu-mau)"]
+        PageIntro["Giới thiệu (/gioi-thieu) ↗"]
+        PageDoc["Văn bản - Biểu mẫu (/van-ban-bieu-mau) ↗"]
         PageRoot --> PageIntro
         PageIntro --> PageDoc
     end
 
     subgraph S2["2. CÂY CHUYÊN MỤC (Phân loại dữ liệu)"]
-        CatPost["Chuyên mục: BÀI VIẾT"]
-        CatDoc["Chuyên mục: VĂN BẢN"]
+        CatPost["Chuyên mục: BÀI VIẾT ↗"]
+        CatDoc["Chuyên mục: VĂN BẢN ↗"]
         CatSubDoc["Biểu mẫu"]
         CatDoc --> CatSubDoc
     end
@@ -190,7 +190,7 @@ Minh họa cơ chế liên kết dữ liệu giữa Cây trang, Menu đầu tran
         MenuMain["Menu chính: GIỚI THIỆU"]
         MenuCol1["Cột 1: TỔNG QUAN"]
         MenuCol2["Cột 2: CÔNG KHAI"]
-        MenuLink["Liên kết: Văn bản - Biểu mẫu"]
+        MenuLink["Liên kết: Văn bản - Biểu mẫu ↗"]
 
         MenuMain --> MenuCol1
         MenuMain --> MenuCol2
@@ -218,13 +218,13 @@ Mô hình phân loại người dùng và 4 nhóm quyền hạn chính sách v�
     StartUser["Vào Quản lý người dùng"] --> FilterUser["Lọc danh sách: Tất cả · Hoạt động · Chờ xác minh · Đã khóa"]
     FilterUser --> UserAction{"Nghiệp vụ cần xử lý"}
 
-    UserAction -->|"Xác minh tài khoản"| VerifyUser["Kiểm tra email @hcmute.edu.vn → Cấp quyền hoạt động"]
+    UserAction -->|"Xác minh tài khoản"| VerifyUser["Kiểm tra email @hcmute.edu.vn → Cấp quyền hoạt động ↗"]
     UserAction -->|"Gán nhóm quyền"| AssignRole{"Chọn vai trò"}
     UserAction -->|"Khóa tài khoản"| LockUser["Khóa tài khoản khi thôi việc / chuyển công tác"]
 
-    AssignRole --> R1["Biên tập viên (Soạn bài, đăng tin, gửi duyệt)"]
-    AssignRole --> R2["Trưởng đơn vị / Người duyệt (Phê duyệt, ban hành nội dung)"]
-    AssignRole --> R3["Quản trị viên đơn vị (Quản trị trang, menu, tiện ích đơn vị)"]
+    AssignRole --> R1["Biên tập viên (Soạn bài, đăng tin, gửi duyệt) ↗"]
+    AssignRole --> R2["Trưởng đơn vị / Người duyệt (Phê duyệt, ban hành nội dung) ↗"]
+    AssignRole --> R3["Quản trị viên đơn vị (Quản trị trang, menu, tiện ích đơn vị) ↗"]
     AssignRole --> R4["Quản trị hệ thống (Toàn quyền thiết lập và cấu hình cấp trường)"]
 
     click VerifyUser href "/docs/05-quan-tri-he-thong-va-tien-ich/01-nguoi-dung-va-nhom-quyen" "Xem hướng dẫn quản lý người dùng"
@@ -241,17 +241,17 @@ Quy trình tạo nhóm tiện ích, cấu hình liên kết số hóa và kiểm
 <Mermaid caption="Sơ đồ 7: Quy trình quản trị tiện ích mở rộng (Bấm vào khối để mở HDSD tác vụ tương ứng)">{`flowchart TD
     StartUtil["Vào Tiện ích mở rộng"] --> UtilChoice{"Nghiệp vụ tiện ích"}
 
-    UtilChoice -->|"Tạo nhóm tiện ích"| NewGroup["Bấm Tạo nhóm mới"]
+    UtilChoice -->|"Tạo nhóm tiện ích"| NewGroup["Bấm Tạo nhóm mới ↗"]
     NewGroup --> GroupForm["Điền: Tên nhóm, Mô tả, Thiết lập Công khai (Public)"]
     GroupForm --> SaveGroup["Lưu nhóm tiện ích"]
 
-    UtilChoice -->|"Thêm tiện ích dịch vụ"| NewItem["Bấm Thêm tiện ích"]
+    UtilChoice -->|"Thêm tiện ích dịch vụ"| NewItem["Bấm Thêm tiện ích ↗"]
     NewItem --> ItemForm["Điền: Nhóm trực thuộc, Tên tiện ích, Mô tả chức năng"]
     ItemForm --> ItemLink["Điền URL liên kết + Chọn mở trong Tab mới (_blank)"]
     ItemLink --> ItemIcon["Tải lên Logo / Biểu tượng hoặc chọn từ thư viện Media"]
     ItemIcon --> ItemAccess{"Chế độ hiển thị"}
 
-    ItemAccess -->|"Công khai (Public)"| PubItem["Hiển thị trên Cổng thông tin công khai cho sinh viên / GV"]
+    ItemAccess -->|"Công khai (Public)"| PubItem["Hiển thị trên Cổng thông tin công khai cho sinh viên / GV ↗"]
     ItemAccess -->|"Nội bộ (Internal)"| PrivItem["Ẩn khỏi cổng công khai, chỉ xem trong giao diện quản trị"]
 
     PubItem --> SaveItem["Lưu tiện ích"]
@@ -273,15 +273,15 @@ Các bước kích hoạt trợ lý ngữ cảnh thông minh và theo dõi hư�
     OpenCenter --> SelectTopic{"Lựa chọn nhu cầu hướng dẫn"}
 
     SelectTopic -->|"Trang hiện tại"| TopicCurrent["Cách sử dụng trang này (Tự động nhận diện ngữ cảnh)"]
-    SelectTopic -->|"Danh mục đầu việc"| TopicChecklist["Checklist thiết lập trước khi công bố"]
-    SelectTopic -->|"Hướng dẫn cơ bản"| TopicGuides["Cách tạo bài viết · Cách tạo trang web · Chuẩn hình 16:9"]
+    SelectTopic -->|"Danh mục đầu việc"| TopicChecklist["Checklist thiết lập trước khi công bố ↗"]
+    SelectTopic -->|"Hướng dẫn cơ bản"| TopicGuides["Cách tạo bài viết · Cách tạo trang web · Chuẩn hình 16:9 ↗"]
 
     TopicCurrent --> ReadOrShow{"Hình thức tiếp nhận"}
     TopicChecklist --> ReadOrShow
     TopicGuides --> ReadOrShow
 
     ReadOrShow -->|"Đọc nhanh"| FastRead["Đọc quy trình tóm tắt và mẹo thao tác trong bảng bên phải"]
-    ReadOrShow -->|"Chỉ dẫn trực tiếp"| StartTour["Bấm nút: Bắt đầu hướng dẫn trên màn hình"]
+    ReadOrShow -->|"Chỉ dẫn trực tiếp"| StartTour["Bấm nút: Bắt đầu hướng dẫn trên màn hình ↗"]
 
     StartTour --> StepHighlight["Vùng thao tác trên màn hình được làm nổi bật (Spotlight)"]
     StepHighlight --> StepBox["Hộp chỉ dẫn hiển thị: Tên bước, Diễn giải, Mẹo, Số thứ tự bước (Ví dụ: 1/6)"]
