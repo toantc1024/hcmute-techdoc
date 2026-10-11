@@ -29,7 +29,6 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState<boolean>(false);
   const [zoom, setZoom] = useState<number>(1);
-  const [containerWidth, setContainerWidth] = useState<number>(0);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [mounted, setMounted] = useState<boolean>(false);
   const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -45,23 +44,6 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
-
-  // Đo chiều rộng container để tính toán tỷ lệ zoom chuẩn
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const updateWidth = () => {
-      if (containerRef.current) {
-        setContainerWidth(containerRef.current.clientWidth);
-      }
-    };
-    updateWidth();
-
-    const ro = new ResizeObserver(updateWidth);
-    ro.observe(container);
-    return () => ro.disconnect();
   }, []);
 
   // Xử lý zoom
@@ -149,14 +131,21 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
 
         const { svg } = await mermaid.render(uniqueId, content);
         if (isMounted) {
-          // Trích xuất chiều rộng gốc từ viewBox
-          const vbMatch = svg.match(/viewBox=["']\s*0\s+0\s+([0-9.]+)\s+([0-9.]+)["']/i);
+          // Trích xuất chiều rộng gốc từ 4 thông số của viewBox: minX minY width height
+          const vbMatch = svg.match(/viewBox=["']\s*(-?[0-9.]+)\s+(-?[0-9.]+)\s+([0-9.]+)\s+([0-9.]+)["']/i);
           if (vbMatch) {
-            setNaturalWidth(parseFloat(vbMatch[1]));
+            const w = parseFloat(vbMatch[3]);
+            if (w > 50) {
+              setNaturalWidth(w);
+            }
           }
 
-          // Gỡ bỏ inline max-width của Mermaid để component tự kiểm soát kích thước thu phóng hoàn toàn
-          const cleanedSvg = svg.replace(/max-width:\s*[^;"]+;?/gi, '');
+          // Xóa max-width ở thẻ svg gốc để việc phóng to bằng CSS diễn ra chuẩn xác
+          const cleanedSvg = svg.replace(/<svg([^>]*)style="([^"]*)"/i, (m, prefix, style) => {
+            const cleanStyle = style.replace(/max-width:\s*[^;"]+;?/gi, '');
+            return `<svg${prefix}style="${cleanStyle}"`;
+          });
+
           setSvgContent(cleanedSvg);
           setError(null);
         }
@@ -259,14 +248,8 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // Chiều rộng cơ sở ở mức zoom 100% (giữ nguyên kích thước hiển thị hiện tại, vừa vặn khung)
-  const baseWidth = containerWidth > 0 && naturalWidth
-    ? Math.min(containerWidth, naturalWidth)
-    : (naturalWidth || 850);
-
-  // Chiều rộng thực tế khi thu phóng
-  const currentWidth = Math.round(baseWidth * zoom);
   const hasClickableNodes = content.includes('click ');
+  const zoomPercent = Math.round(zoom * 100);
 
   return (
     <>
@@ -304,7 +287,7 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
                 className="inline-flex min-h-[30px] px-2 items-center justify-center rounded-md text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-slate-100 transition cursor-pointer active:scale-95 min-w-[46px] text-center"
                 title="Nhấp để đặt lại kích thước mặc định (100%)"
               >
-                {Math.round(zoom * 100)}%
+                {zoomPercent}%
               </button>
 
               <button
@@ -374,12 +357,12 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
           ) : svgContent ? (
             <div
               style={{
-                width: zoom === 1 ? '100%' : `${currentWidth}px`,
-                minWidth: zoom === 1 ? undefined : `${currentWidth}px`,
-                maxWidth: zoom === 1 ? `${baseWidth}px` : 'none',
+                width: `${zoomPercent}%`,
+                minWidth: zoom > 1 ? `${zoomPercent}%` : undefined,
+                maxWidth: zoom === 1 && naturalWidth ? `${naturalWidth}px` : 'none',
                 transition: isDragging ? 'none' : 'width 0.15s ease, min-width 0.15s ease',
               }}
-              className="flex justify-center [&>svg]:!max-w-none [&>svg]:!w-full [&>svg]:!h-auto [&_a]:cursor-pointer [&_a:hover_rect]:stroke-[#0072BC] [&_a:hover_rect]:stroke-[2.5px] [&_a:hover_polygon]:stroke-[#0072BC] [&_a:hover_polygon]:stroke-[2.5px] [&_a:hover_circle]:stroke-[#0072BC] [&_a:hover]:filter [&_a:hover]:drop-shadow-md"
+              className="flex justify-center [&>svg]:!w-full [&>svg]:!h-auto [&>svg]:!max-w-none [&_a]:cursor-pointer [&_a:hover_rect]:stroke-[#0072BC] [&_a:hover_rect]:stroke-[2.5px] [&_a:hover_polygon]:stroke-[#0072BC] [&_a:hover_polygon]:stroke-[2.5px] [&_a:hover_circle]:stroke-[#0072BC] [&_a:hover]:filter [&_a:hover]:drop-shadow-md"
               dangerouslySetInnerHTML={{ __html: svgContent }}
             />
           ) : (
@@ -438,7 +421,7 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
                     className="inline-flex min-h-[32px] px-2.5 items-center justify-center rounded-md text-xs font-semibold text-slate-200 hover:bg-slate-700 hover:text-white transition cursor-pointer min-w-[50px] text-center"
                     title="Đặt lại kích thước mặc định (100%)"
                   >
-                    {Math.round(zoom * 100)}%
+                    {zoomPercent}%
                   </button>
 
                   <button
@@ -488,9 +471,9 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
             >
               <div
                 style={{
-                  width: `${Math.round((naturalWidth || 1000) * zoom)}px`,
-                  minWidth: `${Math.round((naturalWidth || 1000) * zoom)}px`,
-                  maxWidth: 'none',
+                  width: `${zoomPercent}%`,
+                  minWidth: zoom > 1 ? `${zoomPercent}%` : undefined,
+                  maxWidth: zoom === 1 && naturalWidth ? `${naturalWidth}px` : 'none',
                   transition: isDragging ? 'none' : 'width 0.15s ease, min-width 0.15s ease',
                 }}
                 className="flex justify-center [&>svg]:!max-w-none [&>svg]:!w-full [&>svg]:!h-auto [&_a]:cursor-pointer [&_a:hover_rect]:stroke-sky-400 [&_a:hover_rect]:stroke-[2.5px] [&_a:hover_polygon]:stroke-sky-400 [&_a:hover_polygon]:stroke-[2.5px] [&_a:hover_circle]:stroke-sky-400 [&_a:hover]:filter [&_a:hover]:drop-shadow-md"
