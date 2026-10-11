@@ -43,6 +43,12 @@ Thư mục: `02-dashboard-tong-quan-va-dang-nhap/`
 
 ### 3. Quản lý danh sách Trang và Lịch sử phiên bản (Luồng A)
 Thư mục: `03-quan-ly-trang-va-thu-vien-mau/`
+- [x] **Ảnh Thông tin trang & Điểm số SEO** (`thong-tin-trang-va-seo-tong-quan.png`):
+  * Vị trí bài viết: `content/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang.mdx`
+  * Nội dung: Vòng tròn đo điểm SEO (80/100), Tiêu đề, Đường dẫn gốc /vi, chọn Trang cha và nút Chuyển trang chủ.
+- [x] **Ảnh Cấu hình SEO Meta & Ảnh bìa** (`cau-hinh-seo-meta-va-anh-bia.png`):
+  * Vị trí bài viết: `content/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang.mdx`
+  * Nội dung: Khung chọn ảnh bìa 1200x630px, Tiêu đề SEO, Mô tả SEO (nhãn Đang trong khoảng khuyến nghị) và tab Xem trước.
 - [ ] **Ảnh 06 - Danh sách toàn bộ các trang** (`danh-sach-trang.png`):
   * Vị trí bài viết: `content/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang.mdx`
   * Nội dung: Bảng danh sách trang (`/admin/pages`), cột Tiêu đề, Đường dẫn slug, Trạng thái (Đã xuất bản / Bản nháp).
