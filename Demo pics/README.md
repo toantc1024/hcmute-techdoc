@@ -55,7 +55,7 @@ Thư mục: `03-quan-ly-trang-va-thu-vien-mau/`
 - [ ] **Ảnh 07 - Thư viện mẫu trang** (`thu-vien-mau-trang.png`):
   * Vị trí bài viết: `content/docs/02-luong-a-quan-ly-trang/02-nhan-ban-tu-thu-vien-mau.mdx`
   * Nội dung: Giao diện chọn nhân bản trang từ Thư viện mẫu có sẵn (Templates).
-- [ ] **Ảnh 08 - Lịch sử phiên bản trang** (`lich-su-phien-ban.png`):
+- [x] **Ảnh 08 - Lịch sử phiên bản trang & Khôi phục bản dựng** (`lich-su-phien-ban.png`):
   * Vị trí bài viết: `content/docs/02-luong-a-quan-ly-trang/04-lich-su-va-khoi-phuc-phien-ban.mdx`
   * Nội dung: Ngăn kéo / danh sách các mốc thời gian lưu bản nháp/xuất bản và nút "Khôi phục phiên bản này".
 

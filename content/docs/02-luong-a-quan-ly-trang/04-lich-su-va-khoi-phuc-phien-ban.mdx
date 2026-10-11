@@ -1,53 +1,104 @@
 ---
-title: Lịch sử phiên bản và khôi phục trang
-description: Theo dõi các mốc chỉnh sửa, so sánh thay đổi và khôi phục trang về trạng thái trước đó an toàn
+title: Lịch sử phiên bản và khôi phục trang theo bản dựng cụ thể
+description: Hướng dẫn tra cứu các mốc chỉnh sửa, so sánh thuộc tính, kiểm tra bản dựng trực quan và khôi phục trang an toàn
 order: 4
 ---
 
-Hệ thống tự động lưu trữ các mốc thay đổi của trang, giúp người quản trị yên tâm thử nghiệm bố cục mới mà không sợ mất dữ liệu cũ.
+Hệ thống quản trị website HCM-UTE tự động ghi nhận và lưu trữ toàn bộ các mốc thay đổi của trang web sau mỗi lần lưu bản nháp hoặc xuất bản. Tính năng này giúp Thầy Cô hoàn toàn yên tâm thử nghiệm các bố cục mới, cập nhật tin tức mà không sợ mất đi dữ liệu hoặc cấu trúc trang trước đó.
+
+![Giao diện Lịch sử phiên bản và Khôi phục trang theo bản dựng cụ thể](/images/trang/lich-su-phien-ban-va-khoi-phuc.png)
 
 ---
 
-## 1. Xem và so sánh lịch sử
+## 1. Cấu trúc màn hình Lịch sử phiên bản
+
+Khi mở tab **Lịch sử** trên thanh tiêu đề của trang (nằm cạnh tab *Nội dung trang* và *Thông tin*), màn hình được chia thành hai phân khu làm việc chính:
+
+### 1.1. Cột danh sách phiên bản lưu trữ (Cột trái)
+* **Tổng số phiên bản:** Huy hiệu đếm số lượng mốc lưu trữ (ví dụ: hiển thị số lượng `50` phiên bản gần nhất).
+* **Danh sách các bản dựng:**
+  * Mỗi mốc ghi nhận rõ số thứ tự và mã phiên bản (ví dụ: `#50 · v274`, `#49 · v273`, `#48 · v272`...).
+  * Tiêu đề của trang tại thời điểm lưu.
+  * Mốc thời gian chính xác (giờ:phút, ngày/tháng/năm).
+  * Phiên bản đang được chọn đối soát sẽ có chấm tròn màu xanh nổi bật.
+
+---
+
+### 1.2. Phân hệ đối soát và so sánh chi tiết (Cột phải)
+Phía trên cùng hiển thị tiêu đề phiên bản đang chọn đối soát (ví dụ: *Phiên bản #274 lúc 11:27 11 thg 10, 2026*):
+
+* **Menu thả xuống `So với`:** Cho phép chọn đối tượng so sánh. Mặc định là so với **Trang hiện tại**, hoặc Thầy Cô có thể chọn so sánh giữa 2 phiên bản cũ bất kỳ để nhận diện sự khác nhau.
+* **Hai chế độ kiểm tra chuyên sâu:**
+  1. **Nút `Thuộc tính`:** Hiển thị bảng đối soát chi tiết các trường siêu dữ liệu của trang:
+     * *Tiêu đề* và *Slug* đường dẫn.
+     * *Mô tả ngắn* của trang.
+     * *Tiêu đề SEO* và *Mô tả SEO*.
+     * *Ảnh bìa* chia sẻ.
+     * Mỗi trường dữ liệu đều có nhãn trạng thái trực quan: **`Không đổi`** (màu xanh nhạt) nếu giá trị giống nhau, hoặc **`Đã thay đổi`** (màu cam nổi bật) để Thầy Cô dễ dàng phát hiện điểm mới.
+  2. **Nút `Bản dựng`:** Cho phép Thầy Cô xem trước trực quan toàn bộ cấu trúc các khối giao diện (Blocks/Sections) của bản dựng đó trước khi quyết định khôi phục.
+* **Nút `Khôi phục` (Màu xanh lá):** Nút hành động chính để phục hồi trang về đúng trạng thái của bản dựng đang chọn.
+
+---
+
+## 2. Quy trình 4 bước khôi phục trang theo bản dựng cụ thể
+
+Để khôi phục toàn bộ nội dung hoặc cấu trúc giao diện về một bản dựng trước đây, Thầy Cô thực hiện theo các bước sau:
 
 <Steps>
   <Step>
-    #### Mở tab Lịch sử
-    Trong trình thiết kế Page Builder, chọn tab **Lịch sử** trên thanh công cụ phía trên.
+    ### Chọn phiên bản bản dựng mong muốn
+    Tại danh sách phiên bản ở cột bên trái, bấm chuột vào mốc thời gian Thầy Cô muốn khôi phục (ví dụ: chọn bản `#48 · v272` lưu lúc 15:25 ngày 10/10/2026).
   </Step>
 
   <Step>
-    #### Chọn phiên bản cần kiểm tra
-    Tại cột *Phiên bản* bên trái, chọn mốc thời gian muốn xem lại. Hệ thống hiển thị rõ số phiên bản, tài khoản chỉnh sửa và thời điểm lưu.
+    ### Đối chiếu thuộc tính và kiểm tra bản dựng
+    * Bấm nút **Thuộc tính** để rà soát lại tiêu đề, đường dẫn slug và mô tả SEO xem có đúng phiên bản cần lấy lại hay không.
+    * Bấm chuyển sang nút **Bản dựng** để xem trước trực tiếp cách các khối nội dung, hình ảnh và banner hiển thị trên giao diện thực tế.
   </Step>
 
   <Step>
-    #### Đối chiếu thuộc tính
-    Tại mục *So với*, chọn đối tượng so sánh (mặc định là *Trang hiện tại*). Bấm nút **Thuộc tính** để xem từng dòng thay đổi giữa hai phiên bản.
+    ### Bấm nút Khôi phục
+    * Bấm nút **Khôi phục** (màu xanh lá có biểu tượng xoay vòng) ở góc trên bên phải màn hình.
+    * Hệ thống sẽ tự động nạp toàn bộ cấu trúc khối giao diện và thông tin của bản dựng được chọn vào bàn làm việc hiện tại.
+    * **Cơ chế an toàn:** Hệ thống không bao giờ xóa hay ghi đè làm mất các mốc phiên bản trung gian, mà sẽ tự động sinh ra một phiên bản mới nhất tiếp theo (ví dụ: `#51 · v275`) mang trọn vẹn nội dung của bản dựng vừa khôi phục.
+  </Step>
+
+  <Step>
+    ### Kiểm tra lại trên Canvas và Xuất bản
+    * Chuyển sang tab **Nội dung trang** (Page Builder) để kiểm tra tổng thể lại bố cục trang trên Canvas.
+    * Thầy Cô có thể chỉnh sửa bổ sung nếu cần, sau đó bấm **Lưu** hoặc chọn **Xuất bản** để công bố nội dung lên website chính thức.
   </Step>
 </Steps>
 
 ---
 
-## 2. Khôi phục phiên bản cũ
+## 3. Sơ đồ quy trình đối soát và khôi phục bản dựng
 
-<Callout type="warn">
-  Thao tác khôi phục sẽ ghi đè nội dung của phiên bản cũ lên phiên bản hiện tại. Hãy kiểm tra kỹ thông tin đối chiếu trước khi thực hiện.
-</Callout>
-
-1. Chọn đúng phiên bản mong muốn trong danh sách bên trái.
-2. Kiểm tra tên trang, thời điểm và nội dung hiển thị thử nghiệm.
-3. Bấm nút **Khôi phục**.
-4. Hệ thống cập nhật Canvas về trạng thái cũ; kiểm tra lại tổng thể rồi bấm **Lưu thay đổi** hoặc **Xuất bản**.
+<Mermaid caption="Quy trình đối soát và khôi phục trang theo bản dựng cụ thể">{`flowchart TD
+    A["Mở tab Lịch sử trên thanh công cụ trang"] --> B["1. Chọn mốc phiên bản ở cột bên trái (#48, #49...)"]
+    B --> C["2. Chọn đối tượng đối soát tại menu 'So với'"]
+    C --> D{"3. Lựa chọn chế độ kiểm tra"}
+    D -->|Bấm Thuộc tính| E1["So sánh Tiêu đề, Slug, Thẻ SEO, Ảnh bìa"]
+    D -->|Bấm Bản dựng| E2["Xem trước trực quan cấu trúc khối giao diện"]
+    E1 --> F["Xác nhận đúng bản dựng cần khôi phục"]
+    E2 --> F
+    F --> G["4. Nhấn nút Khôi phục (Màu xanh lá)"]
+    G --> H["Hệ thống tạo phiên bản mới mang nội dung bản dựng cũ"]
+    H --> I["Kiểm tra Canvas & Bấm Xuất bản trang"]
+`}</Mermaid>
 
 ---
 
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
-### Tình huống 1: Làm sao để kiểm tra ai đã sửa đổi bố cục trang và vào thời gian nào?
-* **Nguyên nhân:** Tính năng ghi nhận lịch sử chỉnh sửa tự động của hệ thống.
-* **Cách xử lý:** Vào tab **Lịch sử phiên bản**, danh sách hiển thị chi tiết tên người sửa, email `@hcmute.edu.vn`, tài khoản thực hiện và thời gian chỉnh sửa.
+### Tình huống 1: Sau khi bấm "Khôi phục" một bản dựng cũ, các phiên bản tạo gần đây có bị mất không?
+* **Nguyên nhân:** Hệ thống luôn áp dụng nguyên tắc bảo toàn lịch sử biên tập.
+* **Cách xử lý:** Không bao giờ bị mất dữ liệu. Khi Thầy Cô khôi phục bản dựng cũ (ví dụ bản `#45`), hệ thống sẽ tạo ra một phiên bản mới tiếp theo (ví dụ `#51`) chứa nội dung của bản `#45`. Toàn bộ các phiên bản từ `#46` đến `#50` vẫn được bảo lưu nguyên vẹn trong danh sách để Thầy Cô có thể quay lại bất cứ lúc nào.
 
-### Tình huống 2: Khôi phục phiên bản cũ có làm mất các phiên bản mới hơn đã tạo không?
-* **Nguyên nhân:** Hệ thống luôn bảo lưu toàn bộ các mốc lịch sử chỉnh sửa trước đây.
-* **Cách xử lý:** Khi bấm **Khôi phục về phiên bản này**, hệ thống sẽ tạo thêm một bản ghi phiên bản mới nhất mang nội dung của bản cũ. Toàn bộ lịch sử các bản sửa đổi trước đó vẫn được lưu giữ đầy đủ để Thầy/Cô có thể quay lại bất cứ lúc nào.
+### Tình huống 2: Bấm nhầm nút "Khôi phục" thì làm sao quay lại phiên bản vừa xong?
+* **Cách xử lý:** Thầy Cô chỉ cần nhìn vào danh sách phiên bản bên trái, chọn lại phiên bản ngay trước đó (ví dụ bản `#50` trước khi khôi phục) và bấm lại nút **Khôi phục**. Trang web sẽ quay trở lại trạng thái ban đầu ngay lập tức.
+
+### Tình huống 3: Làm sao nhận biết những trường thông tin nào đã bị thay đổi giữa 2 phiên bản?
+* **Cách xử lý:** Khi xem ở tab **Thuộc tính**, Thầy Cô quan sát góc bên phải của từng hàng dữ liệu:
+  * Nhãn **`Không đổi`** (màu xanh/xám nhẹ): Dữ liệu của 2 phiên bản hoàn toàn trùng khớp.
+  * Nhãn **`Đã thay đổi`** (màu cam nổi bật): Trường dữ liệu này có sự chỉnh sửa giữa 2 mốc thời gian, giúp Thầy Cô đối chiếu nhanh chóng mà không cần đọc lại từng từ.
