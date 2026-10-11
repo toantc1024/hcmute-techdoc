@@ -118,6 +118,14 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
           startOnLoad: false,
           theme: 'base',
           securityLevel: 'loose',
+          flowchart: {
+            htmlLabels: true,
+            curve: 'basis',
+            padding: 16,
+            nodeSpacing: 30,
+            rankSpacing: 40,
+            useMaxWidth: true,
+          },
           themeCSS: `
             /* Bỏ triệt để đường gạch chân cho link tương tác trong Mermaid */
             g.clickable, g.clickable a, g.clickable text, g.clickable tspan,
@@ -146,13 +154,21 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
               letter-spacing: 0.02em !important;
               color: ${isDark ? '#38BDF8' : '#0072BC'} !important;
             }
-            .node p {
+            /* Chống triệt để việc cắt chữ / tràn chữ trong khối node do Tailwind .prose p ghi đè */
+            .node foreignObject {
+              overflow: visible !important;
+            }
+            .node, .node *, .nodeLabel, .nodeLabel *, .node p, .node span {
+              font-family: inherit !important;
+              font-size: 13px !important;
+              line-height: 1.35 !important;
               margin: 0 !important;
-              line-height: 1.4 !important;
+              padding: 0 !important;
+              box-sizing: border-box !important;
             }
           `,
           themeVariables: {
-            fontFamily: 'inherit',
+            fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
             fontSize: '13px',
             darkMode: isDark,
             // Bảng màu chuẩn thương hiệu HCM-UTE
@@ -324,10 +340,29 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
                 font-weight: 700 !important;
                 letter-spacing: 0.02em !important;
               }
+              /* Chống triệt để việc cắt chữ / tràn chữ trong khối node do Tailwind .prose p ghi đè */
+              figure svg .node foreignObject,
+              [role="dialog"] svg .node foreignObject {
+                overflow: visible !important;
+              }
+              figure svg .node,
+              figure svg .node *,
+              figure svg .nodeLabel,
+              figure svg .nodeLabel *,
               figure svg .node p,
-              [role="dialog"] svg .node p {
+              figure svg .node span,
+              [role="dialog"] svg .node,
+              [role="dialog"] svg .node *,
+              [role="dialog"] svg .nodeLabel,
+              [role="dialog"] svg .nodeLabel *,
+              [role="dialog"] svg .node p,
+              [role="dialog"] svg .node span {
+                font-family: inherit !important;
+                font-size: 13px !important;
+                line-height: 1.35 !important;
                 margin: 0 !important;
-                line-height: 1.4 !important;
+                padding: 0 !important;
+                box-sizing: border-box !important;
               }
             `,
           }}
