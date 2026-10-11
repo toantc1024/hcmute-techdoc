@@ -1,7 +1,7 @@
 {
   "name": "hdsd",
   "version": "0.0.43",
-  "packageManager": "pnpm@12.10.1",
+  "private": true,
   "scripts": {
     "build": "next build",
     "dev": "next dev",
