@@ -1,0 +1,48 @@
+---
+title: Ba Cấu Trúc Quản Trị Cốt Lõi
+description: Phân biệt rõ Sơ đồ trang (Sitemap), Cây chuyên mục và Menu đầu trang trong hệ thống quản trị HCM-UTE
+---
+
+Trong hệ thống website của Trường ĐH Sư phạm Kỹ thuật TP.HCM, toàn bộ hoạt động quản trị xoay quanh **3 cấu trúc độc lập nhưng liên kết chặt chẽ**:
+
+<Diagram 
+  src="/diagrams/01-tong-quan-to-chuc.png" 
+  caption="Sơ đồ 01/06: Tổng quan ba cấu trúc quản trị website HCM-UTE" 
+/>
+
+---
+
+## 1. So Sánh Ba Cấu Trúc
+
+| Cấu trúc | Vị trí trong Quản trị | Bản chất & Vai trò | Thao tác chính |
+| :--- | :--- | :--- | :--- |
+| **1. Sơ đồ trang (Sitemap)** | `Website` → `Trang` | Xác định cây URL của website (Trang gốc, Trang cấp 1, Trang cấp 2). | Tạo trang mới, nhân bản trang, kéo thả các khối hiển thị. |
+| **2. Cây chuyên mục** | `Quản lý nội dung` → `Chuyên mục` | Phân loại tin bài và văn bản thành các nhóm chủ đề (Tin tức, Sự kiện, Thông báo, Biểu mẫu...). | Tạo nhóm phân loại; 1 bài viết có thể gắn nhiều nhóm. |
+| **3. Menu đầu trang** | `Website` → `Header & Footer` | Thanh điều hướng mà người đọc nhìn thấy ở đầu website để bấm chuyển trang. | Tạo menu cha, tạo cột, gắn liên kết dẫn đến Trang hoặc Chuyên mục. |
+
+---
+
+## 2. Ví Dụ Thực Tế: Nối Ba Phần Cho "Văn Bản - Biểu Mẫu"
+
+Khi đơn vị muốn người đọc bấm vào Menu để xem toàn bộ Biểu mẫu của Khoa/Phòng:
+
+<Steps>
+  <Step>
+    #### 1. Trên Menu (Người đọc bấm)
+    Vào `Giới thiệu` → `Cột CÔNG KHAI` → Bấm liên kết **Văn bản - Biểu mẫu**.
+  </Step>
+
+  <Step>
+    #### 2. Mở Trang tương ứng (Sơ đồ trang)
+    Hệ thống mở trang `/gioi-thieu/van-ban-bieu-mau`. Trang này chứa **Khối Văn bản** đã được cấu hình từ trước.
+  </Step>
+
+  <Step>
+    #### 3. Khối tự động rút dữ liệu (Cây chuyên mục)
+    Khối hiển thị tự động quét và lọc tất cả các văn bản thuộc chuyên mục: `Chuyên mục VĂN BẢN` → `Biểu mẫu` để hiển thị danh sách cho người đọc tải về.
+  </Step>
+</Steps>
+
+<Callout type="warn">
+  **LƯU Ý:** Cột trong Menu là nhóm liên kết điều hướng, không mặc định là Trang hay Chuyên mục. Ba cây này hoàn toàn độc lập và không cần phải đặt tên giống hệt nhau.
+</Callout>

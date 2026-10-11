@@ -1,0 +1,55 @@
+---
+title: Luồng B – Đăng Bài Viết & Văn Bản
+description: Quy trình soạn thảo tin tức, đính kèm văn bản và cơ chế phân phối tự động đa chuyên mục
+---
+
+Luồng B là luồng công việc thường xuyên nhất của Ban biên tập website và cán bộ phụ trách truyền thông tại các đơn vị.
+
+<Diagram 
+  src="/diagrams/05-luong-b-noi-dung.png" 
+  caption="Sơ đồ 05/06: Luồng B – Quản trị nội dung: Bài viết và Văn bản" 
+/>
+
+---
+
+## 1. Phân Loại: Bài Viết Hay Văn Bản?
+
+Vào `Quản lý nội dung` → chọn `Văn bản và bài viết` → Bấm nút **Tạo mới**:
+
+<Tabs items={['Đăng Bài Viết (Tin tức / Sự kiện)', 'Đăng Văn Bản (Quy định / Biểu mẫu)']}>
+  <Tab value="Đăng Bài Viết (Tin tức / Sự kiện)">
+    * **Tiêu đề bài viết:** Ngắn gọn, súc tích, phản ánh đúng trọng tâm tin tức.
+    * **Ảnh đại diện (Thumbnail):** Tỷ lệ chuẩn 16:9, dung lượng dưới 1MB để tối ưu tốc độ tải trang.
+    * **Đoạn tóm tắt (Sapo):** 2 - 3 câu nêu bật nội dung cốt lõi.
+    * **Nội dung chi tiết:** Trình bày bằng trình soạn thảo rich-text, có thể chèn ảnh, video hoặc bảng biểu.
+  </Tab>
+  <Tab value="Đăng Văn Bản (Quy định / Biểu mẫu)">
+    * **Số / Ký hiệu văn bản:** Ví dụ: `125/QĐ-ĐHSPKT`.
+    * **Ngày ban hành & Cơ quan ban hành:** Đúng theo văn bản giấy.
+    * **Trích yếu nội dung:** Diễn giải ngắn gọn văn bản quy định về việc gì.
+    * **Tệp toàn văn (Attachment):** Đính kèm file định dạng `.pdf`, `.docx`, dung lượng tối đa 20MB.
+  </Tab>
+</Tabs>
+
+---
+
+## 2. Bước Then Chốt: Chọn Chuyên Mục Hiển Thị
+
+<Callout type="warn">
+  **BẮT BUỘC:** Mọi bài viết hoặc văn bản đều phải thuộc ít nhất một Chuyên mục. Nếu không chọn chuyên mục, bài viết sẽ không thể xuất hiện trên bất kỳ khối nào của website!
+</Callout>
+
+### Cơ chế chọn nhiều chuyên mục song song (N:N)
+Hệ thống cho phép **tick chọn nhiều chuyên mục cùng một lúc**:
+* *Ví dụ:* Một bài viết thông báo *"Học bổng Doanh nghiệp dành cho Sinh viên Khoa Cơ khí"* có thể được tick chọn đồng thời:
+  1. `Chuyên mục: Tin tức sinh viên` (Để xuất hiện ở Trang chủ toàn trường).
+  2. `Chuyên mục: Học bổng - Hỗ trợ tài chính` (Để xuất hiện ở Trang phòng Công tác Sinh viên).
+  3. `Chuyên mục: Thông báo Khoa Cơ khí` (Để xuất hiện ở Trang web của Khoa).
+
+Thầy/Cô **chỉ cần soạn nội dung duy nhất 1 lần**, hệ thống sẽ tự động đồng bộ hiển thị ra tất cả các trang liên quan.
+
+---
+
+## 3. Lưu & Xuất Bản
+* Bấm **Lưu nháp** nếu cần duyệt lại.
+* Bấm **Xuất bản** để công khai nội dung lên website ngay lập tức.

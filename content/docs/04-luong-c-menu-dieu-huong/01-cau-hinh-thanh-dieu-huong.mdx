@@ -1,0 +1,66 @@
+---
+title: Luồng C – Cấu Hình Menu Header & Footer
+description: Hướng dẫn thiết lập thanh điều hướng menu chính, tạo cột phân nhóm và gắn liên kết mở trang
+---
+
+Thanh Menu (Header) là con đường chính để người dùng khám phá toàn bộ website của đơn vị. Cấu hình menu khoa học giúp người đọc tìm thấy thông tin trong không quá 3 lần nhấp chuột.
+
+<Diagram 
+  src="/diagrams/06-luong-c-menu.png" 
+  caption="Sơ đồ 06/06: Luồng C – Cấu hình thanh điều hướng Menu Đầu trang và Chân trang" 
+/>
+
+---
+
+## 1. Cấu Trúc Phân Cấp Của Menu Đầu Trang (Header)
+
+Một thanh menu hiện đại của HCM-UTE được tổ chức theo cấp bậc 3 tầng:
+
+```text
+[MỤC MENU CHÍNH (CẤP 1)]  --> Ví dụ: GIỚI THIỆU
+      │
+      ├── [CỘT 1: NHÓM QUẢN TRỊ]
+      │         ├── Liên kết 1: Cơ cấu tổ chức (Mở Trang)
+      │         └── Liên kết 2: Ban Giám hiệu (Mở Trang)
+      │
+      └── [CỘT 2: NHÓM CÔNG KHAI]
+                ├── Liên kết 1: Quy chế & Quy định (Mở Chuyên mục)
+                └── Liên kết 2: Biểu mẫu công tác (Mở Trang)
+```
+
+---
+
+## 2. Các Bước Cấu Hình Chi Tiết
+
+<Steps>
+  <Step>
+    #### Vào khu vực quản trị Menu
+    Vào thanh menu bên trái: `Website` → chọn `Header & Footer`.
+  </Step>
+
+  <Step>
+    #### Chọn phân hệ cần sửa
+    * Chọn tab **Menu Đầu trang (Header)** để cấu hình thanh điều hướng trên cùng.
+    * Chọn tab **Chân trang (Footer)** để cấu hình thông tin liên hệ, bản đồ và các liên kết phụ trợ dưới đáy trang.
+  </Step>
+
+  <Step>
+    #### Thêm Mục Menu chính & Tạo Cột
+    * Bấm nút **Thêm mục Menu** (ví dụ: *Đào tạo*, *Nghiên cứu khoa học*).
+    * Bên trong mục này, bấm **Thêm Cột** để chia nhỏ các nhóm liên kết (giúp menu mở rộng dạng Mega-menu đẹp mắt và ngăn nắp).
+  </Step>
+
+  <Step>
+    #### Gán liên kết (Đích đến)
+    Khi thêm một liên kết, Thầy/Cô chọn 1 trong 3 loại đích đến:
+    * **Mở Trang nội bộ:** Chọn trang đã xuất bản từ Luồng A (ví dụ: `/gioi-thieu/so-do-to-chuc`).
+    * **Mở Chuyên mục:** Chọn nhóm tin tức/văn bản từ Luồng B (hệ thống sẽ tự mở trang danh sách tin tương ứng).
+    * **Liên kết tùy biến (URL):** Dán link website bên ngoài (ví dụ: dẫn về Cổng thông tin Đào tạo `online.hcmute.edu.vn`).
+  </Step>
+
+  <Step>
+    #### Kéo thả sắp xếp & Lưu thay đổi
+    * Dùng chuột kéo biểu tượng sáu chấm `⋮⋮` để đổi thứ tự các mục menu và các liên kết.
+    * Bấm **Lưu & Xuất bản**. Mở trang chủ website để kiểm tra tất cả các nút bấm.
+  </Step>
+</Steps>

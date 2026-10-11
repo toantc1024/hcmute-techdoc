@@ -1,0 +1,60 @@
+---
+title: Mối Quan Hệ Giữa Cây Trang, Menu và Chuyên Mục
+description: Bản đồ kết nối luồng dữ liệu - hiểu rõ cách thức trang hút dữ liệu từ chuyên mục và liên kết với menu
+---
+
+Hiểu rõ mối quan hệ tương hỗ này giúp Thầy/Cô không bao giờ bị nhầm lẫn giữa việc "Tạo Trang" và "Tạo Chuyên Mục".
+
+<Diagram 
+  src="/diagrams/03-moi-quan-he.png" 
+  caption="Sơ đồ 03/06: Mối quan hệ giữa Cây trang, Menu và Chuyên mục" 
+/>
+
+---
+
+## 1. Cơ Chế Kết Nối Dữ Liệu
+
+Đọc theo chiều mũi tên trong sơ đồ:
+1. **Cây trang:** Tạo trang cấp 1 (`/gioi-thieu`), trang con cấp 2 (`/gioi-thieu/so-do-to-chuc`).
+2. **Menu đầu trang:** Tạo mục Menu `GIỚI THIỆU` → Cột `QUẢN TRỊ` → Gán liên kết dẫn đến trang `Cơ cấu tổ chức`. Người đọc bấm vào liên kết này để mở trang.
+3. **Các phần trên trang:** Trang sẽ chứa các khối:
+   * Khối ảnh / Giới thiệu tĩnh.
+   * Khối Tin tức đa bố cục.
+   * Khối Văn bản.
+4. **Nội dung và Chuyên mục:**
+   * Bài viết và Văn bản được phân loại vào **Cây chuyên mục chung**.
+   * Các khối hiển thị trên trang sẽ **tự động rút tin theo nhóm chuyên mục đã chọn** (đường nét đứt trong sơ đồ).
+   * **Đặc biệt:** Cùng 1 bài viết hoặc văn bản có thể tick chọn đồng thời ở cả 2 nhánh chuyên mục để hiển thị song song ở các khối khác nhau.
+
+---
+
+## 2. Thứ Tự Thiết Lập Chuẩn 5 Bước
+
+Khi xây dựng mới một phân hệ hoặc website đơn vị, Thầy/Cô nên tiến hành theo trình tự chuẩn 5 bước sau:
+
+<Steps>
+  <Step>
+    #### 1. Tạo cây trang
+    Xác định danh sách các trang cần có (Trang chủ, Giới thiệu, Đào tạo, Nghiên cứu khoa học...).
+  </Step>
+
+  <Step>
+    #### 2. Tạo cây chuyên mục
+    Phân loại các chủ đề tin tức, thông báo, văn bản, biểu mẫu tương ứng với nội dung sẽ phát sinh.
+  </Step>
+
+  <Step>
+    #### 3. Bố trí nội dung trang
+    Mở từng trang, kéo thả các khối hiển thị (Tin tức, Văn bản) và cấu hình chọn đúng nhóm chuyên mục tương ứng.
+  </Step>
+
+  <Step>
+    #### 4. Gắn trang vào menu
+    Vào cấu hình Header, thêm tên menu, tạo cột và chọn trang đã tạo ở Bước 1 để gắn liên kết.
+  </Step>
+
+  <Step>
+    #### 5. Kiểm tra thực tế
+    Mở giao diện người đọc trên cả Máy tính và Điện thoại, bấm thử tất cả menu và kiểm tra dữ liệu hiển thị.
+  </Step>
+</Steps>

@@ -1,0 +1,76 @@
+---
+title: Luồng A – Tạo, Chỉnh Sửa và Công Bố Trang
+description: Quy trình chi tiết từ lúc khởi tạo trang web, thiết kế khối giao diện cho đến xuất bản và kiểm thử
+---
+
+Quy trình quản trị trang web tại HCM-UTE được thiết kế trực quan theo luồng khép kín, có cơ chế đối chiếu trước khi xuất bản chính thức.
+
+<Diagram 
+  src="/diagrams/04-luong-a-trang.png" 
+  caption="Sơ đồ 04/06: Luồng A – Tạo, chỉnh sửa và công bố trang" 
+/>
+
+---
+
+## 1. Điểm Bắt Đầu & Lựa Chọn Tác Vụ
+
+Vào menu bên trái: `Website` → `Trang`. Hệ thống hỗ trợ 4 lựa chọn phù hợp theo từng tình huống:
+
+<Tabs items={['1. Tạo trang trống', '2. Thêm trang con', '3. Nhân bản từ mẫu', '4. Sửa trang có sẵn']}>
+  <Tab value="1. Tạo trang trống">
+    * Dành cho trang có bố cục hoàn toàn mới hoặc đơn giản.
+    * Bấm nút **Tạo trang** → chọn **Trang trống**.
+  </Tab>
+  <Tab value="2. Thêm trang con">
+    * Dành cho các trang cấp 2, cấp 3 (ví dụ: các bộ môn trực thuộc khoa).
+    * Chọn **Trang cha** trong danh sách → bấm **Thêm trang con**.
+  </Tab>
+  <Tab value="3. Nhân bản từ mẫu">
+    * Khuyên dùng cho các đơn vị muốn tái sử dụng bố cục chuẩn của trường.
+    * Bấm **Nhân bản trang mẫu** → Chọn mẫu đơn vị tương ứng → Bấm **Nhân bản** rồi thay nội dung của mình.
+  </Tab>
+  <Tab value="4. Sửa trang có sẵn">
+    * Chọn trang cần cập nhật nội dung → bấm **Sửa**.
+  </Tab>
+</Tabs>
+
+---
+
+## 2. Thiết Kế & Kiểm Tra Hiển Thị
+
+<Steps>
+  <Step>
+    #### Nhập thông tin trang
+    Điền Tên trang tiếng Việt, đường dẫn slug (viết thường, không dấu, nối bằng gạch ngang, ví dụ: `co-cau-to-chuc`), chọn Trang cha và mô tả ngắn gọn.
+  </Step>
+
+  <Step>
+    #### Bấm "Chọn Thiết kế"
+    Giao diện chuyển sang trình biên tập kéo thả:
+    * Thêm, xóa hoặc kéo đổi thứ tự các phần hiển thị.
+    * Tùy chỉnh ảnh banner, khối tin tức đa bố cục, khối danh sách văn bản.
+  </Step>
+
+  <Step>
+    #### Xem trước (Preview)
+    Bấm nút **Xem trước**, kiểm tra hiển thị đồng thời ở 2 chế độ:
+    * **Giao diện Máy tính (Desktop)**
+    * **Giao diện Điện thoại (Mobile)**
+  </Step>
+
+  <Step>
+    #### Rẽ nhánh điều kiện: Nội dung đã đúng chưa?
+    * **Chưa đúng:** Quay lại bước sửa đổi các khối hiển thị.
+    * **Đã đúng:** Bấm **Lưu trang / Lưu thay đổi** → bấm nút **Xuất bản** (màu đỏ).
+  </Step>
+</Steps>
+
+---
+
+## 3. Hoàn Tất Hoặc Chuyển Luồng
+
+<Callout type="warn">
+  Sau khi xuất bản thành công, hệ thống hỏi: **"Cần thêm trang vào menu?"**
+  * **Nếu KHÔNG:** Bấm **Hoàn tất**. Trang đã hoạt động qua đường dẫn trực tiếp.
+  * **Nếu CÓ:** Bấm **Sang Luồng C** để gắn trang này lên thanh Menu điều hướng đầu trang.
+</Callout>
