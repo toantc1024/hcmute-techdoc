@@ -88,6 +88,9 @@ export default function PocketGuidePage() {
             ----------------------------------------------------------------------- */}
         <div className="pocket-page relative overflow-hidden bg-white text-[#11324D] border border-slate-200/90 shadow-xl rounded-2xl p-7 sm:p-9 print:border-none print:shadow-none print:rounded-none print:p-0">
           
+          {/* LƯỚI TỌA ĐỘ KỸ THUẬT BLUEPRINT CHUẨN HCM-UTE (GÓC DƯỚI PHẢI FADE-BR) */}
+          <div className="pointer-events-none absolute inset-0 ute-blueprint-grid ute-mask-fade-br opacity-80 -z-0" />
+
           {/* ORBITAL RINGS NỀN TRANG TRÍ (THEO SKILL HCM-UTE) */}
           <div className="pointer-events-none absolute top-0 right-0 w-80 h-80 opacity-20 -z-0">
             <svg viewBox="0 0 300 300" className="w-full h-full stroke-[#0072BC]" fill="none">
@@ -140,7 +143,8 @@ export default function PocketGuidePage() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 
                 {/* 1. Trang con */}
-                <div className="rounded-xl border border-slate-200/90 bg-[#F7FBFF] p-3 flex flex-col justify-between">
+                <div className="relative overflow-hidden rounded-xl border border-slate-200/90 bg-[#F7FBFF] p-3 flex flex-col justify-between">
+                  <div className="pointer-events-none absolute bottom-0 right-0 w-28 h-28 ute-blueprint-grid ute-mask-fade-br opacity-70" />
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
                       <div className="flex items-center gap-1.5 font-bold text-xs text-[#004776]">
@@ -161,7 +165,8 @@ export default function PocketGuidePage() {
                 </div>
 
                 {/* 2. Tin tức / PDF */}
-                <div className="rounded-xl border border-slate-200/90 bg-[#F7FBFF] p-3 flex flex-col justify-between">
+                <div className="relative overflow-hidden rounded-xl border border-slate-200/90 bg-[#F7FBFF] p-3 flex flex-col justify-between">
+                  <div className="pointer-events-none absolute bottom-0 right-0 w-28 h-28 ute-blueprint-grid ute-mask-fade-br opacity-70" />
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
                       <div className="flex items-center gap-1.5 font-bold text-xs text-[#004776]">
@@ -182,7 +187,8 @@ export default function PocketGuidePage() {
                 </div>
 
                 {/* 3. Menu điều hướng */}
-                <div className="rounded-xl border border-slate-200/90 bg-[#F7FBFF] p-3 flex flex-col justify-between">
+                <div className="relative overflow-hidden rounded-xl border border-slate-200/90 bg-[#F7FBFF] p-3 flex flex-col justify-between">
+                  <div className="pointer-events-none absolute bottom-0 right-0 w-28 h-28 ute-blueprint-grid ute-mask-fade-br opacity-70" />
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
                       <div className="flex items-center gap-1.5 font-bold text-xs text-[#004776]">
@@ -400,6 +406,9 @@ export default function PocketGuidePage() {
             ----------------------------------------------------------------------- */}
         <div className="pocket-page relative overflow-hidden bg-white text-[#11324D] border border-slate-200/90 shadow-xl rounded-2xl p-7 sm:p-9 print:border-none print:shadow-none print:rounded-none print:p-0">
           
+          {/* LƯỚI TỌA ĐỘ KỸ THUẬT BLUEPRINT CHUẨN HCM-UTE */}
+          <div className="pointer-events-none absolute inset-0 ute-blueprint-grid ute-mask-fade-br opacity-80 -z-0" />
+
           {/* ORBITAL RINGS NỀN TRANG TRÍ TRANG 2 */}
           <div className="pointer-events-none absolute top-0 left-0 w-80 h-80 opacity-20 -z-0">
             <svg viewBox="0 0 300 300" className="w-full h-full stroke-[#0072BC]" fill="none">

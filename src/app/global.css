@@ -411,3 +411,82 @@ img, svg, video, iframe {
     break-after: avoid !important;
   }
 }
+
+
+/* =========================================================================
+   HỆ THỐNG LƯỚI TỌA ĐỘ KỸ THUẬT & NỀN CHUẨN HCM-UTE (BLUEPRINT GRID SYSTEM)
+   Chuẩn hóa theo thiết kế nhận diện chính thức HCMUTE Life & Campus
+   ========================================================================= */
+
+/* Lưới ô vuông kỹ thuật 24px x 24px với màu xanh thương hiệu #0072BC */
+.ute-blueprint-grid {
+  background-image: 
+    linear-gradient(to right, rgba(0, 114, 188, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 114, 188, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.dark .ute-blueprint-grid {
+  background-image: 
+    linear-gradient(to right, rgba(56, 199, 244, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 199, 244, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Lưới ô vuông kỹ thuật mật độ cao 16px x 16px */
+.ute-blueprint-grid-dense {
+  background-image: 
+    linear-gradient(to right, rgba(0, 114, 188, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 114, 188, 0.07) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Mặt nạ làm mờ chuyển tiếp góc dưới-phải (chuẩn y hệt hình mẫu card UTE) */
+.ute-mask-fade-br {
+  mask-image: radial-gradient(circle at bottom right, black 25%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at bottom right, black 25%, transparent 75%);
+}
+
+/* Mặt nạ làm mờ chuyển tiếp góc trên-phải */
+.ute-mask-fade-tr {
+  mask-image: radial-gradient(circle at top right, black 25%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at top right, black 25%, transparent 75%);
+}
+
+/* Mặt nạ làm mờ tỏa từ tâm */
+.ute-mask-fade-center {
+  mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);
+}
+
+/* Đường gióng kết cấu kỹ thuật 1px (Structural Alignment Lines) */
+.ute-structural-border-r {
+  border-right: 1px solid rgba(0, 114, 188, 0.12);
+}
+
+.ute-structural-border-b {
+  border-bottom: 1px solid rgba(0, 114, 188, 0.12);
+}
+
+.dark .ute-structural-border-r {
+  border-right: 1px solid rgba(56, 199, 244, 0.12);
+}
+
+.dark .ute-structural-border-b {
+  border-bottom: 1px solid rgba(56, 199, 244, 0.12);
+}
+
+/* Thẻ nội dung chuẩn hóa theo phong cách Blueprint Card */
+.ute-card-blueprint {
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 114, 188, 0.16);
+  border-radius: 1.25rem; /* 20px */
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .ute-card-blueprint {
+  background-color: rgba(15, 23, 42, 0.7);
+  border-color: rgba(56, 199, 244, 0.16);
+}

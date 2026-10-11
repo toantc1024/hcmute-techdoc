@@ -124,9 +124,11 @@ export default function HomePage() {
   return (
     <main className="relative w-full flex-1 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
       
-      {/* 3. Hiệu ứng thị giác nhẹ nhàng: Orbital Rings & Subtle Glow */}
-      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[520px] overflow-hidden opacity-35 dark:opacity-20 -z-10">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[340px] rounded-full bg-gradient-to-tr from-[#0072BC]/20 via-sky-400/10 to-transparent blur-3xl" />
+      {/* 3. Hiệu ứng thị giác chuẩn HCM-UTE: Lưới tọa độ Blueprint & Orbital Rings */}
+      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[560px] overflow-hidden -z-10">
+        {/* Lưới kỹ thuật chìm ở trung tâm */}
+        <div className="absolute inset-0 ute-blueprint-grid ute-mask-fade-center opacity-65 dark:opacity-30" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[340px] rounded-full bg-gradient-to-tr from-[#0072BC]/20 via-sky-400/10 to-transparent blur-3xl opacity-35 dark:opacity-20" />
         <svg className="absolute inset-0 w-full h-full stroke-[#0072BC]/20 dark:stroke-sky-400/15 [mask-image:radial-gradient(ellipse_at_center,white,transparent_75%)]" xmlns="http://www.w3.org/2000/svg">
           <ellipse cx="50%" cy="38%" rx="420" ry="170" fill="none" strokeWidth="1" strokeDasharray="5 7" />
           <ellipse cx="50%" cy="38%" rx="540" ry="220" fill="none" strokeWidth="1" />
@@ -217,7 +219,8 @@ export default function HomePage() {
         <section className="w-full mb-20 text-left">
           <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 via-card/90 to-card p-6 sm:p-8 backdrop-blur-xs shadow-md">
             
-            {/* Vòng sáng trang trí nền */}
+            {/* Lưới tọa độ Blueprint & Vòng sáng trang trí nền */}
+            <div className="pointer-events-none absolute inset-0 ute-blueprint-grid ute-mask-fade-br opacity-80 -z-10" />
             <div className="pointer-events-none absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-primary/10 blur-3xl -z-10" />
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
