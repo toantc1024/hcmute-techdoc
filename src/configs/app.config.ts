@@ -26,7 +26,7 @@ export const brandConfig = {
 };
 
 export const gitConfig = {
-  user: 'hoavm73',
+  user: 'toantc1024',
   repo: 'hcmute-techdoc',
   branch: 'main',
 };
