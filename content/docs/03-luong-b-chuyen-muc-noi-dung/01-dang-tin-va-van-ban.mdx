@@ -1,13 +1,14 @@
 ---
 title: Luồng B – Đăng bài viết và quản lý nội dung
-description: Hướng dẫn đăng tin tức hoạt động, quy chuẩn ảnh 16:9, gắn nhiều chuyên mục song song và gắn thẻ tags
+description: Hướng dẫn đăng bài viết tin tức, thanh nhắc nhở hoàn thành tác vụ, quản trị tệp đính kèm, bộ chấm điểm chất lượng SEO và quy trình kiểm duyệt nội dung.
 order: 1
 ---
 
-Luồng B là luồng công việc thường ngày của cán bộ biên tập và truyền thông tại các đơn vị:
+Luồng B là luồng công việc thường ngày của cán bộ biên tập và truyền thông tại các Khoa, Phòng ban, Viện và Trung tâm thuộc Trường Đại học Công nghệ Kỹ thuật TP.HCM (HCM-UTE):
 
-> [!IMPORTANT]
-> **Nguyên tắc cốt lõi:** **Lưu ≠ Gửi duyệt ≠ Công bố**. Thực hiện theo đúng nhánh **Bài viết** hoặc **Văn bản** tùy theo định dạng thông tin.
+<Callout type="warn" title="Nguyên tắc cốt lõi cần ghi nhớ">
+  **Lưu nháp ≠ Gửi duyệt ≠ Xuất bản**. Tùy theo vai trò tài khoản (*Cộng tác viên, Biên tập viên hay Lãnh đạo đơn vị*), Thầy/Cô thực hiện theo đúng nhánh biên tập và gửi duyệt nội dung.
+</Callout>
 
 <Diagram 
   src="/diagrams/05-luong-b-noi-dung.png" caption="Sơ đồ 05 / 06: Luồng B – Soạn, duyệt và công bố nội dung" 
@@ -17,49 +18,83 @@ Luồng B là luồng công việc thường ngày của cán bộ biên tập v
 
 ## 1. Màn hình danh sách nội dung
 
-Vào menu trái `Quản lý nội dung` → chọn `Văn bản và bài viết`:
-* **4 Thẻ phân loại:**
-  * *Tất cả nội dung:* Toàn bộ bài của đơn vị.
-  * *Nội dung của tôi:* Các bài do chính tài khoản của Thầy/Cô tạo.
-  * *Cần tôi duyệt:* Bài viết do cấp dưới gửi lên chờ Lãnh đạo duyệt.
-  * *Cộng tác:* Bài viết được chia sẻ quyền biên tập chung.
+Vào menu trái **Quản lý nội dung** → chọn **Văn bản và bài viết**:
+
+* **4 Thẻ phân loại tab:**
+  * *Tất cả nội dung:* Toàn bộ bài viết, tin tức và thông báo của đơn vị.
+  * *Nội dung của tôi:* Các bài do chính tài khoản của Thầy/Cô biên soạn.
+  * *Cần tôi duyệt:* Bài viết do cấp dưới gửi lên chờ Lãnh đạo đơn vị phê duyệt.
+  * *Cộng tác:* Bài viết được chia sẻ quyền biên tập chung giữa các cán bộ trong đơn vị.
 * **Bộ lọc trạng thái:** *Tất cả, Bản nháp, Chờ duyệt, Đã xuất bản, Bị từ chối*.
-* **Bộ lọc Loại nội dung:** *TẤT CẢ, Bài viết, Văn bản*.
+* **Bộ lọc Loại nội dung:** *Tất cả, Bài viết, Văn bản*.
 
 ---
 
-## 2. Quy trình tạo bài viết mới
+## 2. Giao diện soạn thảo và thanh nhắc nhở tác vụ thông minh
 
-<Steps>
-  <Step>
-    #### Bấm nút tạo bài viết
-    Tại góc trên bên phải màn hình, chọn **Tạo bài viết**. Nhập tiêu đề bài viết mới ở ô trên cùng.
-  </Step>
+Khi bấm nút **Tạo bài viết mới**, hệ thống cung cấp giao diện soạn thảo đồng bộ với thanh chỉ báo nhắc nhở tiến độ trực quan:
 
-  <Step>
-    #### Hoàn tất thông tin bài viết
-    * **Ảnh bìa đại diện (*):** Chọn tải ảnh từ máy hoặc từ Thư viện.
-      * *Quy chuẩn ảnh:* Tỷ lệ **16:9** (khuyến nghị kích thước `1920×1080px` hoặc `1200×630px`). Hệ thống có sẵn công cụ cắt ảnh trực quan.
-    * **Chuyên mục (*):** Sử dụng ô *Tìm & chọn chuyên mục…*. Bắt buộc chọn ít nhất 1 chuyên mục.
-      * *Tính năng chọn song song (N:N):* Có thể tick chọn đồng thời nhiều chuyên mục (ví dụ: vừa thuộc *Tin hoạt động Khoa*, vừa thuộc *Tin tức sinh viên toàn trường*).
-    * **Thẻ bài viết (Tags):** Gắn các từ khóa liên quan để hỗ trợ tìm kiếm (ví dụ: `tuyen-sinh`, `tot-nghiep`).
-    * **Mô tả ngắn gọn (Sapo):** Nhập tóm tắt 2 - 3 câu; hệ thống có bộ đếm giới hạn tối đa 500 ký tự.
-  </Step>
+![Giao diện soạn thảo bài viết tổng thể](/images/editor/giao-dien-soan-thao-tong-the.png)
 
-  <Step>
-    #### Soạn thảo nội dung
-    Nhập bài viết tại vùng rich-text editor; sử dụng thanh công cụ để chèn ảnh, nhúng video, kẻ bảng hoặc định dạng đề mục `H2`, `H3`.
-  </Step>
+### 2.1. Thanh nhắc nhở tác vụ chưa hoàn thành (Pre-publish Checklist Bar)
 
-  <Step>
-    #### Xem trước và Lưu
-    Kiểm tra 4 chỉ báo: *Tiêu đề, Chuyên mục, Ảnh bìa, Nội dung*. Bấm **Xem trước** rồi bấm **Lưu** (Lưu nháp hoặc Gửi duyệt/Xuất bản theo quyền tài khoản).
-  </Step>
-</Steps>
+Nằm ngay bên dưới ô nhập tiêu đề và phía trên thanh công cụ soạn thảo, thanh nhắc nhở theo dõi thời gian thực 5 tiêu chí cốt lõi:
+
+![Thanh nhắc nhở tác vụ và kiểm tra chuyên mục bắt buộc](/images/editor/thanh-nhac-nho-tac-vu.png)
+
+| Tiêu chí | Trạng thái hiển thị | Ý nghĩa & Thao tác hỗ trợ |
+| :--- | :---: | :--- |
+| **● Tiêu đề** | Chấm đỏ / Chấm xanh | Cảnh báo khi chưa nhập tiêu đề bài viết hoặc tiêu đề chưa đạt độ dài tối thiểu. |
+| **✔ Chuyên mục** | Nhãn cam `Bắt buộc` | **Bắt buộc:** Phải chọn ít nhất 1 chuyên mục để bài viết xuất hiện đúng trang. Chuyển xanh khi đã gán chuyên mục hợp lệ. |
+| **○ Ảnh bìa** | Chấm xám / Chấm xanh | Nhắc nhở tải ảnh đại diện 16:9. Ảnh bìa quyết định ấn tượng đầu tiên của độc giả trên trang chủ. |
+| **○ Tệp đính kèm** | Chấm xám / Chấm xanh | Hiển thị trạng thái có tệp đính kèm (PDF, văn bản, biểu mẫu) trong bài viết hay chưa. |
+| **✔ Nội dung** | Chấm xanh | Xác nhận vùng soạn thảo đã có nội dung văn bản đạt chuẩn. |
+
+<Callout type="info" title="Tính năng tương tác 1 chạm (Click-to-Navigate)">
+  Khi rê chuột vào từng mục trên thanh nhắc nhở, hệ thống hiển thị tooltip chi tiết tình trạng (*Ví dụ: Đã chọn 1 chuyên mục — Đã kiểm tra đạt yêu cầu*).
+  
+  Thầy/Cô chỉ cần **nhấp chuột vào mục bất kỳ**, hệ thống sẽ tự động cuộn màn hình hoặc mở đúng tab cài đặt tương ứng bên cột trái (*Nhấn để chuyển đến phần này*), giúp thao tác biên tập nhanh chóng mà không cần tìm kiếm thủ công.
+</Callout>
 
 ---
 
-## 3. Quy trình duyệt bài và các tính năng nâng cao
+## 3. Quản trị tệp đính kèm và công cụ chấm điểm SEO
+
+Tại cột bên trái màn hình soạn thảo, hệ thống phân chia thành 2 tab nghiệp vụ: **Thuộc tính** và **Tệp đính kèm**:
+
+![Quản trị tệp đính kèm và công cụ chấm điểm chất lượng SEO](/images/editor/tep-dinh-kem-va-cham-diem-seo.png)
+
+### 3.1. Quản trị tài liệu & tệp đính kèm trong bài viết
+
+Phục vụ việc đăng tải thông báo tuyển sinh, danh sách tốt nghiệp, quyết định ban hành hoặc biểu mẫu hướng dẫn:
+
+* **Hai cách thêm tệp tiện lợi:**
+  * **+ Thêm tệp:** Bấm để tải trực tiếp tệp mới từ máy tính cá nhân lên bài viết (hỗ trợ file PDF, Word, Excel, PowerPoint, ZIP).
+  * **Tệp đính kèm (Từ thư viện):** Bấm để chọn các tệp tài liệu số đã được lưu trữ sẵn trong kho media dùng chung của đơn vị.
+* **Tự động tạo khung tải file:** Toàn bộ tệp đính kèm sẽ được hệ thống hiển thị trang nhã ở chân bài viết với biểu tượng định dạng tệp, dung lượng file và nút tải về trực tiếp. Thầy/Cô không cần mất công chèn link tải thủ công vào từng đoạn văn.
+
+### 3.2. Mô tả ngắn gọn (Sapo / Meta Description)
+* Khung tóm tắt nội dung chính của bài viết trong 2 - 3 câu ngắn gọn.
+* Hệ thống hiển thị bộ đếm ký tự thời gian thực (giới hạn tối đa **500 ký tự**).
+* Phần mô tả này sẽ xuất hiện trên các khối tin tức trang chủ, danh sách bài viết, nguồn cấp RSS và là đoạn trích dẫn khi bài viết được chia sẻ lên Zalo/Facebook.
+
+### 3.3. Bộ chấm điểm chất lượng SEO thời gian thực (0 - 100 điểm)
+
+Hệ thống tích hợp thuật toán chấm điểm SEO chuẩn hóa theo tiêu chuẩn công cụ tìm kiếm hiện đại:
+
+* **Thang điểm trực quan:**
+  * **Màu đỏ (< 50 điểm - Cần tối ưu):** Thiếu nhiều thông tin quan trọng; bài viết khó xuất hiện ở vị trí cao trên Google và dễ bị lỗi hiển thị khi chia sẻ mạng xã hội.
+  * **Màu vàng (50 - 79 điểm - Mức khá):** Đạt tiêu chuẩn tối thiểu, có thể xuất bản nhưng nên hoàn thiện thêm tiêu đề và ảnh bìa.
+  * **Màu xanh (80 - 100 điểm - Tối ưu xuất sắc):** Đầy đủ thông tin, chuẩn hóa tối đa cho các công cụ tìm kiếm và mạng xã hội.
+* **4 tiêu chí đánh giá tự động:**
+  1. **Độ dài tiêu đề SEO (`Tiêu đề: 0/70 ký tự`):** Khuyến nghị từ 50 - 70 ký tự để hiển thị trọn vẹn trên Google Search mà không bị cắt cụt dấu `...`.
+  2. **Độ dài mô tả ngắn (`Mô tả: 0/160 ký tự`):** Tối ưu từ 120 - 160 ký tự giúp độc giả nắm bắt nhanh ý chính bài viết từ kết quả tìm kiếm.
+  3. **Ảnh đại diện OpenGraph:** Kiểm tra ảnh bìa hiển thị khi chia sẻ bài viết lên mạng xã hội (Facebook, Zalo, Teams). Đảm bảo hiển thị hình ảnh 16:9 sắc nét thay vì liên kết trần không ảnh.
+  4. **Phân loại chuyên mục:** Kiểm tra bài viết đã được gắn vào đúng chuyên mục hay chưa để tự động tạo cấu trúc đường dẫn phân cấp Breadcrumbs chuẩn SEO.
+
+---
+
+## 4. Quy trình duyệt bài và các tính năng nâng cao
 
 Hệ thống quản lý nội dung tích hợp các tiêu chuẩn kiểm duyệt và vận hành hiện đại:
 
@@ -75,19 +110,21 @@ Hệ thống quản lý nội dung tích hợp các tiêu chuẩn kiểm duyệt
 
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
-### Tình huống 1: Mở bài viết ra thấy thông báo "Bài viết đang được chỉnh sửa bởi [Tên cán bộ]"?
+### Tình huống 1: Điểm chất lượng SEO báo màu đỏ (ví dụ 15/100) thì có thể bấm xuất bản bài viết được không?
+* **Nguyên nhân:** Hệ thống không khóa cứng nút Lưu hay Xuất bản khi điểm SEO thấp. Điểm SEO là công cụ hỗ trợ và nhắc nhở cán bộ nâng cao chất lượng truyền thông của đơn vị.
+* **Cách xử lý:** Thầy/Cô chỉ cần bổ sung thêm vài câu ở mục **Mô tả ngắn gọn** (đạt khoảng 120 - 160 ký tự) và tải lên **Ảnh bìa 16:9**, điểm SEO sẽ lập tức nhảy lên mức xanh (> 80 điểm).
+
+### Tình huống 2: Bấm vào thanh nhắc nhở tác vụ thấy báo chấm đỏ ở mục Chuyên mục hoặc Tiêu đề?
+* **Nguyên nhân:** Đây là 2 trường bắt buộc tối thiểu của hệ thống. Nếu thiếu 1 trong 2 mục này, hệ thống sẽ không cho phép Gửi duyệt hoặc Xuất bản.
+* **Cách xử lý:** Thầy/Cô nhấp chuột trực tiếp vào nhãn **Chuyên mục** trên thanh nhắc nhở, hệ thống sẽ mở ngay bảng chọn chuyên mục bên cột trái để Thầy/Cô tick chọn nhanh.
+
+### Tình huống 3: Tệp tài liệu đính kèm (PDF, Word) tải lên có giới hạn dung lượng bao nhiêu?
+* **Nguyên nhân:** Để đảm bảo tốc độ tải trang nhanh và tối ưu trải nghiệm cho độc giả xem trên điện thoại di động, hệ thống khuyến nghị mỗi tệp đính kèm có dung lượng dưới **25MB**.
+* **Cách xử lý:** Nếu tệp PDF quá nặng do chứa nhiều ảnh scan màu độ phân giải cao, Thầy/Cô có thể sử dụng công cụ nén PDF trực tuyến trước khi tải lên, hoặc chia nhỏ thành từng tập/phụ lục riêng biệt.
+
+### Tình huống 4: Mở bài viết ra thấy thông báo "Bài viết đang được chỉnh sửa bởi [Tên cán bộ]"?
 * **Nguyên nhân:** Cơ chế khóa biên tập (*Redis Distributed Locking* - tiêu chuẩn PW.10) đang bảo vệ bài viết để tránh trường hợp 2 người cùng sửa rồi ghi đè làm mất nội dung của nhau.
 * **Cách xử lý:** Thầy/Cô có thể liên hệ nhanh với đồng nghiệp để nhắc lưu và đóng bài, hoặc chờ sau ít phút khi phiên làm việc của người trước hết hạn, hệ thống sẽ tự động mở khóa.
 
-### Tình huống 2: Người duyệt bài muốn chỉ rõ câu từ cần sửa thì thao tác thế nào?
-* **Cách xử lý:** Tại màn hình duyệt bài, bôi đen đoạn chữ cần sửa → biểu tượng nhận xét (*Comment*) hiện lên → nhập nội dung góp ý → bấm **Gửi nhận xét**. Tác giả bài viết sẽ nhận được chuông thông báo đẩy (*Server-Sent Events* - tiêu chuẩn NI.1) và nhìn thấy chính xác vị trí cần chỉnh sửa.
-
-### Tình huống 3: Bài viết chỉ sai một lỗi chính tả nhỏ, trả bài về có bắt duyệt lại từ đầu không?
-* **Nguyên nhân:** Cơ chế hoàn trả từng phần (*Partial Workflow Rewind* - tiêu chuẩn PW.8) cho phép trả về linh hoạt.
-* **Cách xử lý:** Người duyệt chọn **Hoàn trả về bước trước** (thay vì Từ chối toàn bộ). Tác giả sửa xong gửi thẳng lại người duyệt đó để xuất bản, tiết kiệm tối đa thời gian hành chính.
-
-### Tình huống 4: Làm thế nào để hẹn giờ tự động xuất bản tin tức vào lúc 08:00 sáng mai?
+### Tình huống 5: Làm thế nào để hẹn giờ tự động xuất bản tin tức vào lúc 08:00 sáng mai?
 * **Cách xử lý:** Tại mục lưu bài viết, chọn **Lập lịch xuất bản** → chọn ngày và giờ mong muốn → bấm Lưu. Đúng thời điểm cài đặt, hệ thống tác vụ chạy nền (*RabbitMQ Worker* - tiêu chuẩn PW.14) sẽ tự động kích hoạt hiển thị công khai trên website.
-
-### Tình huống 5: Làm thế nào để đề xuất bài viết xuất sắc của Khoa lên trang chủ Trường (hcmute.edu.vn)?
-* **Cách xử lý:** Trước khi xuất bản, Quản trị viên đơn vị tích chọn ô **Đề xuất lên trang chủ Trường**. Bài viết sẽ tự động xuất hiện trong hàng đợi phê duyệt của Ban biên tập trang chủ Nhà trường qua cơ chế nhân bản an toàn (*Cross-tenant Promotion* - tiêu chuẩn PW.13).
