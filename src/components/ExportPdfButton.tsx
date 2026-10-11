@@ -207,7 +207,7 @@ export function ExportPdfButton() {
                       onClick={() => handleApplyDomain('@hcmute.edu.vn')}
                       className="px-2 py-0.5 rounded-md bg-sky-50 dark:bg-sky-950/50 text-[#0072BC] dark:text-sky-300 border border-sky-200 dark:border-sky-800 hover:bg-sky-100 dark:hover:bg-sky-900/60 transition cursor-pointer font-mono"
                     >
-                      + @hcmute.edu.vn (Cán bộ)
+                      + @hcmute.edu.vn (Thầy Cô)
                     </button>
                     <button
                       type="button"
