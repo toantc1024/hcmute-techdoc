@@ -13,7 +13,6 @@ import {
   SearchCheck, 
   HelpCircle,
   MessageSquareHeart,
-  Sparkles
 } from "lucide-react";
 
 interface ArticleFeedbackProps {

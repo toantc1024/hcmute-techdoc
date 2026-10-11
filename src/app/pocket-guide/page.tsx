@@ -15,7 +15,6 @@ import {
   Building2,
   ShieldCheck,
   LifeBuoy,
-  Sparkles,
   ArrowRight,
   ExternalLink,
   Sliders,
@@ -47,7 +46,7 @@ export default function PocketGuidePage() {
 
             <div>
               <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#0072BC] uppercase tracking-wider">
-                <Sparkles className="size-3" />
+                <span className="size-1.5 rounded-full bg-[#0072BC]" />
                 <span>Quy chuẩn ấn phẩm HCM-UTE · 2 Trang A4</span>
               </div>
               <h1 className="text-base sm:text-lg font-bold text-foreground leading-tight">

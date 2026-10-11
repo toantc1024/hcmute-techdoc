@@ -7,7 +7,6 @@ import {
   FileText, 
   Compass, 
   CheckCircle2, 
-  Sparkles, 
   Newspaper, 
   FileUp, 
   LayoutTemplate, 
@@ -164,7 +163,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-7 pb-3.5 border-b border-border/60 gap-3">
             <div>
               <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary uppercase tracking-wider mb-1.5">
-                <Sparkles className="size-3.5" />
+                <span className="size-1.5 rounded-full bg-primary" />
                 <span>Thao tác nhanh</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
@@ -227,8 +226,7 @@ export default function HomePage() {
               
               {/* Cột thông tin giới thiệu */}
               <div className="lg:col-span-7">
-                <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/15 px-3 py-1 text-xs font-semibold text-primary mb-3.5">
-                  <Sparkles className="size-3.5" />
+                <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/15 px-3.5 py-1 text-xs font-semibold text-primary mb-3.5">
                   <span>Sổ tay bỏ túi 2 trang A4 · Phiên bản v2.4 (Tháng 10/2026)</span>
                 </div>
 

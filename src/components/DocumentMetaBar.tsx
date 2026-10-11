@@ -12,7 +12,6 @@ import {
   Tag,
   X,
   XCircle,
-  Sparkles,
 } from 'lucide-react';
 
 export interface ChangelogItem {

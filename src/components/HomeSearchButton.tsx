@@ -1,6 +1,6 @@
 'use client';
 
-import { Search, Sparkles } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { useSearchContext } from 'fumadocs-ui/contexts/search';
 import { Dialog } from '@base-ui/react/dialog';
 import Link from 'next/link';
@@ -45,8 +45,7 @@ export function HomeSearchButton() {
 
       {/* Dòng gợi ý tìm kiếm ngay dưới */}
       <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2 text-xs">
-        <span className="text-muted-foreground/90 font-medium inline-flex items-center gap-1">
-          <Sparkles className="size-3 text-primary shrink-0" />
+        <span className="text-muted-foreground/90 font-semibold inline-flex items-center">
           <span>Gợi ý:</span>
         </span>
         {SUGGESTIONS.map((item) => (
