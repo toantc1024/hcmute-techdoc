@@ -439,7 +439,7 @@ export default function PocketGuidePage() {
                 <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#EBF5FF] text-[#0072BC] font-bold text-[9px] mb-1 border border-[#0072BC]/20">
                   TRANG 2 / 2
                 </span>
-                <div>An toàn: <strong className="text-[#004776]">Nghị định 13/2023</strong></div>
+                <div>An toàn: <strong className="text-[#004776]">Luật số 91/2025/QH15</strong></div>
                 <div>Tổng đài: <strong className="text-[#004776]">028.3722.1223</strong></div>
               </div>
             </header>
@@ -515,7 +515,7 @@ export default function PocketGuidePage() {
                     <AlertTriangle className="size-3 stroke-[2.5]" />
                   </div>
                   <div className="text-[#11324D]">
-                    <strong className="text-[#ED1C24]">7. Bảo vệ dữ liệu cá nhân &amp; Quy chế phát ngôn (Nghị định 13/2023/NĐ-CP):</strong> Tuyệt đối không đăng tải công khai số CCCD, tài khoản ngân hàng, thông tin gia cảnh nhạy cảm; toàn bộ nội dung tuân thủ nghiêm ngặt quy chế phát ngôn của Nhà trường.
+                    <strong className="text-[#ED1C24]">7. Bảo vệ dữ liệu cá nhân &amp; Quy chế phát ngôn (Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15):</strong> Tuyệt đối không đăng tải công khai số CCCD, tài khoản ngân hàng, thông tin gia cảnh nhạy cảm; toàn bộ nội dung tuân thủ nghiêm ngặt quy chế phát ngôn của Nhà trường.
                   </div>
                 </div>
 

@@ -305,7 +305,7 @@ export default function HomePage() {
                       </div>
                     </div>
                     <div className="text-[6.5px] text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-1">
-                      doc.utehub.vn
+                      HCM-UTE TECH DOC
                     </div>
                   </div>
 
@@ -331,7 +331,7 @@ export default function HomePage() {
                       </div>
                     </div>
                     <div className="text-[6.5px] text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-1">
-                      doc.utehub.vn
+                      HCM-UTE TECH DOC
                     </div>
                   </div>
 
@@ -463,7 +463,7 @@ export default function HomePage() {
                 Vận hành thử nghiệm toàn Trường
               </h4>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Tài liệu chuẩn hóa bám sát quy chế truyền thông Nhà trường, tích hợp bộ chấm điểm SEO và bảo vệ dữ liệu cá nhân theo Nghị định 13/2023/NĐ-CP.
+                Tài liệu chuẩn hóa bám sát quy chế truyền thông Nhà trường, tích hợp bộ chấm điểm SEO và bảo vệ dữ liệu cá nhân theo Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15.
               </p>
             </div>
 

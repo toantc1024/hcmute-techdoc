@@ -3,7 +3,9 @@ import { baseOptions } from '@/lib/layout.shared';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "HCM-UTE TECH DOC — Cổng tài liệu hướng dẫn quản trị Website HCM-UTE",
+  title: {
+    absolute: "HCM-UTE TECH DOC",
+  },
   description: "Cổng tài liệu kỹ thuật & Hướng dẫn sử dụng hệ thống Website HCM-UTE",
 };
 
