@@ -94,7 +94,20 @@ Hệ thống tích hợp thuật toán chấm điểm SEO chuẩn hóa theo tiê
 
 ---
 
-## 4. Quy trình duyệt bài và các tính năng nâng cao
+## 4. Quy chuẩn hình ảnh đại diện chia sẻ mạng xã hội (Open Graph / Zalo, Facebook)
+
+Thầy Cô sau khi xuất bản bài viết thường chia sẻ liên kết lên Zalo, Facebook, Fanpage Khoa hoặc gửi email cho sinh viên. Để bài viết hiển thị chuyên nghiệp, không bị cắt mép chữ hay mất đầu hình ảnh, Thầy Cô cần lưu ý:
+
+* **Tỷ lệ khung hình chuẩn:** Luôn thiết kế ảnh bìa bài viết theo tỷ lệ **16:9** (kích thước tối ưu: `1200 x 630 px` hoặc `1920 x 1080 px`).
+* **Vùng an toàn (Safe Zone):**
+  * Đặt tiêu đề bài viết, biểu trưng và chủ thể khuôn mặt người ở **khu vực trung tâm bức ảnh** (cách 4 mép viền tối thiểu 10% khoảng đệm).
+  * Khi Zalo hoặc Facebook hiển thị bài viết dưới dạng thẻ vuông nhỏ (tỷ lệ 1:1) hay thẻ chữ nhật lớn (1.91:1), hệ thống vẫn giữ trọn vẹn thông điệp chính mà không bị cắt mất chữ.
+* **Đoạn trích dẫn (Sapo mô tả ngắn):** Soạn thảo từ 120 - 150 ký tự súc tích, nêu bật nội dung cốt lõi của sự kiện để kích thích độc giả bấm vào đọc toàn văn.
+* **Thẻ văn bản thay thế (Alt Text):** Luôn nhập mô tả ngắn về bức ảnh (ví dụ: *Lễ ký kết hợp tác giữa Khoa Cơ khí và Doanh nghiệp Nhật Bản*) nhằm hỗ trợ máy tìm kiếm Google lập chỉ mục và phục vụ người khiếm thị sử dụng phần mềm đọc màn hình.
+
+---
+
+## 5. Quy trình duyệt bài và các tính năng nâng cao
 
 Hệ thống quản lý nội dung tích hợp các tiêu chuẩn kiểm duyệt và vận hành hiện đại:
 
@@ -128,3 +141,10 @@ Hệ thống quản lý nội dung tích hợp các tiêu chuẩn kiểm duyệt
 
 ### Tình huống 5: Làm thế nào để hẹn giờ tự động xuất bản tin tức vào lúc 08:00 sáng mai?
 * **Cách xử lý:** Tại mục lưu bài viết, chọn **Lập lịch xuất bản** → chọn ngày và giờ mong muốn → bấm Lưu. Đúng thời điểm cài đặt, hệ thống tác vụ chạy nền (*RabbitMQ Worker* - tiêu chuẩn PW.14) sẽ tự động kích hoạt hiển thị công khai trên website.
+
+### Tình huống 6: Thông báo tuyển sinh hoặc học vụ cũ các năm trước đã hết hạn thì xử lý thế nào để không gãy liên kết (lỗi 404)?
+* **Nguyên nhân:** Việc bấm nút "Xóa vĩnh viễn" (*Delete*) các bài viết cũ sẽ làm đứt gãy toàn bộ đường link mà phụ huynh, sinh viên đã lưu hoặc đang tìm kiếm trên Google, dẫn đến trang báo lỗi `404 Not Found (Trang không tồn tại)` gây giảm uy tín website của đơn vị.
+* **Cách xử lý chuẩn:**
+  1. Tuyệt đối **không xóa** bài viết cũ. Hãy chuyển trạng thái bài sang **Lưu trữ (Archive)** hoặc gỡ tick chọn ở chuyên mục *Tin nổi bật trang chủ*.
+  2. Bổ sung thông báo ghim ngay đầu bài viết: `⚠️ Thông báo này đã hết thời hạn tiếp nhận hồ sơ từ ngày DD/MM/YYYY. Quý Thầy Cô và sinh viên vui lòng xem thông báo mới nhất tại [Liên kết đến bài thông báo mới]`.
+  3. Nếu cấu trúc trang buộc phải thay đổi đường dẫn URL, hãy gửi phiếu hỗ trợ Ticket cho AD để thiết lập bản ghi **Chuyển hướng 301 (301 Permanent Redirect)** tự động đưa người đọc về địa chỉ mới.
