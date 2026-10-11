@@ -184,7 +184,7 @@ export function DocumentMetaBar({
                     Lịch sử thay đổi & Nhật ký phiên bản
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400">
-                    Cổng hướng dẫn kỹ thuật HCM-UTE TechDoc
+                    Cổng hướng dẫn kỹ thuật HCM-UTE TECH DOC
                   </p>
                 </div>
               </div>

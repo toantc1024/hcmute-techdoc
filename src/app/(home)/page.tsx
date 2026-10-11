@@ -133,7 +133,7 @@ export default function HomePage() {
         {/* 1. Tên cổng tài liệu (nhỏ phía trên) */}
         <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-card/80 backdrop-blur-xs px-3.5 py-1 text-xs font-medium text-foreground/90 mb-5 shadow-2xs">
           <span className="size-2 rounded-full bg-[#0072BC] animate-pulse" />
-          <span>Trường Đại học Công nghệ Kỹ thuật TP.HCM · Cổng hướng dẫn quản trị HCM-UTE</span>
+          <span>Trường Đại học Công nghệ Kỹ thuật TP.HCM · HCM-UTE TECH DOC</span>
         </div>
 
         {/* 1. Tiêu đề chính: gọn gàng trên 1 dòng duy nhất */}

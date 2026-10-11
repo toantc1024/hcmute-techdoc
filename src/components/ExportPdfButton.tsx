@@ -170,7 +170,7 @@ export function ExportPdfButton() {
                     Xác thực tải tài liệu kỹ thuật
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
-                    Tài liệu nội bộ HCM-UTE TechDoc tích hợp chữ ký điện tử và watermark định danh người tải.
+                    Tài liệu nội bộ HCM-UTE TECH DOC tích hợp chữ ký điện tử và watermark định danh người tải.
                   </p>
                 </div>
               </div>
@@ -289,7 +289,7 @@ export function ExportPdfButton() {
             {/* 2. Dòng chữ ký cố định dưới chân trang lặp lại ở đáy mỗi trang PDF */}
             <div className="pdf-running-footer" aria-hidden="true">
               <div className="flex items-center gap-1.5 font-semibold text-[#004776]">
-                <span>HCM-UTE TechDoc</span>
+                <span>HCM-UTE TECH DOC</span>
                 <span className="text-slate-400">•</span>
                 <span className="text-slate-500 font-normal">Cổng hướng dẫn quản trị website</span>
               </div>
@@ -325,7 +325,7 @@ export function ExportPdfButton() {
                 </div>
               </div>
               <p className="mt-2 text-[8pt] text-slate-500 italic">
-                * Bản sao điện tử này được trích xuất trực tiếp từ cổng hướng dẫn HCM-UTE TechDoc và có giá trị lưu hành nội bộ theo tài khoản định danh của người tải.
+                * Bản sao điện tử này được trích xuất trực tiếp từ cổng hướng dẫn HCM-UTE TECH DOC và có giá trị lưu hành nội bộ theo tài khoản định danh của người tải.
               </p>
             </div>
           </div>,

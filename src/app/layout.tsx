@@ -1,11 +1,35 @@
 import { RootProvider } from "fumadocs-ui/provider/next";
 import "./global.css";
 import { Inter } from "next/font/google";
-import type { Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { withBasePath } from "@/configs/app.config";
 
 const inter = Inter({
   subsets: ["latin"],
 });
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | HCM-UTE TECH DOC",
+    default: "HCM-UTE TECH DOC",
+  },
+  description: "Cổng tài liệu kỹ thuật & Hướng dẫn sử dụng hệ thống Website HCM-UTE",
+  applicationName: "HCM-UTE TECH DOC",
+  icons: {
+    icon: [
+      { url: withBasePath("/favicon.ico") },
+      { url: withBasePath("/favicon.svg"), type: "image/svg+xml" },
+    ],
+    apple: withBasePath("/logo-hcm-ute.png"),
+  },
+  openGraph: {
+    title: "HCM-UTE TECH DOC",
+    description: "Cổng tài liệu kỹ thuật & Hướng dẫn sử dụng hệ thống Website HCM-UTE",
+    siteName: "HCM-UTE TECH DOC",
+    locale: "vi_VN",
+    type: "website",
+  },
+};
 
 export const viewport: Viewport = {
   width: "device-width",
