@@ -1,13 +1,13 @@
 import { createGetUrl } from 'fumadocs-core/source';
 
-export const appName = 'HCMUTE TechDoc';
+export const appName = 'HCM-UTE TechDoc';
 export const docsRoute = '/docs';
 export const docsImageRoute = '/og/docs';
 export const docsContentRoute = '/llms.mdx/docs';
 
 export const brandConfig = {
   name: 'HCM-UTE TechDoc',
-  schoolName: 'Trường Đại học Sư phạm Kỹ thuật TP. Hồ Chí Minh',
+  schoolName: 'Trường Đại học Công nghệ Kỹ thuật TP.HCM',
   primaryColor: '#0072BC',
   secondaryColor: '#ED1C24',
   logoUrl: '/logo-hcm-ute.png',

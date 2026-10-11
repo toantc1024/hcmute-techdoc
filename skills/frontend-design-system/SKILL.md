@@ -1,9 +1,9 @@
 ---
 name: hcmute_frontend_design_system_v2
-description: Quy chuẩn hệ thống thiết kế giao diện Frontend (Design System Guide V2) cho toàn bộ website và ứng dụng HCMUTE (hệ màu OKLCH, typography tiếng Việt, layout, borders, cards, shadows, animations).
+description: Quy chuẩn hệ thống thiết kế giao diện Frontend (Design System Guide V2) cho toàn bộ website và ứng dụng HCM-UTE (hệ màu OKLCH, typography tiếng Việt, layout, borders, cards, shadows, animations).
 ---
 
-# HCMUTE Website Frontend — Design System Guide for AI Agents (V2)
+# HCM-UTE Website Frontend — Design System Guide for AI Agents (V2)
 
 **Purpose**: This guide defines the visual design system and CSS patterns for the HCMUTE website. Follow these rules to maintain design consistency across all generated components.
 
@@ -16,9 +16,9 @@ description: Quy chuẩn hệ thống thiết kế giao diện Frontend (Design 
 ### 1.0 QUY TẮC BẮT BUỘC: THAY THẾ CHỮ ĐEN BẰNG MÀU XANH THẪM RGB(0, 71, 118)
 
 > [!IMPORTANT]
-> **QUY CHUẨN THƯƠNG HIỆU HCMUTE (Tham chiếu chính thức: https://beta.hcmute.edu.vn)**:
+> **QUY CHUẨN THƯƠNG HIỆU HCM-UTE (Tham chiếu chính thức: https://beta.hcmute.edu.vn)**:
 > * Trong toàn bộ hệ thống giao diện (Light Theme), **TUYỆT ĐỐI KHÔNG DÙNG MÀU ĐEN THUẦN (`#000000`, `text-black`, `text-slate-900`, `text-gray-900`)** cho tiêu đề và nội dung văn bản.
-> * **MÀU CHỮ TIÊU CHUẨN:** Bắt buộc sử dụng màu Xanh thẫm thương hiệu HCMUTE: **`rgb(0, 71, 118)`** (HEX: **`#004776`**).
+> * **MÀU CHỮ TIÊU CHUẨN:** Bắt buộc sử dụng màu Xanh thẫm thương hiệu HCM-UTE: **`rgb(0, 71, 118)`** (HEX: **`#004776`**).
 > * **Phạm vi áp dụng:**
 >   * Toàn bộ thẻ tiêu đề: `h1, h2, h3, h4, h5, h6`
 >   - Nội dung đoạn văn, danh sách, bảng: `p, li, span, td, th`

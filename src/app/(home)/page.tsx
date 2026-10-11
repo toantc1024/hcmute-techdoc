@@ -9,7 +9,7 @@ export default function HomePage() {
         {/* Pill Badge */}
         <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs sm:text-sm font-semibold text-primary mb-6 transition hover:bg-primary/15">
           <span className="inline-block w-2 h-2 rounded-full bg-primary animate-pulse" />
-          <span>Trường Đại học Sư phạm Kỹ thuật TP. Hồ Chí Minh</span>
+          <span>Trường Đại học Công nghệ Kỹ thuật TP.HCM</span>
         </div>
 
         {/* Hero Headline */}
