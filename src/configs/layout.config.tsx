@@ -12,5 +12,11 @@ export function baseOptions(): BaseLayoutProps {
         </span>
       ),
     },
+    links: [
+      { text: "Cổng tài liệu", url: "/docs", active: "nested-url" },
+      { text: "Theo vai trò", url: "/docs/01-khoi-dong-va-tong-quan/06-huong-dan-theo-vai-tro" },
+      { text: "Xử lý sự cố", url: "/docs/06-kiem-tra-va-tro-ly/05-trung-tam-xu-ly-su-co" },
+      { text: "Phím tắt", url: "/docs/06-kiem-tra-va-tro-ly/04-tra-cuu-thuat-ngu-va-phim-tat" },
+    ],
   };
 }

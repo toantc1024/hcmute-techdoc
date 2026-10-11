@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { HomeSearchButton } from '@/components/HomeSearchButton';
 import { 
   ArrowRight, 
   BookOpen, 
@@ -115,6 +116,11 @@ export default function HomePage() {
         <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed font-normal">
           Chuẩn hóa quy trình vận hành website các đơn vị: Xây dựng sơ đồ cây trang, quản lý chuyên mục tin tức, phân phối bài viết đa luồng và cấu hình thanh điều hướng.
         </p>
+
+        {/* Thanh tìm kiếm nhanh */}
+        <div className="w-full flex justify-center mb-8">
+          <HomeSearchButton />
+        </div>
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto mb-16">
