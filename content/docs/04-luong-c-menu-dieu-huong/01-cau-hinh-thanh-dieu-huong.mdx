@@ -1,9 +1,10 @@
 ---
-title: Luồng C – Cấu Hình Menu Header & Footer
-description: Hướng dẫn thiết lập thanh điều hướng menu chính, tạo cột phân nhóm và gắn liên kết mở trang
+title: Luồng C – Cấu Hình Menu Đầu Trang (Header)
+description: Thiết kế Mega Menu đa tầng, phân chia cột nhóm liên kết và gắn đích đến cho từng nút bấm
+order: 1
 ---
 
-Thanh Menu (Header) là con đường chính để người dùng khám phá toàn bộ website của đơn vị. Cấu hình menu khoa học giúp người đọc tìm thấy thông tin trong không quá 3 lần nhấp chuột.
+Thanh Menu Header là trục điều hướng chính dẫn dắt người đọc tiếp cận các trang và chuyên mục của đơn vị.
 
 <Diagram 
   src="/diagrams/06-luong-c-menu.png" 
@@ -12,55 +13,41 @@ Thanh Menu (Header) là con đường chính để người dùng khám phá to�
 
 ---
 
-## 1. Cấu Trúc Phân Cấp Của Menu Đầu Trang (Header)
+## 1. Cấu Trúc Khối Trong Mega Menu
 
-Một thanh menu hiện đại của HCM-UTE được tổ chức theo cấp bậc 3 tầng:
-
-```text
-[MỤC MENU CHÍNH (CẤP 1)]  --> Ví dụ: GIỚI THIỆU
-      │
-      ├── [CỘT 1: NHÓM QUẢN TRỊ]
-      │         ├── Liên kết 1: Cơ cấu tổ chức (Mở Trang)
-      │         └── Liên kết 2: Ban Giám hiệu (Mở Trang)
-      │
-      └── [CỘT 2: NHÓM CÔNG KHAI]
-                ├── Liên kết 1: Quy chế & Quy định (Mở Chuyên mục)
-                └── Liên kết 2: Biểu mẫu công tác (Mở Trang)
-```
+Vào `Website` → `Header & Footer` → Chọn tab **Đầu trang**. Thư viện khối bên trái cung cấp:
+* **Cột Danh mục Liên kết:** Khối cơ bản chứa danh sách các đường link có tiêu đề và mô tả.
+* **Thẻ Quảng bá:** Khối hình ảnh banner kèm link nổi bật (ví dụ: *Banner Tuyển sinh*).
+* **Khối Đơn vị trực thuộc:** Danh bạ chuyển tab giữa các Khoa, Viện, Phòng ban.
+* **Thẻ Tin tức & Sự kiện:** Tự động hút 2 - 3 tin bài mới nhất vào menu thả xuống.
+* **Nút Menu Điều hướng:** Mục menu cấp 1 trên thanh header chính.
 
 ---
 
-## 2. Các Bước Cấu Hình Chi Tiết
+## 2. Quy Trình Chỉnh Sửa Cột & Liên Kết
 
 <Steps>
   <Step>
-    #### Vào khu vực quản trị Menu
-    Vào thanh menu bên trái: `Website` → chọn `Header & Footer`.
+    #### Chọn cột cần sửa
+    Bấm chọn cột trên vùng bố cục Mega Menu (ví dụ: cột *TỔNG QUAN* thuộc menu *GIỚI THIỆU*).
   </Step>
 
   <Step>
-    #### Chọn phân hệ cần sửa
-    * Chọn tab **Menu Đầu trang (Header)** để cấu hình thanh điều hướng trên cùng.
-    * Chọn tab **Chân trang (Footer)** để cấu hình thông tin liên hệ, bản đồ và các liên kết phụ trợ dưới đáy trang.
+    #### Sửa thuộc tính cột
+    Trong bảng bên phải, cập nhật **Tiêu đề cột hiển thị** và kiểm tra loại nội dung cột.
   </Step>
 
   <Step>
-    #### Thêm Mục Menu chính & Tạo Cột
-    * Bấm nút **Thêm mục Menu** (ví dụ: *Đào tạo*, *Nghiên cứu khoa học*).
-    * Bên trong mục này, bấm **Thêm Cột** để chia nhỏ các nhóm liên kết (giúp menu mở rộng dạng Mega-menu đẹp mắt và ngăn nắp).
+    #### Thêm & Cập nhật danh sách liên kết
+    * Bấm **Thêm liên kết** hoặc sửa liên kết có sẵn.
+    * Nhập tên hiển thị, mô tả phụ và chọn biểu tượng icon nếu cần.
+    * **Chọn trang đích:** Bấm nút **Chọn trang** để liên kết đến trang web đã tạo từ Luồng A (hoặc nhập URL tùy biến).
+    * Thiết lập công tắc **Tab mới (`_blank`)** nếu dẫn ra website ngoài.
   </Step>
 
   <Step>
-    #### Gán liên kết (Đích đến)
-    Khi thêm một liên kết, Thầy/Cô chọn 1 trong 3 loại đích đến:
-    * **Mở Trang nội bộ:** Chọn trang đã xuất bản từ Luồng A (ví dụ: `/gioi-thieu/so-do-to-chuc`).
-    * **Mở Chuyên mục:** Chọn nhóm tin tức/văn bản từ Luồng B (hệ thống sẽ tự mở trang danh sách tin tương ứng).
-    * **Liên kết tùy biến (URL):** Dán link website bên ngoài (ví dụ: dẫn về Cổng thông tin Đào tạo `online.hcmute.edu.vn`).
-  </Step>
-
-  <Step>
-    #### Kéo thả sắp xếp & Lưu thay đổi
-    * Dùng chuột kéo biểu tượng sáu chấm `⋮⋮` để đổi thứ tự các mục menu và các liên kết.
-    * Bấm **Lưu & Xuất bản**. Mở trang chủ website để kiểm tra tất cả các nút bấm.
+    #### Sắp xếp & Lưu thay đổi
+    * Dùng nút mũi tên lên/xuống để sắp xếp thứ tự liên kết.
+    * Bấm **Lưu thay đổi** để áp dụng lên website.
   </Step>
 </Steps>

@@ -1,6 +1,7 @@
 {
-  "title": "4. Luồng C: Menu Header & Footer",
+  "title": "4. Lu\u1ed3ng C: Menu Header & Footer",
   "pages": [
-    "01-cau-hinh-thanh-dieu-huong"
+    "01-cau-hinh-thanh-dieu-huong",
+    "02-cau-hinh-chan-trang-footer"
   ]
 }

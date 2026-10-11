@@ -1,9 +1,10 @@
 ---
-title: Luồng A – Tạo, Chỉnh Sửa và Công Bố Trang
+title: Luồng A – Tạo, Chỉnh Sửa & Công Bố Trang
 description: Quy trình chi tiết từ lúc khởi tạo trang web, thiết kế khối giao diện cho đến xuất bản và kiểm thử
+order: 1
 ---
 
-Quy trình quản trị trang web tại HCM-UTE được thiết kế trực quan theo luồng khép kín, có cơ chế đối chiếu trước khi xuất bản chính thức.
+Luồng A hướng dẫn toàn bộ thao tác xây dựng và quản lý danh sách trang web của đơn vị.
 
 <Diagram 
   src="/diagrams/04-luong-a-trang.png" 
@@ -12,65 +13,49 @@ Quy trình quản trị trang web tại HCM-UTE được thiết kế trực qua
 
 ---
 
-## 1. Điểm Bắt Đầu & Lựa Chọn Tác Vụ
+## 1. Màn Hình Danh Sách Trang
 
-Vào menu bên trái: `Website` → `Trang`. Hệ thống hỗ trợ 4 lựa chọn phù hợp theo từng tình huống:
+Tại thanh điều hướng bên trái, chọn **Website** → **Trang**. Màn hình hiển thị tên trang, đường dẫn slug, trạng thái và các nút chức năng:
 
-<Tabs items={['1. Tạo trang trống', '2. Thêm trang con', '3. Nhân bản từ mẫu', '4. Sửa trang có sẵn']}>
-  <Tab value="1. Tạo trang trống">
-    * Dành cho trang có bố cục hoàn toàn mới hoặc đơn giản.
-    * Bấm nút **Tạo trang** → chọn **Trang trống**.
-  </Tab>
-  <Tab value="2. Thêm trang con">
-    * Dành cho các trang cấp 2, cấp 3 (ví dụ: các bộ môn trực thuộc khoa).
-    * Chọn **Trang cha** trong danh sách → bấm **Thêm trang con**.
-  </Tab>
-  <Tab value="3. Nhân bản từ mẫu">
-    * Khuyên dùng cho các đơn vị muốn tái sử dụng bố cục chuẩn của trường.
-    * Bấm **Nhân bản trang mẫu** → Chọn mẫu đơn vị tương ứng → Bấm **Nhân bản** rồi thay nội dung của mình.
-  </Tab>
-  <Tab value="4. Sửa trang có sẵn">
-    * Chọn trang cần cập nhật nội dung → bấm **Sửa**.
-  </Tab>
-</Tabs>
+* **Chế độ xem Cây:** Xem cấu trúc phân cấp trực quan trang cha – trang con.
+* **Chế độ xem Bảng:** Chuyển sang hiển thị dạng bảng thông thường.
+* **Ô tìm kiếm:** Nhập tên trang để tìm nhanh.
+* **Nhãn Trang chủ:** Chỉ định trang chủ của đơn vị.
+* **Trạng thái Đã xuất bản:** Cho biết trang đang hiển thị công khai trên website.
+
+### Các nút thao tác trên từng dòng:
+* **Thiết kế:** Mở trình thiết kế kéo thả khối (Page Builder).
+* **Thêm trang con:** Mở biểu mẫu tạo trang phân cấp dưới trang đang chọn.
+* **Sửa:** Chỉnh sửa thông tin cơ bản của trang (Tiêu đề, đường dẫn, mô tả).
+* **Khác (`⋮`):** Mở các thao tác bổ sung: Mở trình thiết kế, Xuất bản, Hủy xuất bản, Lưu trữ, Nhân bản, Xóa.
 
 ---
 
-## 2. Thiết Kế & Kiểm Tra Hiển Thị
+## 2. Quy Trình Tạo Trang Mới
 
 <Steps>
   <Step>
-    #### Nhập thông tin trang
-    Điền Tên trang tiếng Việt, đường dẫn slug (viết thường, không dấu, nối bằng gạch ngang, ví dụ: `co-cau-to-chuc`), chọn Trang cha và mô tả ngắn gọn.
+    #### Bấm nút Tạo trang
+    Tại góc trên màn hình Trang website, chọn **Tạo trang** → chọn **Trang trống**.
   </Step>
 
   <Step>
-    #### Bấm "Chọn Thiết kế"
-    Giao diện chuyển sang trình biên tập kéo thả:
-    * Thêm, xóa hoặc kéo đổi thứ tự các phần hiển thị.
-    * Tùy chỉnh ảnh banner, khối tin tức đa bố cục, khối danh sách văn bản.
+    #### Chọn ngôn ngữ & Điền thông tin
+    Chọn ngôn ngữ làm việc (**Việt** hoặc **Anh**) và hoàn tất biểu mẫu:
+    * **Tiêu đề (*):** Nhập tên trang (ví dụ: *Cơ cấu tổ chức*).
+    * **Đường dẫn / Slug (*):** Nhập phần URL không dấu, nối bằng gạch ngang (ví dụ: `co-cau-to-chuc`).
+    * **Trang cha:** Chọn trang cấp trên nếu là trang con (hoặc để trống nếu là trang cấp 1).
+    * **Mô tả:** Giới thiệu ngắn về mục đích của trang.
+    * Bấm **Tiếp tục** để chuyển sang bước kế tiếp.
   </Step>
 
   <Step>
-    #### Xem trước (Preview)
-    Bấm nút **Xem trước**, kiểm tra hiển thị đồng thời ở 2 chế độ:
-    * **Giao diện Máy tính (Desktop)**
-    * **Giao diện Điện thoại (Mobile)**
+    #### Thiết kế và Bố trí khối
+    Hệ thống mở trình Page Builder để Thầy/Cô kéo thả các khối hiển thị.
   </Step>
 
   <Step>
-    #### Rẽ nhánh điều kiện: Nội dung đã đúng chưa?
-    * **Chưa đúng:** Quay lại bước sửa đổi các khối hiển thị.
-    * **Đã đúng:** Bấm **Lưu trang / Lưu thay đổi** → bấm nút **Xuất bản** (màu đỏ).
+    #### Xuất bản trang
+    Bấm **Lưu thay đổi** → chọn **Xuất bản** để công bố trang.
   </Step>
 </Steps>
-
----
-
-## 3. Hoàn Tất Hoặc Chuyển Luồng
-
-<Callout type="warn">
-  Sau khi xuất bản thành công, hệ thống hỏi: **"Cần thêm trang vào menu?"**
-  * **Nếu KHÔNG:** Bấm **Hoàn tất**. Trang đã hoạt động qua đường dẫn trực tiếp.
-  * **Nếu CÓ:** Bấm **Sang Luồng C** để gắn trang này lên thanh Menu điều hướng đầu trang.
-</Callout>

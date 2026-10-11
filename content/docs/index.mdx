@@ -1,54 +1,55 @@
 ---
-title: Giới thiệu & Hướng dẫn Chung
-description: Cổng tài liệu và quy trình chuẩn hóa quản trị Website các đơn vị thuộc Trường Đại học Công nghệ Kỹ thuật TP.HCM (HCM-UTE)
+title: Cổng Hướng Dẫn Quản Trị Website HCM-UTE
+description: Tài liệu chuẩn hóa quy trình quản trị website, biên tập nội dung và thiết kế giao diện cho các đơn vị thuộc Trường Đại học Công nghệ Kỹ thuật TP.HCM (HCM-UTE) — Giai đoạn vận hành thử nghiệm Tháng 10/2026.
 ---
 
 Chào mừng Quý Thầy/Cô và Cán bộ quản trị đến với **Cổng Hướng dẫn Quản trị Website HCM-UTE**.
 
-Tài liệu này được biên soạn nhằm chuẩn hóa các thao tác quản trị, giúp việc xây dựng trang web của các Khoa, Phòng, Viện, Trung tâm diễn ra khoa học, đồng bộ và đúng nhận diện thương hiệu Nhà trường.
+Tài liệu này được biên soạn bám sát theo cẩm nang vận hành thử nghiệm (Tháng 10/2026) của Trường Đại học Công nghệ Kỹ thuật TP.HCM, kết hợp hệ thống sơ đồ luồng thao tác trực quan.
 
 ---
 
-## 3 Luồng Thao Tác Trọng Tâm
-
-Hệ sinh thái quản trị website HCM-UTE được thiết kế tách bạch thành 3 luồng chức năng độc lập:
+## 6 Trụ Cột Hướng Dẫn Nghiệp Vụ
 
 <Cards>
   <Card 
-    title="Luồng A: Quản trị Trang (Sitemap)" 
+    title="1. Khởi động & Tổng quan" 
+    href="/docs/01-khoi-dong-va-tong-quan/01-dang-nhap-va-khu-vuc-chinh"
+    description="Đăng nhập email @hcmute.edu.vn, phạm vi đơn vị, theo dõi thống kê và bản chất 3 cấu trúc quản trị cốt lõi."
+  />
+  <Card 
+    title="2. Luồng A: Quản trị Trang" 
     href="/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang"
-    description="Tạo cấu trúc cây trang (Cấp 1, Cấp 2), nhân bản mẫu và thiết kế khối hiển thị (Tin tức, Văn bản)."
+    description="Tạo cây trang, nhân bản từ 4 nhóm thư viện mẫu, sử dụng trình thiết kế Page Builder và quản lý lịch sử phiên bản."
   />
   <Card 
-    title="Luồng B: Đăng Tin tức & Văn bản" 
+    title="3. Luồng B: Quản lý Nội dung" 
     href="/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban"
-    description="Soạn bài viết, tải tệp toàn văn và gán hiển thị đồng thời trên nhiều chuyên mục song song."
+    description="Đăng bài viết ảnh 16:9, ban hành văn bản đính kèm PDF, gán nhiều chuyên mục song song và trợ lý AI Copilot song ngữ."
   />
   <Card 
-    title="Luồng C: Cấu hình Menu Điều hướng" 
+    title="4. Luồng C: Menu Điều hướng" 
     href="/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong"
-    description="Thiết lập Menu Đầu trang (Header) & Chân trang (Footer), gán liên kết mở trang hoặc mở chuyên mục."
+    description="Thiết kế Mega Menu Header đa tầng, tạo cột danh mục, gán liên kết mở trang và thiết lập chân trang Footer."
   />
   <Card 
-    title="Trợ lý UTE & Hỗ trợ trực tiếp" 
-    href="/docs/05-tro-ly-va-ho-tro/01-tro-ly-ute-theo-tac-vu"
-    description="Xem hướng dẫn từng bước trực quan ngay trên màn hình thao tác của hệ thống quản trị."
+    title="5. Quản trị & Tiện ích" 
+    href="/docs/05-quan-tri-he-thong-va-tien-ich/01-nguoi-dung-va-nhom-quyen"
+    description="4 nhóm quyền (Unit Collaborator/Editor/Leader/Admin), quản lý cổng tiện ích mở rộng và chuông thông báo hệ thống."
+  />
+  <Card 
+    title="6. Trợ lý UTE & Nghiệm thu" 
+    href="/docs/06-kiem-tra-va-tro-ly/01-tro-ly-ute-theo-tac-vu"
+    description="Hướng dẫn trực tiếp trên màn hình theo tác vụ (Interactive Tour) và checklist 6 tiêu chuẩn kiểm tra trước khi công bố."
   />
 </Cards>
 
 ---
 
-## Nguyên Tắc Vàng Trong Quản Trị
+## 3 Nguyên Tắc Vàng Cần Ghi Nhớ
 
 <Callout type="warn">
-  **3 NGUYÊN TẮC CẦN GHI NHỚ:**
   1. **Tạo trang KHÔNG tự tạo Menu:** Muốn người đọc bấm vào được trang mới, Thầy/Cô bắt buộc phải vào Luồng C để gắn liên kết trang vào Menu.
   2. **Chuyên mục chỉ phân nhóm nội dung, KHÔNG thay thế Trang:** Khối tin tức/văn bản trên trang sẽ tự động hút bài viết về dựa theo Chuyên mục đã chọn.
   3. **Một bài viết có thể chọn nhiều chuyên mục:** Khi đăng một thông báo hay quy định mới, Thầy/Cô có thể tick chọn đồng thời nhiều chuyên mục con để xuất hiện song song ở các trang khác nhau mà không cần đăng lại 2 lần.
 </Callout>
-
----
-
-## Bắt đầu ngay
-
-Quý Thầy/Cô vui lòng tham khảo mục **1. Tổng quan hệ thống** ở cột bên trái để nắm rõ bản chất mối quan hệ giữa Cây Trang, Cây Chuyên Mục và Menu Điều Hướng.

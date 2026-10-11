@@ -1,9 +1,10 @@
 ---
-title: Luồng B – Đăng Bài Viết & Văn Bản
-description: Quy trình soạn thảo tin tức, đính kèm văn bản và cơ chế phân phối tự động đa chuyên mục
+title: Luồng B – Đăng Bài Viết & Quản Lý Nội Dung
+description: Hướng dẫn đăng tin tức hoạt động, quy chuẩn ảnh 16:9, gắn nhiều chuyên mục song song và gắn thẻ tags
+order: 1
 ---
 
-Luồng B là luồng công việc thường xuyên nhất của Ban biên tập website và cán bộ phụ trách truyền thông tại các đơn vị.
+Luồng B là luồng công việc thường ngày của cán bộ biên tập và truyền thông tại các đơn vị.
 
 <Diagram 
   src="/diagrams/05-luong-b-noi-dung.png" 
@@ -12,44 +13,44 @@ Luồng B là luồng công việc thường xuyên nhất của Ban biên tập
 
 ---
 
-## 1. Phân Loại: Bài Viết Hay Văn Bản?
+## 1. Màn Hình Danh Sách Nội Dung
 
-Vào `Quản lý nội dung` → chọn `Văn bản và bài viết` → Bấm nút **Tạo mới**:
-
-<Tabs items={['Đăng Bài Viết (Tin tức / Sự kiện)', 'Đăng Văn Bản (Quy định / Biểu mẫu)']}>
-  <Tab value="Đăng Bài Viết (Tin tức / Sự kiện)">
-    * **Tiêu đề bài viết:** Ngắn gọn, súc tích, phản ánh đúng trọng tâm tin tức.
-    * **Ảnh đại diện (Thumbnail):** Tỷ lệ chuẩn 16:9, dung lượng dưới 1MB để tối ưu tốc độ tải trang.
-    * **Đoạn tóm tắt (Sapo):** 2 - 3 câu nêu bật nội dung cốt lõi.
-    * **Nội dung chi tiết:** Trình bày bằng trình soạn thảo rich-text, có thể chèn ảnh, video hoặc bảng biểu.
-  </Tab>
-  <Tab value="Đăng Văn Bản (Quy định / Biểu mẫu)">
-    * **Số / Ký hiệu văn bản:** Ví dụ: `125/QĐ-ĐHSPKT`.
-    * **Ngày ban hành & Cơ quan ban hành:** Đúng theo văn bản giấy.
-    * **Trích yếu nội dung:** Diễn giải ngắn gọn văn bản quy định về việc gì.
-    * **Tệp toàn văn (Attachment):** Đính kèm file định dạng `.pdf`, `.docx`, dung lượng tối đa 20MB.
-  </Tab>
-</Tabs>
+Vào menu trái `Quản lý nội dung` → chọn `Văn bản và bài viết`:
+* **4 Thẻ phân loại:**
+  * *Tất cả nội dung:* Toàn bộ bài của đơn vị.
+  * *Nội dung của tôi:* Các bài do chính tài khoản của Thầy/Cô tạo.
+  * *Cần tôi duyệt:* Bài viết do cấp dưới gửi lên chờ Lãnh đạo duyệt.
+  * *Cộng tác:* Bài viết được chia sẻ quyền biên tập chung.
+* **Bộ lọc trạng thái:** *Tất cả, Bản nháp, Chờ duyệt, Đã xuất bản, Bị từ chối*.
+* **Bộ lọc Loại nội dung:** *TẤT CẢ, Bài viết, Văn bản*.
 
 ---
 
-## 2. Bước Then Chốt: Chọn Chuyên Mục Hiển Thị
+## 2. Quy Trình Tạo Bài Viết Mới
 
-<Callout type="warn">
-  **BẮT BUỘC:** Mọi bài viết hoặc văn bản đều phải thuộc ít nhất một Chuyên mục. Nếu không chọn chuyên mục, bài viết sẽ không thể xuất hiện trên bất kỳ khối nào của website!
-</Callout>
+<Steps>
+  <Step>
+    #### Bấm nút Tạo bài viết
+    Tại góc trên bên phải màn hình, chọn **Tạo bài viết**. Nhập tiêu đề bài viết mới ở ô trên cùng.
+  </Step>
 
-### Cơ chế chọn nhiều chuyên mục song song (N:N)
-Hệ thống cho phép **tick chọn nhiều chuyên mục cùng một lúc**:
-* *Ví dụ:* Một bài viết thông báo *"Học bổng Doanh nghiệp dành cho Sinh viên Khoa Cơ khí"* có thể được tick chọn đồng thời:
-  1. `Chuyên mục: Tin tức sinh viên` (Để xuất hiện ở Trang chủ toàn trường).
-  2. `Chuyên mục: Học bổng - Hỗ trợ tài chính` (Để xuất hiện ở Trang phòng Công tác Sinh viên).
-  3. `Chuyên mục: Thông báo Khoa Cơ khí` (Để xuất hiện ở Trang web của Khoa).
+  <Step>
+    #### Hoàn tất thông tin bài viết
+    * **Ảnh bìa đại diện (*):** Chọn tải ảnh từ máy hoặc từ Thư viện.
+      * *Quy chuẩn ảnh:* Tỷ lệ **16:9** (khuyến nghị kích thước `1920×1080px` hoặc `1200×630px`). Hệ thống có sẵn công cụ cắt ảnh trực quan.
+    * **Chuyên mục (*):** Sử dụng ô *Tìm & chọn chuyên mục…*. Bắt buộc chọn ít nhất 1 chuyên mục.
+      * *Tính năng chọn song song (N:N):* Có thể tick chọn đồng thời nhiều chuyên mục (ví dụ: vừa thuộc *Tin hoạt động Khoa*, vừa thuộc *Tin tức sinh viên toàn trường*).
+    * **Thẻ bài viết (Tags):** Gắn các từ khóa liên quan để hỗ trợ tìm kiếm (ví dụ: `tuyen-sinh`, `tot-nghiep`).
+    * **Mô tả ngắn gọn (Sapo):** Nhập tóm tắt 2 - 3 câu; hệ thống có bộ đếm giới hạn tối đa 500 ký tự.
+  </Step>
 
-Thầy/Cô **chỉ cần soạn nội dung duy nhất 1 lần**, hệ thống sẽ tự động đồng bộ hiển thị ra tất cả các trang liên quan.
+  <Step>
+    #### Soạn thảo nội dung
+    Nhập bài viết tại vùng rich-text editor; sử dụng thanh công cụ để chèn ảnh, nhúng video, kẻ bảng hoặc định dạng đề mục `H2`, `H3`.
+  </Step>
 
----
-
-## 3. Lưu & Xuất Bản
-* Bấm **Lưu nháp** nếu cần duyệt lại.
-* Bấm **Xuất bản** để công khai nội dung lên website ngay lập tức.
+  <Step>
+    #### Xem trước và Lưu
+    Kiểm tra 4 chỉ báo: *Tiêu đề, Chuyên mục, Ảnh bìa, Nội dung*. Bấm **Xem trước** rồi bấm **Lưu** (Lưu nháp hoặc Gửi duyệt/Xuất bản theo quyền tài khoản).
+  </Step>
+</Steps>
