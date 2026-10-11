@@ -1,132 +1,116 @@
 ---
 title: Quản lý đa phương tiện và bộ nhận diện HCM-UTE
-description: Hướng dẫn quản trị kho tài nguyên đa phương tiện tập trung, tìm kiếm, tải lên hình ảnh và khai thác kho tài sản số Bộ nhận diện thương hiệu HCM-UTE tích hợp sẵn.
+description: Hướng dẫn quản trị kho hình ảnh tập trung, khai thác kho Bộ nhận diện HCM-UTE tích hợp sẵn và chuẩn thiết kế poster, banner an toàn.
 order: 5
 ---
 
-Phân hệ **Quản lý đa phương tiện** (Media Library) là kho lưu trữ tài sản số tập trung của website đơn vị thuộc Trường Đại học Công nghệ Kỹ thuật TP.HCM (HCM-UTE), phục vụ toàn bộ nhu cầu chèn hình ảnh, video, banner và tài liệu vào bài viết cũng như các trang chuyên đề.
+Phân hệ **Quản lý đa phương tiện** (Media Library) là kho lưu trữ tập trung toàn bộ hình ảnh, biểu trưng, video và tài liệu của website đơn vị tại Trường Đại học Công nghệ Kỹ thuật TP.HCM (HCM-UTE).
 
-<Callout type="info" title="Kho Bộ nhận diện HCM-UTE tích hợp sẵn 100%">
-  Nhằm đảm bảo tính đồng bộ và chuẩn mực nhận diện thương hiệu trên toàn hệ sinh thái website Trường, hệ thống đã **tích hợp sẵn 100% kho tài sản số Bộ nhận diện thương hiệu HCM-UTE**.
-  
-  Thầy Cô biên tập các Khoa, Phòng ban, Viện và Trung tâm có thể chọn sử dụng ngay logo, biểu trưng, họa tiết nhận diện chuẩn màu mà không cần mất thời gian tìm kiếm hoặc tự cắt ghép từ nguồn bên ngoài.
+<Callout type="info" title="⚡ Thao tác nhanh (Dành cho Thầy/Cô)">
+  * **Quyền cần có:** Biên tập viên (Unit Editor) hoặc Quản trị viên đơn vị (Unit Admin).
+  * **Đường dẫn nhanh:** Menu trái `Quản lý nội dung` → chọn `Đa phương tiện`.
+  * **Tài nguyên sẵn có 100%:** Thầy/Cô chỉ cần bấm tab **Bộ nhận diện HCM-UTE** để lấy ngay logo chuẩn 2 màu xanh - đỏ, logo âm bản trắng và file Vector SVG sắc nét mà không cần tìm kiếm bên ngoài.
+  * **3 tỷ lệ ảnh cần nhớ:**
+    * **16:9 (`1920 × 1080 px`):** Chuẩn cho ảnh bìa bài viết tin tức và video.
+    * **2.4:1 (`2400 × 1000 px`):** Chuẩn cho banner biểu ngữ lớn ở trang chủ.
+    * **3:4 (`1080 × 1440 px`):** Chuẩn cho poster dọc hiển thị trên điện thoại.
 </Callout>
-
----
-
-## 1. Màn hình quản lý đa phương tiện
-
-Để truy cập phân hệ, từ menu điều hướng bên trái chọn **Quản lý nội dung** → **Đa phương tiện**:
 
 ![Giao diện Quản lý đa phương tiện và Bộ nhận diện HCM-UTE](/images/media/quan-ly-da-phuong-tien-bo-nhan-dien.png)
 
-### 1.1. Ba tab phân loại tài nguyên chuyên biệt
-Tại góc trên bên phải của biểu ngữ quản lý, hệ thống phân chia thành 3 nhóm nguồn tệp rõ ràng:
-1. **Tab `Tất cả` (Mặc định):** Hiển thị toàn bộ kho tài nguyên đa phương tiện của website đơn vị (ảnh tải lên từ các bài viết, ảnh trang giới thiệu, tài liệu số).
-2. **Tab `Tệp của tôi`:** Bộ lọc cá nhân hóa, chỉ hiển thị những tệp tin do chính tài khoản của Thầy/Cô đã tải lên hệ thống.
-3. **Tab `Bộ nhận diện HCM-UTE` (Tài sản số chuẩn hóa):**
-   * Kho dữ liệu số chính thức do Phòng Quản trị thương hiệu & Truyền thông (P. QTTH&TT) quản trị và cung cấp tập trung.
-   * **Các tài sản số bao gồm:**
-     * Logo Trường chuẩn 2 màu nhận diện: Xanh dương công nghệ (`#0072BC`) và Đỏ năng lượng (`#ED1C24`).
-     * Logo đơn sắc âm bản (trắng) và dương bản (đen) chuyên dùng trên nền màu tối hoặc tài liệu in ấn.
-     * Logo dạng ngang (Horizontal), logo dạng khối vuông (Symbol Icon), logo song ngữ có tên tiếng Anh (*HCM City University of Technology and Education*).
-     * Biểu trưng số hóa định dạng **Vector SVG** (độ nét tuyệt đối ở mọi kích thước màn hình) và **PNG nền trong suốt** (Transparent).
-     * Họa tiết nhận diện thương hiệu (Key Visual, Background Pattern) phục vụ dựng banner sự kiện.
+---
+
+## Tác vụ 1: Tải hình ảnh hoặc tệp tài liệu mới lên thư viện
+
+### Mục đích
+Đưa hình ảnh hoạt động, tài liệu hội thảo hoặc ảnh chụp sự kiện của đơn vị lên kho lưu trữ để sử dụng cho các bài viết và trang web.
+
+### Các bước thực hiện
+1. Tại menu trái, Thầy/Cô chọn **Quản lý nội dung** → chọn **Đa phương tiện**.
+2. Bấm nút màu xanh **+ Tải lên** ở góc trên bên phải thanh công cụ (hoặc kéo thả tệp trực tiếp từ máy tính vào màn hình trình duyệt).
+3. Chọn một hoặc nhiều bức ảnh từ máy tính.
+4. Bấm vào bức ảnh vừa tải lên, điền thêm ô **Văn bản thay thế (Alt text)** miêu tả ngắn về bức ảnh (ví dụ: *Lễ bế giảng và trao bằng tốt nghiệp đợt 1 năm 2026*).
+5. Bấm **Lưu thông tin**.
+
+### Kết quả
+Hình ảnh được lưu an toàn trong kho và hiển thị ngay trên lưới thư viện, sẵn sàng để chèn vào bài viết chỉ với 1 cú nhấp chuột.
+
+### Lưu ý nếu có
+* Hệ thống sẽ tự động tối ưu ảnh sang định dạng WebP hiện đại để website tải cực nhanh trên điện thoại mà vẫn giữ nguyên độ sắc nét.
+* Thầy/Cô nên chọn ảnh rõ nét, dung lượng khuyến nghị mỗi ảnh dưới **5MB**.
 
 ---
 
-## 2. Thanh công cụ tìm kiếm và lọc tệp thông minh
+## Tác vụ 2: Khai thác kho Logo & Biểu trưng trong tab Bộ nhận diện HCM-UTE
 
-Ngay phía dưới biểu ngữ là thanh công cụ hỗ trợ tìm kiếm và thao tác tệp trực quan:
+### Mục đích
+Sử dụng logo và họa tiết nhận diện chính thức của Trường với màu sắc và tỷ lệ chuẩn xác nhất, tránh tình trạng lấy ảnh mờ hoặc sai logo cũ từ trên mạng.
 
-* **Ô tìm kiếm (`Tìm theo tên tệp...`):** Gõ từ khóa tên tệp, nhãn mô tả hoặc định dạng (ví dụ: `logo`, `banner`, `hcmute-symbol`, `tuyen-sinh`...).
-* **Lọc theo ngày tải lên:** Giúp khoanh vùng nhanh các tệp tải lên trong tuần này, tháng này hoặc theo khoảng thời gian diễn ra sự kiện.
-* **Sắp xếp thời gian:** Tùy chọn xem theo thứ tự *Mới nhất* (mặc định) hoặc *Cũ nhất*.
-* **Bộ lọc loại tệp (`Tất cả loại`):** Phân loại nhanh theo *Hình ảnh*, *Video*, *Tài liệu văn bản (PDF/Word)* hoặc *Tệp nén (ZIP/RAR)*.
-* **Chuyển đổi giao diện hiển thị:**
-  * **Chế độ Lưới (Grid View - Biểu tượng lưới):** Hiển thị ảnh xem trước trực quan dưới dạng thẻ hình ảnh. Phù hợp nhất khi chọn ảnh minh họa.
-  * **Chế độ Danh sách (List View - Biểu tượng gạch đầu dòng):** Hiển thị bảng chi tiết gồm tên tệp, dung lượng file, kích thước pixel và ngày tải lên. Phù hợp khi cần kiểm tra thông số kỹ thuật.
-* **Nút `+ Tải lên` (Màu xanh):** Cho phép kéo thả trực tiếp một hoặc nhiều tệp từ máy tính lên kho lưu trữ.
+### Các bước thực hiện
+1. Tại màn hình Đa phương tiện, Thầy/Cô bấm chuyển sang tab **Bộ nhận diện HCM-UTE** ở góc trên bên phải.
+2. Tìm kiếm và chọn tài sản số phù hợp:
+   * **Logo chuẩn màu:** Dùng trên nền sáng (Xanh dương `#0072BC` kết hợp Đỏ `#ED1C24`).
+   * **Logo âm bản trắng:** Dùng đặt trên các nền màu tối, nền xanh đậm hoặc ảnh chụp phong cảnh.
+   * **Logo dạng ngang:** Dành riêng cho khu vực thanh Header đầu trang hoặc chân trang Footer.
+   * **Tệp biểu trưng Vector SVG / PNG trong suốt:** Tự động hiển thị sắc nét tuyệt đối trên mọi độ phân giải màn hình.
+3. Bấm vào tệp để xem trước kích thước, sau đó bấm nút **Chèn vào nội dung** hoặc **Tải về máy tính**.
+
+### Kết quả
+Logo và biểu trưng hiển thị chuẩn xác, trang trọng và đồng bộ hoàn toàn với nhận diện thương hiệu của toàn Trường.
+
+### Lưu ý nếu có
+* Tuyệt đối không tự ý kéo dãn làm méo tỉ lệ khung hình của logo hoặc tự đổi tông màu biểu trưng của Trường.
 
 ---
 
-## 3. Quy chuẩn Thiết kế Poster, Banner và Vùng an toàn (Blueprint)
+## Tác vụ 3: Thiết kế Poster, Banner chuẩn tỷ lệ và Vùng an toàn (Safe Zone)
+
+### Mục đích
+Bảo đảm toàn bộ tiêu đề chữ, khuôn mặt nhân vật và logo không bị cắt xén hay che khuất khi hiển thị trên các loại màn hình máy tính và điện thoại thông minh.
 
 <PosterBlueprintGuide />
 
 <Steps>
   <Step>
-    ### Ba tỷ lệ kích thước chuẩn hóa chính thức của HCM-UTE
-    Để poster sự kiện, banner chào mừng và hình ảnh bài viết hiển thị đồng bộ hoàn hảo trên mọi thiết bị và độ phân giải, Nhà trường quy chuẩn **3 tỷ lệ kích thước chính thức**:
-    * **Tỷ lệ 2.4:1 (Mặc định trang chủ HCMUTE):**
-      * **Canvas Poster tổng:** `2400 × 1000 px` (Tràn viền 0 px, ảnh nền phủ 100% canvas).
-      * **Khung nội dung chính:** `2100 × 620 px` (Lề trên/dưới 190 px • Lề trái/phải 150 px — Vùng không bao giờ bị cắt xén trên máy tính).
-      * **Vùng an toàn Chữ & Logo:** `1200 × 460 px` (Cách trên/dưới 270 px • Cách trái/phải 600 px — Đặt toàn bộ Tiêu đề, Logo, Nút bấm CTA tại đây).
-    * **Tỷ lệ 16:9 (Chuẩn Video & Slide Quốc Tế, ảnh đại diện bài viết):**
-      * **Canvas Poster tổng:** `1920 × 1080 px` (Độ phân giải Full HD tiêu chuẩn, tràn viền 0 px).
-      * **Khung nội dung chính:** `1680 × 880 px` (Lề trên/dưới 100 px • Lề trái/phải 120 px — Vùng hiển thị trọn vẹn không bị cắt).
-      * **Vùng an toàn Chữ & Logo:** `1280 × 580 px` (Cách trên/dưới 250 px • Cách trái/phải 320 px — Tránh che khuất bởi nút điều hướng 2 bên).
-    * **Tỷ lệ 3:4 & 5:6 (Dọc màn hình smartphone):**
-      * **Canvas Mobile tiêu chuẩn:** `1080 × 1440 px` (Tỷ lệ dọc 3:4 chuẩn màn hình điện thoại).
-      * **Canvas Mobile vuông vừa:** `1000 × 1200 px` (Tỷ lệ 5:6 cho màn hình ngắn).
-      * **Vùng an toàn Chữ & Logo:** `800 × 640 px` (Cách trên 400 px • Cách dưới 400 px • Cách 2 bên 140 px — Vùng tránh Header 400 px trên và nút cuộn/dots 400 px dưới).
+    #### 1. Banner trang chủ toàn cảnh (Tỷ lệ 2.4:1)
+    * **Kích thước thiết kế:** `2400 × 1000 px` (Ảnh nền phủ tràn toàn bộ khung).
+    * **Vùng an toàn Chữ & Logo:** Đặt gói gọn trong phạm vi `1200 × 460 px` ở chính giữa (cách lề trên/dưới 270 px, cách 2 bên 600 px).
+    * **Ứng dụng:** Làm banner chào mừng sự kiện lớn ở đầu trang chủ đơn vị.
   </Step>
 
   <Step>
-    ### Ưu tiên sử dụng định dạng Vector SVG và PNG trong suốt cho Logo
-    Khi thiết kế Header, chân trang Footer hoặc chèn logo Trường vào đầu các văn bản/bài viết, luôn ưu tiên chọn tệp `.svg` hoặc `.png` từ tab **Bộ nhận diện HCM-UTE**. Tránh sử dụng ảnh chụp lại màn hình hoặc ảnh `.jpg` có viền trắng đè lên nền trang.
+    #### 2. Ảnh bìa bài viết & Video (Tỷ lệ 16:9)
+    * **Kích thước thiết kế:** `1920 × 1080 px` (Chuẩn Full HD quốc tế).
+    * **Vùng an toàn Chữ & Logo:** Đặt trong khoảng `1280 × 580 px` (cách trên/dưới 250 px, cách 2 bên 320 px).
+    * **Ứng dụng:** Ảnh đại diện tin tức khi chia sẻ lên Zalo, Facebook sẽ hiển thị đẹp mắt, không bao giờ bị cắt mất chữ.
   </Step>
 
   <Step>
-    ### Cơ chế tự động tối ưu dung lượng (WebP Conversion)
-    Hệ thống tích hợp sẵn thuật toán nén thông minh. Khi Thầy/Cô tải ảnh gốc độ phân giải cao lên, máy chủ sẽ tự động tối ưu sang chuẩn WebP thế hệ mới, giúp trang web tải siêu tốc trên mạng di động 4G/5G mà vẫn giữ trọn vẹn độ sắc nét.
+    #### 3. Poster dọc hiển thị điện thoại (Tỷ lệ 3:4)
+    * **Kích thước thiết kế:** `1080 × 1440 px` (Chuẩn tỷ lệ dọc smartphone).
+    * **Vùng an toàn Chữ & Logo:** Đặt trong khoảng `800 × 640 px` ở giữa (cách mép trên và mép dưới 400 px, cách 2 bên 140 px).
+    * **Ứng dụng:** Thiết kế poster sự kiện tuyển sinh hoặc hội thảo dành riêng cho người dùng di động.
   </Step>
 </Steps>
 
 ---
 
-## 4. Quy định bản quyền hình ảnh và nguồn tài nguyên số hợp pháp
+## 🔒 Quy tắc bảo vệ dữ liệu cá nhân trong hình ảnh (Luật số 91/2025/QH15)
 
-Nhằm đảm bảo an toàn pháp lý và giữ vững uy tín học thuật của Nhà trường theo quy định của Luật Sở hữu trí tuệ:
+Khi đăng tải hình ảnh chụp giao diện phần mềm, văn bản hành chính hoặc hoạt động sinh viên, Thầy/Cô cần lưu ý che mờ các thông tin sau:
 
-* **Ưu tiên số 1:** Luôn sử dụng hình ảnh thực tế chụp tại Trường, các sự kiện của Khoa/Phòng ban hoặc kho ảnh số do Phòng Quản trị thương hiệu & Truyền thông (BMC) cung cấp.
-* **Quy tắc trích dẫn nguồn bắt buộc:** Đối với hình ảnh khoa học, tư liệu sơ đồ hoặc biểu đồ lấy từ nguồn bên ngoài, bắt buộc phải ghi rõ: `Nguồn: [Tên tác giả / Tạp chí / Cơ quan xuất bản]` ngay bên dưới phần chú thích ảnh (*Caption*).
-* **Nghiêm cấm:** Tuyệt đối không tải các bức ảnh có watermark bản quyền chìm của bên thứ ba (như Getty Images, Shutterstock, Reuters...) về đăng lên website đơn vị khi chưa mua bản quyền sử dụng hợp pháp.
-
----
-
-
----
-
-## 5. Quy tắc bảo vệ dữ liệu cá nhân trong hình ảnh minh họa
-
-Nhằm tuân thủ quy định pháp luật về bảo vệ dữ liệu cá nhân (Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15) và bảo mật thông tin nội bộ của Trường ĐH Sư phạm Kỹ thuật TP.HCM:
-
-<Callout type="warn" title="QUY TẮC BẮT BUỘC KHI ĐĂNG TẢI ẢNH CHỤP GIAO DIỆN & TÀI LIỆU MINH HOẠ">
-  Mọi ảnh chụp màn hình, ảnh tài liệu hành chính hoặc minh họa chức năng đăng tải trên website công khai **bắt buộc phải che mờ (blur / che phủ màu đặc)** các trường thông tin nhạy cảm sau đây:
-</Callout>
-
-### 1. Bốn nhóm thông tin nhạy cảm bắt buộc phải che mờ:
-* **Địa chỉ email cá nhân / công vụ:** Bắt buộc che mờ tiền tố hoặc toàn bộ địa chỉ email (ví dụ: `nguyen***@hcmute.edu.vn`).
-* **Tên tài khoản & Mật khẩu đăng nhập:** Bất kỳ ảnh chụp màn hình cấu hình, biểu mẫu đăng nhập hoặc thông báo có chứa username, mã token xác thực hoặc mật khẩu.
-* **Mã hồ sơ hành chính & Số định danh:** Số Căn cước công dân (CCCD/CMND), mã số định danh tuyển sinh, hồ sơ kỷ luật hoặc thông tin tài chính cá nhân.
-* **Dữ liệu sinh viên:** Mã số sinh viên (MSSV), bảng điểm thi cá nhân, số điện thoại, địa chỉ nhà riêng và thông tin đánh giá rèn luyện.
-
-### 2. Tiêu chuẩn kỹ thuật khi làm mờ thông tin:
-* Sử dụng công cụ làm mờ hộp (**Box Blur**) với bán kính tối thiểu **25px** hoặc vẽ thanh màu đơn sắc (trắng/xám/đen) che phủ hoàn toàn văn bản.
-* **Tuyệt đối KHÔNG** sử dụng cọ vẽ mờ trong suốt (translucent) hoặc nét cọ thưa vì người đọc vẫn có thể dùng công cụ chỉnh sáng để đọc được nội dung gốc.
-* Kiểm tra kỹ ảnh sau khi xuất tệp để đảm bảo không còn sót dữ liệu cá nhân trước khi tải lên kho Đa phương tiện.
+1. **Địa chỉ email cá nhân / công vụ:** Che mờ phần tên người dùng (ví dụ: `nguyen***@hcmute.edu.vn`).
+2. **Số Căn cước công dân và tài khoản ngân hàng:** Bắt buộc che mờ hoàn toàn.
+3. **Mã số sinh viên (MSSV) trên thẻ sinh viên:** Che bớt các số cuối khi chụp ảnh minh họa gần thẻ.
+4. **Địa chỉ nhà riêng và số điện thoại cá nhân:** Không đưa lên ảnh công khai.
 
 ---
 
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
-### Tình huống 1: Làm sao để lấy nhanh logo Trường nền trong suốt chèn vào bài viết của Khoa?
-* **Cách xử lý:** Trong màn hình soạn thảo bài viết, bấm nút **Thêm ảnh** → chọn tab **Bộ nhận diện HCM-UTE** → chọn tệp có nhãn *"Logo Trường - Nền trong suốt (PNG/SVG)"* → bấm **Chèn vào bài viết**. Logo sẽ hiển thị sắc nét tự nhiên trên mọi màu nền của website.
+### Tình huống 1: Tải ảnh chụp bằng điện thoại lên bị xoay ngang hoặc ngược đầu?
+* **Cách xử lý:** Hệ thống tự động nhận diện chiều xoay của ảnh. Nếu ảnh bị ngược, Thầy/Cô bấm vào ảnh trong thư viện, bấm biểu tượng **Xoay ảnh** và bấm Lưu để hệ thống tự xoay đúng chiều.
 
-### Tình huống 2: Tải ảnh chụp sự kiện dung lượng lớn (10MB - 15MB) từ máy ảnh cơ lên có làm chậm website không?
-* **Nguyên nhân:** Máy ảnh chuyên nghiệp chụp ảnh có dung lượng rất lớn.
-* **Cách xử lý:** Thầy/Cô cứ yên tâm tải lên. Hệ thống sẽ tự động tối ưu hóa kích thước tệp xuống mức phù hợp (dưới 300KB) và tạo các phiên bản co giãn (*Responsive Srcset*), giúp người dùng xem trên điện thoại hay máy tính đều mượt mà.
-
-### Tình huống 3: Một hình ảnh đã tải lên kho đa phương tiện có thể tái sử dụng cho nhiều bài viết không?
-* **Cách xử lý:** Có. Mọi tệp tải lên đều được lưu trữ vĩnh viễn trong kho Đa phương tiện. Khi viết bài mới hoặc tạo trang mới, Thầy/Cô chỉ cần bấm "Chọn từ thư viện" và gõ tên tệp vào ô tìm kiếm để tái sử dụng ngay lập tức mà không cần tải lên lại từ máy tính.
+### Tình huống 2: Ảnh đưa lên web bị mờ khi xem trên màn hình lớn?
+* **Nguyên nhân:** Do ảnh gốc có kích thước quá nhỏ (dưới 800 px chiều rộng).
+* **Cách xử lý:** Thầy/Cô nên chọn ảnh gốc có chiều ngang từ **1920 px trở lên** để ảnh hiển thị sắc nét trên cả màn hình máy tính bảng và màn hình máy tính để bàn.

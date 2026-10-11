@@ -1,23 +1,21 @@
 ---
 title: Quản lý người dùng và 4 nhóm quyền
-description: Phân cấp quyền hạn vận hành website khoa học và an toàn tại các đơn vị trực thuộc HCM-UTE
+description: Hướng dẫn phân cấp quyền hạn vận hành website khoa học và an toàn tại các đơn vị trực thuộc HCM-UTE.
 order: 1
 ---
 
-Hệ thống phân quyền đa cấp giúp đơn vị kiểm soát chặt chẽ quy trình sản xuất và duyệt nội dung trước khi xuất bản.
+Hệ thống phân quyền đa cấp giúp Khoa/Phòng kiểm soát chặt chẽ quy trình sản xuất và phê duyệt tin tức trước khi xuất bản ra không gian mạng.
 
----
-
-## 4 nhóm quyền quản trị đơn vị
-
-Vào menu bên trái chọn **Người dùng**. Hệ thống định nghĩa 4 vai trò tiêu chuẩn:
-
-| Tên giao diện | Tên nhóm tiếng Việt | Phạm vi quyền hạn |
-| :--- | :--- | :--- |
-| **Unit Collaborator** | Cộng tác viên đơn vị | Soạn thảo bài viết, tải ảnh; chỉ được lưu bản nháp, không có quyền duyệt bài hoặc xuất bản. |
-| **Unit Editor** | Biên tập viên đơn vị | Soạn bài viết, sửa bài của cộng tác viên, gửi bài lên lãnh đạo chờ duyệt. |
-| **Unit Leader** | Lãnh đạo đơn vị | Phê duyệt bài viết, ký duyệt công bố văn bản, bấm xuất bản trực tiếp lên website. |
-| **Unit Admin** | Quản trị viên đơn vị | Toàn quyền cấu hình trang, thiết kế Header/Footer, phân quyền tài khoản và quản lý tiện ích. |
+<Callout type="info" title="⚡ Thao tác nhanh (Dành cho Thầy/Cô)">
+  * **Quyền cần có:** Quản trị viên đơn vị (Unit Admin).
+  * **Đường dẫn nhanh:** Menu trái chọn **Người dùng** → chọn **Tài khoản & Nhóm quyền**.
+  * **4 vai trò tiêu chuẩn:**
+    1. **Unit Collaborator (Cộng tác viên):** Viết bài, tải ảnh; chỉ được Lưu nháp.
+    2. **Unit Editor (Biên tập viên):** Soạn bài, sửa bài, bấm **Gửi duyệt** lên Lãnh đạo.
+    3. **Unit Leader (Lãnh đạo đơn vị):** Phê duyệt tin bài, bấm nút **Xuất bản** công khai.
+    4. **Unit Admin (Quản trị viên đơn vị):** Toàn quyền dựng Trang, sửa Menu và cấp quyền tài khoản.
+  * **Cấp quyền nhanh:** Bấm **+ Thêm người dùng** → Nhập email trường `@hcmute.edu.vn` → Chọn vai trò → Bấm **Lưu**.
+</Callout>
 
 <Mermaid caption="Sơ đồ phân cấp 4 nhóm quyền và nghiệp vụ tương ứng (Bấm vào khối để mở HDSD tác vụ tương ứng)">{`flowchart TD
     Users["Quản lý người dùng (@hcmute.edu.vn)"] --> Roles{"Phân nhóm quyền"}
@@ -34,63 +32,58 @@ Vào menu bên trái chọn **Người dùng**. Hệ thống định nghĩa 4 va
 
     click A1 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem nghiệp vụ soạn bài viết"
     click A2 href "/docs/03-luong-b-chuyen-muc-noi-dung/02-ban-hanh-van-ban-bieu-mau" "Xem nghiệp vụ ban hành văn bản"
-    click A3 href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem hướng dẫn quản trị trang & menu"`}</Mermaid>
-
-
----
-
-## Quản lý danh sách tài khoản
-
-* **Bộ lọc trạng thái:** *Tất cả, Hoạt động, Chờ xác minh, Đã khóa*.
-* **Thông tin hiển thị:** Họ tên, email trường, nhóm quyền, ngày tham gia và trạng thái.
-* **Nguyên tắc phân quyền:** Chỉ cấp quyền theo đúng chức năng nhiệm vụ được Lãnh đạo đơn vị phân công.
+    click A3 href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem hướng dẫn quản trị trang & menu"
+`}</Mermaid>
 
 ---
 
+## Tác vụ 1: Thêm thành viên mới và phân quyền biên tập
+
+### Mục đích
+Cấp quyền làm việc cho cán bộ, giảng viên trong đơn vị để cùng tham gia viết bài, đăng thông báo hoặc quản trị website.
+
+### Các bước thực hiện
+1. Tại menu điều hướng bên trái, Thầy/Cô chọn mục **Người dùng**.
+2. Bấm nút màu xanh **+ Thêm người dùng** ở góc trên bên phải.
+3. Điền thông tin nhân sự:
+   * **Họ và tên:** Nhập họ tên đầy đủ của Thầy/Cô được cấp quyền.
+   * **Email trường (*):** Nhập chính xác email cá nhân do Trường cấp có đuôi `@hcmute.edu.vn`.
+   * **Nhóm quyền (*):** Chọn 1 trong 4 vai trò (*Cộng tác viên, Biên tập viên, Lãnh đạo hoặc Quản trị viên*).
+4. Bấm nút **Lưu thông tin**.
+
+### Kết quả
+Tài khoản của Thầy/Cô mới được thêm ngay vào danh sách. Thầy/Cô đó chỉ cần đăng nhập bằng Google với email trường là có thể bắt đầu tác nghiệp ngay.
+
+### Lưu ý nếu có
+* Hệ thống chỉ chấp nhận email có đuôi `@hcmute.edu.vn`, tuyệt đối không sử dụng email cá nhân bên ngoài (như Gmail, Yahoo).
 
 ---
 
-## Quy trình thu hồi quyền khi chuyển đơn vị công tác hoặc thôi việc
+## Tác vụ 2: Điều chỉnh quyền hạn hoặc thu hồi tài khoản khi chuyển công tác
 
-Nhằm bảo đảm an toàn dữ liệu và phân định rõ trách nhiệm tại các đơn vị, quyền hạn quản trị website đơn vị phải được rà soát và thu hồi kịp thời theo quy trình chuẩn sau:
+### Mục đích
+Cập nhật đúng vị trí công tác mới hoặc thu hồi quyền truy cập khi nhân sự chuyển đơn vị công tác, nghỉ hưu hoặc thôi việc nhằm bảo mật dữ liệu.
 
-### 1. Nguyên tắc cốt lõi
-* **Gắn liền vị trí công tác:** Quyền quản trị chỉ tồn tại khi Thầy Cô đang trực tiếp đảm nhiệm công tác truyền thông, quản trị nội dung tại đơn vị.
-* **Thời hạn thu hồi:** Khi có quyết định điều động công tác, luân chuyển đơn vị hoặc nghỉ hưu/thôi việc, tài khoản quản trị tại đơn vị cũ phải được thu hồi trong vòng **24 giờ làm việc**.
-* **Bảo toàn dữ liệu lịch sử:** Toàn bộ tin bài, văn bản và hình ảnh Thầy Cô đã biên tập trước đây vẫn được lưu trữ nguyên vẹn trên hệ thống của đơn vị cũ, ghi nhận công sức đóng góp của Thầy Cô.
+### Các bước thực hiện
+1. Trong danh sách tài khoản, Thầy/Cô tìm đến dòng của người cần điều chỉnh.
+2. Bấm vào biểu tượng cây bút **Sửa quyền** ở cuối dòng.
+3. Tùy theo nhu cầu thực tế:
+   * Nếu thăng cấp hoặc chuyển đổi nhiệm vụ: Chọn vai trò mới từ danh sách thả xuống.
+   * Nếu chuyển công tác hoặc nghỉ việc: Chuyển trạng thái tài khoản sang **Đã khóa** hoặc bấm nút **Thu hồi quyền**.
+4. Bấm **Xác nhận**.
 
-### 2. Các bước thực hiện thu hồi và chuyển giao quyền hạn
+### Kết quả
+Quyền hạn mới có hiệu lực ngay lập tức. Cán bộ chuyển đi sẽ không còn quyền chỉnh sửa nội dung trên website của đơn vị cũ.
 
-<Steps>
-  <Step>
-    ### Bàn giao bài viết và tài sản số dở dang
-    Thầy Cô chuyển giao toàn bộ các bài viết đang ở trạng thái bản nháp (`Draft`), văn bản chờ duyệt hoặc tài nguyên media cho nhân sự kế nhiệm của đơn vị tiếp quản.
-  </Step>
-
-  <Step>
-    ### Quản trị viên đơn vị (Unit Admin) tiến hành thu hồi quyền
-    * Đăng nhập trang quản trị đơn vị, truy cập menu **Người dùng**.
-    * Tìm kiếm tài khoản của Thầy Cô theo email trường cấp (`@hcmute.edu.vn`).
-    * Bấm chọn **Chỉnh sửa vai trò** → Chọn **Thu hồi quyền quản trị** (hoặc chuyển về nhóm người đọc thông thường).
-    * Ngay sau khi bấm xác nhận, phiên làm việc quản trị của tài khoản trên website đơn vị cũ sẽ lập tức bị hủy bỏ trên toàn hệ thống.
-  </Step>
-
-  <Step>
-    ### Cấp quyền tại đơn vị công tác mới (Nếu luân chuyển nội bộ)
-    * Khi Thầy Cô tiếp nhận nhiệm vụ mới tại Khoa/Phòng/Viện khác, Lãnh đạo đơn vị mới sẽ gửi văn bản hoặc tạo Ticket đề xuất gán vai trò tương ứng tại đơn vị mới.
-    * Ban Quản trị Trường hoặc Quản trị viên đơn vị mới kích hoạt vai trò phù hợp theo phân công nhiệm vụ.
-  </Step>
-</Steps>
+### Lưu ý nếu có
+* Toàn bộ tin bài, văn bản và hình ảnh Thầy/Cô đã biên tập trước đây vẫn được lưu trữ nguyên vẹn trên hệ thống, ghi nhận công sức đóng góp của Thầy/Cô cho đơn vị.
 
 ---
 
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
-### Tình huống 1: Phân quyền mới cho Thầy Cô thì sau bao lâu tài khoản có hiệu lực?
+### Tình huống 1: Biên tập viên sau khi viết bài xong thì làm sao để Lãnh đạo biết mà duyệt?
+* **Cách xử lý:** Sau khi viết bài xong, Thầy/Cô biên tập viên chỉ cần bấm nút **Gửi duyệt**. Hệ thống sẽ tự động gửi thông báo chuông và hiển thị bài viết vào danh mục *Cần tôi duyệt* của Lãnh đạo đơn vị.
 
-* **Cách xử lý:** Phân quyền có hiệu lực ngay lập tức. Thầy Cô được phân quyền không cần đăng xuất, chỉ cần bấm tải lại trang (`F5`) là thanh menu sẽ hiển thị đầy đủ các tính năng mới được cấp.
-
-
-
-### Tình huống 3: Thầy Cô chuyển sang đơn vị công tác mới thì xử lý tài khoản như thế nào?
-* **Cách xử lý:** Quản trị viên chỉ cần vào màn hình quản lý người dùng, chọn thu hồi vai trò tại đơn vị cũ và gán vai trò tại đơn vị mới. Toàn bộ hồ sơ danh tính Google Workspace và lịch sử bài viết cũ của Thầy Cô vẫn được bảo lưu trọn vẹn.
+### Tình huống 2: Một người có thể giữ cùng lúc 2 vai trò được không?
+* **Cách hiểu đúng:** Có. Quản trị viên đơn vị (Unit Admin) mặc định đã có đầy đủ thẩm quyền của cả Biên tập viên và Người duyệt bài, có thể trực tiếp soạn bài và xuất bản ngay.

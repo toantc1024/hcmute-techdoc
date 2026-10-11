@@ -1,22 +1,21 @@
 ---
 title: Luồng A – Tạo, chỉnh sửa và công bố trang
-description: Quy trình chi tiết từ lúc khởi tạo trang web, thiết kế khối giao diện cho đến xuất bản và kiểm thử
+description: Hướng dẫn chi tiết quy trình tạo trang mới, thiết kế khối giao diện trực quan và đưa lên thanh menu điều hướng tại HCM-UTE.
 order: 1
 ---
 
-Luồng A hướng dẫn toàn bộ thao tác xây dựng và quản lý danh sách trang web của đơn vị.
+Luồng A là luồng nghiệp vụ giúp Quý Thầy/Cô xây dựng các trang nội dung tĩnh cho đơn vị như: Trang giới thiệu chung, Sơ đồ cơ cấu tổ chức, Chương trình đào tạo ngành, Danh sách phòng thí nghiệm...
 
-<Callout type="info" title="⚡ Thực hiện nhanh">
-  * **Quyền cần có:** Quản trị viên đơn vị (Unit Admin) hoặc Biên tập viên được phân quyền quản trị trang.
-  * **Đường dẫn thao tác:** Menu trái `Website` → chọn `Trang`.
-  * **Các bước chính:**
-    1. Bấm nút **Tạo trang mới** (hoặc chọn nhân bản từ mẫu trang con có sẵn).
-    2. Nhập tiêu đề trang, đường dẫn slug (chữ thường không dấu, phân tách bằng dấu `-`).
-    3. Kéo thả và bố trí các khối nội dung bằng Page Builder (Banner, Khối Tin tức, Khối Nhân sự).
-    4. Tối ưu SEO (Điểm SEO > 80/100, ảnh chia sẻ mạng xã hội chuẩn 1200 × 630 px).
-    5. Bấm **Lưu nháp** → **Xem trước (Preview)** → Bấm **Xuất bản** → Gắn liên kết vào Menu Header/Footer để độc giả tìm thấy.
-  * **Kết quả kiểm tra:** Trang hiển thị công khai trên website đơn vị tại đúng đường dẫn URL và liên kết trên menu mở ra đúng trang vừa tạo.
-  * **Xử lý sự cố thường gặp:** Đã công bố nhưng không thấy trên thanh menu? Xem [Hướng dẫn gắn trang vào Menu](/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong).
+<Callout type="info" title="⚡ Thao tác nhanh (Dành cho Thầy/Cô)">
+  * **Quyền cần có:** Quản trị viên đơn vị (Unit Admin) hoặc Biên tập viên được phân quyền.
+  * **Đường dẫn nhanh:** Menu trái `Website` → chọn `Trang`.
+  * **5 bước thực hiện:**
+    1. Bấm nút **+ Tạo trang** → chọn **Trang trống** (hoặc chọn nhân bản từ mẫu có sẵn).
+    2. Nhập **Tiêu đề trang**, kiểm tra **Đường dẫn (Slug)** không dấu (ví dụ: `co-cau-to-chuc`).
+    3. Bấm **Thiết kế** để kéo thả các khối nội dung (Banner, Giới thiệu, Nhân sự...).
+    4. Bấm biểu tượng điện thoại để **Xem trước** hiển thị di động.
+    5. Bấm **Xuất bản** → Sang menu `Header & Footer` để gắn đường dẫn trang lên thanh Menu.
+  * **Kết quả:** Trang hiển thị công khai trên website đơn vị và người đọc có thể bấm nút trên Menu để vào xem.
 </Callout>
 
 <Diagram 
@@ -25,149 +24,78 @@ Luồng A hướng dẫn toàn bộ thao tác xây dựng và quản lý danh s�
 
 ---
 
-## 1. Màn hình danh sách trang
+## Tác vụ 1: Khởi tạo một trang web mới
 
-Tại thanh điều hướng bên trái, chọn **Website** → **Trang**. Màn hình hiển thị tên trang, đường dẫn slug, trạng thái và các nút chức năng:
+### Mục đích
+Tạo một trang web độc lập cho đơn vị để giới thiệu ngành nghề, bộ môn hoặc quy chế làm việc.
 
-* **Chế độ xem Cây:** Xem cấu trúc phân cấp trực quan trang cha – trang con.
-* **Chế độ xem Bảng:** Chuyển sang hiển thị dạng bảng thông thường.
-* **Ô tìm kiếm:** Nhập tên trang để tìm nhanh.
-* **Nhãn Trang chủ:** Chỉ định trang chủ của đơn vị.
-* **Trạng thái Đã xuất bản:** Cho biết trang đang hiển thị công khai trên website.
+### Các bước thực hiện
+1. Tại menu điều hướng bên trái, Thầy/Cô chọn **Website** → chọn **Trang**.
+2. Bấm nút màu xanh **+ Tạo trang** ở góc trên bên phải → chọn **Trang trống**.
+3. Điền các trường thông tin cơ bản:
+   * **Tiêu đề (*):** Nhập tên trang trang trọng, rõ nghĩa (ví dụ: *Cơ cấu tổ chức và Đội ngũ Giảng viên*).
+   * **Đường dẫn / Slug (*):** Hệ thống tự sinh chữ thường không dấu nối bằng gạch ngang (ví dụ: `co-cau-to-chuc`). Thầy/Cô có thể chỉnh sửa lại cho ngắn gọn.
+   * **Trang cha:** Nếu đây là trang con (ví dụ nằm trong mục *Giới thiệu*), Thầy/Cô chọn trang cha tương ứng; nếu là trang độc lập thì để trống.
+   * **Mô tả:** Viết 1 - 2 câu tóm tắt nội dung trang.
+4. Bấm nút **Tạo trang**.
 
-### Các nút thao tác trên từng dòng:
-* **Thiết kế:** Mở trình thiết kế kéo thả khối (Page Builder).
-* **Thêm trang con:** Mở biểu mẫu tạo trang phân cấp dưới trang đang chọn.
-* **Sửa:** Chỉnh sửa thông tin cơ bản của trang (Tiêu đề, đường dẫn, mô tả).
-* **Khác (`⋮`):** Mở các thao tác bổ sung: Mở trình thiết kế, Xuất bản, Hủy xuất bản, Lưu trữ, Nhân bản, Xóa.
+### Kết quả
+Trang được tạo thành công ở trạng thái **Bản nháp** và xuất hiện ngay trong sơ đồ cây trang của đơn vị.
 
----
-
-## 2. Quy trình tạo trang mới
-
-<Steps>
-  <Step>
-    #### Bấm nút tạo trang
-    Tại góc trên màn hình Trang website, chọn **Tạo trang** → chọn **Trang trống**.
-  </Step>
-
-  <Step>
-    #### Chọn ngôn ngữ & Điền thông tin
-    Chọn ngôn ngữ làm việc (**Việt** hoặc **Anh**) và hoàn tất biểu mẫu:
-    * **Tiêu đề (*):** Nhập tên trang (ví dụ: *Cơ cấu tổ chức*).
-    * **Đường dẫn / Slug (*):** Nhập phần URL không dấu, nối bằng gạch ngang (ví dụ: `co-cau-to-chuc`).
-    * **Trang cha:** Chọn trang cấp trên nếu là trang con (hoặc để trống nếu là trang cấp 1).
-    * **Mô tả:** Giới thiệu ngắn về mục đích của trang.
-    * Bấm **Tiếp tục** để chuyển sang bước kế tiếp.
-  </Step>
-
-  <Step>
-    #### Thiết kế và Bố trí khối
-    Hệ thống mở trình Page Builder để Thầy/Cô kéo thả các khối hiển thị.
-  </Step>
-
-  <Step>
-    #### Xuất bản trang
-    Bấm **Lưu thay đổi** → chọn **Xuất bản** để công bố trang.
-  </Step>
-</Steps>
+### Lưu ý nếu có
+* Không đặt dấu cách tiếng Việt hay các ký tự đặc biệt như `@, #, $, %` trong ô Đường dẫn (Slug).
 
 ---
 
+## Tác vụ 2: Thiết kế giao diện trang bằng Page Builder
+
+### Mục đích
+Lắp ghép các khối giao diện chuẩn hóa (Banner, khối chữ, ảnh đại diện, danh sách nhân sự) theo thời gian thực mà không cần biết lập trình.
+
+### Các bước thực hiện
+1. Trong danh sách trang, Thầy/Cô tìm đến trang vừa tạo và bấm nút màu xanh **Thiết kế** (Page Builder).
+2. Tại cột bên trái (Thư viện khối), chọn nhóm khối mong muốn:
+   * Khối *Banner hình ảnh lớn*, *Khối Giới thiệu tóm tắt*, *Khối Ban lãnh đạo*, hoặc *Khối Tin tức tự động*.
+3. Dùng chuột kéo khối đó thả vào không gian ở giữa màn hình (Canvas).
+4. Bấm chuột trực tiếp vào khối vừa thả để thay đổi câu chữ và bấm đổi hình ảnh tại cột thuộc tính bên phải.
+5. Kiểm tra hiển thị: Bấm vào biểu tượng **Điện thoại** ở thanh trên cùng để xem trang khi mở bằng smartphone có cân đối hay không.
+6. Bấm nút **Lưu thay đổi** ở góc trên.
+
+### Kết quả
+Giao diện trang web được sắp xếp gọn gàng, đẹp mắt và đồng bộ tuyệt đối với nhận diện thương hiệu của Nhà trường.
+
+### Lưu ý nếu có
+* Thầy/Cô có thể kéo thả đổi thứ tự các khối từ trên xuống dưới dễ dàng tại tab **Quản lý phân tầng (Layers)** ở cột bên trái.
 
 ---
 
-## 3. Cấu hình thông tin trang và tối ưu hóa SEO (Tab Thông tin)
+## Tác vụ 3: Xuất bản trang và gắn liên kết lên thanh Menu
 
-Khi quản trị một trang web, hệ thống cung cấp 3 tab làm việc chính trên thanh tiêu đề:
-* **Nội dung trang:** Mở trình kéo thả khối giao diện (Page Builder).
-* **Thông tin:** Quản lý thông tin định danh, đường dẫn, thiết lập trang chủ, ảnh bìa chia sẻ và các thông số tối ưu hóa SEO & Meta.
-* **Lịch sử:** Tra cứu các mốc thời gian lưu trữ và khôi phục phiên bản khi cần.
+### Mục đích
+Đưa trang lên mạng Internet công khai và tạo lối vào trên thanh Menu chính để độc giả thuận tiện bấm vào xem.
 
-![Giao diện Cấu hình Thông tin trang và Điểm số SEO](/images/trang/cau-hinh-thong-tin-trang-va-seo-tong-quan.png)
+### Các bước thực hiện
+1. **Xuất bản trang:** Trong màn hình thiết kế hoặc danh sách trang, Thầy/Cô bấm nút **Xuất bản (Publish)**. Trang sẽ chuyển từ màu xám sang trạng thái màu xanh lá *Đã xuất bản*.
+2. **Lấy liên kết trang:** Bấm biểu tượng **Sao chép link** của trang đó.
+3. **Gắn vào Menu điều hướng:**
+   * Tại menu bên trái, Thầy/Cô chọn **Website** → chọn **Header & Footer** (tab *Đầu trang*).
+   * Chọn đúng nút bấm hoặc cột muốn đặt liên kết.
+   * Dán liên kết vừa chép vào ô **Đường dẫn liên kết**.
+4. **Lưu hoàn tất:** Bấm nút **Lưu thay đổi**.
 
-### 3.1. Thang đo Điểm số SEO thời gian thực
-Tại cột bên trái của tab **Thông tin**, hệ thống tích hợp vòng đo đánh giá chất lượng SEO tự động theo thang điểm 100:
-* **Vòng tròn điểm số (Ví dụ: `80 / 100`):** Đánh giá mức độ tối ưu của trang để được Google và các công cụ tìm kiếm xếp hạng cao.
-* **Các mức đánh giá:**
-  * **Xanh lá (80 – 100 điểm - Tốt):** Trang đã hoàn thiện đầy đủ tiêu đề, mô tả và ảnh bìa theo đúng tiêu chuẩn khuyến nghị.
-  * **Vàng (50 – 79 điểm - Cần cải thiện):** Trang có thể xuất bản nhưng đang thiếu một số thông tin (như chưa có ảnh bìa hoặc độ dài mô tả chưa tối ưu).
-  * **Đỏ (< 50 điểm - Chưa đạt):** Trang còn thiếu nhiều thông tin quan trọng, nên hoàn thiện trước khi công bố.
-* **Hộp nhắc nhở cải thiện:** Hệ thống tự động liệt kê các hạng mục cần bổ sung (ví dụ: *"Ảnh bìa cần bổ sung"*). Thầy Cô có thể bấm nút **Chỉnh sửa** để chuyển nhanh đến ô dữ liệu cần cập nhật.
+### Kết quả
+Trang web hiển thị công khai trên website. Khi độc giả nhấp vào thanh Menu trên cùng, trang sẽ lập tức được mở ra.
 
----
-
-### 3.2. Cấu hình thông tin cơ bản & Đường dẫn trang
-
-* **Tiêu đề trang (Bắt buộc):** Tên chính thức của trang web, hỗ trợ tối đa 1024 ký tự kèm bộ đếm ký tự trực quan.
-* **Đường dẫn công khai (Slug):**
-  * **Trang chủ:** Luôn mang nhãn **Đường dẫn gốc (/)** với địa chỉ là `/vi` (hoặc `/en`). Trang chủ sử dụng trực tiếp địa chỉ gốc của website đơn vị, không dùng slug riêng.
-  * **Trang thông thường:** Nhập đường dẫn không dấu, viết thường, nối bằng gạch ngang (ví dụ: `/co-cau-to-chuc`, `/chuong-trinh-dao-tao`).
-* **Trang cha (Parent Page):** Chọn trang cấp trên trực tiếp trong cây trang để xác định quan hệ phân cấp. Đối với trang chủ, hệ thống mặc định hiển thị *"Trang chủ luôn ở gốc"*.
-* **Trang chủ:** Nhãn trạng thái *"Đang là trang chủ"*. Thầy Cô có thể bấm nút **Chuyển** để đổi quyền làm trang chủ cho trang khác khi đơn vị thay đổi bố cục cổng thông tin.
-
----
-
-### 3.3. Cấu hình Ảnh bìa và Tối ưu hóa SEO & Meta
-
-![Cấu hình Ảnh bìa và Thẻ SEO Meta](/images/trang/cau-hinh-seo-meta-va-anh-bia.png)
-
-#### A. Ảnh bìa chia sẻ (Social Cover / Open Graph)
-* **Quy chuẩn kích thước khuyến nghị:** **`1200 × 630px`** (tỷ lệ 1.91:1).
-* **Vai trò:** Khi Thầy Cô chia sẻ liên kết trang lên mạng xã hội (Facebook, Zalo, LinkedIn, cổng tuyển sinh), ảnh bìa này sẽ hiển thị làm hình minh họa xem trước (thumbnail card) sắc nét, giúp tăng tính nhận diện và thu hút người đọc.
-* **Thao tác:** Bấm nút **Chọn ảnh** để chọn từ Thư viện đa phương tiện hoặc tải trực tiếp ảnh mới từ máy tính.
-
-#### B. Phân hệ Thẻ dữ liệu Meta & SEO (Tab `SEO & Meta`)
-
-<Callout type="info" title="Nguyên tắc ưu tiên khi chia sẻ liên kết">
-  Hệ thống **ưu tiên Tiêu đề SEO và Mô tả SEO** khi hiển thị trên Google và mạng xã hội. Nếu Thầy Cô để trống hai trường này, hệ thống sẽ tự động dùng Tiêu đề trang và Mô tả nội dung mặc định của trang để thay thế.
-</Callout>
-
-1. **Tiêu đề SEO (SEO Title):**
-   * **Số lượng ký tự khuyến nghị:** Từ **40 đến 65 ký tự**. Hệ thống hiển thị nhãn xanh *"Đang trong khoảng khuyến nghị"*.
-   * **Mẹo tối ưu:** Đặt tiêu đề súc tích, chứa từ khóa chính của trang kèm tên đơn vị (ví dụ: *Trường Đại học Công nghệ Kỹ thuật TP. HCM* hoặc *Khoa Điện - Điện tử | Đào tạo chất lượng cao*).
-2. **Mô tả SEO (Meta Description):**
-   * **Số lượng ký tự khuyến nghị:** Từ **70 đến 160 ký tự**. Hệ thống tự động đếm số lượng ký tự thời gian thực.
-   * **Mẹo tối ưu:** Trình bày 1 - 2 câu tóm tắt nổi bật sứ mệnh, giá trị và thông điệp chính của trang để người tìm kiếm hiểu rõ nội dung.
-3. **Tab Mô tả:** Dùng để nhập đoạn giới thiệu ngắn phục vụ hiển thị trên danh mục trang con hoặc các khối giao diện.
-4. **Tab Xem trước (Preview Snippet):** Bấm sang tab **Xem trước** để xem mô phỏng chính xác giao diện hiển thị của trang khi xuất hiện trên kết quả tìm kiếm Google và thẻ chia sẻ qua Zalo/Facebook.
-
----
-
-### 3.4. Sơ đồ quy trình tối ưu thông tin trang và SEO
-
-<Mermaid caption="Quy trình 5 bước tối ưu thông tin trang và SEO trước khi công bố">{`flowchart TD
-    A["Mở tab Thông tin của trang"] --> B["1. Nhập Tiêu đề & Chọn vị trí Trang cha"]
-    B --> C["2. Thiết lập Slug / Kiểm tra Trang chủ"]
-    C --> D["3. Tải Ảnh bìa chuẩn 1200x630px"]
-    D --> E["4. Nhập Tiêu đề SEO & Mô tả SEO"]
-    E --> F{"Kiểm tra Vòng đo SEO"}
-    F -->|Điểm < 80| G["Xem gợi ý cải thiện & Tinh chỉnh thêm"]
-    G --> E
-    F -->|Điểm ≥ 80 Tốt| H["5. Kiểm tra Tab Xem trước"]
-    H --> I["Bấm Lưu hoặc Xuất bản trang"]
-`}</Mermaid>
+### Lưu ý nếu có
+* Nếu Thầy/Cô chỉ bấm *Xuất bản* mà quên gắn vào Menu, người đọc sẽ không biết đường dẫn để tìm thấy trang này.
 
 ---
 
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
-### Tình huống 1: Báo lỗi "Đường dẫn (Slug) đã tồn tại trên hệ thống"?
-* **Nguyên nhân:** Hệ thống áp dụng quy chuẩn quản lý tên miền và đường dẫn toàn cục. Mỗi trang web bắt buộc phải có một đường dẫn duy nhất để đảm bảo thứ hạng tìm kiếm SEO và không bị xung đột trang.
-* **Cách xử lý:** Thầy/Cô chỉ cần thêm từ khóa phụ hoặc tên viết tắt của đơn vị vào sau đường dẫn (ví dụ: thay vì chỉ để `gioi-thieu`, đổi thành `gioi-thieu-khoa-dien-dien-tu`).
+### Tình huống 1: Đã xuất bản trang thành công nhưng bấm vào Menu ngoài web báo lỗi 404 (Không tìm thấy trang)?
+* **Nguyên nhân:** Khi gắn vào Menu, Thầy/Cô có thể đã gõ nhầm một chữ cái trong đường dẫn URL hoặc quên chưa lưu cấu hình Menu.
+* **Cách xử lý:** Mở lại mục *Header & Footer*, bấm nút *Chọn trang* thay vì tự gõ tay để hệ thống tự động điền đúng địa chỉ, sau đó bấm *Lưu thay đổi*.
 
-### Tình huống 2: Đổi đường dẫn trang cũ sang đường dẫn mới thì liên kết cũ đã chia sẻ có bị lỗi 404 không?
-* **Nguyên nhân:** Tính năng quản trị điều hướng SEO tự động lưu lại lịch sử các liên kết cũ.
-* **Cách xử lý:** Khi người đọc bấm vào liên kết cũ đã gửi qua Zalo hay mạng xã hội, hệ thống tự động chuyển hướng mượt mà sang đường dẫn mới, hoàn toàn không gây lỗi trang đứt đoạn.
-
-### Tình huống 3: Bấm nút "Công bố" nhưng nhận thông báo không đủ thẩm quyền?
-* **Nguyên nhân:** Theo mô hình phân quyền phân cấp, tài khoản vai trò Cộng tác viên hoặc Biên tập viên chỉ có quyền Lưu nháp để thiết kế nội bộ.
-* **Cách xử lý:** Thầy/Cô lưu trang ở trạng thái "Bản nháp" và thông báo cho Quản trị viên đơn vị hoặc Lãnh đạo Khoa/Phòng để kiểm tra và bấm công bố chính thức.
-
-
-### Tình huống 4: Tại sao vòng đo SEO báo điểm vàng và có nhắc nhở "Ảnh bìa cần bổ sung"?
-* **Nguyên nhân:** Trang chưa được gán ảnh bìa chia sẻ chuẩn 1200×630px.
-* **Cách xử lý:** Thầy Cô bấm vào nút **Chọn ảnh** ở khung Ảnh bìa, chọn ảnh đại diện cho trang từ kho Đa phương tiện. Ngay sau khi chọn ảnh, vòng đo SEO sẽ tự động tăng từ 15 – 20 điểm và chuyển sang trạng thái "Tốt (Xanh lá)".
-
-### Tình huống 5: Tiêu đề SEO và Tiêu đề trang khác nhau như thế nào?
-* **Cách phân biệt:** Tiêu đề trang là tên hiển thị trên menu và tiêu đề lớn ở đầu trang web. Tiêu đề SEO là chuỗi ký tự hiển thị trên tab trình duyệt, kết quả tìm kiếm Google và khi gửi link qua tin nhắn Zalo/Facebook. Nếu để trống Tiêu đề SEO, hệ thống sẽ tự động dùng Tiêu đề trang.
+### Tình huống 2: Muốn tạm thời gỡ trang xuống để sửa chữa lớn mà không xóa mất nội dung?
+* **Cách xử lý:** Thầy/Cô vào danh sách trang, bấm nút ba chấm (`⋮`) cạnh tên trang và chọn **Hủy xuất bản (Unpublish)**. Trang sẽ chuyển về trạng thái *Bản nháp*, người ngoài web không thể xem được nhưng toàn bộ công sức thiết kế của Thầy/Cô vẫn được giữ nguyên vẹn trong hệ thống.

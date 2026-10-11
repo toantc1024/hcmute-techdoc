@@ -1,6 +1,6 @@
 ---
 title: Ba cấu trúc quản trị cốt lõi
-description: Phân biệt rõ ràng giữa Tin tức, Văn bản, Trang và Menu trong hệ sinh thái HCM-UTE
+description: Phân biệt rõ ràng giữa Tin tức, Văn bản, Trang và Menu trong hệ sinh thái HCM-UTE.
 order: 3
 ---
 
@@ -10,54 +10,64 @@ Trong hệ thống website của Trường Đại học Công nghệ Kỹ thuậ
   src="/diagrams/01-tong-quan-to-chuc.png" caption="Sơ đồ 01: Tổng quan ba cấu trúc quản trị website" 
 />
 
+<Callout type="info" title="⚡ Tóm tắt nhanh cốt lõi (Dành cho Thầy/Cô)">
+  * **1. Bài viết / Tin tức (Luồng B):** Dành cho các tin hoạt động, sự kiện diễn ra hàng ngày, tự động xuất hiện theo dòng thời gian.
+  * **2. Văn bản / Biểu mẫu (Luồng B):** Dành cho các thông báo pháp lý, kế hoạch có đính kèm tệp PDF toàn văn cho người đọc tải về.
+  * **3. Trang độc lập (Luồng A):** Dành cho các trang tĩnh như Giới thiệu Khoa, Cơ cấu tổ chức, dựng bằng các khối giao diện cố định.
+  * **4. Menu điều hướng (Luồng C):** Nút bấm trên đầu trang (Header) hoặc chân trang (Footer) dẫn người đọc mở ra Trang hoặc Chuyên mục.
+</Callout>
+
 ---
 
-## 1. Bảng phân biệt: Tin tức, văn bản, trang và menu
+## 1. Bảng so sánh 4 loại nội dung thường gặp
 
-Hiểu rõ bản chất 4 loại đối tượng này là chìa khóa để vận hành website khoa học:
+Hiểu rõ bản chất 4 loại nội dung này giúp Thầy/Cô chọn đúng công cụ ngay từ đầu, tiết kiệm rất nhiều thời gian:
 
 | Loại nội dung | Bản chất & Cách sử dụng | Ví dụ thực tế |
 | :--- | :--- | :--- |
-| **Tin tức (Bài viết)** | Đăng bài cập nhật hoạt động sự kiện, tự động hiển thị trong các khối tin theo chuyên mục phù hợp. | *Lễ khai giảng năm học mới, Hội thảo khoa học quốc tế, Hoạt động Mùa hè xanh...* |
-| **Văn bản** | Công bố thông tin pháp lý, biểu mẫu hành chính kèm tệp PDF toàn văn cho người đọc tải về. | *Kế hoạch đào tạo năm học, Thông báo thu học phí, Quyết định khen thưởng, Biểu mẫu đăng ký...* |
-| **Trang (Page)** | Trình bày thông tin tĩnh bằng bố cục riêng biệt và tập hợp các khối nội dung (Page Builder). | *Trang Giới thiệu Khoa, Trang Chương trình đào tạo ngành, Trang Cơ cấu tổ chức...* |
-| **Menu Điều hướng** | Dẫn người xem từ thanh điều hướng trên cùng đến một Trang, một Chuyên mục hoặc liên kết ngoài. | *Menu Header đầu trang, mục Đào tạo dẫn đến trang chương trình đào tạo...* |
+| **Tin tức (Bài viết)** | Cập nhật sự kiện, hoạt động; tự động hút vào các khối tin theo chuyên mục đã chọn. | *Lễ khai giảng năm học mới, Hội thảo khoa học quốc tế, Ngày hội việc làm...* |
+| **Văn bản pháp quy** | Công bố thông tin chính thức kèm tệp PDF hoặc biểu mẫu Word để tải về. | *Kế hoạch đào tạo, Quyết định khen thưởng, Biểu mẫu xin hoãn thi...* |
+| **Trang tĩnh (Page)** | Bố cục thông tin riêng biệt, lắp ghép bằng các khối đồ họa cố định. | *Trang Giới thiệu Khoa, Trang Chương trình đào tạo ngành, Trang Phòng thí nghiệm...* |
+| **Menu điều hướng** | Nút bấm dẫn đường trên thanh Header hoặc chân trang Footer. | *Mục Đào tạo trên Menu dẫn sang Trang Đào tạo hoặc Chuyên mục Học vụ...* |
 
 ---
 
-## 2. Ví dụ nối ba phần: Văn bản - Biểu mẫu
+## Tác vụ thực hành mẫu: Kết nối Menu → Trang → Chuyên mục
 
-Khi đơn vị muốn người đọc bấm vào Menu để xem toàn bộ Biểu mẫu công tác:
+### Mục đích
+Tạo ra một luồng truy cập hoàn chỉnh: Khi sinh viên bấm vào nút Menu trên trang chủ, hệ thống sẽ mở ra Trang chứa toàn bộ danh sách biểu mẫu của đơn vị.
 
+### Các bước thực hiện
 <Steps>
   <Step>
-    #### 1. Trên Menu (Người đọc bấm)
-    Vào `Giới thiệu` → `Cột CÔNG KHAI` → Bấm liên kết **Văn bản - Biểu mẫu**.
+    #### Bước 1: Soạn bài và gán chuyên mục (Luồng B)
+    Vào `Quản lý nội dung` → `Văn bản và bài viết` → Ban hành văn bản biểu mẫu và tick chọn chuyên mục là **Biểu mẫu - Hướng dẫn**.
   </Step>
 
   <Step>
-    #### 2. Mở Trang tương ứng (Sơ đồ trang)
-    Hệ thống mở trang `/gioi-thieu/van-ban-bieu-mau`. Trang này chứa **Khối Văn bản** đã được cấu hình từ trước.
+    #### Bước 2: Dựng trang chứa khối văn bản (Luồng A)
+    Vào `Website` → `Trang` → Mở trang *Văn bản - Biểu mẫu* bằng trình **Thiết kế** (Page Builder) → Kéo thả khối **Danh sách văn bản** vào trang và chọn nguồn lấy tin từ chuyên mục *Biểu mẫu - Hướng dẫn*.
   </Step>
 
   <Step>
-    #### 3. Khối tự động rút dữ liệu (Cây chuyên mục)
-    Khối hiển thị tự động lọc tất cả các văn bản thuộc `Chuyên mục VĂN BẢN` → `Biểu mẫu` để hiển thị danh sách cho người đọc tải về.
+    #### Bước 3: Đưa trang lên Menu điều hướng (Luồng C)
+    Vào `Website` → `Header & Footer` → Chọn menu *Giới thiệu* → Bấm thêm nút **Văn bản - Biểu mẫu** và chọn liên kết đích đến trang vừa dựng ở Bước 2 → Bấm **Lưu thay đổi**.
   </Step>
 </Steps>
+
+### Kết quả
+Khi người đọc nhấp vào nút *Văn bản - Biểu mẫu* trên Menu đầu trang, trang web sẽ mở ra danh sách đầy đủ tất cả các biểu mẫu đã đăng tải và có nút tải tệp PDF trực tiếp.
+
+### Lưu ý nếu có
+* Mỗi khi Thầy/Cô đăng thêm một biểu mẫu mới thuộc chuyên mục đó, trang web sẽ tự động cập nhật thêm biểu mẫu mới vào danh sách mà Thầy/Cô không cần phải sửa lại trang hay menu nữa.
 
 ---
 
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
-### Tình huống 1: Tại sao bài viết của Khoa A không thể hiển thị trong chuyên mục của Khoa B?
-* **Nguyên nhân:** Dữ liệu của mỗi Khoa, Phòng ban, Viện được phân định ranh giới rõ ràng. Thầy Cô chỉ quản trị và xem nội dung thuộc phạm vi đơn vị mình phụ trách.
-* **Cách xử lý:** Mỗi đơn vị chỉ quản lý nội dung của mình. Nếu muốn chia sẻ bài viết sang website Trường hoặc đơn vị khác, Thầy Cô sử dụng tính năng **Đề xuất chia sẻ bài viết**.
+### Tình huống 1: Tại sao bài viết của Khoa A không hiển thị được trên chuyên mục của Khoa B?
+* **Cách hiểu đúng:** Dữ liệu của mỗi Khoa, Phòng ban, Viện được phân quyền bảo mật riêng biệt. Thầy/Cô chỉ quản trị nội dung thuộc phạm vi đơn vị mình phụ trách nhằm bảo đảm an toàn dữ liệu cho toàn Trường.
 
-### Tình huống 2: Tạo chuyên mục mới nhưng quên gắn bài viết thì trang hiển thị thế nào?
-* **Nguyên nhân:** Chuyên mục đóng vai trò như một thư mục phân loại. Nếu chuyên mục chưa có bài viết nào được xuất bản, khối hiển thị ngoài web sẽ để trống.
-* **Cách xử lý:** Sau khi tạo chuyên mục, Thầy/Cô cần vào soạn bài viết và tick chọn chuyên mục đó, hoặc gán các bài viết cũ vào chuyên mục mới.
-
-### Tình huống 3: Đã tạo trang và viết bài nhưng người đọc vào web lại không thấy ở đâu?
-* **Nguyên nhân:** Trang web và Menu là 2 cấu trúc độc lập. Việc tạo trang mới chỉ tạo ra đường dẫn URL, chứ hệ thống không tự động thêm nút bấm lên thanh điều hướng.
-* **Cách xử lý:** Vào **Luồng C: Cấu hình Menu** để thêm nút liên kết trỏ đến trang mới vừa tạo.
+### Tình huống 2: Tạo chuyên mục mới xong nhưng vào trang web lại thấy khung trắng?
+* **Nguyên nhân:** Chuyên mục mới tạo chưa có bài viết nào được bấm xuất bản.
+* **Cách xử lý:** Thầy/Cô chỉ cần vào viết một bài mới (hoặc mở bài cũ) và tick chọn thêm chuyên mục đó vào là trang sẽ hiển thị bài ngay.

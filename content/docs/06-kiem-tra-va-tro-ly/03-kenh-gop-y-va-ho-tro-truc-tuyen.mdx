@@ -1,161 +1,64 @@
 ---
 title: Kênh góp ý và hỗ trợ trực tuyến (Tickets)
-description: Hướng dẫn sử dụng phân hệ Góp ý & Hỗ trợ trực tuyến 100% do Ban Quản trị Trường HCM-UTE (School Admin) tiếp nhận, giải đáp thắc mắc nghiệp vụ và xử lý sự cố kỹ thuật trong quá trình vận hành website.
+description: Hướng dẫn sử dụng phân hệ Góp ý & Hỗ trợ trực tuyến do Ban Quản trị Trường HCM-UTE tiếp nhận và xử lý sự cố.
 ---
 
-Trong quá trình quản trị và biên tập website đơn vị, bên cạnh tính năng tự hướng dẫn của **Trợ lý UTE**, Thầy Cô có thể gửi phiếu yêu cầu hỗ trợ trực tiếp đến **Ban Quản trị Trường (School Admin / AD)** thông qua phân hệ **Góp ý & Hỗ trợ**.
+Khi gặp sự cố kỹ thuật hoặc muốn đề xuất cải tiến tính năng mới cho website, Quý Thầy/Cô có thể gửi phiếu yêu cầu hỗ trợ trực tuyến (**Ticket**) đến Ban Quản trị Cổng thông tin Nhà trường (School Admin / AD).
 
-<Callout type="info" title="Cam kết hỗ trợ trực tuyến 100% từ Ban Quản trị Trường">
-  * **Tiếp nhận tập trung:** Mọi yêu cầu được ghi nhận thành mã phiếu (**Ticket ID**) độc lập, lưu trữ lịch sử xử lý minh bạch và gắn liền với tài khoản email công vụ `@hcmute.edu.vn` của người gửi.
-  * **Thời gian phản hồi:** Ban Quản trị Trường HCM-UTE tiếp nhận và bắt đầu xử lý trong vòng **24 giờ làm việc**.
-  * **Thông báo đa kênh:** Tiến độ xử lý và câu trả lời giải đáp sẽ được thông báo ngay lập tức qua biểu tượng chuông trên thanh công cụ quản trị.
+<Callout type="info" title="⚡ Thao tác nhanh (Dành cho Thầy/Cô)">
+  * **Đường dẫn nhanh:** Menu trái chọn **Góp ý & Hỗ trợ** → bấm **+ Gửi yêu cầu mới**.
+  * **3 bước gửi ticket:**
+    1. Nhập **Tiêu đề** ngắn gọn (ví dụ: *Cần hỗ trợ gắn liên kết cổng đăng ký thi tốt nghiệp*).
+    2. Mô tả chi tiết vấn đề và đính kèm **Ảnh chụp màn hình lỗi** (nếu có).
+    3. Chọn danh mục (*Kỹ thuật, Phân quyền, Nội dung...*) và bấm **Gửi yêu cầu**.
+  * **Thời gian phản hồi:** Đội ngũ kỹ thuật Nhà trường sẽ tiếp nhận và phản hồi giải pháp trong vòng **24 giờ làm việc**.
 </Callout>
-
----
-
-## 1. Giao diện tổng quan phân hệ Góp ý & Hỗ trợ
-
-Khi truy cập vào mục **Góp ý & Hỗ trợ** trên thanh menu điều hướng bên trái, hệ thống cung cấp bảng điều khiển trung tâm với các chỉ số thống kê và danh sách phiếu yêu cầu:
 
 ![Giao diện Quản lý Góp ý & Hỗ trợ](/images/tickets/dashboard-quan-ly-ticket.png)
 
-### Các khu vực chức năng chính trên bảng điều khiển:
-1. **Hàng 4 thẻ trạng thái (KPI Cards):**
-   * **Tổng số yêu cầu:** Tổng lượng ticket đơn vị đã gửi lên hệ thống.
-   * **Mới tiếp nhận (Xanh dương):** Ticket vừa gửi thành công, đang chờ Quản trị viên Trường phân công xử lý.
-   * **Đang xử lý (Màu tím):** Kỹ thuật viên/Chuyên viên phụ trách đang kiểm tra dữ liệu, cấu hình hoặc sửa lỗi.
-   * **Đã xử lý (Xanh lá):** Yêu cầu đã được giải quyết triệt để hoặc đã có câu trả lời phản hồi chính thức.
-2. **Thanh công cụ lọc và tra cứu nhanh:**
-   * **Ô tìm kiếm:** Tra cứu nhanh theo mã Ticket (ví dụ: `TK-2026-1012`), tiêu đề hoặc tên người gửi.
-   * **Bộ lọc phân loại:** Lọc theo *Tất cả danh mục*, *Tất cả mức độ ưu tiên* và *Tất cả trạng thái*.
-   * **Nút tạo mới:** Nút **+ Gửi yêu cầu mới** và **+ Tạo yêu cầu hỗ trợ** màu xanh nổi bật để mở biểu mẫu gửi yêu cầu.
+---
+
+## Tác vụ 1: Gửi phiếu yêu cầu hỗ trợ mới (Ticket)
+
+### Mục đích
+Báo cáo lỗi phần mềm, đề xuất cấp thêm quyền tài khoản hoặc nhờ Ban Quản trị Trường hướng dẫn xử lý các vướng mắc phức tạp.
+
+### Các bước thực hiện
+1. Tại menu điều hướng bên trái, Thầy/Cô bấm chọn **Góp ý & Hỗ trợ**.
+2. Bấm nút màu xanh **+ Gửi yêu cầu mới** (hoặc **+ Tạo yêu cầu hỗ trợ**).
+3. Hoàn tất biểu mẫu yêu cầu:
+   * **Tiêu đề (*):** Tóm tắt nội dung cần giúp đỡ (ví dụ: *Lỗi hiển thị ảnh banner trên trang chủ Khoa Cơ khí*).
+   * **Nội dung chi tiết (*):** Mô tả các bước Thầy/Cô đã thao tác và dán đường link trang web đang gặp sự cố.
+   * **Tải ảnh chụp màn hình:** Bấm nút đính kèm ảnh để gửi hình chụp thông báo lỗi trên máy tính. Việc có ảnh chụp màn hình giúp kỹ thuật viên xử lý nhanh hơn rất nhiều.
+   * **Danh mục:** Chọn nhóm phù hợp (*Kỹ thuật & Hệ thống*, *Phân quyền tài khoản*, *Nội dung biên tập* hoặc *Đề xuất tính năng mới*).
+   * **Mức độ ưu tiên:** Chọn mức *Bình thường*, hoặc chọn *Khẩn cấp* nếu website bị gián đoạn hoạt động trước sự kiện lớn.
+4. Bấm nút **Gửi yêu cầu**.
+
+### Kết quả
+Hệ thống cấp ngay một mã số phiếu độc lập (ví dụ: `TK-2026-1012`) và gửi phiếu trực tiếp đến hàng đợi xử lý của kỹ thuật viên Trường.
+
+### Lưu ý nếu có
+* Hệ thống tự động ghi nhận họ tên, email `@hcmute.edu.vn` và tên đơn vị của Thầy/Cô nên Thầy/Cô không cần nhập lại thông tin cá nhân.
 
 ---
 
-## 2. Quy trình 4 bước gửi phiếu yêu cầu hỗ trợ (Ticket)
+## Tác vụ 2: Theo dõi tiến độ và nhận phản hồi từ kỹ thuật viên
 
-![Biểu mẫu Gửi Góp ý / Yêu cầu Hỗ trợ](/images/tickets/modal-gui-yeu-cau.png)
+### Mục đích
+Xem kỹ thuật viên đã tiếp nhận yêu cầu chưa, đọc hướng dẫn giải quyết và xác nhận đóng phiếu hỗ trợ.
 
-<Steps>
-  <Step>
-    ### Mở biểu mẫu gửi yêu cầu
-    Trên màn hình quản trị, bấm chọn mục **Góp ý & Hỗ trợ** ở thanh menu bên trái, sau đó bấm nút **+ Gửi yêu cầu mới** (hoặc **+ Tạo yêu cầu hỗ trợ**).
-  </Step>
+### Các bước thực hiện
+1. Khi kỹ thuật viên trả lời, hệ thống sẽ phát tín hiệu qua **biểu tượng chiếc Chuông thông báo** ở góc trên màn hình và gửi email thông báo.
+2. Thầy/Cô vào menu **Góp ý & Hỗ trợ**, bấm vào mã phiếu yêu cầu để đọc nội dung giải đáp.
+3. Nếu vấn đề đã được giải quyết xong xuôi: Thầy/Cô bấm nút **Đóng yêu cầu (Hoàn tất)**.
+4. Nếu vẫn còn vướng mắc: Thầy/Cô gõ thêm phản hồi vào ô trao đổi ở cuối trang và bấm **Gửi phản hồi**.
 
-  <Step>
-    ### Nhập tiêu đề và nội dung chi tiết
-    * **Tiêu đề yêu cầu (Bắt buộc):** Tóm tắt ngắn gọn vấn đề cần hỗ trợ trong phạm vi 200 ký tự (Ví dụ: *Lỗi cập nhật bài viết ở Khoa CNTT*, *Đề xuất thêm khối liên kết ngoài ở trang chủ*...).
-    * **Nội dung chi tiết & Minh họa (Bắt buộc):** Trình bày chi tiết các bước Thầy/Cô đã thao tác dẫn đến sự cố, dán đường link trang bị lỗi.
-    * **Đính kèm ảnh chụp màn hình:** Bấm nút **Thêm ảnh** trên thanh soạn thảo để tải ảnh chụp màn hình thông báo lỗi hoặc giao diện bị lệch. Ảnh minh họa giúp đội ngũ kỹ thuật khoanh vùng và xử lý sự cố nhanh gấp 3 lần.
-  </Step>
-
-  <Step>
-    ### Chọn danh mục nghiệp vụ và mức độ ưu tiên
-    * **Thông tin người gửi:** Hệ thống tự động trích xuất tên, email `@hcmute.edu.vn` và đơn vị của Thầy/Cô.
-    * **Danh mục nghiệp vụ:**
-      * *Kỹ thuật & Hệ thống:* Lỗi giao diện, không truy cập được trang, lỗi chức năng CMS.
-      * *Phân quyền & Tài khoản:* Đề xuất cấp mới hoặc thay đổi quyền hạn biên tập/duyệt bài.
-      * *Nội dung & Biên tập:* Vướng mắc về định dạng văn bản, chuẩn ảnh đại diện, chuyển mục song ngữ.
-      * *Góp ý & Đề xuất tính năng:* Đóng góp ý kiến cải tiến giao diện hoặc tính năng mới cho website trường.
-    * **Mức độ ưu tiên:**
-      * *Thấp:* Góp ý nhỏ, cải tiến thẩm mỹ không ảnh hưởng đến vận hành.
-      * *Trung bình:* Thắc mắc nghiệp vụ, câu hỏi hướng dẫn sử dụng thông thường.
-      * *Khẩn cấp:* Sự cố ngắt kết nối trang, lỗi bảo mật hoặc không thể xuất bản tin tức sự kiện khẩn cấp của đơn vị.
-  </Step>
-
-  <Step>
-    ### Hoàn tất gửi phiếu (Hỗ trợ phím tắt nhanh)
-    Bấm nút **Gửi yêu cầu hỗ trợ** hoặc nhấn tổ hợp phím **Ctrl + Enter** (trên Windows) / **Cmd + Enter** (trên Mac) để gửi nhanh phiếu yêu cầu đến Ban Quản trị Trường.
-  </Step>
-</Steps>
-
----
-
-## 3. Sơ đồ quy trình tiếp nhận và xử lý Ticket trực tuyến
-
-<Mermaid caption="Quy trình tiếp nhận và xử lý yêu cầu hỗ trợ trực tuyến 100% bởi AD">{`flowchart TD
-    A["Thầy Cô đơn vị gửi Ticket"] --> B["Hệ thống cấp mã TK-2026-XXXX"]
-    B --> C["Thông báo tự động đến Ban Quản trị Trường (AD)"]
-    C --> D{"Phân loại nghiệp vụ"}
-    D -->|Kỹ thuật & Hệ thống| E1["Bộ phận Kỹ thuật kiểm tra & sửa lỗi"]
-    D -->|Phân quyền & Tài khoản| E2["Chuyên viên quản trị tài khoản xử lý"]
-    D -->|Nội dung & Góp ý| E3["P. QTTH&TT giải đáp nghiệp vụ"]
-    E1 --> F["Cập nhật trạng thái: Đang xử lý"]
-    E2 --> F
-    E3 --> F
-    F --> G["Hoàn tất giải pháp & Phản hồi trực tuyến"]
-    G --> H["Chuyển trạng thái: Đã xử lý (Xanh lá)"]
-    H --> I["Thầy Cô nhận thông báo tức thì qua chuông thông báo"]
-`}</Mermaid>
-
----
-
-
-
----
-
-## 4. Bảng cam kết thời gian phản hồi hỗ trợ (SLA)
-
-Nhằm đảm bảo hệ thống website toàn trường vận hành thông suốt và tin cậy, Ban Quản trị Trường cam kết thời gian tiếp nhận và xử lý yêu cầu hỗ trợ theo bảng cam kết mức chất lượng dịch vụ (SLA - Service Level Agreement) sau:
-
-| Mức độ ưu tiên | Định nghĩa sự cố / Phân loại yêu cầu | Thời gian phản hồi ban đầu | Thời gian xử lý cam kết |
-| :--- | :--- | :--- | :--- |
-| **Khẩn cấp (P1)** | Website đơn vị bị tê liệt toàn bộ, lỗi ngắt kết nối diện rộng, sự cố an ninh thông tin hoặc mã độc | **≤ 30 phút** (24/7) | **≤ 4 giờ** |
-| **Cao (P2)** | Chức năng quan trọng bị gián đoạn (không thể xuất bản tin tuyển sinh/sự kiện, lỗi phân quyền duyệt bài) | **≤ 2 giờ** (Giờ hành chính) | **≤ 8 giờ làm việc** |
-| **Trung bình (P3)** | Thắc mắc nghiệp vụ biên tập, lỗi hiển thị giao diện cục bộ, cập nhật menu hoặc biểu mẫu | **≤ 4 giờ làm việc** | **≤ 24 giờ làm việc** |
-| **Thấp (P4)** | Đóng góp ý kiến cải tiến, đề xuất tính năng mới, yêu cầu tài liệu hướng dẫn bổ sung | **≤ 8 giờ làm việc** | **≤ 3 - 5 ngày làm việc** |
-
----
-
-## 5. Quy trình báo cáo sự cố an ninh và bảo mật thông tin
-
-Khi phát hiện bất kỳ dấu hiệu bất thường nào liên quan đến an ninh mạng hoặc nghi ngờ lộ lọt tài khoản quản trị, Thầy Cô cần kích hoạt ngay quy trình phản ứng nhanh sau:
-
-<Callout type="error" title="CẢNH BÁO BẢO VỆ DỮ LIỆU CÁ NHÂN & THÔNG TIN BẢO MẬT TRÊN TICKET">
-  * **Tuyệt đối KHÔNG gửi mật khẩu, khóa bảo mật (API Key) hoặc Access Token qua ticket:** Ban Quản trị và đội ngũ kỹ thuật Trường HCM-UTE không bao giờ yêu cầu Thầy Cô cung cấp mật khẩu cá nhân hay mã xác thực 2 lớp dưới bất kỳ hình thức nào.
-  * **Bảo vệ dữ liệu cá nhân (Tuân thủ Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15):** Không tải lên hoặc đính kèm danh sách sinh viên chứa số Căn cước công dân (CCCD), tài khoản ngân hàng cá nhân, số điện thoại riêng tư hoặc điểm số chi tiết.
-  * **Che mờ ảnh chụp màn hình nhạy cảm:** Trước khi đính kèm ảnh chụp sự cố, Thầy Cô bắt buộc phải dùng công cụ chỉnh sửa để che mờ (blur / che phủ màu) địa chỉ email, tên đăng nhập, mã số hồ sơ nội bộ.
-</Callout>
-
-### Các bước phối hợp xử lý sự cố an ninh:
-
-<Steps>
-  <Step>
-    ### Tự bảo vệ tài khoản ngay lập tức
-    Nếu nghi ngờ tài khoản bị lộ thông tin đăng nhập, Thầy Cô hãy lập tức đổi mật khẩu email Google Workspace trường cấp (`@hcmute.edu.vn`) và đăng xuất khỏi mọi thiết bị đang mở.
-  </Step>
-
-  <Step>
-    ### Tạo ticket khẩn cấp hoặc gọi đường dây nóng
-    * Tạo ticket trên hệ thống với **Mức độ: Khẩn cấp** và chọn danh mục **An ninh & Bảo mật hệ thống**.
-    * Trình bày vướng mắc gặp phải, thời điểm phát hiện và đường dẫn trang web bị ảnh hưởng.
-    * Trường hợp khẩn cấp ngoài giờ hành chính, liên hệ trực tiếp đường dây nóng kỹ thuật Trung tâm Dữ liệu & CNTT.
-  </Step>
-
-  <Step>
-    ### Ban Quản trị Trường kích hoạt cô lập sự cố
-    * Chuyên trách an ninh hệ thống tiến hành vô hiệu hóa phiên đăng nhập bất thường, kiểm tra nhật ký truy cập và ngăn chặn các kết nối độc hại.
-    * Phối hợp cùng đơn vị xác minh tính toàn vẹn dữ liệu trang web.
-  </Step>
-
-  <Step>
-    ### Khắc phục triệt để và bàn giao an toàn
-    Sau khi xử lý sự cố, hệ thống sẽ gửi thông báo phản hồi chính thức trên ticket, hướng dẫn Thầy Cô các bước kiểm tra an toàn trước khi tiếp tục vận hành bình thường.
-  </Step>
-</Steps>
+### Kết quả
+Quá trình hỗ trợ diễn ra minh bạch, lịch sử trao đổi được lưu lại đầy đủ để Thầy/Cô dễ dàng tra cứu lại khi cần.
 
 ---
 
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
-### Tình huống 1: Gửi yêu cầu hỗ trợ nhưng muốn bổ sung thêm ảnh chụp màn hình thì thao tác thế nào?
-* **Nguyên nhân:** Sau khi gửi ticket, Thầy/Cô phát hiện thêm chi tiết lỗi hoặc có thêm ảnh chụp màn hình bổ sung.
-* **Cách xử lý:** Mở danh sách **Góp ý & Hỗ trợ** → bấm vào dòng chứa mã Ticket vừa gửi (ví dụ: `TK-2026-1012`) → kéo xuống phần trao đổi và tải thêm ảnh chụp hoặc gõ nội dung bổ sung vào ô phản hồi.
-
-### Tình huống 2: Trường hợp gặp sự cố khẩn cấp (website đơn vị bị gián đoạn trước giờ diễn ra sự kiện) thì chọn mức ưu tiên nào?
-* **Nguyên nhân:** Sự cố phát sinh đột xuất cần ưu tiên khắc phục ngay lập tức để phục vụ công tác truyền thông của Trường hoặc Khoa.
-* **Cách xử lý:** Khi tạo ticket, Thầy/Cô chọn **Mức độ ưu tiên: Khẩn cấp**. Hệ thống sẽ gắn nhãn cảnh báo đỏ và gửi thông báo ưu tiên trực tiếp đến điện thoại/email trực ban kỹ thuật của Ban Quản trị để can thiệp trong thời gian ngắn nhất.
-
-### Tình huống 3: Làm sao để kiểm tra lại lịch sử các ticket đã được xử lý xong từ những tháng trước?
-* **Nguyên nhân:** Thầy Cô cần tra cứu lại hướng dẫn hoặc giải pháp mà AD đã phản hồi để áp dụng cho trường hợp tương tự.
-* **Cách xử lý:** Tại thanh công cụ lọc của trang **Quản lý Góp ý & Hỗ trợ**, Thầy/Cô chọn bộ lọc **Trạng thái: Đã xử lý** (hoặc gõ từ khóa vào ô tìm kiếm). Toàn bộ nội dung trao đổi, thời gian xử lý và giải pháp của AD đều được lưu trữ vĩnh viễn trên hệ thống.
+### Tình huống 1: Gửi ticket vào ngày cuối tuần hoặc ngoài giờ hành chính thì khi nào được hỗ trợ?
+* **Cách hiểu đúng:** Hệ thống tiếp nhận ticket trực tuyến 24/7. Các vấn đề khẩn cấp ảnh hưởng trực tiếp đến toàn hệ thống sẽ được đội ngũ kỹ thuật trực ca xử lý ngay; các yêu cầu thông thường sẽ được ưu tiên giải quyết vào đầu giờ sáng của ngày làm việc tiếp theo.

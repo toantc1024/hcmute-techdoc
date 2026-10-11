@@ -1,125 +1,95 @@
 ---
 title: Trình thiết kế giao diện Page Builder
-description: Làm chủ công cụ kéo thả khối nội dung trực quan, bộ xem trước responsive 3 chế độ, quản lý cấu trúc layer và thư viện khối giao diện chuẩn hóa HCM-UTE.
+description: Làm chủ công cụ kéo thả khối nội dung trực quan, bộ xem trước responsive 3 chế độ và thư viện khối giao diện chuẩn hóa tại HCM-UTE.
 order: 3
 ---
 
-Trình thiết kế **Page Builder** cho phép Quý Thầy/Cô tự do sắp đặt, lắp ghép các khối thông tin trên trang theo thời gian thực mà không cần viết code hay am hiểu lập trình web.
+Trình thiết kế **Page Builder** cho phép Quý Thầy/Cô tự do sắp xếp, lắp ghép các khối thông tin trên trang theo thời gian thực mà không cần viết bất kỳ dòng mã lập trình nào.
 
----
-
-## 1. Ba khu vực làm việc chính
-
-Giao diện trình thiết kế chia làm 3 cột chức năng trực quan:
-
-| Khu vực | Vị trí | Chức năng |
-| :--- | :--- | :--- |
-| **Thư viện khối & Layer** | Bên trái | Chứa danh mục các khối chuẩn hóa, quản lý phân tầng layer, ô tìm kiếm và lọc chuyên mục khối. |
-| **Vùng dựng trang (Canvas)** | Ở giữa | Không gian mô phỏng trực quan trang web, hỗ trợ kéo thả và xem trước nội dung. |
-| **Bảng thuộc tính** | Bên phải | Tùy chỉnh chi tiết câu chữ, hình ảnh, liên kết và kiểu dáng (căn lề, màu sắc, khoảng cách) của khối đang chọn. |
-
----
-
-## 2. Thanh công cụ điều khiển phía trên
+<Callout type="info" title="⚡ Thao tác nhanh (Dành cho Thầy/Cô)">
+  * **3 khu vực làm việc chính:**
+    1. **Cột bên trái:** Thư viện khối giao diện và cây phân tầng (Layers).
+    2. **Khu vực ở giữa:** Không gian kéo thả và xem trước trang trực quan.
+    3. **Cột bên phải:** Bảng chỉnh sửa câu chữ, hình ảnh và liên kết cho khối đang chọn.
+  * **Kiểm tra điện thoại di động:** Bấm vào biểu tượng **Điện thoại** ở thanh trên cùng để xem trước giao diện trên smartphone.
+  * **Đừng quên:** Bấm nút **Lưu thay đổi** ở góc trên bên phải sau mỗi lần chỉnh sửa.
+</Callout>
 
 ![Thư viện khối giao diện trong trình thiết kế Page Builder](/images/page-builder/thu-vien-khoi-trang-chu.png)
 
-* **Bộ chuyển đổi hiển thị Responsive (3 chế độ):**
-  * `Máy tính` (Desktop): Chế độ mặc định để bố cục toàn trang trên màn hình lớn.
-  * `Máy tính bảng` (Tablet): Kiểm tra độ co giãn 2 cột hoặc lưới thu nhỏ.
-  * `Điện thoại` (Mobile): Kiểm tra giao diện dọc, cỡ chữ và độ dễ đọc trên thiết bị di động.
-* **3 Tab công cụ tại thanh cột bên trái:**
-  * **Tab Khối giao diện (Biểu tượng 4 ô vuông):** Thư viện toàn bộ các khối nội dung chuẩn hóa sẵn sàng kéo thả hoặc bấm nút `+`.
-  * **Tab Quản lý phân tầng (Biểu tượng các lớp Layers):** Xem cây cấu trúc các khối đang có trên trang, kéo thả đổi thứ tự từ trên xuống dưới nhanh chóng.
-  * **Tab Cài đặt chung (Biểu tượng chữ i):** Cấu hình tiêu đề, mô tả và cài đặt nền của trang.
+---
+
+## Tác vụ 1: Thêm khối giao diện mới vào trang
+
+### Mục đích
+Bổ sung thêm một phần thông tin mới lên trang web (ví dụ: thêm Banner chào mừng, thêm khung giới thiệu hay danh sách cán bộ).
+
+### Các bước thực hiện
+1. Trong màn hình Page Builder, nhìn sang cột bên trái và bấm vào tab **Khối giao diện** (biểu tượng 4 ô vuông).
+2. Duyệt qua các nhóm khối chuẩn hóa (*Trang chủ, Giới thiệu, Tin tức, Đội ngũ...*).
+3. Dùng chuột **kéo khối mong muốn** và thả vào vị trí phù hợp trong không gian ở giữa màn hình (hoặc bấm dấu `+` để thêm vào cuối trang).
+4. Bấm **Lưu thay đổi**.
+
+### Kết quả
+Khối giao diện mới lập tức xuất hiện trên trang với định dạng màu sắc và phông chữ chuẩn hóa của Trường.
+
+### Lưu ý nếu có
+* Thầy/Cô có thể gõ từ khóa vào ô **Tìm khối** ở đầu cột trái để tìm nhanh khối cần dùng.
 
 ---
 
-## 3. Thư viện các khối giao diện chuẩn hóa (Blocks Library)
+## Tác vụ 2: Chỉnh sửa chữ và đổi hình ảnh trong khối
 
-Hệ thống cung cấp sẵn các nhóm khối chức năng được thiết kế riêng theo tiêu chuẩn nhận diện thương hiệu của Trường ĐH Công nghệ Kỹ thuật TP.HCM:
+### Mục đích
+Thay thế văn bản mẫu và hình minh họa mặc định thành nội dung thực tế của đơn vị.
 
-### Nhóm 1: Trang chủ & Tổng quan (10 khối)
+### Các bước thực hiện
+1. Dùng chuột **nhấp trực tiếp vào khối** muốn chỉnh sửa ở khu vực giữa màn hình. Khối đang chọn sẽ có đường viền bao quanh.
+2. Nhìn sang **Cột bên phải (Bảng thuộc tính)**:
+   * **Sửa câu chữ:** Nhập trực tiếp tiêu đề, đoạn văn mô tả vào các ô tương ứng.
+   * **Đổi hình ảnh:** Bấm vào ô hình ảnh để tải ảnh mới từ máy tính hoặc chọn ảnh từ tab *Bộ nhận diện HCM-UTE*.
+   * **Gắn liên kết nút bấm:** Nhập đường dẫn trang web hoặc số điện thoại vào ô liên kết.
+3. Bấm **Lưu thay đổi**.
 
-Nhóm khối dành riêng cho việc xây dựng trang chủ của Trường, Khoa, Viện và các cổng thông tin chuyên đề:
+### Kết quả
+Nội dung của khối được cập nhật tức thì ngay trên màn hình để Thầy/Cô kiểm tra.
 
-1. **Băng chuyền ảnh nổi bật (Hero Carousel):**
-   * *Đặc điểm:* Hiển thị slide biểu ngữ lớn ở đầu trang với hiệu ứng chuyển ảnh mượt mà, tiêu đề nổi bật, nút kêu gọi hành động (*Call to Action*) và các chấm tròn chỉ số trang.
-   * *Ứng dụng:* Dành cho các chiến dịch tuyển sinh, sự kiện khai giảng, hội nghị quốc tế hoặc thành tựu nổi bật của đơn vị.
-2. **Giới thiệu Về HCM-UTE (About Section):**
-   * *Đặc điểm:* Bố cục kết hợp giữa video giới thiệu trực quan (có nút Play) và các cột tóm tắt lịch sử, quy mô đào tạo và điểm nhấn đơn vị.
-   * *Ứng dụng:* Trang giới thiệu tổng quan Khoa/Trường, lịch sử hình thành và phát triển.
-3. **Ban Lãnh đạo (Leadership Cards):**
-   * *Đặc điểm:* Bố cục thẻ trang trọng hiển thị chân dung Lãnh đạo (Ban Giám hiệu, Ban Chủ nhiệm Khoa, Lãnh đạo Phòng ban) kèm học hàm, học vị, chức danh và thông tin liên hệ.
-4. **Thông điệp Hiệu trưởng (Principal / Dean Message):**
-   * *Đặc điểm:* Thiết kế trích dẫn trang trọng với hình ảnh chân dung Lãnh đạo và đoạn trích dẫn tâm huyết về định hướng phát triển, lời chào mừng tân sinh viên hoặc đối tác.
-5. **Tầm nhìn & Sứ mệnh (Vision & Mission):**
-   * *Đặc điểm:* Khối trình bày tuyên ngôn Tầm nhìn, Sứ mệnh và Giá trị cốt lõi theo cấu trúc thẻ song song, rõ ràng và mạch lạc.
-6. *(Các khối tiếp theo trong nhóm Trang chủ & Tổng quan và các nhóm khối khác đang được cập nhật liên tục bám sát tài liệu thực tế của Thầy/Cô).*
+### Lưu ý nếu có
+* Nếu muốn đổi màu nền hoặc khoảng cách cách lề, Thầy/Cô kéo xuống mục *Kiểu dáng (Styles)* ở bảng thuộc tính bên phải.
 
 ---
 
-## 4. Thao tác thêm, sắp xếp và tùy biến khối
+## Tác vụ 3: Đổi thứ tự hoặc xóa bỏ khối không sử dụng
 
-<Steps>
-  <Step>
-    ### Thêm khối mới vào trang
-    Tại thư viện bên trái, gõ từ khóa vào ô **Tìm kiếm khối** hoặc chọn chuyên mục. Nhấn nút dấu `+` màu xanh bên cạnh khối (hoặc dùng chuột kéo khối thả trực tiếp vào vị trí mong muốn trên Canvas).
-  </Step>
+### Mục đích
+Sắp xếp lại trình tự xuất hiện của các phần trên trang từ trên xuống dưới hoặc xóa bớt phần thừa.
 
-  <Step>
-    ### Sắp xếp và đổi vị trí khối
-    * Bấm chọn khối: thanh công cụ của khối sẽ xuất hiện với mũi tên lên/xuống để đổi thứ tự.
-    * Hoặc chuyển sang tab **Layer (Các lớp)** ở cột trái để kéo thả di chuyển vị trí giữa các khối cực kỳ trực quan.
-  </Step>
+### Các bước thực hiện
+1. Nhìn sang cột bên trái và bấm chọn tab **Quản lý phân tầng (Layers)** (biểu tượng các lớp xếp chồng).
+2. Danh sách tất cả các khối trên trang sẽ hiển thị từ trên xuống dưới.
+3. **Đổi thứ tự:** Dùng chuột bấm giữ vào tên khối và kéo lên hoặc kéo xuống vị trí mong muốn.
+4. **Xóa khối:** Bấm vào biểu tượng thùng rác màu đỏ cạnh tên khối đó (hoặc bấm vào khối ở giữa màn hình rồi nhấn phím `Delete`).
+5. Bấm **Lưu thay đổi**.
 
-  <Step>
-    ### Tùy biến nội dung tại bảng thuộc tính
-    Bấm chọn khối trên Canvas → điều chỉnh tại bảng bên phải:
-    * **Tab Nội dung:** Cập nhật tiêu đề, chữ mô tả, liên kết nút bấm, tải ảnh thay thế.
-    * **Tab Kiểu dáng:** Tùy chỉnh căn lề (trái/giữa/phải), màu nền, khoảng cách đệm trên dưới (*Padding*).
-  </Step>
-</Steps>
+### Kết quả
+Trang web được tinh gọn lại và các phần hiển thị theo đúng thứ tự logic mà Thầy/Cô mong muốn.
+
+### Lưu ý nếu có
+* Thao tác xóa khối có thể hoàn tác ngay bằng tổ hợp phím `Ctrl + Z` nếu Thầy/Cô lỡ tay bấm nhầm.
 
 ---
 
+## 💡 Thư viện các khối giao diện tiêu biểu của HCM-UTE
+
+* **Hero Carousel (Băng chuyền ảnh lớn):** Đặt ở đầu trang, hiển thị các hình ảnh sự kiện trọng đại với nút bấm hành động nổi bật.
+* **About Section (Khối Giới thiệu):** Trình bày video giới thiệu và các đoạn tóm tắt lịch sử phát triển đơn vị.
+* **Leadership Cards (Ban Lãnh đạo):** Hiển thị thẻ chân dung Ban Giám hiệu, Ban Chủ nhiệm Khoa kèm học hàm, học vị và email công vụ.
+* **News Grid (Lưới Tin tức tự động):** Tự động lọc và hiển thị 3 - 6 bài viết mới nhất từ chuyên mục được chỉ định.
+* **Quick Links (Liên kết nhanh):** Dãy nút dẫn nhanh đến các cổng thông tin dịch vụ như E-learning, Đăng ký học phần, Thư viện số.
 
 ---
-
-## 5. Đồng bộ cấu trúc và dịch AI sang trang tiếng Anh
-
-Khi xây dựng hoàn thiện trang giao diện bên **Tiếng Việt**, Thầy Cô không cần mất công tạo lại từng khối cho phiên bản tiếng Anh. Hệ thống cung cấp công cụ chuyển giao tự động:
-
-![Giao diện modal Đồng bộ & Dịch AI trong Page Builder](/images/page-builder/dong-bo-va-dich-ai.png)
-
-### 5.1. Quy trình kích hoạt và các bước thực hiện
-1. Tại góc trên bên phải màn hình Page Builder, bấm nút **✨ Đồng bộ & Dịch AI**.
-2. Hệ thống hiển thị modal làm việc với nguồn **Tiếng Việt** và đích đến **English**.
-3. **Lựa chọn 1 trong 2 chế độ xử lý nội dung:**
-   * **Điền phần còn thiếu (Fill - Khuyến nghị):** Hệ thống chỉ đồng bộ các khối mới tạo và dịch các trường văn bản còn trống. **Giữ nguyên 100% các câu chữ Thầy/Cô đã trau chuốt thủ công bên tiếng Anh trước đó**, không lo bị AI dịch đè mất dữ liệu.
-   * **Thay thế toàn bộ (Replace):** Ghi đè và dịch lại toàn bộ nội dung của các khối đã chọn từ Tiếng Việt sang English (phù hợp khi trang tiếng Việt được thiết kế lại hoàn toàn mới).
-4. **Chọn khối cần xử lý:** Tích chọn toàn bộ hoặc chọn riêng các khối cần cập nhật (ví dụ: *Hero Carousel, Thông báo Marquee, Giới thiệu Home/About...*).
-5. **Chọn hình thức đồng bộ:**
-   * **Nút `Sao chép cấu trúc`:** Chỉ sao chép bố cục, hình ảnh và media sang tiếng Anh mà chưa dịch chữ (để Thầy Cô tự biên soạn tiếng Anh).
-   * **Nút `Đồng bộ & Dịch`:** Sao chép toàn bộ bố cục, hình ảnh đồng thời kích hoạt AI dịch văn bản tự động sang tiếng Anh.
-
-<Callout type="warn" title="Nguyên tắc vàng: Rà soát ngữ pháp trước khi xuất bản">
-  * **AI đóng vai trò trợ lý dịch thô (Draft Translation):** AI hỗ trợ chuyển ngữ nhanh giúp tiết kiệm 80% thời gian dựng trang, nhưng không thể thay thế hoàn toàn năng lực chuyên môn của người làm truyền thông.
-  * **Bắt buộc kiểm tra kỹ ngữ pháp & thuật ngữ:** Trước khi bấm nút **Xuất bản** phiên bản tiếng Anh, Thầy/Cô cần chuyển sang tab **English** để đọc soát kỹ:
-    * *Học hàm, học vị và chức danh Lãnh đạo:* Chuẩn hóa đúng dạng quốc tế (*Assoc. Prof., Ph.D, Dean, Vice Dean, Head of Department...*).
-    * *Tên riêng các đơn vị đào tạo, phòng ban và chuyên ngành.*
-    * *Cấu trúc câu, thì động từ và văn phong học thuật chuẩn mực.*
-</Callout>
 
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
-### Tình huống 1: Hình ảnh tải lên khối banner hoặc trình chiếu bị vỡ hạt hoặc méo tỷ lệ?
-* **Nguyên nhân:** Hệ thống áp dụng quy chuẩn tỷ lệ **16:9** cho banner trượt và **4:3** cho ảnh bài viết.
-* **Cách xử lý:** Thầy/Cô nên chuẩn bị ảnh có độ phân giải ngang từ 1200px trở lên (khuyến nghị `1920×1080px`). Khi tải lên, sử dụng công cụ cắt ảnh trực quan để định vị đúng tâm ảnh.
-
-### Tình huống 2: Giao diện trên máy tính rất đẹp nhưng khi xem trên điện thoại các khối bị tràn viền?
-* **Cách xử lý:** Bấm ngay nút **Điện thoại** (Mobile) trên thanh công cụ phía trên để xem trước giao diện dọc. Tất cả các khối chuẩn trong thư viện đều đã được lập trình tự động co giãn thông minh (*Responsive 100%*).
-
-### Tình huống 3: Đang dựng khối dở thì trình duyệt bị tắt đột ngột do mất điện?
-* **Nguyên nhân:** Hệ thống có tính năng tự động lưu nháp định kỳ.
-* **Cách xử lý:** Khi mở lại trang, hệ thống sẽ tự động hiển thị thanh thông báo: *"Phát hiện bản nháp chưa công bố lúc [giờ:phút]. Bạn có muốn khôi phục không?"* → bấm **Khôi phục** để tiếp tục công việc mà không bị mất bố cục.
+### Tình huống 1: Sau khi sửa trang, xem trên điện thoại thấy chữ bị tràn hoặc ảnh bị méo?
+* **Cách xử lý:** Trong trình thiết kế, Thầy/Cô bấm vào biểu tượng **Điện thoại** ở thanh trên cùng để kiểm tra. Nếu chữ quá dài, hãy rút ngắn tiêu đề hoặc điều chỉnh cỡ chữ ở bảng thuộc tính bên phải dành riêng cho chế độ di động.

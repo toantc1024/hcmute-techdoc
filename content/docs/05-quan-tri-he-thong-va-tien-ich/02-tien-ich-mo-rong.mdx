@@ -1,36 +1,65 @@
 ---
 title: Quản lý tiện ích mở rộng (Widgets và Services)
-description: Quản lý các nhóm tiện ích, liên kết phần mềm nội bộ và cổng dịch vụ công của HCM-UTE
+description: Hướng dẫn quản lý các nhóm tiện ích, liên kết phần mềm nội bộ và cổng dịch vụ công tại HCM-UTE.
 order: 2
 ---
 
-Phân hệ **Tiện ích mở rộng** cho phép tập hợp các liên kết dịch vụ dùng chung (như *Cổng đào tạo online, Thư viện số, Đánh giá rèn luyện, Khảo sát trực tuyến*) thành các thẻ trực quan trên website.
+Phân hệ **Tiện ích mở rộng** cho phép Quý Thầy/Cô tập hợp các đường link dịch vụ trực tuyến (như *Cổng đào tạo tín chỉ, E-learning, Thư viện số, Đánh giá điểm rèn luyện*) thành các nút bấm đẹp mắt, đồng bộ trên website.
+
+<Callout type="info" title="⚡ Thao tác nhanh (Dành cho Thầy/Cô)">
+  * **Quyền cần có:** Quản trị viên đơn vị (Unit Admin).
+  * **Đường dẫn nhanh:** Menu trái chọn **Tiện ích mở rộng**.
+  * **3 bước thực hiện:**
+    1. Bấm **Tạo nhóm mới** để gom nhóm (ví dụ: *Dịch vụ Sinh viên* hoặc *Dịch vụ Giảng viên*).
+    2. Bấm **+ Thêm tiện ích** → Nhập tên dịch vụ, dán đường dẫn URL truy cập.
+    3. Tải biểu tượng icon (PNG/SVG) và bật công tắc **Công khai** để hiển thị ra website.
+  * **Kết quả:** Các biểu tượng dịch vụ xuất hiện gọn gàng trên trang chủ để sinh viên và giảng viên bấm vào sử dụng ngay.
+</Callout>
 
 ---
 
-## 1. Tạo nhóm tiện ích mới
-1. Vào `Tiện ích mở rộng` → chọn **Tạo nhóm mới**.
-2. Nhập **Tên nhóm tiện ích (*)** (ví dụ: *Dịch vụ Sinh viên, Cổng Thầy Cô Giảng viên*).
-3. Nhập **Mô tả nhóm** và thiết lập công tắc **Công khai (Public)** để hiển thị trên cổng thông tin.
+## Tác vụ 1: Tạo nhóm tiện ích mới
+
+### Mục đích
+Gom các phần mềm và cổng dịch vụ có cùng đối tượng sử dụng vào chung một nhóm ngăn nắp (ví dụ: *Cổng dịch vụ sinh viên*, *Hệ thống quản lý nghiên cứu khoa học*).
+
+### Các bước thực hiện
+1. Tại menu bên trái, Thầy/Cô chọn **Tiện ích mở rộng**.
+2. Bấm nút **Tạo nhóm mới** ở góc trên.
+3. Điền thông tin nhóm:
+   * **Tên nhóm tiện ích (*):** Nhập tên rõ ràng (ví dụ: *Hệ thống phần mềm đào tạo*).
+   * **Mô tả nhóm:** Viết 1 câu giới thiệu ngắn gọn.
+   * **Công tắc Công khai:** Bật xanh để nhóm này hiển thị công khai trên cổng thông tin.
 4. Bấm **Tạo nhóm tiện ích**.
 
+### Kết quả
+Nhóm tiện ích mới được tạo thành công và sẵn sàng để Thầy/Cô thêm các dịch vụ cụ thể vào bên trong.
+
+### Lưu ý nếu có
+* Mỗi nhóm nên chứa từ 4 đến 8 tiện ích để khi hiển thị ra trang web không bị quá dài.
+
 ---
 
-## 2. Thêm tiện ích vào nhóm
-1. Chọn **Thêm tiện ích** ở đầu trang hoặc bên trong nhóm tương ứng.
-2. Nhập thông tin:
-   * **Nhóm tiện ích (*):** Chọn nhóm cha.
-   * **Tên tiện ích (*):** Tên dịch vụ (ví dụ: *Đăng ký học phần*).
-   * **Mô tả chức năng:** Hướng dẫn ngắn về tiện ích.
-   * **Đường dẫn URL liên kết (*):** Địa chỉ truy cập chính xác.
-   * **Khung mở liên kết:** Khuyến nghị chọn *Tab mới (`_blank`)*.
-   * **Biểu tượng (Icon / Logo):** Tải lên logo định dạng PNG hoặc SVG nền trong suốt (kích thước tối ưu `64×64` hoặc `128×128`).
-   * **Công tắc Công khai:** Bật để hiện công khai, tắt để chuyển sang *Chế độ nội bộ*.
+## Tác vụ 2: Thêm một dịch vụ tiện ích vào nhóm
+
+### Mục đích
+Tạo ra một biểu tượng bấm nhanh dẫn người dùng mở cổng dịch vụ trực tuyến (ví dụ: Nút *Đăng ký học phần*, *Khảo sát trực tuyến*).
+
+### Các bước thực hiện
+1. Trong nhóm tiện ích tương ứng, Thầy/Cô bấm nút **+ Thêm tiện ích**.
+2. Điền thông tin chi tiết:
+   * **Tên tiện ích (*):** Tên dịch vụ (ví dụ: *Cổng nộp học phí trực tuyến*).
+   * **Đường dẫn URL liên kết (*):** Dán chính xác địa chỉ web của phần mềm đó (ví dụ: `https://e-learning.hcmute.edu.vn`).
+   * **Khung mở liên kết:** Chọn **Mở trong tab mới (`_blank`)** để người dùng không bị đóng website của đơn vị.
+   * **Biểu tượng (Icon / Logo):** Tải lên biểu trưng nhận diện (khuyến nghị tệp PNG nền trong suốt hoặc SVG độ phân giải `128×128 px`).
+   * **Công tắc Công khai:** Bật xanh để đưa ra website.
 3. Bấm **Tạo tiện ích**.
 
----
+### Kết quả
+Nút bấm dịch vụ hiển thị trang trọng với biểu tượng sắc nét, người xem nhấp vào sẽ được đưa thẳng tới cổng dịch vụ của Trường.
 
-## 3. Sơ đồ quy trình nghiệp vụ tiện ích
+### Lưu ý nếu có
+* Luôn mở thử đường dẫn sau khi tạo để chắc chắn địa chỉ web nhập vào hoạt động chính xác.
 
 <Mermaid caption="Sơ đồ quy trình tạo nhóm và thiết lập tiện ích số (Bấm vào khối để mở HDSD tác vụ tương ứng)">{`flowchart LR
     Step1["1. Tạo nhóm tiện ích
@@ -45,18 +74,16 @@ Phân hệ **Tiện ích mở rộng** cho phép tập hợp các liên kết d�
     Step4 -->|"Tắt Công khai"| Private["Chế độ nội bộ
 (Chỉ xem trong Quản trị)"]
 
-    click Step1 href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong#1-t%E1%BA%A1o-nh%C3%B3m-ti%E1%BB%87n-%C3%ADch-m%E1%BB%9Bi" "Xem cách tạo nhóm tiện ích"
-    click Step2 href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong#2-th%C3%AAm-ti%E1%BB%87n-%C3%ADch-v%C3%A0o-nh%C3%B3m" "Xem cách thêm tiện ích"
-    click Step4 href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong" "Xem phân loại hiển thị"`}</Mermaid>
+    click Step1 href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong#t%C3%A1c-v%E1%BB%A5-1-t%E1%BA%A1o-nh%C3%B3m-ti%E1%BB%87n-%C3%ADch-m%E1%BB%9Bi" "Xem cách tạo nhóm tiện ích"
+    click Step2 href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong#t%C3%A1c-v%E1%BB%A5-2-th%C3%AAm-m%E1%BB%99t-d%E1%BB%8Bch-v%E1%BB%A5-ti%E1%BB%87n-%C3%ADch-v%C3%A0o-nh%C3%B3m" "Xem cách thêm tiện ích"
+`}</Mermaid>
 
 ---
 
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
-### Tình huống 1: Tìm kiếm bài viết bằng từ khóa không dấu có ra kết quả chính xác không?
-* **Nguyên nhân:** Bộ máy tìm kiếm của hệ thống hỗ trợ xử lý tiếng Việt thông minh.
-* **Cách xử lý:** Người dùng có thể gõ tiếng Việt có dấu hoặc không dấu (ví dụ: `tuyen sinh` hoặc `tuyển sinh`) đều nhận được kết quả chính xác, hỗ trợ tìm kiếm cả trong nội dung các tệp đính kèm.
+### Tình huống 1: Nếu một phần mềm liên kết ngoài bị bảo trì thì website của Khoa có bị ảnh hưởng không?
+* **Cách hiểu đúng:** Hoàn toàn không bị ảnh hưởng. Website đơn vị hoạt động trên máy chủ độc lập. Nếu phần mềm ngoài tạm thời bảo trì, Thầy/Cô chỉ cần gạt tắt công tắc *Công khai* của tiện ích đó trong bảng điều khiển để ẩn tạm thời nút bấm.
 
-### Tình huống 2: Nếu một tiện ích liên kết ngoài bị bảo trì thì website đơn vị có bị ảnh hưởng không?
-* **Nguyên nhân:** Các tiện ích được thiết kế vận hành độc lập với hệ thống cốt lõi.
-* **Cách xử lý:** Khi cổng dịch vụ bên ngoài bảo trì, tiện ích sẽ hiển thị trạng thái tạm ngưng hoặc ẩn liên kết, hoàn toàn không ảnh hưởng đến hoạt động bình thường của website đơn vị.
+### Tình huống 2: Người đọc tìm kiếm tiện ích bằng từ khóa không dấu có ra không?
+* **Cách hiểu đúng:** Có. Bộ máy tìm kiếm thông minh của Trường hỗ trợ tìm kiếm cả tiếng Việt có dấu và không dấu (ví dụ: gõ `hoc phi` hay `học phí` đều ra đúng tiện ích).

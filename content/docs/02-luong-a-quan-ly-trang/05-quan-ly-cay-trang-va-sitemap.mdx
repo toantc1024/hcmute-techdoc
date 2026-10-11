@@ -1,96 +1,68 @@
 ---
 title: Quản lý cây trang và sitemap toàn hệ thống
-description: Hướng dẫn quản trị sơ đồ cây trang đa tầng, chế độ xem Cây và Bảng trực quan, cơ chế tự động đồng bộ sitemap XML tối ưu cho công cụ tìm kiếm Google.
+description: Hướng dẫn quản trị sơ đồ cây trang đa tầng, chế độ xem Cây và Bảng trực quan, cơ chế tự động đồng bộ sitemap XML tại HCM-UTE.
 order: 5
 ---
 
-Quản lý cây trang là phân hệ nền tảng của **Luồng A**, cho phép Thầy Cô quản trị thiết lập và kiểm soát toàn bộ cấu trúc kiến trúc thông tin (*Information Architecture - IA*) của website đơn vị thuộc Trường Đại học Công nghệ Kỹ thuật TP.HCM (HCM-UTE).
+Phân hệ **Quản lý cây trang** giúp Quý Thầy/Cô bao quát toàn bộ cấu trúc các trang web của đơn vị theo mô hình phân cấp nhánh cha – con khoa học và mạch lạc.
 
-<Callout type="info" title="Ý nghĩa kiến trúc cây trang & Sitemap">
-  * **Cây trang phân tầng:** Mô hình hóa toàn bộ các trang nội dung từ Trang chủ `/(Gốc)` tỏa ra các nhánh chuyên ngành, phòng ban và dịch vụ hỗ trợ.
-  * **Sitemap XML tự động:** Hệ thống tự động sinh và cập nhật tệp sơ đồ trang web (`/sitemap.xml`) chuẩn quốc tế, giúp bot tìm kiếm Google lập chỉ mục (index) bài vở nhanh và chính xác nhất.
+<Callout type="info" title="⚡ Thao tác nhanh (Dành cho Thầy/Cô)">
+  * **Quyền cần có:** Quản trị viên đơn vị (Unit Admin).
+  * **Đường dẫn nhanh:** Menu trái `Website` → chọn `Trang`.
+  * **2 chế độ xem linh hoạt:**
+    * **Chế độ Cây (Tree View):** Xem sơ đồ dạng cây phân nhánh cha – con. Thích hợp nhất khi cần theo dõi tổng thể cấu trúc website.
+    * **Chế độ Bảng (Table View):** Hiển thị danh sách phẳng để dễ tìm kiếm, lọc theo ngày tạo hoặc trạng thái xuất bản.
+  * **Sitemap XML tự động:** Hệ thống tự động cập nhật sơ đồ trang web (`/sitemap.xml`) lên Google mỗi khi Thầy/Cô xuất bản trang mới, Thầy/Cô không cần can thiệp kỹ thuật.
 </Callout>
-
----
-
-## 1. Màn hình quản lý cây trang website
-
-Từ thanh menu bên trái, chọn phân hệ **Website** → chọn **Trang**:
 
 ![Giao diện Quản lý cây trang website và Sitemap](/images/trang/quan-ly-cay-trang-sitemap.png)
 
-### 1.1. Chế độ xem kép linh hoạt (Dual View Modes)
-Hệ thống cung cấp hai phương thức hiển thị tối ưu cho từng nhu cầu quản trị:
-* **Chế độ Cây (Nút `Cây`):** Hiển thị dạng sơ đồ phân nhánh cha — con với các đường nối trực quan và nút mũi tên đóng/mở từng nhánh. Phù hợp nhất khi cần theo dõi luồng điều hướng và sơ đồ cây toàn diện.
-* **Chế độ Bảng (Nút `Bảng`):** Chuyển sang dạng danh sách phẳng, phù hợp khi cần tìm kiếm lọc theo ngày cập nhật, trạng thái xuất bản hoặc xử lý hàng loạt trang.
+---
 
-### 1.2. Thanh công cụ tác vụ nhanh
-* **Ô tìm trang:** Gõ từ khóa để lọc nhanh tên trang hoặc đường dẫn slug.
-* **Thu gọn tất cả / Mở rộng tất cả:** Thu gọn toàn bộ cây trang về mức Trang chủ hoặc mở bung toàn bộ các nhánh con.
-* **Cấu hình template:** Thiết lập khung mẫu bố cục áp dụng chung cho website đơn vị.
-* **Nhân bản trang mẫu:** Sử dụng các mẫu giao diện có sẵn từ thư viện 4 nhóm mẫu chuẩn của trường.
-* **+ Tạo trang:** Nút tạo trang mới độc lập hoặc chọn tạo từ mẫu.
+## Tác vụ 1: Thêm trang con trực thuộc trang cha
+
+### Mục đích
+Xây dựng cấu trúc phân tầng hợp lý cho website đơn vị (ví dụ: trong mục lớn *Giới thiệu* có các trang con như *Tổng quan*, *Cơ cấu tổ chức*, *Bộ nhận diện thương hiệu*).
+
+### Các bước thực hiện
+1. Tại menu bên trái, Thầy/Cô chọn **Website** → chọn **Trang**.
+2. Đảm bảo đang chọn nút **Cây** ở thanh công cụ phía trên.
+3. Tìm đến dòng của trang cha, rê chuột sang cuối dòng và bấm nút dấu cộng **+ (Thêm trang con)**.
+4. Điền thông tin trang mới:
+   * **Tiêu đề (*):** Tên trang con (ví dụ: *Quy chế đào tạo*).
+   * **Đường dẫn / Slug (*):** Nhập chữ không dấu (ví dụ: `quy-che-dao-tao`). Hệ thống sẽ tự động ghép thành đường dẫn chuẩn: `/dao-tao/quy-che-dao-tao`.
+5. Bấm nút **Tạo trang**.
+
+### Kết quả
+Trang con mới được khởi tạo và hiển thị thụt lề ngay bên dưới trang cha trong sơ đồ cây.
+
+### Lưu ý nếu có
+* Cấu trúc cây trang chỉ nên phân cấp sâu từ 2 đến 3 tầng để người đọc trên điện thoại không phải bấm mở quá nhiều bước.
 
 ---
 
-## 2. Cấu trúc phân cấp cây trang mẫu thực tế
+## Tác vụ 2: Lấy liên kết trang web nhanh để chia sẻ hoặc gắn Menu
 
-Một cấu trúc cây trang chuẩn hóa của đơn vị được tổ chức như sau:
+### Mục đích
+Lấy đường dẫn URL chính thức của một trang bất kỳ để gửi cho đối tác, sinh viên hoặc gắn vào nút bấm trên thanh Menu.
 
-```text
-🏠 Trường Đại học Công nghệ Kỹ thuật TP. HCM [Trang chủ] [10 con] — /(Gốc) — Đã xuất bản
-  ├── 📄 Đơn vị (/don-vi) — Đã xuất bản
-  └── 📂 Giới thiệu [15 con] (/gioi-thieu) — Đã xuất bản
-        ├── 📄 Công khai giáo dục (/gioi-thieu/cong-khai-giao-duc) — Đã xuất bản
-        ├── 📄 Tổng quan (/gioi-thieu/tong-quan) — Đã xuất bản
-        ├── 📄 Văn bản - Biểu mẫu (/gioi-thieu/van-ban-bieu-mau) — Đã xuất bản
-        ├── 📄 Bộ nhận diện thương hiệu (/gioi-thieu/bo-nhan-dien) — Đã xuất bản
-        ├── 📄 Thầy Cô viên chức (/gioi-thieu/can-bo-vien-chuc) — Đã xuất bản
-        └── 📄 Thông điệp hiệu trưởng (/gioi-thieu/thong-diep-hieu-truong) — Đã xuất bản
-```
+### Các bước thực hiện
+1. Trên màn hình danh sách cây trang, tìm đến trang cần lấy địa chỉ.
+2. Bấm vào biểu tượng **Sao chép link** (Copy Link) ở thanh công cụ của dòng đó.
+3. Dán (`Ctrl + V`) vào nội dung thông báo, email hoặc ô cấu hình liên kết của thanh Menu.
 
-### Các nút thao tác trên từng hàng trang:
-* **Nút Thiết kế (Màu xanh):** Bấm để mở ngay trình dựng trang trực quan **Page Builder** để chỉnh sửa bố cục các khối giao diện.
-* **Biểu tượng Sao chép link:** Lấy liên kết URL chính thức của trang để dán vào cấu hình thanh Header Mega Menu hoặc chân trang Footer.
-* **Nút `+` (Thêm trang con):** Tạo nhanh một trang cấp dưới trực thuộc trang cha hiện tại (đường dẫn tự động nối tiếp: `/trang-cha/trang-con`).
-* **Nút Cây bút (Sửa):** Đổi tên trang, sửa đường dẫn slug, cập nhật thẻ SEO tiêu đề và mô tả.
-* **Nút ba chấm (...):** Các tùy chọn nâng cao như nhân bản cấu trúc trang hoặc xóa trang nháp.
+### Kết quả
+Địa chỉ liên kết chuẩn xác của trang được lưu ngay vào bộ nhớ máy tính để Thầy/Cô sử dụng.
 
----
-
-## 3. Quản lý Sitemap toàn hệ thống tối ưu cho SEO Google
-
-<Steps>
-  <Step>
-    ### Cơ chế tự động đồng bộ Sitemap XML
-    Mỗi khi Thầy/Cô tạo trang mới, đổi đường dẫn (slug) hoặc xuất bản lại nội dung, hệ thống tác vụ chạy nền sẽ tự động biên dịch lại tệp `sitemap.xml` của website đơn vị trong vòng **vài giây**.
-  </Step>
-
-  <Step>
-    ### Đường dẫn Sitemap chuẩn hóa
-    Mọi website con trong hệ thống HCM-UTE đều sở hữu một đường dẫn sitemap độc lập tại:
-    ```text
-    https://[tên-đơn-vị].hcmute.edu.vn/sitemap.xml
-    ```
-    *Ví dụ: `https://fit.hcmute.edu.vn/sitemap.xml`, `https://aao.hcmute.edu.vn/sitemap.xml`.*
-  </Step>
-
-  <Step>
-    ### Tối ưu hóa thứ hạng tìm kiếm (Google Search Console)
-    Đường dẫn sitemap XML này chỉ cần được khai báo một lần duy nhất lên công cụ Google Search Console. Khi có bất kỳ trang mới nào ra mắt, Google Bot sẽ tự động quét theo sơ đồ cây trang để lập chỉ mục mà không cần gửi yêu cầu thủ công.
-  </Step>
-</Steps>
+### Lưu ý nếu có
+* Hãy đảm bảo trang đó đang ở trạng thái màu xanh lá **Đã xuất bản**. Nếu trang vẫn là *Bản nháp*, người đọc bên ngoài bấm vào sẽ không xem được nội dung.
 
 ---
 
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
-### Tình huống 1: Làm sao để xem trực tiếp tệp Sitemap XML của website đơn vị?
-* **Cách xử lý:** Thầy/Cô mở trình duyệt web và nhập thêm `/sitemap.xml` vào sau địa chỉ tên miền chính thức của đơn vị (Ví dụ: `https://fit.hcmute.edu.vn/sitemap.xml`). Trình duyệt sẽ hiển thị toàn bộ danh sách đường dẫn các trang, bài viết kèm ngày cập nhật mới nhất chuẩn định dạng XML.
+### Tình huống 1: Tại sao tạo trang con xong nhưng người đọc vào trang cha không thấy đường dẫn đến trang con?
+* **Cách xử lý:** Trang cha và trang con là hai trang web độc lập. Sau khi tạo trang con, Thầy/Cô hãy mở trình *Thiết kế* của trang cha để thêm một nút bấm hoặc thẻ liên kết dẫn đến trang con đó nhé.
 
-### Tình huống 2: Tạo trang con cấp 2 hoặc cấp 3 thì đường dẫn slug hình thành ra sao?
-* **Nguyên nhân:** Cơ chế tạo đường dẫn tự động theo cấp trang cha - con.
-* **Cách xử lý:** Khi bấm nút `+` trên hàng của trang `Giới thiệu` (`/gioi-thieu`) và đặt tên trang con là `Cơ cấu tổ chức` (`co-cau-to-chuc`), hệ thống tự động ghép thành đường dẫn chuẩn: `/gioi-thieu/co-cau-to-chuc`. Cấu trúc phân cấp này được Google đánh giá rất cao về tính mạch lạc và chuyên nghiệp.
-
-### Tình huống 3: Di chuyển trang từ nhánh cha này sang nhánh cha khác có làm mất nội dung các khối thiết kế không?
-* **Cách xử lý:** Không làm mất dữ liệu. Bố cục các khối hiển thị và nội dung bài viết được bảo toàn 100%. Hệ thống chỉ cập nhật lại đường dẫn cha con và tự động cấu hình chuyển hướng liên kết cũ sang liên kết mới.
+### Tình huống 2: Sitemap XML của website có tự động cập nhật khi đổi tên trang không?
+* **Cách hiểu đúng:** Có. Hệ thống tự động làm mới tệp `sitemap.xml` sau mỗi lần Thầy/Cô bấm *Xuất bản* hoặc *Cập nhật* trang, giúp công cụ tìm kiếm Google luôn nhận diện đúng đường dẫn mới nhất.
