@@ -28,16 +28,20 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
   const [naturalWidth, setNaturalWidth] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState<boolean>(false);
-  const [zoom, setZoom] = useState<number>(1);
+
+  // Zoom ở ngoài (trang tài liệu)
+  const [inlineZoom, setInlineZoom] = useState<number>(1);
+
+  // Zoom trong modal toàn màn hình
+  const [modalZoom, setModalZoom] = useState<number>(1);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [mounted, setMounted] = useState<boolean>(false);
-  const [isDragging, setIsDragging] = useState<boolean>(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const fullscreenContainerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  // Refs để hỗ trợ kéo rê (drag to pan) khi phóng to
+  // Refs hỗ trợ kéo rê (drag to pan) CHỈ trong modal toàn màn hình
   const isDraggingRef = useRef(false);
   const startPosRef = useRef({ x: 0, y: 0, scrollLeft: 0, scrollTop: 0 });
   const hasDraggedRef = useRef(false);
@@ -46,49 +50,54 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
     setMounted(true);
   }, []);
 
-  // Xử lý zoom
-  const handleZoomIn = useCallback(() => {
-    setZoom((prev) => Math.min(Math.round((prev + 0.25) * 100) / 100, 2.5));
+  // Điều khiển zoom ở ngoài: 50% đến 200%, bước nhảy 25%
+  const handleInlineZoomIn = useCallback(() => {
+    setInlineZoom((prev) => Math.min(Math.round((prev + 0.25) * 100) / 100, 2));
   }, []);
 
-  const handleZoomOut = useCallback(() => {
-    setZoom((prev) => Math.max(Math.round((prev - 0.25) * 100) / 100, 0.5));
+  const handleInlineZoomOut = useCallback(() => {
+    setInlineZoom((prev) => Math.max(Math.round((prev - 0.25) * 100) / 100, 0.5));
   }, []);
 
-  const handleResetZoom = useCallback(() => {
-    setZoom(1);
+  const handleInlineResetZoom = useCallback(() => {
+    setInlineZoom(1);
   }, []);
 
-  // Hỗ trợ cuộn chuột + phím Ctrl / Cmd để thu phóng
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const handleWheel = (e: WheelEvent) => {
-      if (e.ctrlKey || e.metaKey) {
-        e.preventDefault();
-        if (e.deltaY < 0) {
-          setZoom((prev) => Math.min(Math.round((prev + 0.15) * 100) / 100, 2.5));
-        } else {
-          setZoom((prev) => Math.max(Math.round((prev - 0.15) * 100) / 100, 0.5));
-        }
-      }
-    };
-
-    container.addEventListener('wheel', handleWheel, { passive: false });
-    return () => container.removeEventListener('wheel', handleWheel);
+  // Điều khiển zoom trong modal toàn màn hình: 50% đến 300%
+  const handleModalZoomIn = useCallback(() => {
+    setModalZoom((prev) => Math.min(Math.round((prev + 0.25) * 100) / 100, 3));
   }, []);
 
-  // Nhấn phím Escape để đóng chế độ toàn màn hình
+  const handleModalZoomOut = useCallback(() => {
+    setModalZoom((prev) => Math.max(Math.round((prev - 0.25) * 100) / 100, 0.5));
+  }, []);
+
+  const handleModalResetZoom = useCallback(() => {
+    setModalZoom(1);
+  }, []);
+
+  // Mở modal toàn màn hình
+  const openFullscreen = useCallback(() => {
+    setModalZoom(1);
+    setIsFullscreen(true);
+  }, []);
+
+  // Đóng modal toàn màn hình
+  const closeFullscreen = useCallback(() => {
+    setIsFullscreen(false);
+    setModalZoom(1);
+  }, []);
+
+  // Nhấn Escape để đóng toàn màn hình
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isFullscreen) {
-        setIsFullscreen(false);
+        closeFullscreen();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isFullscreen]);
+  }, [isFullscreen, closeFullscreen]);
 
   // Kết xuất biểu đồ Mermaid
   useEffect(() => {
@@ -131,22 +140,14 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
 
         const { svg } = await mermaid.render(uniqueId, content);
         if (isMounted) {
-          // Trích xuất chiều rộng gốc từ 4 thông số của viewBox: minX minY width height
+          // Trích xuất chiều rộng gốc từ viewBox
           const vbMatch = svg.match(/viewBox=["']\s*(-?[0-9.]+)\s+(-?[0-9.]+)\s+([0-9.]+)\s+([0-9.]+)["']/i);
           if (vbMatch) {
             const w = parseFloat(vbMatch[3]);
-            if (w > 50) {
-              setNaturalWidth(w);
-            }
+            if (w > 50) setNaturalWidth(w);
           }
 
-          // Xóa max-width ở thẻ svg gốc để việc phóng to bằng CSS diễn ra chuẩn xác
-          const cleanedSvg = svg.replace(/<svg([^>]*)style="([^"]*)"/i, (m, prefix, style) => {
-            const cleanStyle = style.replace(/max-width:\s*[^;"]+;?/gi, '');
-            return `<svg${prefix}style="${cleanStyle}"`;
-          });
-
-          setSvgContent(cleanedSvg);
+          setSvgContent(svg);
           setError(null);
         }
       } catch (err: any) {
@@ -172,74 +173,79 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
     };
   }, [content, uniqueId]);
 
-  // Xử lý điều hướng khi bấm vào các khối liên kết (interactive nodes)
+  // Xử lý click điều hướng cho các khối interactive ở ngoài
   useEffect(() => {
-    const handleAnchorClick = (e: MouseEvent) => {
-      // Nếu vừa thao tác kéo rê chuột (drag to pan) thì không kích hoạt điều hướng
+    const handleContainerClick = (e: MouseEvent) => {
+      const anchor = (e.target as Element)?.closest('a');
+      if (anchor) {
+        const href = anchor.getAttribute('href') || anchor.getAttribute('xlink:href');
+        if (href && href.startsWith('/')) {
+          e.preventDefault();
+          router.push(withBasePath(href));
+        }
+      }
+    };
+
+    const c1 = containerRef.current;
+    if (c1) c1.addEventListener('click', handleContainerClick);
+
+    return () => {
+      if (c1) c1.removeEventListener('click', handleContainerClick);
+    };
+  }, [svgContent, router]);
+
+  // Xử lý click điều hướng trong modal toàn màn hình
+  useEffect(() => {
+    const handleModalClick = (e: MouseEvent) => {
       if (hasDraggedRef.current) {
         e.preventDefault();
         e.stopPropagation();
         return;
       }
-
       const anchor = (e.target as Element)?.closest('a');
-      if (!anchor) return;
-
-      const href = anchor.getAttribute('href') || anchor.getAttribute('xlink:href');
-      if (href && href.startsWith('/')) {
-        e.preventDefault();
-        if (isFullscreen) {
-          setIsFullscreen(false);
+      if (anchor) {
+        const href = anchor.getAttribute('href') || anchor.getAttribute('xlink:href');
+        if (href && href.startsWith('/')) {
+          e.preventDefault();
+          closeFullscreen();
+          router.push(withBasePath(href));
         }
-        router.push(withBasePath(href));
       }
     };
 
-    const c1 = containerRef.current;
     const c2 = fullscreenContainerRef.current;
-    if (c1) c1.addEventListener('click', handleAnchorClick);
-    if (c2) c2.addEventListener('click', handleAnchorClick);
-
+    if (c2) c2.addEventListener('click', handleModalClick);
     return () => {
-      if (c1) c1.removeEventListener('click', handleAnchorClick);
-      if (c2) c2.removeEventListener('click', handleAnchorClick);
+      if (c2) c2.removeEventListener('click', handleModalClick);
     };
-  }, [svgContent, router, isFullscreen]);
+  }, [svgContent, router, closeFullscreen]);
 
-  // Thao tác kéo rê chuột (drag to pan)
-  const handleMouseDown = (targetContainer: HTMLDivElement | null) => (e: React.MouseEvent) => {
-    if (e.button !== 0 || !targetContainer) return;
+  // Kéo rê chuột CHỈ dùng trong modal toàn màn hình
+  const handleModalMouseDown = (e: React.MouseEvent) => {
+    if (e.button !== 0 || !fullscreenContainerRef.current) return;
     isDraggingRef.current = true;
     hasDraggedRef.current = false;
-    setIsDragging(true);
     startPosRef.current = {
       x: e.clientX,
       y: e.clientY,
-      scrollLeft: targetContainer.scrollLeft,
-      scrollTop: targetContainer.scrollTop,
+      scrollLeft: fullscreenContainerRef.current.scrollLeft,
+      scrollTop: fullscreenContainerRef.current.scrollTop,
     };
   };
 
-  const handleMouseMove = (targetContainer: HTMLDivElement | null) => (e: React.MouseEvent) => {
-    if (!isDraggingRef.current || !targetContainer) return;
+  const handleModalMouseMove = (e: React.MouseEvent) => {
+    if (!isDraggingRef.current || !fullscreenContainerRef.current) return;
     const dx = e.clientX - startPosRef.current.x;
     const dy = e.clientY - startPosRef.current.y;
     if (Math.abs(dx) > 4 || Math.abs(dy) > 4) {
       hasDraggedRef.current = true;
     }
-    targetContainer.scrollLeft = startPosRef.current.scrollLeft - dx;
-    targetContainer.scrollTop = startPosRef.current.scrollTop - dy;
+    fullscreenContainerRef.current.scrollLeft = startPosRef.current.scrollLeft - dx;
+    fullscreenContainerRef.current.scrollTop = startPosRef.current.scrollTop - dy;
   };
 
-  const handleMouseUp = () => {
+  const handleModalMouseUp = () => {
     isDraggingRef.current = false;
-    setIsDragging(false);
-  };
-
-  // Nhấp đúp vào sơ đồ để chuyển đổi nhanh giữa 100% và 150%
-  const handleDoubleClick = (e: React.MouseEvent) => {
-    if ((e.target as HTMLElement).closest('a') || (e.target as HTMLElement).closest('button')) return;
-    setZoom((prev) => (prev <= 1 ? 1.5 : 1));
   };
 
   const handleCopy = () => {
@@ -249,13 +255,14 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
   };
 
   const hasClickableNodes = content.includes('click ');
-  const zoomPercent = Math.round(zoom * 100);
+  const inlineZoomPercent = Math.round(inlineZoom * 100);
+  const modalZoomPercent = Math.round(modalZoom * 100);
 
   return (
     <>
       <figure className="my-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 sm:p-5 shadow-sm hover:shadow-md transition">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 pb-2 border-b border-slate-100 dark:border-slate-800">
-          {/* Tiêu đề sơ đồ khối (đã bỏ icon theo yêu cầu) */}
+          {/* Tiêu đề sơ đồ khối */}
           <div className="flex items-center gap-2 text-xs font-semibold text-[#0072BC]">
             <span>Sơ đồ khối</span>
             {hasClickableNodes && (
@@ -266,15 +273,15 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
             )}
           </div>
 
-          {/* Thanh công cụ: Thu phóng (Zoom in/out/reset/toàn màn hình) và Sao chép */}
+          {/* Thanh công cụ: Thu phóng (zoom in/out/reset), Toàn màn hình & Sao chép mã */}
           <div className="flex items-center gap-1.5 sm:gap-2 self-end sm:self-auto flex-wrap">
-            {/* Bộ nút thu phóng */}
-            <div className="inline-flex items-center gap-0.5 bg-slate-100 dark:bg-slate-800/90 rounded-lg p-0.5 border border-slate-200 dark:border-slate-700">
+            {/* Bộ điều khiển thu phóng mượt mà ở ngoài */}
+            <div className="inline-flex items-center gap-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg p-0.5 border border-slate-200 dark:border-slate-700">
               <button
                 type="button"
-                onClick={handleZoomOut}
-                disabled={zoom <= 0.5}
-                className="inline-flex min-h-[30px] min-w-[30px] items-center justify-center rounded-md text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer active:scale-95"
+                onClick={handleInlineZoomOut}
+                disabled={inlineZoom <= 0.5}
+                className="inline-flex min-h-[30px] min-w-[30px] items-center justify-center rounded-md text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
                 title="Thu nhỏ sơ đồ (-25%)"
                 aria-label="Thu nhỏ sơ đồ"
               >
@@ -283,18 +290,18 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
 
               <button
                 type="button"
-                onClick={handleResetZoom}
-                className="inline-flex min-h-[30px] px-2 items-center justify-center rounded-md text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-slate-100 transition cursor-pointer active:scale-95 min-w-[46px] text-center"
-                title="Nhấp để đặt lại kích thước mặc định (100%)"
+                onClick={handleInlineResetZoom}
+                className="inline-flex min-h-[30px] px-2 items-center justify-center rounded-md text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-700 transition cursor-pointer min-w-[46px] text-center"
+                title="Đặt lại kích thước mặc định (100%)"
               >
-                {zoomPercent}%
+                {inlineZoomPercent}%
               </button>
 
               <button
                 type="button"
-                onClick={handleZoomIn}
-                disabled={zoom >= 2.5}
-                className="inline-flex min-h-[30px] min-w-[30px] items-center justify-center rounded-md text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer active:scale-95"
+                onClick={handleInlineZoomIn}
+                disabled={inlineZoom >= 2}
+                className="inline-flex min-h-[30px] min-w-[30px] items-center justify-center rounded-md text-slate-600 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
                 title="Phóng to sơ đồ (+25%)"
                 aria-label="Phóng to sơ đồ"
               >
@@ -303,26 +310,26 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
 
               <button
                 type="button"
-                onClick={handleResetZoom}
-                className="inline-flex min-h-[30px] min-w-[30px] items-center justify-center rounded-md text-slate-500 hover:bg-white dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-slate-100 transition cursor-pointer active:scale-95 border-l border-slate-200 dark:border-slate-700 ml-0.5"
-                title="Đặt lại mặc định (100%)"
+                onClick={handleInlineResetZoom}
+                className="inline-flex min-h-[30px] min-w-[30px] items-center justify-center rounded-md text-slate-400 hover:bg-white dark:hover:bg-slate-700 hover:text-slate-700 dark:hover:text-slate-200 transition cursor-pointer border-l border-slate-200 dark:border-slate-700 ml-0.5"
+                title="Đặt lại 100%"
               >
                 <RotateCcw className="size-3" />
               </button>
             </div>
 
-            {/* Nút xem toàn màn hình */}
+            {/* Nút Toàn màn hình */}
             <button
               type="button"
-              onClick={() => setIsFullscreen(true)}
-              className="inline-flex min-h-[30px] items-center gap-1 px-2 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition cursor-pointer active:scale-95"
-              title="Xem sơ đồ toàn màn hình (phóng to cực đại)"
+              onClick={openFullscreen}
+              className="inline-flex min-h-[30px] items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition cursor-pointer active:scale-95"
+              title="Phóng to xem rõ toàn màn hình (Hỗ trợ kéo rê và thu phóng cực đại)"
             >
-              <Maximize2 className="size-3.5" />
-              <span className="hidden sm:inline text-[11px]">Toàn màn hình</span>
+              <Maximize2 className="size-3.5 text-[#0072BC]" />
+              <span className="hidden sm:inline">Toàn màn hình</span>
             </button>
 
-            {/* Nút sao chép mã */}
+            {/* Nút Sao chép */}
             <button
               type="button"
               onClick={handleCopy}
@@ -335,21 +342,13 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
           </div>
         </div>
 
-        {/* Khung hiển thị sơ đồ */}
+        {/* Khung hiển thị sơ đồ ở ngoài: KHÔNG có max-h gây cắt cụt, tự nhiên, cuộn ngang an toàn khi phóng to */}
         <div
           ref={containerRef}
-          onMouseDown={(e) => handleMouseDown(containerRef.current)(e)}
-          onMouseMove={(e) => handleMouseMove(containerRef.current)(e)}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-          onDoubleClick={handleDoubleClick}
-          className={`overflow-auto max-h-[85vh] rounded-lg bg-slate-50 dark:bg-slate-950 p-2 sm:p-4 flex justify-center [webkit-overflow-scrolling:touch] select-none ${
-            zoom > 1 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'
-          }`}
-          title="Nhấp đúp vào sơ đồ để phóng to/thu nhỏ nhanh, hoặc kéo chuột để di chuyển khi phóng to"
+          className="w-full overflow-x-auto rounded-lg bg-slate-50 dark:bg-slate-950 p-2 sm:p-4 text-center [webkit-overflow-scrolling:touch]"
         >
           {error ? (
-            <div className="text-xs text-red-500 p-4">
+            <div className="text-xs text-red-500 p-4 text-left">
               <p className="font-semibold mb-1">Lỗi cú pháp Mermaid:</p>
               <pre className="bg-red-50 dark:bg-red-950/30 p-2 rounded">{error}</pre>
               <pre className="mt-2 text-slate-500">{content}</pre>
@@ -357,12 +356,13 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
           ) : svgContent ? (
             <div
               style={{
-                width: `${zoomPercent}%`,
-                minWidth: zoom > 1 ? `${zoomPercent}%` : undefined,
-                maxWidth: zoom === 1 && naturalWidth ? `${naturalWidth}px` : 'none',
-                transition: isDragging ? 'none' : 'width 0.15s ease, min-width 0.15s ease',
+                display: 'inline-block',
+                width: inlineZoom === 1 ? '100%' : `${inlineZoomPercent}%`,
+                minWidth: inlineZoom > 1 ? `${inlineZoomPercent}%` : undefined,
+                maxWidth: inlineZoom === 1 && naturalWidth ? `${naturalWidth}px` : 'none',
+                transition: 'width 0.2s ease, min-width 0.2s ease',
               }}
-              className="flex justify-center [&>svg]:!w-full [&>svg]:!h-auto [&>svg]:!max-w-none [&_a]:cursor-pointer [&_a:hover_rect]:stroke-[#0072BC] [&_a:hover_rect]:stroke-[2.5px] [&_a:hover_polygon]:stroke-[#0072BC] [&_a:hover_polygon]:stroke-[2.5px] [&_a:hover_circle]:stroke-[#0072BC] [&_a:hover]:filter [&_a:hover]:drop-shadow-md"
+              className="text-center [&>svg]:mx-auto [&>svg]:w-full [&>svg]:max-w-full [&>svg]:h-auto [&_a]:cursor-pointer [&_a:hover_rect]:stroke-[#0072BC] [&_a:hover_rect]:stroke-[2.5px] [&_a:hover_polygon]:stroke-[#0072BC] [&_a:hover_polygon]:stroke-[2.5px] [&_a:hover_circle]:stroke-[#0072BC] [&_a:hover]:filter [&_a:hover]:drop-shadow-md"
               dangerouslySetInnerHTML={{ __html: svgContent }}
             />
           ) : (
@@ -407,36 +407,36 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
                 <div className="inline-flex items-center gap-0.5 bg-slate-800 rounded-lg p-0.5 border border-slate-700">
                   <button
                     type="button"
-                    onClick={handleZoomOut}
-                    disabled={zoom <= 0.5}
+                    onClick={handleModalZoomOut}
+                    disabled={modalZoom <= 0.5}
                     className="inline-flex min-h-[32px] min-w-[32px] items-center justify-center rounded-md text-slate-300 hover:bg-slate-700 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
-                    title="Thu nhỏ sơ đồ"
+                    title="Thu nhỏ sơ đồ (-25%)"
                   >
                     <ZoomOut className="size-4" />
                   </button>
 
                   <button
                     type="button"
-                    onClick={handleResetZoom}
+                    onClick={handleModalResetZoom}
                     className="inline-flex min-h-[32px] px-2.5 items-center justify-center rounded-md text-xs font-semibold text-slate-200 hover:bg-slate-700 hover:text-white transition cursor-pointer min-w-[50px] text-center"
                     title="Đặt lại kích thước mặc định (100%)"
                   >
-                    {zoomPercent}%
+                    {modalZoomPercent}%
                   </button>
 
                   <button
                     type="button"
-                    onClick={handleZoomIn}
-                    disabled={zoom >= 3}
+                    onClick={handleModalZoomIn}
+                    disabled={modalZoom >= 3}
                     className="inline-flex min-h-[32px] min-w-[32px] items-center justify-center rounded-md text-slate-300 hover:bg-slate-700 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
-                    title="Phóng to sơ đồ"
+                    title="Phóng to sơ đồ (+25%)"
                   >
                     <ZoomIn className="size-4" />
                   </button>
 
                   <button
                     type="button"
-                    onClick={handleResetZoom}
+                    onClick={handleModalResetZoom}
                     className="inline-flex min-h-[32px] min-w-[32px] items-center justify-center rounded-md text-slate-400 hover:bg-slate-700 hover:text-white transition cursor-pointer border-l border-slate-700 ml-0.5"
                     title="Đặt lại 100%"
                   >
@@ -446,7 +446,7 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
 
                 <button
                   type="button"
-                  onClick={() => setIsFullscreen(false)}
+                  onClick={closeFullscreen}
                   className="inline-flex min-h-[34px] items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-medium text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition cursor-pointer active:scale-95"
                   title="Đóng chế độ toàn màn hình (Phím Esc)"
                 >
@@ -456,25 +456,24 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
               </div>
             </div>
 
-            {/* Thân modal toàn màn hình có thể kéo rê */}
+            {/* Thân modal toàn màn hình: Kéo rê chuột & Thu phóng không giới hạn */}
             <div
               ref={fullscreenContainerRef}
-              onMouseDown={(e) => handleMouseDown(fullscreenContainerRef.current)(e)}
-              onMouseMove={(e) => handleMouseMove(fullscreenContainerRef.current)(e)}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseUp}
-              onDoubleClick={handleDoubleClick}
-              className={`overflow-auto flex-1 flex justify-center items-center p-4 sm:p-8 select-none ${
-                zoom > 1 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'
+              onMouseDown={handleModalMouseDown}
+              onMouseMove={handleModalMouseMove}
+              onMouseUp={handleModalMouseUp}
+              onMouseLeave={handleModalMouseUp}
+              className={`overflow-auto flex-1 flex justify-center items-start p-4 sm:p-8 select-none ${
+                modalZoom > 1 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'
               }`}
-              title="Nhấp đúp để phóng to/thu nhỏ nhanh, hoặc kéo chuột để di chuyển sơ đồ"
+              title="Kéo chuột để di chuyển khi phóng to, hoặc bấm vào khối để mở HDSD"
             >
               <div
                 style={{
-                  width: `${zoomPercent}%`,
-                  minWidth: zoom > 1 ? `${zoomPercent}%` : undefined,
-                  maxWidth: zoom === 1 && naturalWidth ? `${naturalWidth}px` : 'none',
-                  transition: isDragging ? 'none' : 'width 0.15s ease, min-width 0.15s ease',
+                  width: `${modalZoomPercent}%`,
+                  minWidth: modalZoom > 1 ? `${modalZoomPercent}%` : undefined,
+                  maxWidth: modalZoom === 1 && naturalWidth ? `${naturalWidth}px` : 'none',
+                  transition: 'width 0.15s ease, min-width 0.15s ease',
                 }}
                 className="flex justify-center [&>svg]:!max-w-none [&>svg]:!w-full [&>svg]:!h-auto [&_a]:cursor-pointer [&_a:hover_rect]:stroke-sky-400 [&_a:hover_rect]:stroke-[2.5px] [&_a:hover_polygon]:stroke-sky-400 [&_a:hover_polygon]:stroke-[2.5px] [&_a:hover_circle]:stroke-sky-400 [&_a:hover]:filter [&_a:hover]:drop-shadow-md"
                 dangerouslySetInnerHTML={{ __html: svgContent }}
