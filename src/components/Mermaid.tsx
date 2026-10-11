@@ -154,17 +154,16 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
               letter-spacing: 0.02em !important;
               color: ${isDark ? '#38BDF8' : '#0072BC'} !important;
             }
-            /* Chống triệt để việc cắt chữ / tràn chữ trong khối node do Tailwind .prose p ghi đè */
-            .node foreignObject {
-              overflow: visible !important;
-            }
-            .node, .node *, .nodeLabel, .nodeLabel *, .node p, .node span {
-              font-family: inherit !important;
-              font-size: 13px !important;
-              line-height: 1.35 !important;
+            /* Reset triệt để margin/padding trên thẻ <p> do Tailwind .prose p ép vào làm tràn chiều dọc */
+            .node p {
               margin: 0 !important;
               padding: 0 !important;
-              box-sizing: border-box !important;
+              line-height: 1.35 !important;
+            }
+            .nodeLabel {
+              white-space: normal !important;
+              word-break: break-word !important;
+              text-align: center !important;
             }
           `,
           themeVariables: {
@@ -340,29 +339,18 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
                 font-weight: 700 !important;
                 letter-spacing: 0.02em !important;
               }
-              /* Chống triệt để việc cắt chữ / tràn chữ trong khối node do Tailwind .prose p ghi đè */
-              figure svg .node foreignObject,
-              [role="dialog"] svg .node foreignObject {
-                overflow: visible !important;
-              }
-              figure svg .node,
-              figure svg .node *,
-              figure svg .nodeLabel,
-              figure svg .nodeLabel *,
+              /* Reset triệt để margin/padding trên thẻ <p> do Tailwind .prose p ép vào làm tràn chiều dọc */
               figure svg .node p,
-              figure svg .node span,
-              [role="dialog"] svg .node,
-              [role="dialog"] svg .node *,
-              [role="dialog"] svg .nodeLabel,
-              [role="dialog"] svg .nodeLabel *,
-              [role="dialog"] svg .node p,
-              [role="dialog"] svg .node span {
-                font-family: inherit !important;
-                font-size: 13px !important;
-                line-height: 1.35 !important;
+              [role="dialog"] svg .node p {
                 margin: 0 !important;
                 padding: 0 !important;
-                box-sizing: border-box !important;
+                line-height: 1.35 !important;
+              }
+              figure svg .nodeLabel,
+              [role="dialog"] svg .nodeLabel {
+                white-space: normal !important;
+                word-break: break-word !important;
+                text-align: center !important;
               }
             `,
           }}

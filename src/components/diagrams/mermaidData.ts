@@ -75,6 +75,7 @@ export const mermaidDiagrams: Record<string, string> = {
     classDef uteGreen fill:#F0FDF4,stroke:#16A34A,stroke-width:1.5px,color:#15803D;
     classDef uteYellow fill:#FEF3C7,stroke:#D97706,stroke-width:1.5px,color:#92400E;
     classDef uteNote fill:#F8FAFC,stroke:#94A3B8,stroke-width:1px,color:#475569;
+
     PreCheck["Điều kiện bắt đầu: Đăng nhập email @hcmute.edu.vn · Kiểm tra đúng đơn vị và ngôn ngữ nội dung"]:::uteBlue
     Question{"Thầy/Cô muốn làm việc gì?"}:::uteYellow
 
@@ -83,31 +84,31 @@ export const mermaidDiagrams: Record<string, string> = {
     subgraph ActionsGrid [" "]
         direction LR
 
-        subgraph BranchA [" "]
+        subgraph BranchC [" "]
             direction TB
-            BranchAHeader["LUỒNG A · TẠO HOẶC SỬA TRANG"]:::uteNavy
-            A1["Mục tiêu: Tạo hoặc sửa trang web ↗<br/>(VD: Giới thiệu · Cơ cấu tổ chức · Chức năng)"]
-            A2["Nơi vào: Website → Trang (Sơ đồ trang) ↗"]
-            A3["SƠ ĐỒ 04: LUỒNG A ↗<br/>(Tạo mới · Nhân bản · Page Builder · Xuất bản)"]:::uteBlue
-            BranchAHeader --> A1 --> A2 --> A3
+            BranchCHeader["LUỒNG C<br/>SỬA MENU & LIÊN KẾT"]:::uteNavy
+            C1["Mục tiêu: Sửa menu và liên kết ↗<br/>(Đổi tên menu · Thêm link<br/>Sắp xếp thứ tự · Footer)"]
+            C2["Nơi vào: Website →<br/>Header & Footer ↗"]
+            C3["SƠ ĐỒ 06: LUỒNG C ↗<br/>(Sửa cột menu · Gán link trang<br/>Kiểm tra Footer)"]:::uteBlue
+            BranchCHeader --> C1 --> C2 --> C3
         end
 
         subgraph BranchB [" "]
             direction TB
-            BranchBHeader["LUỒNG B · ĐĂNG NỘI DUNG"]:::uteNavy
-            B1["Mục tiêu: Đăng tin tức / văn bản ↗<br/>(VD: Tin tức · Hoạt động · Thông báo · Quyết định)"]
-            B2["Nơi vào: Quản lý nội dung → Văn bản và bài viết ↗"]
-            B3["SƠ ĐỒ 05: LUỒNG B ↗<br/>(Soạn bài · AI Copilot · Gửi duyệt · Ban hành PDF)"]:::uteBlue
+            BranchBHeader["LUỒNG B<br/>ĐĂNG NỘI DUNG"]:::uteNavy
+            B1["Mục tiêu: Đăng tin tức / văn bản ↗<br/>(Tin tức · Hoạt động<br/>Thông báo · Quyết định)"]
+            B2["Nơi vào: Quản lý nội dung →<br/>Văn bản và bài viết ↗"]
+            B3["SƠ ĐỒ 05: LUỒNG B ↗<br/>(Soạn bài · AI Copilot<br/>Gửi duyệt · Ban hành PDF)"]:::uteBlue
             BranchBHeader --> B1 --> B2 --> B3
         end
 
-        subgraph BranchC [" "]
+        subgraph BranchA [" "]
             direction TB
-            BranchCHeader["LUỒNG C · SỬA MENU & LIÊN KẾT"]:::uteNavy
-            C1["Mục tiêu: Sửa menu và liên kết ↗<br/>(VD: Đổi tên menu · Thêm link · Đổi thứ tự · Footer)"]
-            C2["Nơi vào: Website → Header & Footer ↗"]
-            C3["SƠ ĐỒ 06: LUỒNG C ↗<br/>(Sửa cột menu · Gán link trang có sẵn · Kiểm tra Footer)"]:::uteBlue
-            BranchCHeader --> C1 --> C2 --> C3
+            BranchAHeader["LUỒNG A<br/>TẠO HOẶC SỬA TRANG"]:::uteNavy
+            A1["Mục tiêu: Tạo hoặc sửa trang web ↗<br/>(Giới thiệu · Cơ cấu tổ chức<br/>Chức năng đơn vị)"]
+            A2["Nơi vào: Website → Trang<br/>(Sơ đồ cây trang) ↗"]
+            A3["SƠ ĐỒ 04: LUỒNG A ↗<br/>(Tạo mới · Nhân bản<br/>Page Builder · Xuất bản)"]:::uteBlue
+            BranchAHeader --> A1 --> A2 --> A3
         end
     end
 
@@ -115,21 +116,17 @@ export const mermaidDiagrams: Record<string, string> = {
     Question -->|"2. Nhu cầu về tin bài / văn bản"| BranchBHeader
     Question -->|"3. Nhu cầu về menu điều hướng"| BranchCHeader
 
-    subgraph FooterRule2 ["GHI CHÚ QUẢN TRỊ"]
-        Rule2["Nhóm Trang - Biểu mẫu - Chuyên mục - Đường dẫn,... là ví dụ chọn nguồn; nhóm thực tế do người quản trị chọn khi thiết kế khối."]:::uteNote
-    end
+    click A1 href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Mở hướng dẫn Luồng A" _self
+    click A2 href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Mở hướng dẫn Luồng A" _self
+    click A3 href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Mở hướng dẫn Luồng A" _self
 
-    click A1 href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Mở hướng dẫn Luồng A"
-    click A2 href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Mở hướng dẫn Luồng A"
-    click A3 href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Mở hướng dẫn Luồng A"
+    click B1 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Mở hướng dẫn Luồng B" _self
+    click B2 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Mở hướng dẫn Luồng B" _self
+    click B3 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Mở hướng dẫn Luồng B" _self
 
-    click B1 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Mở hướng dẫn Luồng B"
-    click B2 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Mở hướng dẫn Luồng B"
-    click B3 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Mở hướng dẫn Luồng B"
-
-    click C1 href "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong" "Mở hướng dẫn Luồng C"
-    click C2 href "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong" "Mở hướng dẫn Luồng C"
-    click C3 href "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong" "Mở hướng dẫn Luồng C"`,
+    click C1 href "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong" "Mở hướng dẫn Luồng C" _self
+    click C2 href "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong" "Mở hướng dẫn Luồng C" _self
+    click C3 href "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong" "Mở hướng dẫn Luồng C" _self`,
 
   '03': `flowchart TB
     classDef uteBlue fill:#F0F9FF,stroke:#0072BC,stroke-width:1.5px,color:#003D66;
