@@ -1,63 +1,97 @@
 ---
 title: Trình thiết kế giao diện Page Builder
-description: Làm chủ công cụ kéo thả khối nội dung trực quan, tùy biến bố cục và xem trước responsive
+description: Làm chủ công cụ kéo thả khối nội dung trực quan, bộ xem trước responsive 3 chế độ, quản lý cấu trúc layer và thư viện khối giao diện chuẩn hóa HCM-UTE.
 order: 3
 ---
 
-Trình thiết kế **Page Builder** cho phép Quý Thầy/Cô tự do sắp đặt các khối thông tin trên trang mà không cần biết lập trình.
+Trình thiết kế **Page Builder** cho phép Quý Thầy/Cô tự do sắp đặt, lắp ghép các khối thông tin trên trang theo thời gian thực mà không cần viết code hay am hiểu lập trình web.
 
 ---
 
 ## 1. Ba khu vực làm việc chính
 
-Giao diện trình thiết kế chia làm 3 cột rõ ràng:
+Giao diện trình thiết kế chia làm 3 cột chức năng trực quan:
 
 | Khu vực | Vị trí | Chức năng |
 | :--- | :--- | :--- |
-| **Thư viện khối** | Bên trái | Chứa danh mục các khối (Blocks) có sẵn, ô tìm kiếm khối và bộ lọc chuyên mục. |
-| **Vùng dựng trang (Canvas)** | Ở giữa | Không gian trực quan mô phỏng giao diện trang web, nơi kéo thả và xem trước nội dung. |
-| **Bảng thuộc tính** | Bên phải | Bảng điều chỉnh chi tiết văn bản, hình ảnh, liên kết và kiểu dáng (Styling) của khối đang chọn. |
+| **Thư viện khối & Layer** | Bên trái | Chứa danh mục các khối chuẩn hóa, quản lý phân tầng layer, ô tìm kiếm và lọc chuyên mục khối. |
+| **Vùng dựng trang (Canvas)** | Ở giữa | Không gian mô phỏng trực quan trang web, hỗ trợ kéo thả và xem trước nội dung. |
+| **Bảng thuộc tính** | Bên phải | Tùy chỉnh chi tiết câu chữ, hình ảnh, liên kết và kiểu dáng (căn lề, màu sắc, khoảng cách) của khối đang chọn. |
 
 ---
 
-## 2. Thanh công cụ phía trên
+## 2. Thanh công cụ điều khiển phía trên
 
-* **Nội dung trang:** Làm việc với bố cục và các khối.
-* **Thông tin:** Xem và chỉnh sửa metadata trang (tiêu đề, slug, mô tả).
-* **Lịch sử:** Xem và khôi phục các phiên bản chỉnh sửa trước đó.
-* **Desktop / Tablet / Mobile:** Chuyển đổi kiểm tra hiển thị trên máy tính, máy tính bảng và điện thoại.
-* **Thu phóng:** Lựa chọn `75%`, `85%`, `100%` hoặc tự động để bao quát toàn trang.
-* **Đồng bộ & Dịch AI:** Tự động chuyển đổi và dịch dự thảo nội dung khối sang trang tiếng Anh.
+![Thư viện khối giao diện trong trình thiết kế Page Builder](/images/page-builder/thu-vien-khoi-trang-chu.png)
+
+* **Bộ chuyển đổi hiển thị Responsive (3 chế độ):**
+  * `Máy tính` (Desktop): Chế độ mặc định để bố cục toàn trang trên màn hình lớn.
+  * `Máy tính bảng` (Tablet): Kiểm tra độ co giãn 2 cột hoặc lưới thu nhỏ.
+  * `Điện thoại` (Mobile): Kiểm tra giao diện dọc, cỡ chữ và độ dễ đọc trên thiết bị di động.
+* **3 Tab công cụ tại thanh cột bên trái:**
+  * **Tab Khối giao diện (Biểu tượng 4 ô vuông):** Thư viện toàn bộ các khối nội dung chuẩn hóa sẵn sàng kéo thả hoặc bấm nút `+`.
+  * **Tab Quản lý phân tầng (Biểu tượng các lớp Layers):** Xem cây cấu trúc các khối đang có trên trang, kéo thả đổi thứ tự từ trên xuống dưới nhanh chóng.
+  * **Tab Cài đặt chung (Biểu tượng chữ i):** Cấu hình tiêu đề, mô tả và cài đặt nền của trang.
 
 ---
 
-## 3. Thao tác thêm, sắp xếp và tùy biến khối
+## 3. Thư viện các khối giao diện chuẩn hóa (Blocks Library)
 
-### Thêm khối mới:
-1. Tại thư viện bên trái, tìm khối mong muốn (ví dụ: *Khối Banner, Khối Tin tức đa bố cục, Khối Văn bản, Khối Giới thiệu*).
-2. Nhấn dấu `+` cạnh khối hoặc **kéo khối** thả vào vị trí mong muốn trên Canvas.
+Hệ thống cung cấp sẵn các nhóm khối chức năng được thiết kế riêng theo tiêu chuẩn nhận diện thương hiệu của Trường ĐH Công nghệ Kỹ thuật TP.HCM:
 
-### Sắp xếp và sao chép:
-* Bấm chọn khối: thanh công cụ của khối sẽ xuất hiện. Dùng **tay nắm kéo** hoặc bấm **mũi tên lên / xuống** để đổi vị trí.
-* Sử dụng **Copy khối** và phím tắt `Ctrl + V` để nhân bản nhanh một khối xuống cuối trang.
+### Nhóm 1: Trang chủ & Tổng quan (10 khối)
 
-### Chỉnh sửa thuộc tính:
-* Bấm chọn khối trên Canvas → Nhìn sang bảng bên phải:
-  * **Tab Nội dung:** Cập nhật tiêu đề, chữ hiệu ứng, link YouTube, nhãn badge, số liệu thống kê.
-  * **Tab Kiểu dáng:** Căn lề, màu nền, khoảng cách đệm.
+Nhóm khối dành riêng cho việc xây dựng trang chủ của Trường, Khoa, Viện và các cổng thông tin chuyên đề:
+
+1. **Băng chuyền ảnh nổi bật (Hero Carousel):**
+   * *Đặc điểm:* Hiển thị slide biểu ngữ lớn ở đầu trang với hiệu ứng chuyển ảnh mượt mà, tiêu đề nổi bật, nút kêu gọi hành động (*Call to Action*) và các chấm tròn chỉ số trang.
+   * *Ứng dụng:* Dành cho các chiến dịch tuyển sinh, sự kiện khai giảng, hội nghị quốc tế hoặc thành tựu nổi bật của đơn vị.
+2. **Giới thiệu Về HCM-UTE (About Section):**
+   * *Đặc điểm:* Bố cục kết hợp giữa video giới thiệu trực quan (có nút Play) và các cột tóm tắt lịch sử, quy mô đào tạo và điểm nhấn đơn vị.
+   * *Ứng dụng:* Trang giới thiệu tổng quan Khoa/Trường, lịch sử hình thành và phát triển.
+3. **Ban Lãnh đạo (Leadership Cards):**
+   * *Đặc điểm:* Bố cục thẻ trang trọng hiển thị chân dung Lãnh đạo (Ban Giám hiệu, Ban Chủ nhiệm Khoa, Lãnh đạo Phòng ban) kèm học hàm, học vị, chức danh và thông tin liên hệ.
+4. **Thông điệp Hiệu trưởng (Principal / Dean Message):**
+   * *Đặc điểm:* Thiết kế trích dẫn trang trọng với hình ảnh chân dung Lãnh đạo và đoạn trích dẫn tâm huyết về định hướng phát triển, lời chào mừng tân sinh viên hoặc đối tác.
+5. **Tầm nhìn & Sứ mệnh (Vision & Mission):**
+   * *Đặc điểm:* Khối trình bày tuyên ngôn Tầm nhìn, Sứ mệnh và Giá trị cốt lõi theo cấu trúc thẻ song song, rõ ràng và mạch lạc.
+6. *(Các khối tiếp theo trong nhóm Trang chủ & Tổng quan và các nhóm khối khác đang được cập nhật liên tục bám sát tài liệu thực tế của Thầy/Cô).*
+
+---
+
+## 4. Thao tác thêm, sắp xếp và tùy biến khối
+
+<Steps>
+  <Step>
+    ### Thêm khối mới vào trang
+    Tại thư viện bên trái, gõ từ khóa vào ô **Tìm kiếm khối** hoặc chọn chuyên mục. Nhấn nút dấu `+` màu xanh bên cạnh khối (hoặc dùng chuột kéo khối thả trực tiếp vào vị trí mong muốn trên Canvas).
+  </Step>
+
+  <Step>
+    ### Sắp xếp và đổi vị trí khối
+    * Bấm chọn khối: thanh công cụ của khối sẽ xuất hiện với mũi tên lên/xuống để đổi thứ tự.
+    * Hoặc chuyển sang tab **Layer (Các lớp)** ở cột trái để kéo thả di chuyển vị trí giữa các khối cực kỳ trực quan.
+  </Step>
+
+  <Step>
+    ### Tùy biến nội dung tại bảng thuộc tính
+    Bấm chọn khối trên Canvas → điều chỉnh tại bảng bên phải:
+    * **Tab Nội dung:** Cập nhật tiêu đề, chữ mô tả, liên kết nút bấm, tải ảnh thay thế.
+    * **Tab Kiểu dáng:** Tùy chỉnh căn lề (trái/giữa/phải), màu nền, khoảng cách đệm trên dưới (*Padding*).
+  </Step>
+</Steps>
 
 ---
 
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
 ### Tình huống 1: Hình ảnh tải lên khối banner hoặc trình chiếu bị vỡ hạt hoặc méo tỷ lệ?
-* **Nguyên nhân:** Hệ thống áp dụng quy trình tự động xử lý hình ảnh (*Image Processing Pipeline* - tiêu chuẩn FM.2) theo tỷ lệ chuẩn **16:9** cho banner và **4:3** cho khối tin tức.
-* **Cách xử lý:** Tải ảnh có độ phân giải ngang tối thiểu 1200px (khuyến nghị 1920×1080px). Sử dụng công cụ cắt ảnh trực quan tích hợp sẵn trong trình duyệt để chọn đúng vùng trọng tâm.
+* **Nguyên nhân:** Hệ thống áp dụng quy chuẩn tỷ lệ **16:9** cho banner trượt và **4:3** cho ảnh bài viết.
+* **Cách xử lý:** Thầy/Cô nên chuẩn bị ảnh có độ phân giải ngang từ 1200px trở lên (khuyến nghị `1920×1080px`). Khi tải lên, sử dụng công cụ cắt ảnh trực quan để định vị đúng tâm ảnh.
 
 ### Tình huống 2: Giao diện trên máy tính rất đẹp nhưng khi xem trên điện thoại các khối bị tràn viền?
-* **Nguyên nhân:** Một số khối có thể chứa hình ảnh hoặc bảng biểu có chiều rộng cố định.
-* **Cách xử lý:** Sử dụng nút **Xem trước (Preview) ở chế độ Mobile (75% - 100%)** ngay trên thanh công cụ phía trên để kiểm tra trước. Ưu tiên sử dụng các khối linh hoạt (flex/grid) có sẵn trong thư viện mẫu.
+* **Cách xử lý:** Bấm ngay nút **Điện thoại** (Mobile) trên thanh công cụ phía trên để xem trước giao diện dọc. Tất cả các khối chuẩn trong thư viện đều đã được lập trình tự động co giãn thông minh (*Responsive 100%*).
 
 ### Tình huống 3: Đang dựng khối dở thì trình duyệt bị tắt đột ngột do mất điện?
-* **Nguyên nhân:** Hệ thống có tính năng tự động lưu nháp ngầm định kỳ (*Debounced Auto-save* - tiêu chuẩn PW.10).
-* **Cách xử lý:** Khi mở lại trang, hệ thống sẽ tự động hiển thị thanh thông báo: *"Phát hiện bản nháp chưa công bố lúc [giờ:phút]. Bạn có muốn khôi phục không?"* → bấm **Khôi phục** để tiếp tục công việc.
+* **Nguyên nhân:** Hệ thống áp dụng cơ chế tự động lưu nháp ngầm định kỳ (*Debounced Auto-save*).
+* **Cách xử lý:** Khi mở lại trang, hệ thống sẽ tự động hiển thị thanh thông báo: *"Phát hiện bản nháp chưa công bố lúc [giờ:phút]. Bạn có muốn khôi phục không?"* → bấm **Khôi phục** để tiếp tục công việc mà không bị mất bố cục.
