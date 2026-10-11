@@ -30,8 +30,10 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const updatedAt = pageData.updatedAt || '11/10/2026';
   const changelog = pageData.changelog;
 
+  const toc = page.data.toc?.filter((item) => item.depth <= 3);
+
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
+    <DocsPage toc={toc} full={page.data.full}>
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription className="mb-0">{page.data.description}</DocsDescription>
       

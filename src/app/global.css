@@ -334,3 +334,41 @@ img, svg, video, iframe {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+
+/* =========================================================================
+   FIX TABLE OF CONTENTS (TOC) WIDTH & LAYOUT (TAILWIND CSS V4 COMPATIBILITY)
+   ========================================================================= */
+
+@media (min-width: 1280px) {
+  :root,
+  #nd-docs-layout {
+    --fd-toc-width: 268px !important;
+  }
+
+  #nd-toc {
+    display: flex !important;
+    width: 268px !important;
+    min-width: 268px !important;
+    max-width: 268px !important;
+    padding-left: 1.25rem !important;
+    padding-right: 0.75rem !important;
+  }
+}
+
+/* Đảm bảo chữ trong mục lục TOC ngắt dòng tự nhiên, chuẩn mực */
+#nd-toc {
+  box-sizing: border-box;
+}
+
+#nd-toc h3 {
+  white-space: nowrap !important;
+  font-weight: 600 !important;
+}
+
+#nd-toc a {
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  line-height: 1.45 !important;
+}
