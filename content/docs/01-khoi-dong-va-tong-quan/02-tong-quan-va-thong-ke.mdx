@@ -35,12 +35,12 @@ Phân hệ **Tổng quan & Thống kê** cung cấp cái nhìn toàn cảnh về
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
 ### Tình huống 1: Số lượt xem và bài viết có được cập nhật ngay lập tức không?
-* **Nguyên nhân:** Dữ liệu thống kê được tổng hợp tự động qua dịch vụ tổng hợp thống kê (*Post Statistic Service* - tiêu chuẩn OM.3) và được lọc tự động các lượt truy cập ảo từ robot tìm kiếm để đảm bảo độ trung thực.
+* **Nguyên nhân:** Dữ liệu thống kê được hệ thống tự động tổng hợp và loại trừ các lượt truy cập ảo để bảo đảm số liệu trung thực.
 * **Cách xử lý:** Các chỉ số cơ bản cập nhật sau vài giây; các biểu đồ phân tích chuyên sâu (như nguồn xem, thời gian ở lại trang) sẽ được đồng bộ định kỳ vào đầu mỗi giờ.
 
 ### Tình huống 2: Làm sao để xuất dữ liệu thống kê phục vụ báo cáo định kỳ của Khoa/Phòng?
 * **Cách xử lý:** Tại góc trên bên phải của bảng thống kê, chọn nút **Xuất báo cáo** (Excel / CSV). Hệ thống sẽ kết xuất bảng tổng hợp số lượng bài viết, lượt xem và phân loại nội dung theo khoảng thời gian tùy chọn để phục vụ các phiên họp giao ban.
 
-### Tình huống 3: Nhận biết dấu hiệu khi website con đang bảo trì hoặc tạm ngắt kết nối (MT.5)?
-* **Nguyên nhân:** Khi quản trị viên cấp cao kích hoạt chế độ bảo trì khẩn cấp (*Emergency Lockdown API*), website con sẽ hiển thị màn hình thông báo bảo trì theo đúng quy chuẩn Nhà trường.
-* **Cách xử lý:** Toàn bộ dữ liệu bài viết và cấu hình trang vẫn được lưu trữ an toàn tuyệt đối, hệ thống sẽ tự động khôi phục bình thường ngay sau khi hoàn tất bảo trì.
+### Tình huống 3: Nhận biết dấu hiệu khi website đang trong thời gian bảo trì?
+* **Nguyên nhân:** Khi hệ thống tiến hành nâng cấp hoặc bảo trì định kỳ, website sẽ hiển thị màn hình thông báo bảo trì theo mẫu chuẩn của Nhà trường.
+* **Cách xử lý:** Toàn bộ dữ liệu bài viết và cấu hình trang được bảo lưu nguyên vẹn, Thầy Cô chỉ cần chờ thông báo hoàn tất bảo trì để tiếp tục làm việc bình thường.

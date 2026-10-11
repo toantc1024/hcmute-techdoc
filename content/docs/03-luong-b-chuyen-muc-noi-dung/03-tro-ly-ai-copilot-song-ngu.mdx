@@ -61,16 +61,16 @@ Tại màn hình thiết kế trang, bấm nút **✨ Đồng bộ & Dịch AI**
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
 ### Tình huống 1: Bài viết chỉ mới có tiếng Việt, chưa kịp dịch tiếng Anh thì độc giả xem bản tiếng Anh sẽ thấy gì?
-* **Nguyên nhân:** Hệ thống áp dụng cơ chế chuyển ngữ dự phòng (*JSONB Bilingual Schema & Locale Fallback*).
+* **Nguyên nhân:** Cơ chế hiển thị dự phòng tự động của hệ thống.
 * **Cách xử lý:** Khi người xem quốc tế hoặc đoàn kiểm định chuyển sang giao diện tiếng Anh, bài viết chưa có bản dịch sẽ tự động hiển thị nội dung tiếng Việt thay thế kèm nhãn thông báo. Trang web tuyệt đối không bị trống hay đứt quãng.
 
 ### Tình huống 2: Trợ lý AI Copilot có tự động thay đổi nội dung bài viết khi chưa được phép không?
-* **Nguyên nhân:** Mô hình tích hợp AI (Gemini / OpenAI - tiêu chuẩn IU.1) hoạt động theo nguyên tắc tương tác hỗ trợ (*Human-in-the-loop*).
+* **Nguyên nhân:** Trợ lý AI hoạt động theo nguyên tắc đồng hành và hỗ trợ người dùng, không tự ý thay đổi dữ liệu.
 * **Cách xử lý:** AI chỉ đưa ra gợi ý sửa lỗi chính tả, đề xuất tiêu đề và điểm đánh giá SEO. Tác giả có toàn quyền bấm **Chấp nhận** hoặc **Bỏ qua** trước khi nội dung được áp dụng vào văn bản.
 
 ### Tình huống 3: Tính năng chuyển văn bản thành giọng nói AI (Text-to-Speech) hoạt động thế nào?
-* **Nguyên nhân:** Hệ thống tích hợp công cụ đọc văn bản thông minh (*Edge TTS Engine* - tiêu chuẩn IU.2) mang tính nhân văn cao, hỗ trợ người khiếm thị và sinh viên tiếp nhận tin tức âm thanh trên điện thoại di động.
+* **Nguyên nhân:** Tính năng đọc văn bản tự động hỗ trợ sinh viên và người đọc nghe tin tức âm thanh trên thiết bị.
 * **Cách xử lý:** Độc giả chỉ cần bấm vào biểu tượng chiếc loa **"Nghe bài viết"** ở đầu bài để nghe đọc trôi chảy cả tiếng Việt và tiếng Anh mà không cần cài đặt thêm phần mềm nào.
 
 ### Tình huống 4: Độc giả muốn nắm nhanh ý chính của bài viết dài trong 5 giây?
-* **Cách xử lý:** Hệ thống tự động kích hoạt tính năng tóm tắt thông minh (*AI Text Summarization* - tiêu chuẩn IU.3), tạo ra khung tóm tắt 3 ý chính súc tích đặt ngay dưới tiêu đề bài viết.
+* **Cách xử lý:** Hệ thống cung cấp tính năng tóm tắt nội dung thông minh, tạo ra khung tóm tắt 3 ý chính súc tích đặt ngay dưới tiêu đề bài viết.

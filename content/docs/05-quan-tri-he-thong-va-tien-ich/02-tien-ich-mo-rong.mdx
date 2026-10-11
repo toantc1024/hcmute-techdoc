@@ -54,9 +54,9 @@ Phân hệ **Tiện ích mở rộng** cho phép tập hợp các liên kết d�
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
 ### Tình huống 1: Tìm kiếm bài viết bằng từ khóa không dấu có ra kết quả chính xác không?
-* **Nguyên nhân:** Công cụ tìm kiếm tích hợp cụm tìm kiếm chuyên sâu (*Elasticsearch Full-text Search* - tiêu chuẩn IU.4).
-* **Cách xử lý:** Người dùng nhập tiếng Việt có dấu hoặc không dấu (ví dụ: `tuyen sinh dai hoc` hay `tuyển sinh đại học`) đều nhận được kết quả chính xác trong vòng chưa đầy 100ms, hỗ trợ tìm kiếm cả trong nội dung file PDF đính kèm.
+* **Nguyên nhân:** Bộ máy tìm kiếm của hệ thống hỗ trợ xử lý tiếng Việt thông minh.
+* **Cách xử lý:** Người dùng có thể gõ tiếng Việt có dấu hoặc không dấu (ví dụ: `tuyen sinh` hoặc `tuyển sinh`) đều nhận được kết quả chính xác, hỗ trợ tìm kiếm cả trong nội dung các tệp đính kèm.
 
 ### Tình huống 2: Nếu một tiện ích liên kết ngoài bị bảo trì thì website đơn vị có bị ảnh hưởng không?
-* **Nguyên nhân:** Kiến trúc hệ thống phân tách theo dạng module độc lập (*Modular Monolith & DDD* - tiêu chuẩn EX.3).
-* **Cách xử lý:** Khi một cổng dịch vụ bên ngoài gặp sự cố, hệ thống sẽ tự động cô lập dịch vụ đó và hiển thị nhãn "Đang bảo trì", hoàn toàn không gây ảnh hưởng đến tốc độ hay hoạt động của website chính.
+* **Nguyên nhân:** Các tiện ích được thiết kế vận hành độc lập với hệ thống cốt lõi.
+* **Cách xử lý:** Khi cổng dịch vụ bên ngoài bảo trì, tiện ích sẽ hiển thị trạng thái tạm ngưng hoặc ẩn liên kết, hoàn toàn không ảnh hưởng đến hoạt động bình thường của website đơn vị.

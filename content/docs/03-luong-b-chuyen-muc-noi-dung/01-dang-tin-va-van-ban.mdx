@@ -115,7 +115,7 @@ Hệ thống quản lý nội dung tích hợp các tiêu chuẩn kiểm duyệt
 * **Nhận xét trực tiếp trên văn bản:** Người duyệt có thể bôi đen bất kỳ đoạn văn bản nào để để lại lời nhắn yêu cầu chỉnh sửa tương tự Google Docs. Tác giả nhận thông báo chuông và phản hồi trực tiếp.
 * **Hoàn trả bài viết theo cấp độ:** Khi phát hiện lỗi biên tập nhỏ, người duyệt có thể trả bài viết về đúng cấp trước đó để sửa, không bắt buộc tác giả phải làm lại từ đầu quy trình.
 * **Cơ chế duyệt tin đồng thuận:** Đối với các bài viết quan trọng yêu cầu hội đồng cùng duyệt, bài viết chỉ chuyển trạng thái xuất bản khi toàn bộ thành viên đều đồng thuận.
-* **Duyệt vượt cấp khẩn cấp:** Lãnh đạo hoặc Quản trị viên cấp cao có thẩm quyền duyệt hỏa tốc để xuất bản ngay các thông tin đột xuất. Toàn bộ thao tác đều được ghi nhật ký kiểm toán minh bạch.
+* **Duyệt nhanh trong trường hợp khẩn cấp:** Lãnh đạo đơn vị có thẩm quyền phê duyệt hỏa tốc để xuất bản ngay các thông tin đột xuất. Toàn bộ thao tác đều được ghi nhật ký kiểm toán minh bạch.
 * **Lập lịch xuất bản tự động:** Cài đặt chính xác ngày và giờ hiển thị công khai bài viết trong tương lai (rất hữu ích cho các chiến dịch tuyển sinh hoặc sự kiện đúng giờ G).
 * **Quảng bá lên trang chủ Trường:** Tích chọn đề xuất tin nổi bật của Khoa lên Cổng thông tin chính `hcmute.edu.vn`.
 
@@ -136,11 +136,11 @@ Hệ thống quản lý nội dung tích hợp các tiêu chuẩn kiểm duyệt
 * **Cách xử lý:** Nếu tệp PDF quá nặng do chứa nhiều ảnh scan màu độ phân giải cao, Thầy/Cô có thể sử dụng công cụ nén PDF trực tuyến trước khi tải lên, hoặc chia nhỏ thành từng tập/phụ lục riêng biệt.
 
 ### Tình huống 4: Mở bài viết ra thấy thông báo "Bài viết đang được chỉnh sửa bởi [Tên Thầy Cô]"?
-* **Nguyên nhân:** Cơ chế khóa biên tập (*Redis Distributed Locking*) đang bảo vệ bài viết để tránh trường hợp 2 người cùng sửa rồi ghi đè làm mất nội dung của nhau.
+* **Nguyên nhân:** Tính năng khóa biên tập đồng thời giúp bảo vệ bài viết, tránh trường hợp hai người cùng sửa một lúc dẫn đến ghi đè mất nội dung.
 * **Cách xử lý:** Thầy/Cô có thể liên hệ nhanh với đồng nghiệp để nhắc lưu và đóng bài, hoặc chờ sau ít phút khi phiên làm việc của người trước hết hạn, hệ thống sẽ tự động mở khóa.
 
 ### Tình huống 5: Làm thế nào để hẹn giờ tự động xuất bản tin tức vào lúc 08:00 sáng mai?
-* **Cách xử lý:** Tại mục lưu bài viết, chọn **Lập lịch xuất bản** → chọn ngày và giờ mong muốn → bấm Lưu. Đúng thời điểm cài đặt, hệ thống tác vụ chạy nền (*RabbitMQ Worker*) sẽ tự động kích hoạt hiển thị công khai trên website.
+* **Cách xử lý:** Tại mục lưu bài viết, chọn **Lập lịch xuất bản** → chọn ngày và giờ mong muốn → bấm Lưu. Đúng thời điểm cài đặt, hệ thống sẽ tự động kích hoạt hiển thị công khai trên website theo đúng lịch đã hẹn.
 
 ### Tình huống 6: Thông báo tuyển sinh hoặc học vụ cũ các năm trước đã hết hạn thì xử lý thế nào để không gãy liên kết (lỗi 404)?
 * **Nguyên nhân:** Việc bấm nút "Xóa vĩnh viễn" (*Delete*) các bài viết cũ sẽ làm đứt gãy toàn bộ đường link mà phụ huynh, sinh viên đã lưu hoặc đang tìm kiếm trên Google, dẫn đến trang báo lỗi `404 Not Found (Trang không tồn tại)` gây giảm uy tín website của đơn vị.

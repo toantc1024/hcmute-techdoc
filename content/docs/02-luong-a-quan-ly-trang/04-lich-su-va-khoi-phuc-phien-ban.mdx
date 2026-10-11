@@ -45,9 +45,9 @@ Hệ thống tự động lưu trữ các mốc thay đổi của trang, giúp n
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
 ### Tình huống 1: Làm sao để kiểm tra ai đã sửa đổi bố cục trang và vào thời gian nào?
-* **Nguyên nhân:** Hệ thống tự động ghi nhận các mốc lịch sử lưu trữ của trang (*Revision Snapshots*).
-* **Cách xử lý:** Vào tab **Lịch sử phiên bản**, danh sách hiển thị chi tiết tên người sửa, email `@hcmute.edu.vn`, địa chỉ IP và thời gian chính xác đến từng giây.
+* **Nguyên nhân:** Tính năng ghi nhận lịch sử chỉnh sửa tự động của hệ thống.
+* **Cách xử lý:** Vào tab **Lịch sử phiên bản**, danh sách hiển thị chi tiết tên người sửa, email `@hcmute.edu.vn`, tài khoản thực hiện và thời gian chỉnh sửa.
 
 ### Tình huống 2: Khôi phục phiên bản cũ có làm mất các phiên bản mới hơn đã tạo không?
-* **Nguyên nhân:** Cơ chế an toàn dữ liệu không bao giờ ghi đè làm mất lịch sử (*Non-destructive Version Restoration*).
+* **Nguyên nhân:** Hệ thống luôn bảo lưu toàn bộ các mốc lịch sử chỉnh sửa trước đây.
 * **Cách xử lý:** Khi bấm **Khôi phục về phiên bản này**, hệ thống sẽ tạo thêm một bản ghi phiên bản mới nhất mang nội dung của bản cũ. Toàn bộ lịch sử các bản sửa đổi trước đó vẫn được lưu giữ đầy đủ để Thầy/Cô có thể quay lại bất cứ lúc nào.

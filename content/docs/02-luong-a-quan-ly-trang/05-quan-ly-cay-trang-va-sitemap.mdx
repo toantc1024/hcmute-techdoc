@@ -89,7 +89,7 @@ Một cấu trúc cây trang chuẩn hóa của đơn vị được tổ chức 
 * **Cách xử lý:** Thầy/Cô mở trình duyệt web và nhập thêm `/sitemap.xml` vào sau địa chỉ tên miền chính thức của đơn vị (Ví dụ: `https://fit.hcmute.edu.vn/sitemap.xml`). Trình duyệt sẽ hiển thị toàn bộ danh sách đường dẫn các trang, bài viết kèm ngày cập nhật mới nhất chuẩn định dạng XML.
 
 ### Tình huống 2: Tạo trang con cấp 2 hoặc cấp 3 thì đường dẫn slug hình thành ra sao?
-* **Nguyên nhân:** Hệ thống áp dụng cơ chế kế thừa tiền tố đường dẫn (*Hierarchical Slug Inheritance*).
+* **Nguyên nhân:** Cơ chế tạo đường dẫn tự động theo cấp trang cha - con.
 * **Cách xử lý:** Khi bấm nút `+` trên hàng của trang `Giới thiệu` (`/gioi-thieu`) và đặt tên trang con là `Cơ cấu tổ chức` (`co-cau-to-chuc`), hệ thống tự động ghép thành đường dẫn chuẩn: `/gioi-thieu/co-cau-to-chuc`. Cấu trúc phân cấp này được Google đánh giá rất cao về tính mạch lạc và chuyên nghiệp.
 
 ### Tình huống 3: Di chuyển trang từ nhánh cha này sang nhánh cha khác có làm mất nội dung các khối thiết kế không?
