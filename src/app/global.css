@@ -148,3 +148,65 @@ input, textarea, select {
   border-left: 1px solid var(--border);
   border-right: 1px solid var(--border);
 }
+
+/* =========================================================================
+   PRINT STYLESHEET (XUẤT PDF CHUẨN A4)
+   ========================================================================= */
+@media print {
+  /* Ẩn các thành phần giao diện không cần thiết khi xuất PDF */
+  header,
+  nav,
+  aside,
+  footer,
+  button,
+  [data-toc],
+  .border-b.pb-6,
+  #nd-sidebar,
+  #nd-toc,
+  .fd-search {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #004776 !important;
+    font-size: 11pt !important;
+    line-height: 1.6 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  main, article, .prose {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Định dạng trang in A4 */
+  @page {
+    size: A4 portrait;
+    margin: 15mm 15mm 15mm 15mm;
+  }
+
+  /* Tránh ngắt trang giữa các khối bước thực hiện hoặc hình ảnh */
+  figure,
+  .rounded-xl,
+  table,
+  pre,
+  blockquote {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  h1, h2, h3, h4 {
+    color: #004776 !important;
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  img, svg {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
