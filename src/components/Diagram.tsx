@@ -9,6 +9,7 @@ import { Diagram04PageFlow } from './diagrams/Diagram04PageFlow';
 import { Diagram05ContentFlow } from './diagrams/Diagram05ContentFlow';
 import { Diagram06MenuFlow } from './diagrams/Diagram06MenuFlow';
 import { Diagram07UteAssistant } from './diagrams/Diagram07UteAssistant';
+import { withBasePath } from '@/configs/app.config';
 
 interface DiagramProps {
   src?: string;
@@ -105,7 +106,7 @@ export function Diagram({ src = '', caption, alt, id }: DiagramProps) {
           </div>
         ) : (
           <img
-            src={src}
+            src={withBasePath(src)}
             alt={alt || caption || 'Sơ đồ hướng dẫn'}
             className="w-full h-auto max-h-[85vh] object-contain"
             loading="lazy"

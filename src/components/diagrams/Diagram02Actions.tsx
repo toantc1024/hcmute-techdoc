@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { brandConfig } from '@/configs/app.config';
 
 export const diagram02Content = {
   school: 'HCM-UTE · TRƯỜNG ĐẠI HỌC CÔNG NGHỆ KỸ THUẬT TP. HỒ CHÍ MINH',
@@ -72,7 +73,7 @@ export function Diagram02Actions() {
 
         {/* ================= HEADER BANNER ================= */}
         {/* Logo HCM-UTE */}
-        <image href="/logo-hcm-ute.png" x="25" y="22" width="48" height="48" />
+        <image href={brandConfig.logoUrl} x="25" y="22" width="48" height="48" />
 
         <text x="85" y="44" fill="#004776" fontSize="21" fontWeight="700" letterSpacing="-0.3">
           {diagram02Content.title}

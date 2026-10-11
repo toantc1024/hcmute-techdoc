@@ -5,12 +5,24 @@ export const docsRoute = '/docs';
 export const docsImageRoute = '/og/docs';
 export const docsContentRoute = '/llms.mdx/docs';
 
+export const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
+export function withBasePath(path: string): string {
+  if (!path) return '';
+  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) {
+    return path;
+  }
+  const cleanBase = basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return cleanBase ? `${cleanBase}${cleanPath}` : cleanPath;
+}
+
 export const brandConfig = {
   name: 'HCM-UTE TechDoc',
   schoolName: 'Trường Đại học Công nghệ Kỹ thuật TP.HCM',
   primaryColor: '#0072BC',
   secondaryColor: '#ED1C24',
-  logoUrl: '/logo-hcm-ute.png',
+  logoUrl: withBasePath('/logo-hcm-ute.png'),
 };
 
 export const gitConfig = {
