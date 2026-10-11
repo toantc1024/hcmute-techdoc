@@ -12,7 +12,7 @@ Bộ sơ đồ khối dưới đây được trích xuất và chuẩn hóa từ
 
 Mô hình hóa quy trình phân luồng giữa website trường và website đơn vị, cơ chế xác thực Google SSO và các khu vực chức năng chính.
 
-<Mermaid caption="Sơ đồ 1: Quy trình đăng nhập và điều hướng quản trị (Bấm vào khối để mở bài học)">{`flowchart TD
+<Mermaid caption="Sơ đồ 1: Quy trình đăng nhập và điều hướng quản trị (Bấm vào khối để mở HDSD tác vụ tương ứng)">{`flowchart TD
     Start(["Bắt đầu truy cập"]) --> CheckDomain{"Loại website"}
 
     CheckDomain -->|"Website đơn vị"| UnitUrl["Truy cập: {ten-don-vi}.hcmutertic.com"]
@@ -50,7 +50,7 @@ Mô hình hóa quy trình phân luồng giữa website trường và website đ�
 
 Quy trình quản lý vòng đời của một trang web: từ danh sách trang, khởi tạo, thiết kế khối nội dung với Page Builder đến xuất bản.
 
-<Mermaid caption="Sơ đồ 2: Luồng A – Quản trị và xây dựng trang (Bấm vào khối để mở bài học)">{`flowchart TD
+<Mermaid caption="Sơ đồ 2: Luồng A – Quản trị và xây dựng trang (Bấm vào khối để mở HDSD tác vụ tương ứng)">{`flowchart TD
     StartPage["Vào Website → Trang → Sơ đồ trang"] --> ActionChoice{"Thao tác cần làm"}
 
     ActionChoice -->|"Tạo trang mới"| CreateNew["Bấm Tạo trang mới"]
@@ -91,7 +91,7 @@ Quy trình quản lý vòng đời của một trang web: từ danh sách trang,
 
 Phân tách rõ ràng giữa hai nhánh nghiệp vụ cốt lõi: Bài viết tin tức (tích hợp trợ lý AI Copilot) và Ban hành văn bản/biểu mẫu PDF.
 
-<Mermaid caption="Sơ đồ 3: Luồng B – Soạn, duyệt và công bố nội dung (Bấm vào khối để mở bài học)">{`flowchart TD
+<Mermaid caption="Sơ đồ 3: Luồng B – Soạn, duyệt và công bố nội dung (Bấm vào khối để mở HDSD tác vụ tương ứng)">{`flowchart TD
     StartContent["Vào Quản lý nội dung → Văn bản và bài viết"] --> ContentType{"Loại nội dung cần đăng"}
 
     %% Nhánh bài viết
@@ -134,7 +134,7 @@ Phân tách rõ ràng giữa hai nhánh nghiệp vụ cốt lõi: Bài viết ti
 
 Quy trình quản lý thanh điều hướng đầu trang (Mega Menu) và chân trang (Footer), gán liên kết thông minh với các trang có sẵn.
 
-<Mermaid caption="Sơ đồ 4: Luồng C – Cấu hình Mega Menu và Chân trang (Bấm vào khối để mở bài học)">{`flowchart TD
+<Mermaid caption="Sơ đồ 4: Luồng C – Cấu hình Mega Menu và Chân trang (Bấm vào khối để mở HDSD tác vụ tương ứng)">{`flowchart TD
     StartNav["Vào Website → Header & Footer"] --> NavArea{"Khu vực cần sửa"}
 
     %% Nhánh Mega Menu
@@ -170,7 +170,7 @@ Quy trình quản lý thanh điều hướng đầu trang (Mega Menu) và chân 
 
 Minh họa cơ chế liên kết dữ liệu giữa Cây trang, Menu đầu trang và Cây chuyên mục tin bài.
 
-<Mermaid caption="Sơ đồ 5: Mô hình quan hệ giữa ba cấu trúc quản trị (Bấm vào khối để mở bài học)">{`flowchart LR
+<Mermaid caption="Sơ đồ 5: Mô hình quan hệ giữa ba cấu trúc quản trị (Bấm vào khối để mở HDSD tác vụ tương ứng)">{`flowchart LR
     subgraph S1["1. SƠ ĐỒ TRANG (Cấu trúc giao diện)"]
         PageRoot["Trang chủ (/)"]
         PageIntro["Giới thiệu (/gioi-thieu)"]
@@ -214,7 +214,7 @@ Minh họa cơ chế liên kết dữ liệu giữa Cây trang, Menu đầu tran
 
 Mô hình phân loại người dùng và 4 nhóm quyền hạn chính sách vận hành trong hệ thống quản trị HCM-UTE.
 
-<Mermaid caption="Sơ đồ 6: Quy trình phân quyền và quản trị người dùng (Bấm vào khối để mở bài học)">{`flowchart TD
+<Mermaid caption="Sơ đồ 6: Quy trình phân quyền và quản trị người dùng (Bấm vào khối để mở HDSD tác vụ tương ứng)">{`flowchart TD
     StartUser["Vào Quản lý người dùng"] --> FilterUser["Lọc danh sách: Tất cả · Hoạt động · Chờ xác minh · Đã khóa"]
     FilterUser --> UserAction{"Nghiệp vụ cần xử lý"}
 
@@ -238,7 +238,7 @@ Mô hình phân loại người dùng và 4 nhóm quyền hạn chính sách v�
 
 Quy trình tạo nhóm tiện ích, cấu hình liên kết số hóa và kiểm soát trạng thái hiển thị công khai / nội bộ.
 
-<Mermaid caption="Sơ đồ 7: Quy trình quản trị tiện ích mở rộng (Bấm vào khối để mở bài học)">{`flowchart TD
+<Mermaid caption="Sơ đồ 7: Quy trình quản trị tiện ích mở rộng (Bấm vào khối để mở HDSD tác vụ tương ứng)">{`flowchart TD
     StartUtil["Vào Tiện ích mở rộng"] --> UtilChoice{"Nghiệp vụ tiện ích"}
 
     UtilChoice -->|"Tạo nhóm tiện ích"| NewGroup["Bấm Tạo nhóm mới"]
@@ -267,7 +267,7 @@ Quy trình tạo nhóm tiện ích, cấu hình liên kết số hóa và kiểm
 
 Các bước kích hoạt trợ lý ngữ cảnh thông minh và theo dõi hướng dẫn tương tác trực quan ngay trên màn hình.
 
-<Mermaid caption="Sơ đồ 8: Quy trình tương tác hướng dẫn qua Trợ lý UTE (Bấm vào khối để mở bài học)">{`flowchart TD
+<Mermaid caption="Sơ đồ 8: Quy trình tương tác hướng dẫn qua Trợ lý UTE (Bấm vào khối để mở HDSD tác vụ tương ứng)">{`flowchart TD
     Trigger["Bấm biểu tượng Trợ lý UTE (Góc trên bên phải)"] --> OpenCenter["Mở Trung tâm Hỗ trợ & Thiết lập Website HCM-UTE"]
 
     OpenCenter --> SelectTopic{"Lựa chọn nhu cầu hướng dẫn"}

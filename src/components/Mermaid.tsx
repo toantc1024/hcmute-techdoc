@@ -122,11 +122,11 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 pb-2 border-b border-slate-100 dark:border-slate-800">
         <div className="flex items-center gap-2 text-xs font-semibold text-[#0072BC]">
           <Sparkles className="size-4 shrink-0" />
-          <span>Sơ đồ khối Mermaid (Chuẩn nhận diện HCM-UTE)</span>
+          <span>Sơ đồ khối</span>
           {hasClickableNodes && (
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950/40 text-[#0072BC] dark:text-sky-300 font-medium text-[11px] border border-sky-200 dark:border-sky-800">
               <MousePointerClick className="size-3" />
-              <span>Bấm vào khối để mở bài học</span>
+              <span>Bấm vào khối để mở HDSD tác vụ tương ứng</span>
             </span>
           )}
         </div>
