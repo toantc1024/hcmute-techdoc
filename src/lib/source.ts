@@ -3,11 +3,22 @@ import { lucideIconsPlugin } from 'fumadocs-core/source/lucide-icons';
 import { docsRoute } from '@/configs/app.config';
 import { defineDocs } from 'fumadocs-mdx/macro';
 import { metaSchema, pageSchema } from 'fumadocs-core/source/schema';
+import { z } from 'zod';
 
 const docs = defineDocs({
   dir: 'content/docs',
   docs: {
-    schema: pageSchema,
+    schema: pageSchema.extend({
+      status: z.string().optional(),
+      version: z.string().optional(),
+      updatedAt: z.string().optional(),
+      changelog: z.array(z.object({
+        version: z.string(),
+        date: z.string(),
+        description: z.string(),
+        highlights: z.array(z.string()).optional(),
+      })).optional(),
+    }),
     postprocess: {
       includeProcessedMarkdown: true,
     },

@@ -4,6 +4,14 @@ Thư mục này dùng để lưu trữ và quản lý các ảnh chụp giao di�
 
 Thầy Cô khi chụp xong có thể thả trực tiếp file ảnh vào thư mục tương ứng bên dưới (hoặc thả ngay vào thư mục gốc `Demo pics/`), hệ thống sẽ tự động tối ưu hóa kích thước và gắn vào đúng bài viết tài liệu.
 
+> [!IMPORTANT]
+> ### 🔒 QUY TẮC BẢO VỆ DỮ LIỆU CÁ NHÂN KHI CHỤP ẢNH MINH HỌA
+> Căn cứ Nghị định 13/2023/NĐ-CP và quy chế an toàn thông tin của HCM-UTE, khi chụp ảnh giao diện thực tế để bổ sung vào tài liệu hướng dẫn, Thầy Cô vui lòng thực hiện:
+> 1. **Che mờ (Blur / Redact / Phủ màu đặc):** Địa chỉ email (cá nhân và trường cấp), tên tài khoản đăng nhập, token xác thực hoặc mật khẩu trên màn hình.
+> 2. **Che mờ mã hồ sơ & dữ liệu nhạy cảm:** Số Căn cước công dân (CCCD), mã số hồ sơ nội bộ, số điện thoại cá nhân.
+> 3. **Bảo vệ tuyệt đối dữ liệu sinh viên:** Mã số sinh viên (MSSV), họ tên, bảng điểm, thông tin học phí hoặc kết quả rèn luyện.
+> 4. **Khuyến nghị kỹ thuật:** Sử dụng công cụ che mờ hộp (Box Blur tối thiểu 25px) hoặc thanh hình chữ nhật màu đơn sắc che kín văn bản, không dùng cọ mờ bán trong suốt.
+
 ---
 
 ## Nhóm 1: Ưu tiên cao nhất (Thao tác cốt lõi thường ngày)

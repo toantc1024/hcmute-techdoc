@@ -45,7 +45,7 @@ Hệ thống tự động lưu trữ các mốc thay đổi của trang, giúp n
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
 ### Tình huống 1: Làm sao để kiểm tra ai đã sửa đổi bố cục trang và vào thời gian nào?
-* **Nguyên nhân:** Hệ thống ghi nhận nhật ký kiểm toán bất biến (*Immutable Audit Logging* - tiêu chuẩn SC.1 và Revision Snapshots - tiêu chuẩn PW.11).
+* **Nguyên nhân:** Hệ thống tự động ghi nhận các mốc lịch sử lưu trữ của trang (*Revision Snapshots*).
 * **Cách xử lý:** Vào tab **Lịch sử phiên bản**, danh sách hiển thị chi tiết tên người sửa, email `@hcmute.edu.vn`, địa chỉ IP và thời gian chính xác đến từng giây.
 
 ### Tình huống 2: Khôi phục phiên bản cũ có làm mất các phiên bản mới hơn đã tạo không?

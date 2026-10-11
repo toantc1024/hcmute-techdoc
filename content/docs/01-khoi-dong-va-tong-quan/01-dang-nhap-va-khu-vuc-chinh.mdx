@@ -71,16 +71,38 @@ Thanh menu điều hướng bên trái bao gồm các phân hệ sau:
 
 ---
 
+
+---
+
+## 4. Yêu cầu cấu hình hệ thống tối thiểu & Khuyến nghị vận hành
+
+Để đảm bảo các thao tác quản trị, biên tập nội dung, tải ảnh và tương tác với Trợ lý AI diễn ra trơn tru, máy trạm của Thầy Cô nên đáp ứng các tiêu chuẩn cấu hình sau:
+
+| Hạng mục | Cấu hình tối thiểu | Cấu hình khuyến nghị | Ghi chú & Khuyến cáo |
+| :--- | :--- | :--- | :--- |
+| **Bộ vi xử lý (CPU)** | 2 nhân (Dual-Core) 2.0 GHz | 4 nhân (Quad-Core) 2.5 GHz trở lên (Intel Core i5/i7, AMD Ryzen 5, Apple Silicon M-series) | Đảm bảo xử lý mượt các thao tác nén ảnh và dựng trang kéo thả |
+| **Bộ nhớ RAM** | **4 GB** | **8 GB trở lên** | Khi mở đồng thời nhiều tab biên tập và thư viện đa phương tiện |
+| **Độ phân giải màn hình** | **HD 1366 × 768** | **Full HD 1920 × 1080** hoặc màn hình 2K/4K | Giúp không gian làm việc của bàn biên tập và Mega Menu rộng rãi, trực quan |
+| **Hệ điều hành** | Windows 10 (64-bit) / macOS 12 / Ubuntu 20.04 | Windows 11 / macOS 14 / Linux phân phối mới nhất | Đảm bảo nhận các bản vá bảo mật mới nhất từ nhà sản xuất hệ điều hành |
+| **Trình duyệt Web** | Chrome 110+, Edge 110+, Safari 16+, Firefox 115+ | **Google Chrome** hoặc **Microsoft Edge** bản cập nhật mới nhất | *Không hỗ trợ Internet Explorer* hoặc các trình duyệt di động cũ |
+| **Kết nối mạng Internet** | Băng thông tối thiểu **5 Mbps** | **25 Mbps trở lên** (Mạng LAN nội bộ hoặc Wi-Fi HCMUTE-STAFF) | Giúp tải lên các tệp tài liệu PDF và album ảnh sự kiện nhanh chóng |
+
+<Callout type="info" title="Lưu ý về thiết bị di động (Smartphone & Tablet)">
+  Hệ thống quản trị HCM-UTE hỗ trợ giao diện đáp ứng (*Responsive Design*) trên máy tính bảng (iPad, Android Tablet) và điện thoại thông minh để Thầy Cô có thể duyệt bài hoặc kiểm tra thông báo khẩn cấp từ xa. Tuy nhiên, đối với các tác vụ cấu hình cây trang phức tạp hoặc căn chỉnh sơ đồ Menu, Thầy Cô nên thực hiện trên máy tính để bàn hoặc laptop để đạt hiệu quả cao nhất.
+</Callout>
+
+---
+
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
 ### Tình huống 1: Tại sao không thể sử dụng Gmail cá nhân (@gmail.com) để làm quản trị viên đơn vị?
-* **Nguyên nhân:** Hệ thống áp dụng cơ chế bảo vệ tài khoản đặc quyền (*Privileged Account Shield* theo tiêu chuẩn an ninh AA.5). Toàn bộ quyền quản trị viên Khoa/Phòng và biên tập viên bắt buộc phải gắn liền với danh tính email công vụ `@hcmute.edu.vn` để đảm bảo trách nhiệm pháp lý và truy vết kiểm toán.
+* **Nguyên nhân:** Hệ thống áp dụng cơ chế bảo vệ tài khoản đặc quyền bảo vệ tài khoản công vụ. Toàn bộ quyền quản trị viên Khoa/Phòng và biên tập viên bắt buộc phải gắn liền với danh tính email trường cấp `@hcmute.edu.vn` để đảm bảo trách nhiệm và an toàn thông tin.
 * **Cách xử lý:** Thầy/Cô bắt buộc chọn đăng nhập bằng tài khoản Google Workspace trường cấp (`...@hcmute.edu.vn`). Trường hợp tài khoản chưa được phân quyền, liên hệ Quản trị viên cấp cao của Trường để kích hoạt vai trò.
 
 ### Tình huống 2: Đang làm việc thì xuất hiện thông báo "Phiên làm việc đã hết hạn hoặc thiết bị bị thay đổi"?
-* **Nguyên nhân:** Hệ thống sử dụng cơ chế định danh thiết bị (*Device Fingerprinting* - tiêu chuẩn AA.6) để ngăn chặn kẻ gian sao chép mã đăng nhập. Khi Thầy/Cô mở trình duyệt khác, đổi mạng Wi-Fi hoặc đăng nhập trên một máy tính mới, phiên cũ sẽ tự động được thu hồi an toàn.
+* **Nguyên nhân:** Hệ thống áp dụng cơ chế xác thực phiên làm việc an toàn nhằm ngăn chặn truy cập trái phép. Khi Thầy/Cô mở trình duyệt khác, đổi mạng hoặc đăng nhập trên một máy tính mới, phiên cũ có thể tự động được làm mới hoặc yêu cầu xác thực lại để bảo vệ tài khoản.
 * **Cách xử lý:** Bấm đăng nhập lại với Google. Dữ liệu bản nháp đã được lưu trước đó vẫn được bảo toàn nguyên vẹn trên hệ thống.
 
 ### Tình huống 3: Bấm nhầm đăng xuất trên máy khác có làm mất bài đang viết dở không?
-* **Nguyên nhân:** Thao tác đăng xuất từ xa hoặc đăng xuất tất cả thiết bị chỉ vô hiệu hóa mã truy cập (*Token Blacklist*) trên các máy cũ.
+* **Nguyên nhân:** Thao tác đăng xuất khỏi tất cả thiết bị sẽ vô hiệu hóa phiên làm việc trên các máy tính khác.
 * **Cách xử lý:** Dữ liệu bản nháp đã được lưu vào cơ sở dữ liệu sẽ không bị ảnh hưởng. Thầy/Cô chỉ cần đăng nhập lại trên máy đang làm việc để tiếp tục biên tập.

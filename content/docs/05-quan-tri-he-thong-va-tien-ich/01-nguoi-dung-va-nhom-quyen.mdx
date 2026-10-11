@@ -47,15 +47,50 @@ Vào menu bên trái chọn **Người dùng**. Hệ thống định nghĩa 4 va
 
 ---
 
+
+---
+
+## Quy trình thu hồi quyền khi chuyển đơn vị công tác hoặc thôi việc
+
+Nhằm tuân thủ nguyên tắc đặc quyền tối thiểu (*Principle of Least Privilege*) và bảo đảm an toàn dữ liệu số của Nhà trường, quyền hạn quản trị website đơn vị phải được rà soát và thu hồi kịp thời theo quy trình chuẩn sau:
+
+### 1. Nguyên tắc cốt lõi
+* **Gắn liền vị trí công tác:** Quyền quản trị chỉ tồn tại khi Thầy Cô đang trực tiếp đảm nhiệm công tác truyền thông, quản trị nội dung tại đơn vị.
+* **Thời hạn thu hồi:** Khi có quyết định điều động công tác, luân chuyển đơn vị hoặc nghỉ hưu/thôi việc, tài khoản quản trị tại đơn vị cũ phải được thu hồi trong vòng **24 giờ làm việc**.
+* **Bảo toàn dữ liệu lịch sử:** Toàn bộ tin bài, văn bản và hình ảnh Thầy Cô đã biên tập trước đây vẫn được lưu trữ nguyên vẹn trên hệ thống của đơn vị cũ, ghi nhận công sức đóng góp của Thầy Cô.
+
+### 2. Các bước thực hiện thu hồi và chuyển giao quyền hạn
+
+<Steps>
+  <Step>
+    ### Bàn giao bài viết và tài sản số dở dang
+    Thầy Cô chuyển giao toàn bộ các bài viết đang ở trạng thái bản nháp (`Draft`), văn bản chờ duyệt hoặc tài nguyên media cho nhân sự kế nhiệm của đơn vị tiếp quản.
+  </Step>
+
+  <Step>
+    ### Quản trị viên đơn vị (Unit Admin) tiến hành thu hồi quyền
+    * Đăng nhập trang quản trị đơn vị, truy cập menu **Người dùng**.
+    * Tìm kiếm tài khoản của Thầy Cô theo email trường cấp (`@hcmute.edu.vn`).
+    * Bấm chọn **Chỉnh sửa vai trò** → Chọn **Thu hồi quyền quản trị** (hoặc chuyển về nhóm người đọc thông thường).
+    * Ngay sau khi bấm xác nhận, phiên làm việc quản trị của tài khoản trên website đơn vị cũ sẽ lập tức bị hủy bỏ trên toàn hệ thống.
+  </Step>
+
+  <Step>
+    ### Cấp quyền tại đơn vị công tác mới (Nếu luân chuyển nội bộ)
+    * Khi Thầy Cô tiếp nhận nhiệm vụ mới tại Khoa/Phòng/Viện khác, Lãnh đạo đơn vị mới sẽ gửi văn bản hoặc tạo Ticket đề xuất gán vai trò tương ứng tại đơn vị mới.
+    * Ban Quản trị Trường hoặc Quản trị viên đơn vị mới kích hoạt vai trò phù hợp theo phân công nhiệm vụ.
+  </Step>
+</Steps>
+
+---
+
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
 ### Tình huống 1: Phân quyền mới cho Thầy Cô thì sau bao lâu tài khoản có hiệu lực?
-* **Nguyên nhân:** Hệ thống áp dụng cơ chế làm mới phân quyền thời gian thực (*Dynamic Group Management & L1/L2 Cache Eviction* - tiêu chuẩn AA.4).
+* **Nguyên nhân:** Hệ thống áp dụng cơ chế làm mới phân quyền thời gian thực .
 * **Cách xử lý:** Phân quyền có hiệu lực ngay tức thì. Thầy Cô được phân quyền không cần đăng xuất, chỉ cần bấm tải lại trang (`F5`) là thanh menu sẽ hiển thị đầy đủ các tính năng mới được cấp.
 
-### Tình huống 2: Người quản trị có thể xóa lịch sử duyệt bài hoặc nhật ký hoạt động của tài khoản không?
-* **Nguyên nhân:** Hệ thống ghi nhận nhật ký kiểm toán bất biến (*Immutable Audit Logging* - tiêu chuẩn SC.1).
-* **Cách xử lý:** Không một vai trò nào (kể cả Quản trị viên cấp cao) có quyền chỉnh sửa hoặc xóa nhật ký kiểm toán. Điều này đảm bảo tính minh bạch tuyệt đối, phục vụ công tác thanh tra đối soát và bảo vệ dữ liệu Nhà trường theo Luật An ninh mạng.
+
 
 ### Tình huống 3: Thầy Cô chuyển sang đơn vị công tác mới thì xử lý tài khoản như thế nào?
 * **Cách xử lý:** Quản trị viên chỉ cần vào màn hình quản lý người dùng, chọn thu hồi vai trò tại đơn vị cũ và gán vai trò tại đơn vị mới. Toàn bộ hồ sơ danh tính Google Workspace và lịch sử bài viết cũ của Thầy Cô vẫn được bảo lưu trọn vẹn.

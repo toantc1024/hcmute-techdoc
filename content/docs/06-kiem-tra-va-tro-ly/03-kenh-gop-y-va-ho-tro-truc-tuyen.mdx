@@ -90,6 +90,62 @@ Khi truy cập vào mục **Góp ý & Hỗ trợ** trên thanh menu điều hư�
 
 ---
 
+
+
+---
+
+## 4. Bảng cam kết thời gian phản hồi hỗ trợ (SLA)
+
+Nhằm đảm bảo hệ thống website toàn trường vận hành thông suốt và tin cậy, Ban Quản trị Trường cam kết thời gian tiếp nhận và xử lý yêu cầu hỗ trợ theo bảng cam kết mức chất lượng dịch vụ (SLA - Service Level Agreement) sau:
+
+| Mức độ ưu tiên | Định nghĩa sự cố / Phân loại yêu cầu | Thời gian phản hồi ban đầu | Thời gian xử lý cam kết |
+| :--- | :--- | :--- | :--- |
+| **Khẩn cấp (P1)** | Website đơn vị bị tê liệt toàn bộ, lỗi ngắt kết nối diện rộng, sự cố an ninh thông tin hoặc mã độc | **≤ 30 phút** (24/7) | **≤ 4 giờ** |
+| **Cao (P2)** | Chức năng quan trọng bị gián đoạn (không thể xuất bản tin tuyển sinh/sự kiện, lỗi phân quyền duyệt bài) | **≤ 2 giờ** (Giờ hành chính) | **≤ 8 giờ làm việc** |
+| **Trung bình (P3)** | Thắc mắc nghiệp vụ biên tập, lỗi hiển thị giao diện cục bộ, cập nhật menu hoặc biểu mẫu | **≤ 4 giờ làm việc** | **≤ 24 giờ làm việc** |
+| **Thấp (P4)** | Đóng góp ý kiến cải tiến, đề xuất tính năng mới, yêu cầu tài liệu hướng dẫn bổ sung | **≤ 8 giờ làm việc** | **≤ 3 - 5 ngày làm việc** |
+
+---
+
+## 5. Quy trình báo cáo sự cố an ninh và bảo mật thông tin
+
+Khi phát hiện bất kỳ dấu hiệu bất thường nào liên quan đến an ninh mạng hoặc nghi ngờ lộ lọt tài khoản quản trị, Thầy Cô cần kích hoạt ngay quy trình phản ứng nhanh sau:
+
+<Callout type="error" title="CẢNH BÁO BẢO VỆ DỮ LIỆU CÁ NHÂN & THÔNG TIN BẢO MẬT TRÊN TICKET">
+  * **Tuyệt đối KHÔNG gửi mật khẩu, khóa bảo mật (API Key) hoặc Access Token qua ticket:** Ban Quản trị và đội ngũ kỹ thuật Trường HCM-UTE không bao giờ yêu cầu Thầy Cô cung cấp mật khẩu cá nhân hay mã xác thực 2 lớp dưới bất kỳ hình thức nào.
+  * **Bảo vệ dữ liệu cá nhân (Tuân thủ Nghị định 13/2023/NĐ-CP):** Không tải lên hoặc đính kèm danh sách sinh viên chứa số Căn cước công dân (CCCD), tài khoản ngân hàng cá nhân, số điện thoại riêng tư hoặc điểm số chi tiết.
+  * **Che mờ ảnh chụp màn hình nhạy cảm:** Trước khi đính kèm ảnh chụp sự cố, Thầy Cô bắt buộc phải dùng công cụ chỉnh sửa để che mờ (blur / che phủ màu) địa chỉ email, tên đăng nhập, mã số hồ sơ nội bộ.
+</Callout>
+
+### Các bước phối hợp xử lý sự cố an ninh:
+
+<Steps>
+  <Step>
+    ### Tự bảo vệ tài khoản ngay lập tức
+    Nếu nghi ngờ tài khoản bị lộ thông tin đăng nhập, Thầy Cô hãy lập tức đổi mật khẩu email Google Workspace trường cấp (`@hcmute.edu.vn`) và đăng xuất khỏi mọi thiết bị đang mở.
+  </Step>
+
+  <Step>
+    ### Tạo ticket khẩn cấp hoặc gọi đường dây nóng
+    * Tạo ticket trên hệ thống với **Mức độ: Khẩn cấp** và chọn danh mục **An ninh & Bảo mật hệ thống**.
+    * Trình bày vướng mắc gặp phải, thời điểm phát hiện và đường dẫn trang web bị ảnh hưởng.
+    * Trường hợp khẩn cấp ngoài giờ hành chính, liên hệ trực tiếp đường dây nóng kỹ thuật Trung tâm Dữ liệu & CNTT.
+  </Step>
+
+  <Step>
+    ### Ban Quản trị Trường kích hoạt cô lập sự cố
+    * Chuyên trách an ninh hệ thống tiến hành vô hiệu hóa phiên đăng nhập bất thường, kiểm tra nhật ký truy cập và ngăn chặn các kết nối độc hại.
+    * Phối hợp cùng đơn vị xác minh tính toàn vẹn dữ liệu trang web.
+  </Step>
+
+  <Step>
+    ### Khắc phục triệt để và bàn giao an toàn
+    Sau khi xử lý sự cố, hệ thống sẽ gửi thông báo phản hồi chính thức trên ticket, hướng dẫn Thầy Cô các bước kiểm tra an toàn trước khi tiếp tục vận hành bình thường.
+  </Step>
+</Steps>
+
+---
+
 ## ⚠️ Các tình huống thường gặp và cách xử lý
 
 ### Tình huống 1: Gửi yêu cầu hỗ trợ nhưng muốn bổ sung thêm ảnh chụp màn hình thì thao tác thế nào?
