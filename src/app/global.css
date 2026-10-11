@@ -150,8 +150,16 @@ input, textarea, select {
 }
 
 /* =========================================================================
-   PRINT STYLESHEET (XUẤT PDF CHUẨN A4)
+   PRINT STYLESHEET & CHỮ KÝ XÁC THỰC PDF (XUẤT PDF CHUẨN A4)
    ========================================================================= */
+
+/* Ẩn hoàn toàn các thành phần PDF trên màn hình duyệt web thông thường */
+.pdf-watermark-overlay,
+.pdf-running-footer,
+.pdf-signature-block {
+  display: none !important;
+}
+
 @media print {
   /* Ẩn các thành phần giao diện không cần thiết khi xuất PDF */
   header,
@@ -163,7 +171,8 @@ input, textarea, select {
   .border-b.pb-6,
   #nd-sidebar,
   #nd-toc,
-  .fd-search {
+  .fd-search,
+  [role="dialog"] {
     display: none !important;
   }
 
@@ -183,10 +192,52 @@ input, textarea, select {
     padding: 0 !important;
   }
 
-  /* Định dạng trang in A4 */
+  /* Định dạng trang in A4 với lề dưới 18mm cho dòng chữ ký chân trang */
   @page {
     size: A4 portrait;
-    margin: 15mm 15mm 15mm 15mm;
+    margin: 15mm 15mm 18mm 15mm;
+  }
+
+  /* Watermark HCM-UTE Tech Doc chéo trang lặp lại trên mọi trang PDF (độ mờ 10%) */
+  .pdf-watermark-overlay {
+    display: flex !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    pointer-events: none !important;
+    z-index: 9999 !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Dòng chữ ký cố định dưới chân trang lặp lại ở đáy mỗi trang PDF */
+  .pdf-running-footer {
+    display: flex !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 12mm !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    border-top: 0.5pt solid #cbd5e1 !important;
+    padding: 0 15mm !important;
+    font-size: 8pt !important;
+    color: #475569 !important;
+    background: transparent !important;
+    z-index: 9998 !important;
+  }
+
+  /* Khối chứng thực bản sao điện tử ở cuối bài viết */
+  .pdf-signature-block {
+    display: block !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin-top: 10mm !important;
   }
 
   /* Tránh ngắt trang giữa các khối bước thực hiện hoặc hình ảnh */
