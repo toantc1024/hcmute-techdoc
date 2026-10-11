@@ -36,13 +36,14 @@ Mô hình hóa quy trình phân luồng giữa website trường và website đ�
     Dashboard --> M5["5. Tiện ích mở rộng (Cổng dịch vụ số) ↗"]
     Dashboard --> M6["6. Thông báo & Trợ lý UTE ↗"]
 
-    click GoogleLogin href "/docs/01-khoi-dong-va-tong-quan/01-dang-nhap-va-khu-vuc-chinh" "Xem hướng dẫn Đăng nhập"
-    click M1 href "/docs/01-khoi-dong-va-tong-quan/02-tong-quan-va-thong-ke" "Xem mục Tổng quan & Thống kê"
-    click M2 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem mục Quản lý nội dung"
-    click M3 href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem mục Quản trị website"
-    click M4 href "/docs/05-quan-tri-he-thong-va-tien-ich/01-nguoi-dung-va-nhom-quyen" "Xem mục Người dùng & Quyền"
-    click M5 href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong" "Xem mục Tiện ích mở rộng"
-    click M6 href "/docs/06-kiem-tra-va-tro-ly/01-tro-ly-ute-theo-tac-vu" "Xem mục Trợ lý UTE"`}</Mermaid>
+    click GoogleLogin href "/docs/01-khoi-dong-va-tong-quan/01-dang-nhap-va-khu-vuc-chinh" "Xem hướng dẫn Đăng nhập" _self
+    click M1 href "/docs/01-khoi-dong-va-tong-quan/02-tong-quan-va-thong-ke" "Xem mục Tổng quan & Thống kê" _self
+    click M2 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem mục Quản lý nội dung" _self
+    click M3 href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem mục Quản trị website" _self
+    click M4 href "/docs/05-quan-tri-he-thong-va-tien-ich/01-nguoi-dung-va-nhom-quyen" "Xem mục Người dùng & Quyền" _self
+    click M5 href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong" "Xem mục Tiện ích mở rộng" _self
+    click M6 href "/docs/06-kiem-tra-va-tro-ly/01-tro-ly-ute-theo-tac-vu" "Xem mục Trợ lý UTE" _self
+`}</Mermaid>
 
 ---
 
@@ -77,13 +78,14 @@ Quy trình quản lý vòng đời của một trang web: từ danh sách trang,
 
     Publish --> ConnectMenu["Liên kết trang vào Menu đầu trang (Mega Menu) ↗"]
 
-    click CreateNew href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem hướng dẫn Tạo trang mới"
-    click AddSub href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem hướng dẫn Thêm trang con"
-    click CloneTpl href "/docs/02-luong-a-quan-ly-trang/02-nhan-ban-tu-thu-vien-mau" "Xem hướng dẫn Nhân bản mẫu"
-    click PageBuilder href "/docs/02-luong-a-quan-ly-trang/03-trinh-thiet-ke-page-builder" "Xem hướng dẫn Page Builder"
-    click BlockOps href "/docs/02-luong-a-quan-ly-trang/03-trinh-thiet-ke-page-builder" "Xem cách quản lý khối nội dung"
-    click SaveDraft href "/docs/02-luong-a-quan-ly-trang/04-lich-su-va-khoi-phuc-phien-ban" "Xem Lịch sử phiên bản"
-    click ConnectMenu href "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong" "Xem hướng dẫn Gắn vào Mega Menu"`}</Mermaid>
+    click CreateNew href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem hướng dẫn Tạo trang mới" _self
+    click AddSub href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem hướng dẫn Thêm trang con" _self
+    click CloneTpl href "/docs/02-luong-a-quan-ly-trang/02-nhan-ban-tu-thu-vien-mau" "Xem hướng dẫn Nhân bản mẫu" _self
+    click PageBuilder href "/docs/02-luong-a-quan-ly-trang/03-trinh-thiet-ke-page-builder" "Xem hướng dẫn Page Builder" _self
+    click BlockOps href "/docs/02-luong-a-quan-ly-trang/03-trinh-thiet-ke-page-builder" "Xem cách quản lý khối nội dung" _self
+    click SaveDraft href "/docs/02-luong-a-quan-ly-trang/04-lich-su-va-khoi-phuc-phien-ban" "Xem Lịch sử phiên bản" _self
+    click ConnectMenu href "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong" "Xem hướng dẫn Gắn vào Mega Menu" _self
+`}</Mermaid>
 
 ---
 
@@ -122,11 +124,12 @@ Phân tách rõ ràng giữa hai nhánh nghiệp vụ cốt lõi: Bài viết ti
     DocSave -->|"Lưu nháp"| DocDraft["Lưu bản ghi nội bộ"]
     DocSave -->|"Hiện ngay"| DocPublish["Lưu & Hiện ngay (Công khai tệp PDF cho người xem)"]
 
-    click NewPost href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem hướng dẫn Tạo bài viết"
-    click AICopilot href "/docs/03-luong-b-chuyen-muc-noi-dung/03-tro-ly-ai-copilot-song-ngu" "Xem hướng dẫn AI Copilot"
-    click PostSubmit href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem quy trình duyệt tin bài"
-    click NewDoc href "/docs/03-luong-b-chuyen-muc-noi-dung/02-ban-hanh-van-ban-bieu-mau" "Xem hướng dẫn Ban hành văn bản"
-    click UploadPDF href "/docs/03-luong-b-chuyen-muc-noi-dung/02-ban-hanh-van-ban-bieu-mau" "Xem quy chuẩn tệp PDF"`}</Mermaid>
+    click NewPost href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem hướng dẫn Tạo bài viết" _self
+    click AICopilot href "/docs/03-luong-b-chuyen-muc-noi-dung/03-tro-ly-ai-copilot-song-ngu" "Xem hướng dẫn AI Copilot" _self
+    click PostSubmit href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem quy trình duyệt tin bài" _self
+    click NewDoc href "/docs/03-luong-b-chuyen-muc-noi-dung/02-ban-hanh-van-ban-bieu-mau" "Xem hướng dẫn Ban hành văn bản" _self
+    click UploadPDF href "/docs/03-luong-b-chuyen-muc-noi-dung/02-ban-hanh-van-ban-bieu-mau" "Xem quy chuẩn tệp PDF" _self
+`}</Mermaid>
 
 ---
 
@@ -160,9 +163,10 @@ Quy trình quản lý thanh điều hướng đầu trang (Mega Menu) và chân 
     SaveHeader --> TestSite["Kiểm tra trực quan trên website công khai"]
     SaveFooter --> TestSite
 
-    click HeaderNav href "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong" "Xem hướng dẫn Mega Menu"
-    click PickPage href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem hướng dẫn Chọn trang"
-    click FooterNav href "/docs/04-luong-c-menu-dieu-huong/02-cau-hinh-chan-trang-footer" "Xem hướng dẫn Chân trang"`}</Mermaid>
+    click HeaderNav href "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong" "Xem hướng dẫn Mega Menu" _self
+    click PickPage href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem hướng dẫn Chọn trang" _self
+    click FooterNav href "/docs/04-luong-c-menu-dieu-huong/02-cau-hinh-chan-trang-footer" "Xem hướng dẫn Chân trang" _self
+`}</Mermaid>
 
 ---
 
@@ -202,11 +206,12 @@ Minh họa cơ chế liên kết dữ liệu giữa Cây trang, Menu đầu tran
     PageDoc -.->|"2. Nhúng khối hiển thị"| BlockDisplay["Khối danh sách văn bản / biểu mẫu"]
     BlockDisplay -.->|"3. Lấy dữ liệu nguồn từ"| CatSubDoc
 
-    click PageIntro href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem quản lý cây trang"
-    click PageDoc href "/docs/02-luong-a-quan-ly-trang/03-trinh-thiet-ke-page-builder" "Xem dựng khối trang"
-    click CatPost href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem chuyên mục tin bài"
-    click CatDoc href "/docs/03-luong-b-chuyen-muc-noi-dung/02-ban-hanh-van-ban-bieu-mau" "Xem chuyên mục văn bản"
-    click MenuLink href "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong" "Xem liên kết menu"`}</Mermaid>
+    click PageIntro href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem quản lý cây trang" _self
+    click PageDoc href "/docs/02-luong-a-quan-ly-trang/03-trinh-thiet-ke-page-builder" "Xem dựng khối trang" _self
+    click CatPost href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem chuyên mục tin bài" _self
+    click CatDoc href "/docs/03-luong-b-chuyen-muc-noi-dung/02-ban-hanh-van-ban-bieu-mau" "Xem chuyên mục văn bản" _self
+    click MenuLink href "/docs/04-luong-c-menu-dieu-huong/01-cau-hinh-thanh-dieu-huong" "Xem liên kết menu" _self
+`}</Mermaid>
 
 ---
 
@@ -227,10 +232,11 @@ Mô hình phân loại người dùng và 4 nhóm quyền hạn chính sách v�
     AssignRole --> R3["Quản trị viên đơn vị (Quản trị trang, menu, tiện ích đơn vị) ↗"]
     AssignRole --> R4["Quản trị hệ thống (Toàn quyền thiết lập và cấu hình cấp trường)"]
 
-    click VerifyUser href "/docs/05-quan-tri-he-thong-va-tien-ich/01-nguoi-dung-va-nhom-quyen" "Xem hướng dẫn quản lý người dùng"
-    click R1 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem nghiệp vụ Biên tập viên"
-    click R2 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem quy trình duyệt"
-    click R3 href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem quyền Quản trị đơn vị"`}</Mermaid>
+    click VerifyUser href "/docs/05-quan-tri-he-thong-va-tien-ich/01-nguoi-dung-va-nhom-quyen" "Xem hướng dẫn quản lý người dùng" _self
+    click R1 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem nghiệp vụ Biên tập viên" _self
+    click R2 href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem quy trình duyệt" _self
+    click R3 href "/docs/02-luong-a-quan-ly-trang/01-tao-va-cong-bo-trang" "Xem quyền Quản trị đơn vị" _self
+`}</Mermaid>
 
 ---
 
@@ -257,9 +263,10 @@ Quy trình tạo nhóm tiện ích, cấu hình liên kết số hóa và kiểm
     PubItem --> SaveItem["Lưu tiện ích"]
     PrivItem --> SaveItem
 
-    click NewGroup href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong" "Xem hướng dẫn nhóm tiện ích"
-    click NewItem href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong" "Xem hướng dẫn thêm tiện ích"
-    click PubItem href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong" "Xem chế độ hiển thị"`}</Mermaid>
+    click NewGroup href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong" "Xem hướng dẫn nhóm tiện ích" _self
+    click NewItem href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong" "Xem hướng dẫn thêm tiện ích" _self
+    click PubItem href "/docs/05-quan-tri-he-thong-va-tien-ich/02-tien-ich-mo-rong" "Xem chế độ hiển thị" _self
+`}</Mermaid>
 
 ---
 
@@ -294,9 +301,10 @@ Các bước kích hoạt trợ lý ngữ cảnh thông minh và theo dõi hư�
     NextStep --> StepHighlight
     PrevStep --> StepHighlight
 
-    click TopicChecklist href "/docs/06-kiem-tra-va-tro-ly/02-checklist-kiem-tra-cong-bo" "Xem Checklist kiểm tra"
-    click TopicGuides href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem hướng dẫn tạo bài"
-    click StartTour href "/docs/06-kiem-tra-va-tro-ly/01-tro-ly-ute-theo-tac-vu" "Xem chi tiết Trợ lý UTE"`}</Mermaid>
+    click TopicChecklist href "/docs/06-kiem-tra-va-tro-ly/02-checklist-kiem-tra-cong-bo" "Xem Checklist kiểm tra" _self
+    click TopicGuides href "/docs/03-luong-b-chuyen-muc-noi-dung/01-dang-tin-va-van-ban" "Xem hướng dẫn tạo bài" _self
+    click StartTour href "/docs/06-kiem-tra-va-tro-ly/01-tro-ly-ute-theo-tac-vu" "Xem chi tiết Trợ lý UTE" _self
+`}</Mermaid>
 
 ---
 

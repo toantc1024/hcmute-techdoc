@@ -22,7 +22,12 @@ interface MermaidProps {
 }
 
 export function Mermaid({ chart, children, caption }: MermaidProps) {
-  const content = (chart || (typeof children === 'string' ? children : '')).trim();
+  const rawText = chart || (typeof children === 'string' ? children : '');
+  const content = rawText
+    .split('\n')
+    .map((line) => line.trimEnd())
+    .join('\n')
+    .trim();
   const renderId = `mermaidRender${useId().replace(/[^a-zA-Z0-9]/g, '')}`;
   const [svgContent, setSvgContent] = useState<string>('');
   const [naturalWidth, setNaturalWidth] = useState<number | null>(null);
