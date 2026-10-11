@@ -357,12 +357,20 @@ export default function PocketGuidePage() {
                   <table className="w-full text-left border-collapse">
                     <tbody>
                       <tr className="border-b border-slate-200/60">
-                        <td className="py-1 font-semibold text-[#536B7D] w-36">Ảnh bìa bài viết</td>
-                        <td className="py-1 text-[#11324D]">Tỷ lệ <strong>16:9</strong> (1200 x 675 px), &lt; 500 KB, WebP/JPG</td>
+                        <td className="py-1 font-semibold text-[#536B7D] w-36">Banner Trang chủ (2.4:1)</td>
+                        <td className="py-1 text-[#11324D]"><strong>2400 × 1000 px</strong> (Vùng an toàn chữ 1200 × 460 px)</td>
+                      </tr>
+                      <tr className="border-b border-slate-200/60">
+                        <td className="py-1 font-semibold text-[#536B7D]">Ảnh bìa &amp; Video (16:9)</td>
+                        <td className="py-1 text-[#11324D]"><strong>1920 × 1080 px</strong> (Vùng an toàn chữ 1280 × 580 px)</td>
+                      </tr>
+                      <tr className="border-b border-slate-200/60">
+                        <td className="py-1 font-semibold text-[#536B7D]">Banner Mobile (3:4)</td>
+                        <td className="py-1 text-[#11324D]"><strong>1080 × 1440 px</strong> (Vùng an toàn chữ 800 × 640 px)</td>
                       </tr>
                       <tr className="border-b border-slate-200/60">
                         <td className="py-1 font-semibold text-[#536B7D]">Ảnh chân dung Giảng viên</td>
-                        <td className="py-1 text-[#11324D]">Tỷ lệ <strong>3:4</strong> (600 x 800 px) hoặc <strong>1:1</strong>, &lt; 300 KB</td>
+                        <td className="py-1 text-[#11324D]">Tỷ lệ <strong>3:4</strong> (600 × 800 px) hoặc <strong>1:1</strong>, &lt; 300 KB</td>
                       </tr>
                       <tr className="border-b border-slate-200/60">
                         <td className="py-1 font-semibold text-[#536B7D]">Tệp văn bản đính kèm</td>

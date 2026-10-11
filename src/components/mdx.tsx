@@ -6,6 +6,7 @@ import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import { Diagram } from './Diagram';
 import { Mermaid } from './Mermaid';
 import { QuickAccessDirectory } from './QuickAccessDirectory';
+import { PosterBlueprintGuide } from './PosterBlueprintGuide';
 
 export function getMDXComponents(components?: MDXComponents) {
   return {
@@ -19,6 +20,7 @@ export function getMDXComponents(components?: MDXComponents) {
     Diagram,
     Mermaid,
     QuickAccessDirectory,
+    PosterBlueprintGuide,
     ...components,
   } satisfies MDXComponents;
 }
