@@ -80,37 +80,40 @@ export const mermaidDiagrams: Record<string, string> = {
 
     PreCheck --> Question
 
-    subgraph ActionsGrid ["3 LUỒNG NGHIỆP VỤ BỐ TRÍ THEO CỘT DỄ NHÌN"]
+    subgraph ActionsGrid [" "]
         direction LR
 
-        subgraph BranchA ["LUỒNG A · TẠO HOẶC SỬA TRANG"]
+        subgraph BranchA [" "]
             direction TB
+            BranchAHeader["LUỒNG A · TẠO HOẶC SỬA TRANG"]:::uteNavy
             A1["Mục tiêu: Tạo hoặc sửa trang web ↗<br/>(VD: Giới thiệu · Cơ cấu tổ chức · Chức năng)"]
             A2["Nơi vào: Website → Trang (Sơ đồ trang) ↗"]
             A3["SƠ ĐỒ 04: LUỒNG A ↗<br/>(Tạo mới · Nhân bản · Page Builder · Xuất bản)"]:::uteBlue
-            A1 --> A2 --> A3
+            BranchAHeader --> A1 --> A2 --> A3
         end
 
-        subgraph BranchB ["LUỒNG B · ĐĂNG NỘI DUNG"]
+        subgraph BranchB [" "]
             direction TB
+            BranchBHeader["LUỒNG B · ĐĂNG NỘI DUNG"]:::uteNavy
             B1["Mục tiêu: Đăng tin tức / văn bản ↗<br/>(VD: Tin tức · Hoạt động · Thông báo · Quyết định)"]
             B2["Nơi vào: Quản lý nội dung → Văn bản và bài viết ↗"]
             B3["SƠ ĐỒ 05: LUỒNG B ↗<br/>(Soạn bài · AI Copilot · Gửi duyệt · Ban hành PDF)"]:::uteBlue
-            B1 --> B2 --> B3
+            BranchBHeader --> B1 --> B2 --> B3
         end
 
-        subgraph BranchC ["LUỒNG C · SỬA MENU & LIÊN KẾT"]
+        subgraph BranchC [" "]
             direction TB
+            BranchCHeader["LUỒNG C · SỬA MENU & LIÊN KẾT"]:::uteNavy
             C1["Mục tiêu: Sửa menu và liên kết ↗<br/>(VD: Đổi tên menu · Thêm link · Đổi thứ tự · Footer)"]
             C2["Nơi vào: Website → Header & Footer ↗"]
             C3["SƠ ĐỒ 06: LUỒNG C ↗<br/>(Sửa cột menu · Gán link trang có sẵn · Kiểm tra Footer)"]:::uteBlue
-            C1 --> C2 --> C3
+            BranchCHeader --> C1 --> C2 --> C3
         end
     end
 
-    Question -->|"1. Nhu cầu về trang web"| A1
-    Question -->|"2. Nhu cầu về tin bài / văn bản"| B1
-    Question -->|"3. Nhu cầu về menu điều hướng"| C1
+    Question -->|"1. Nhu cầu về trang web"| BranchAHeader
+    Question -->|"2. Nhu cầu về tin bài / văn bản"| BranchBHeader
+    Question -->|"3. Nhu cầu về menu điều hướng"| BranchCHeader
 
     subgraph FooterRule2 ["GHI CHÚ QUẢN TRỊ"]
         Rule2["Nhóm Trang - Biểu mẫu - Chuyên mục - Đường dẫn,... là ví dụ chọn nguồn; nhóm thực tế do người quản trị chọn khi thiết kế khối."]:::uteNote
@@ -194,9 +197,10 @@ export const mermaidDiagrams: Record<string, string> = {
     classDef uteGreen fill:#F0FDF4,stroke:#16A34A,stroke-width:1.5px,color:#15803D;
     classDef uteYellow fill:#FEF3C7,stroke:#D97706,stroke-width:1.5px,color:#92400E;
     classDef uteNote fill:#F8FAFC,stroke:#94A3B8,stroke-width:1px,color:#475569;
-    subgraph Phase1 ["GIAI ĐOẠN 1: KHỞI TẠO & NHẬP THÔNG TIN TRANG"]
+    subgraph Phase1 [" "]
         direction LR
-        StartA(["BẮT ĐẦU"]) --> OpenPages["Website → Trang"] --> DecisionCreate{"Bạn muốn làm gì?"}:::uteYellow
+        Phase1Header["GIAI ĐOẠN 1: KHỞI TẠO & NHẬP THÔNG TIN TRANG"]:::uteNavy
+        Phase1Header --> StartA(["BẮT ĐẦU"]) --> OpenPages["Website → Trang"] --> DecisionCreate{"Bạn muốn làm gì?"}:::uteYellow
         DecisionCreate -->|"Tạo mới"| BranchNew["Tạo trang trống ↗"]
         DecisionCreate -->|"Trang con"| BranchChild["Thêm trang con ↗"]
         DecisionCreate -->|"Dùng mẫu"| BranchClone["Nhân bản mẫu ↗"]
@@ -204,21 +208,23 @@ export const mermaidDiagrams: Record<string, string> = {
         BranchNew & BranchChild & BranchClone & BranchEdit --> FormPage["Nhập thông tin trang:<br/>• Tên trang (VI/EN) · Slug URL<br/>• Trang cha · Mô tả ngắn"]
     end
 
-    subgraph Phase2 ["GIAI ĐOẠN 2: THIẾT KẾ BỐ CỤC & XEM TRƯỚC (PAGE BUILDER)"]
+    subgraph Phase2 [" "]
         direction LR
-        OpenBuilderBtn["Mở Page Builder ↗<br/>(Nút Thiết kế)"]:::uteBlue --> EditBlocks["Dựng khối nội dung:<br/>• Thêm khối từ thư viện<br/>• Gán nguồn chuyên mục<br/>• Tùy chỉnh màu sắc, kiểu"] --> PreviewResponsive["Xem trước đa thiết bị:<br/>Máy tính · Tablet · Mobile (75%-100%)"]:::uteGreen --> CheckContent{"Nội dung đã đúng chưa?"}:::uteYellow
+        Phase2Header["GIAI ĐOẠN 2: THIẾT KẾ BỐ CỤC & XEM TRƯỚC (PAGE BUILDER)"]:::uteNavy
+        Phase2Header --> OpenBuilderBtn["Mở Page Builder ↗<br/>(Nút Thiết kế)"]:::uteBlue --> EditBlocks["Dựng khối nội dung:<br/>• Thêm khối từ thư viện<br/>• Gán nguồn chuyên mục<br/>• Tùy chỉnh màu sắc, kiểu"] --> PreviewResponsive["Xem trước đa thiết bị:<br/>Máy tính · Tablet · Mobile (75%-100%)"]:::uteGreen --> CheckContent{"Nội dung đã đúng chưa?"}:::uteYellow
         CheckContent -->|"Chưa → sửa lại"| EditBlocks
     end
 
-    subgraph Phase3 ["GIAI ĐOẠN 3: LƯU, XUẤT BẢN CÔNG KHAI & ĐIỀU HƯỚNG MENU"]
+    subgraph Phase3 [" "]
         direction LR
-        SaveDraftPage["Lưu nháp nội bộ ↗"] --> PublishPage["Xuất bản (Công bố)<br/>(Chỉ khi có quyền & kiểm tra)"]:::uteRed --> LiveVerifyPage["Mở web kiểm tra thực tế"]:::uteGreen --> NeedMenuDecision{"Cần thêm vào menu?"}:::uteYellow
+        Phase3Header["GIAI ĐOẠN 3: LƯU, XUẤT BẢN CÔNG KHAI & ĐIỀU HƯỚNG MENU"]:::uteNavy
+        Phase3Header --> SaveDraftPage["Lưu nháp nội bộ ↗"] --> PublishPage["Xuất bản (Công bố)<br/>(Chỉ khi có quyền & kiểm tra)"]:::uteRed --> LiveVerifyPage["Mở web kiểm tra thực tế"]:::uteGreen --> NeedMenuDecision{"Cần thêm vào menu?"}:::uteYellow
         NeedMenuDecision -->|"Có"| GotoFlowC["SANG LUỒNG C (GẮN MENU) ↗"]:::uteBlue
         NeedMenuDecision -->|"Không"| PageSuccess(["HOÀN TẤT"]):::uteGreen
     end
 
-    FormPage -->|"Tiếp tục"| OpenBuilderBtn
-    CheckContent -->|"Đúng"| SaveDraftPage
+    FormPage -->|"Tiếp tục"| Phase2Header
+    CheckContent -->|"Đúng"| Phase3Header
 
     subgraph FooterRule4 ["CẢNH BÁO CÔNG BỐ"]
         Warn4["Lưu ý: Tạo trang chưa tạo mục trên menu. Chỉ công bố khi đã kiểm tra và tài khoản có quyền."]:::uteRed
@@ -241,9 +247,10 @@ export const mermaidDiagrams: Record<string, string> = {
     classDef uteNote fill:#F8FAFC,stroke:#94A3B8,stroke-width:1px,color:#475569;
     StartB["Quản lý nội dung → Văn bản và bài viết"] --> DecisionType{"Bạn muốn đăng gì?"}:::uteYellow
 
-    subgraph TrackPost ["NHÁNH 1: QUY TRÌNH BÀI VIẾT / TIN TỨC (NGANG GỌN GÀNG)"]
+    subgraph TrackPost [" "]
         direction LR
-        CreatePost["1. Tạo bài viết ↗"] --> PostInfo["2. Tiêu đề & Ảnh bìa 16:9<br/>• Chọn chuyên mục & tag"] --> PostBody["3. Soạn thảo nội dung<br/>• Trợ lý AI Copilot song ngữ"] --> PostPreview["4. Xem trước & Lưu"]:::uteGreen --> CheckApproval{"5. Có cần duyệt?"}:::uteYellow
+        TrackPostHeader["NHÁNH 1: QUY TRÌNH BÀI VIẾT / TIN TỨC"]:::uteNavy
+        TrackPostHeader --> CreatePost["1. Tạo bài viết ↗"] --> PostInfo["2. Tiêu đề & Ảnh bìa 16:9<br/>• Chọn chuyên mục & tag"] --> PostBody["3. Soạn thảo nội dung<br/>• Trợ lý AI Copilot song ngữ"] --> PostPreview["4. Xem trước & Lưu"]:::uteGreen --> CheckApproval{"5. Có cần duyệt?"}:::uteYellow
         CheckApproval -->|"Tự duyệt"| PostPublishDirect["6. Xuất bản"]:::uteRed
         CheckApproval -->|"Cần duyệt"| SubmitReview["6. Gửi duyệt ↗"]:::uteBlue --> ReviewResult{"Kết quả?"}:::uteYellow
         ReviewResult -->|"Duyệt"| PostPublishApproved["Xuất bản"]:::uteRed
@@ -251,13 +258,14 @@ export const mermaidDiagrams: Record<string, string> = {
         PostPublishDirect & PostPublishApproved --> VerifyPost["7. Mở web kiểm tra & Chia sẻ (QR/Link)"]:::uteGreen --> PostComplete(["HOÀN TẤT"]):::uteGreen
     end
 
-    subgraph TrackDoc ["NHÁNH 2: QUY TRÌNH BAN HÀNH VĂN BẢN / BIỂU MẪU"]
+    subgraph TrackDoc [" "]
         direction LR
-        IssueDoc["1. Ban hành văn bản ↗"] --> DocInfo["2. Trích yếu, số hiệu, ngày ký"] --> DocFile["3. Tải lên tệp PDF toàn văn ↗"] --> DocCat["4. Chọn: VĂN BẢN / BIỂU MẪU"] --> DocSavePublish["5. Xem trước → Lưu → Công bố (Hiện)"]:::uteRed --> DocComplete(["HOÀN TẤT"]):::uteGreen
+        TrackDocHeader["NHÁNH 2: QUY TRÌNH BAN HÀNH VĂN BẢN / BIỂU MẪU"]:::uteNavy
+        TrackDocHeader --> IssueDoc["1. Ban hành văn bản ↗"] --> DocInfo["2. Trích yếu, số hiệu, ngày ký"] --> DocFile["3. Tải lên tệp PDF toàn văn ↗"] --> DocCat["4. Chọn: VĂN BẢN / BIỂU MẪU"] --> DocSavePublish["5. Xem trước → Lưu → Công bố (Hiện)"]:::uteRed --> DocComplete(["HOÀN TẤT"]):::uteGreen
     end
 
-    DecisionType -->|"Bài viết / Tin tức"| CreatePost
-    DecisionType -->|"Văn bản / Biểu mẫu"| IssueDoc
+    DecisionType -->|"Bài viết / Tin tức"| TrackPostHeader
+    DecisionType -->|"Văn bản / Biểu mẫu"| TrackDocHeader
 
     subgraph FooterRule5 ["QUY TẮC CỐT LÕI"]
         Rule5["Lưu ý: Lưu ≠ Gửi duyệt ≠ Công bố. Cả bài viết và văn bản đều phải chọn chuyên mục. Công bố theo quyền; kiểm tra các khối đã chọn và tệp kèm."]:::uteNote
@@ -276,16 +284,18 @@ export const mermaidDiagrams: Record<string, string> = {
     classDef uteGreen fill:#F0FDF4,stroke:#16A34A,stroke-width:1.5px,color:#15803D;
     classDef uteYellow fill:#FEF3C7,stroke:#D97706,stroke-width:1.5px,color:#92400E;
     classDef uteNote fill:#F8FAFC,stroke:#94A3B8,stroke-width:1px,color:#475569;
-    subgraph NavStage1 ["BƯỚC 1: CHỌN KHU VỰC CẦN SỬA"]
+    subgraph NavStage1 [" "]
         direction LR
-        StartC(["BẮT ĐẦU"]) --> OpenNav["Website → Header & Footer"] --> DecisionNavArea{"Sửa ở đâu?"}:::uteYellow
+        NavStage1Header["BƯỚC 1: CHỌN KHU VỰC CẦN SỬA"]:::uteNavy
+        NavStage1Header --> StartC(["BẮT ĐẦU"]) --> OpenNav["Website → Header & Footer"] --> DecisionNavArea{"Sửa ở đâu?"}:::uteYellow
         DecisionNavArea -->|"Đầu trang (Mega Menu)"| PickHeader["Chọn Đầu trang → Chọn Menu / Cột cần sửa ↗"]:::uteBlue
         DecisionNavArea -->|"Chân trang (Footer)"| PickFooter["Chọn Chân trang → Cập nhật logo, địa chỉ, hotline, email"]:::uteBlue
     end
 
-    subgraph NavStage2 ["BƯỚC 2: THỰC HIỆN THAO TÁC LIÊN KẾT"]
+    subgraph NavStage2 [" "]
         direction LR
-        ActionMenu{"Bạn muốn làm gì?"}:::uteYellow
+        NavStage2Header["BƯỚC 2: THỰC HIỆN THAO TÁC LIÊN KẾT"]:::uteNavy
+        NavStage2Header --> ActionMenu{"Bạn muốn làm gì?"}:::uteYellow
         ActionMenu -->|"Đổi thứ tự"| ReorderAction["Đổi thứ tự (Mũi tên Lên/Xuống)"]
         ActionMenu -->|"Xóa"| DeleteAction["Xóa liên kết (Thùng rác)"]:::uteRed
         ActionMenu -->|"Thêm / sửa"| EditLinkAction["Thêm / sửa liên kết"]
@@ -294,16 +304,17 @@ export const mermaidDiagrams: Record<string, string> = {
         LinkTarget -->|"Nơi khác"| PickExternalLink["Nhập URL đích (Tab mới _blank)"]
     end
 
-    subgraph NavStage3 ["BƯỚC 3: LƯU & KIỂM TRA THỰC TẾ TRÊN MÁY TÍNH / ĐIỆN THOẠI"]
+    subgraph NavStage3 [" "]
         direction LR
-        SaveNavChanges["1. Bấm Lưu thay đổi"] --> TestLiveSite["2. Mở website thực tế"]:::uteGreen --> ClickTestLink["3. Bấm thử liên kết"]:::uteGreen --> CheckLinkOk{"Đã đúng chưa?"}:::uteYellow
+        NavStage3Header["BƯỚC 3: LƯU & KIỂM TRA THỰC TẾ TRÊN MÁY TÍNH / ĐIỆN THOẠI"]:::uteNavy
+        NavStage3Header --> SaveNavChanges["1. Bấm Lưu thay đổi"] --> TestLiveSite["2. Mở website thực tế"]:::uteGreen --> ClickTestLink["3. Bấm thử liên kết"]:::uteGreen --> CheckLinkOk{"Đã đúng chưa?"}:::uteYellow
         CheckLinkOk -->|"Đúng"| NavComplete(["HOÀN TẤT"]):::uteGreen
         CheckLinkOk -->|"Chưa → sửa lại"| FixLink["Quay lại bước 2"]:::uteRed
     end
 
-    PickHeader --> ActionMenu
-    PickFooter --> SaveNavChanges
-    ReorderAction & DeleteAction & PickInternalPage & PickExternalLink --> SaveNavChanges
+    PickHeader --> NavStage2Header
+    PickFooter --> NavStage3Header
+    ReorderAction & DeleteAction & PickInternalPage & PickExternalLink --> NavStage3Header
     FixLink -.-> ActionMenu
 
     subgraph MissingPageHelp ["HỖ TRỢ: LÀM THẾ NÀO KHI CHƯA CÓ TRANG CẦN CHỌN?"]
