@@ -1,0 +1,92 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build Fumadocs Static Site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        run: npm install -g pnpm@12.10.1
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Determine Base Path
+        shell: bash
+        run: |
+          if [ -n "${{ vars.BASE_PATH }}" ]; then
+            BASE_PATH="${{ vars.BASE_PATH }}"
+          elif [[ "${{ github.repository }}" == *".github.io" ]]; then
+            BASE_PATH=""
+          else
+            REPO_NAME="${{ github.repository }}"
+            BASE_PATH="/${REPO_NAME#*/}"
+          fi
+          echo "BASE_PATH=$BASE_PATH" >> $GITHUB_ENV
+          echo "Resolved BASE_PATH=$BASE_PATH"
+
+      - name: Install dependencies
+        run: |
+          pnpm approve-builds --all || true
+          pnpm install --frozen-lockfile
+
+      - name: Build static site
+        run: pnpm run build
+        env:
+          NODE_ENV: production
+
+      - name: Ensure .nojekyll exists
+        run: touch ./out/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    name: Deploy to GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
