@@ -25,11 +25,36 @@ Hệ thống quản trị HCM-UTE tích hợp sẵn **Trợ lý AI Copilot** h�
 
 ---
 
-## 2. Đồng bộ nội dung sang trang tiếng Anh
+## 2. Đồng bộ nội dung và trang sang tiếng Anh
 
-* Khi chuyển sang tab **Tiếng Anh**, thanh công cụ có nút **Lấy nội dung từ Tiếng Việt**.
-* Hệ thống sẽ tự động đồng bộ hình ảnh và tạo bản dịch dự thảo tiếng Anh cho bài viết.
-* **Lưu ý kiểm tra:** AI hỗ trợ dịch thô, Quý Thầy/Cô luôn cần rà soát lại tên riêng và thuật ngữ chuyên ngành trước khi xuất bản.
+Hệ thống cung cấp cơ chế đồng bộ song ngữ toàn diện cho cả hai phân hệ: **Bài viết (Luồng B)** và **Trang giao diện (Luồng A)**:
+
+### 2.1. Đồng bộ trong bài viết đơn lẻ
+* Khi chuyển sang tab **Tiếng Anh** trên thanh công cụ soạn thảo, bấm nút **Lấy nội dung từ Tiếng Việt**.
+* Hệ thống tự động sao chép toàn bộ kho ảnh minh họa, tệp đính kèm và tạo bản dịch dự thảo tiếng Anh cho tiêu đề, mô tả và nội dung bài viết.
+
+### 2.2. Đồng bộ toàn trang trong Page Builder (Đồng bộ & Dịch AI)
+
+![Modal Đồng bộ & Dịch AI trong Page Builder](/images/page-builder/dong-bo-va-dich-ai.png)
+
+Tại màn hình thiết kế trang, bấm nút **✨ Đồng bộ & Dịch AI** để mở bảng điều khiển đồng bộ cấu trúc:
+* **Khung Nguồn — Đích:** Nguồn từ `Tiếng Việt` sang đích `English`.
+* **2 Chế độ xử lý dữ liệu thông minh:**
+  * **Điền phần còn thiếu (Fill - Khuyến nghị):** Chỉ dịch các khối mới hoặc trường còn trống. Bảo toàn nguyên vẹn 100% các nội dung Thầy/Cô đã trau chuốt thủ công bên tiếng Anh trước đó.
+  * **Thay thế toàn bộ (Replace):** Ghi đè và dịch lại toàn bộ các khối đã chọn.
+* **Sao chép cấu trúc vs Đồng bộ & Dịch:** Cho phép chọn chỉ sao chép bố cục hình ảnh (nút *Sao chép cấu trúc*) hoặc vừa chép bố cục vừa dịch tự động (nút *Đồng bộ & Dịch*).
+
+### 2.3. Quy định bắt buộc: Rà soát ngữ pháp và hiệu đính trước khi xuất bản
+
+<Callout type="warn" title="Quy tắc kiểm duyệt nội dung quốc tế">
+  * **Bản dịch AI chỉ là bản dự thảo ban đầu (Drafting):** Dịch máy bằng AI giúp tiết kiệm đến 80% công sức dựng khung, nhưng ngữ pháp, ngữ cảnh học thuật và văn phong báo chí quốc tế bắt buộc phải có sự kiểm định của con người (*Human Verification*).
+  * **Các điểm bắt buộc kiểm tra kỹ lưỡng:**
+    1. **Thuật ngữ chuyên ngành:** Tên các ngành học, môn học, đề tài nghiên cứu khoa học.
+    2. **Tên cơ quan, đơn vị:** Danh xưng chuẩn hóa của Trường, các Khoa, Viện, Phòng ban.
+    3. **Chức danh & Học hàm học vị:** Đảm bảo viết đúng chuẩn quốc tế (*Prof., Assoc. Prof., Dr., Dean, Head...*).
+    4. **Ngữ pháp & Thì câu:** Đọc soát lại câu văn, tránh câu cú dịch gượng gạo theo lối từ ngữ đối xứng (Word-by-word).
+  * **Quy trình:** Sau khi bấm Đồng bộ & Dịch AI → Chuyển sang giao diện **English** → Đọc soát và sửa lỗi trực tiếp → Kiểm tra hiển thị → Bấm **Xuất bản (Publish)**.
+</Callout>
 
 ---
 
