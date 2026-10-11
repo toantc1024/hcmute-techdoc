@@ -31,17 +31,31 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
 
         mermaid.initialize({
           startOnLoad: false,
-          theme: isDark ? 'dark' : 'base',
+          theme: 'base',
           securityLevel: 'loose',
           themeVariables: {
-            primaryColor: '#F0F9FF',
-            primaryBorderColor: '#0284C7',
-            primaryTextColor: '#004776',
-            lineColor: '#0284C7',
-            secondaryColor: '#FEF3C7',
-            tertiaryColor: '#F0FDF4',
-            fontSize: '13px',
             fontFamily: 'inherit',
+            fontSize: '13px',
+            darkMode: isDark,
+            // Bảng màu chuẩn thương hiệu HCM-UTE
+            // Xanh dương chủ đạo: #0072BC, Xanh đậm Navy: #003D66, Đỏ điểm nhấn: #ED1C24
+            background: isDark ? '#020617' : '#FFFFFF',
+            mainBkg: isDark ? '#0F172A' : '#FFFFFF',
+            nodeBorder: isDark ? '#0284C7' : '#0072BC',
+            primaryColor: isDark ? '#0F2942' : '#F0F9FF',
+            primaryBorderColor: isDark ? '#0284C7' : '#0072BC',
+            primaryTextColor: isDark ? '#E0F2FE' : '#003D66',
+            lineColor: isDark ? '#38BDF8' : '#0072BC',
+            secondaryColor: isDark ? '#451A03' : '#FEF3C7',
+            secondaryBorderColor: isDark ? '#D97706' : '#D97706',
+            secondaryTextColor: isDark ? '#FEF08A' : '#92400E',
+            tertiaryColor: isDark ? '#052E16' : '#F0FDF4',
+            tertiaryBorderColor: isDark ? '#16A34A' : '#16A34A',
+            tertiaryTextColor: isDark ? '#BBF7D0' : '#15803D',
+            clusterBkg: isDark ? '#0B1726' : '#F8FAFC',
+            clusterBorder: isDark ? '#0284C7' : '#0072BC',
+            edgeLabelBackground: isDark ? '#1E293B' : '#FFFFFF',
+            titleColor: isDark ? '#38BDF8' : '#0072BC',
           },
         });
 
@@ -108,9 +122,9 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 pb-2 border-b border-slate-100 dark:border-slate-800">
         <div className="flex items-center gap-2 text-xs font-semibold text-[#0072BC]">
           <Sparkles className="size-4 shrink-0" />
-          <span>Sơ đồ khối Mermaid</span>
+          <span>Sơ đồ khối Mermaid (Chuẩn nhận diện HCM-UTE)</span>
           {hasClickableNodes && (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-medium text-[11px] border border-emerald-200 dark:border-emerald-800">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950/40 text-[#0072BC] dark:text-sky-300 font-medium text-[11px] border border-sky-200 dark:border-sky-800">
               <MousePointerClick className="size-3" />
               <span>Bấm vào khối để mở bài học</span>
             </span>
@@ -123,7 +137,7 @@ export function Mermaid({ chart, children, caption }: MermaidProps) {
           className="inline-flex min-h-[36px] items-center gap-1.5 self-end sm:self-auto px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition cursor-pointer active:scale-95"
           title="Sao chép mã nguồn Mermaid"
         >
-          {copied ? <Check className="size-3.5 text-green-600" /> : <Copy className="size-3.5" />}
+          {copied ? <Check className="size-3.5 text-[#16A34A]" /> : <Copy className="size-3.5" />}
           <span>{copied ? 'Đã sao chép' : 'Sao chép mã'}</span>
         </button>
       </div>
