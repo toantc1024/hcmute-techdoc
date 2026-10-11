@@ -1,0 +1,93 @@
+---
+title: Quản lý cây chuyên mục bài viết và văn bản
+description: Hướng dẫn tổ chức, phân cấp và quản trị cấu trúc cây chuyên mục bài viết & văn bản theo chuẩn trực quan, hỗ trợ đếm số lượng tin bài và phân nhánh đa tầng.
+order: 4
+---
+
+Chuyên mục là xương sống giúp phân loại và gom nhóm nội dung bài viết, tin tức và văn bản pháp quy tại website của các đơn vị thuộc Trường Đại học Công nghệ Kỹ thuật TP.HCM (HCM-UTE).
+
+<Callout type="info" title="Bản chất của cây chuyên mục">
+  * **Cây phân cấp trực quan:** Chuyên mục được tổ chức theo mô hình **Cha — Con (Parent — Child)** không giới hạn độ sâu, giúp phân luồng nội dung khoa học và logic.
+  * **Hút tin tự động về Trang:** Khối tin bài trên các trang giao diện sẽ tự động hút đúng bài viết về dựa theo Chuyên mục đã được gán.
+  * **Quan hệ đa chiều (N:N):** Một bài viết có thể gắn đồng thời vào nhiều chuyên mục khác nhau mà không phải sao chép nội dung nhiều lần.
+</Callout>
+
+---
+
+## 1. Màn hình quản lý cây chuyên mục
+
+Để truy cập phân hệ, từ menu điều hướng bên trái chọn **Quản lý nội dung** → **Chuyên mục**:
+
+![Giao diện Quản lý cây chuyên mục](/images/chuyen-muc/quan-ly-cay-chuyen-muc.png)
+
+### 1.1. Các chỉ số thống kê tổng quan (KPI Cards)
+Ngay trên đầu trang, hệ thống cung cấp 3 thẻ thống kê nhanh:
+* **Tổng chuyên mục:** Tổng số lượng chuyên mục hiện có trong hệ thống website đơn vị (ví dụ: *22 chuyên mục*).
+* **Chuyên mục gốc:** Số lượng các nhóm danh mục chính cấp cao nhất (ví dụ: *2 nhóm chính: Bài viết và Văn bản*).
+* **Chuyên mục con:** Số lượng các chuyên mục nhánh đã được phân bổ chi tiết (ví dụ: *20 mục con*).
+
+### 1.2. Thanh công cụ quản trị cây danh mục
+* **Ô tìm kiếm chuyên mục:** Gõ tìm nhanh theo tên chuyên mục, đường dẫn slug hoặc phần mô tả.
+* **Nút Làm mới:** Cập nhật lại số lượng bài viết mới nhất trong từng chuyên mục.
+* **Nút + Thêm chuyên mục gốc:** Khởi tạo danh mục cấp cao nhất (Root Category).
+* **Nút Mở rộng tất cả / Thu gọn tất cả:** Bung toàn bộ các nhánh con hoặc thu gọn lại để dễ quan sát tổng thể cây thư mục.
+
+---
+
+## 2. Cấu trúc hiển thị và các thao tác trên từng nhánh
+
+Mỗi chuyên mục trên cây hiển thị đầy đủ thông tin nhận diện và các nút thao tác nhanh:
+
+```text
+[Thư mục gốc] BÀI VIẾT (/bai-viet) — 10 mục con — 5 bài
+  ├── Báo chí nói gì về HCM-UTE (/bao-chi-noi-gi-ve-hcm-ute) — 20 bài
+  ├── Cán bộ viên chức, cựu viên chức (/can-bo-vien-chuc-cuu-vien-chuc) — 17 bài
+  ├── Cựu sinh viên (/cuu-sinh-vien) — 1 mục con — 9 bài
+  └── Đời sống sinh viên (/doi-song-sinh-vien) — 25 bài
+```
+
+### Chi tiết các nút thao tác trên từng hàng:
+1. **Sao chép link:** Lấy nhanh đường dẫn URL chính thức của chuyên mục (ví dụ: `https://fit.hcmute.edu.vn/bai-viet/doi-song-sinh-vien`) để gắn vào Menu điều hướng hoặc chia sẻ.
+2. **+ Thêm mục con:** Tạo nhanh một chuyên mục cấp dưới trực thuộc chuyên mục hiện tại. Hệ thống sẽ tự động liên kết quan hệ cha — con.
+3. **Sửa:** Chỉnh sửa tên chuyên mục, đường dẫn slug thân thiện SEO và mô tả tóm tắt.
+4. **Xóa:** Xóa chuyên mục không còn sử dụng (chỉ hiển thị ở các mục con, thư mục gốc được khóa bảo vệ).
+5. **Nút ba chấm (...):** Mở thêm các tùy chọn nâng cao như sắp xếp thứ tự hiển thị hoặc phân quyền biên tập viên theo chuyên mục.
+
+---
+
+## 3. Quy trình tạo chuyên mục mới chuẩn SEO
+
+<Steps>
+  <Step>
+    ### Chọn cấp độ chuyên mục cần tạo
+    * Nếu tạo nhóm phân loại lớn mới: Bấm nút **+ Thêm chuyên mục gốc**.
+    * Nếu tạo nhánh con cho chuyên mục sẵn có: Tìm đến hàng của chuyên mục cha và bấm **+ Thêm mục con**.
+  </Step>
+
+  <Step>
+    ### Nhập thông tin chuyên mục
+    * **Tên chuyên mục:** Tên hiển thị công khai (Ví dụ: *Thông báo tuyển sinh*, *Tin hoạt động đoàn thể*...).
+    * **Đường dẫn rút gọn (Slug):** Hệ thống tự động chuyển đổi từ tiếng Việt có dấu sang không dấu có dấu gạch ngang (Ví dụ: `thong-bao-tuyen-sinh`). Thầy/Cô có thể tùy chỉnh ngắn gọn hơn để tối ưu SEO.
+    * **Mô tả chuyên mục:** Đoạn giới thiệu ngắn 1 - 2 câu giúp định vị nội dung và hỗ trợ bot tìm kiếm Google hiểu cấu trúc danh mục.
+  </Step>
+
+  <Step>
+    ### Lưu và kiểm tra trên cây thư mục
+    Bấm **Lưu chuyên mục**. Nhánh mới sẽ xuất hiện ngay lập tức trên sơ đồ cây với huy hiệu số lượng bài viết ban đầu là `0 bài`.
+  </Step>
+</Steps>
+
+---
+
+## ⚠️ Các tình huống thường gặp và cách xử lý
+
+### Tình huống 1: Xóa một chuyên mục thì các bài viết bên trong có bị mất không?
+* **Nguyên nhân:** Cán bộ lo ngại thao tác xóa chuyên mục sẽ xóa luôn nội dung bài viết.
+* **Cách xử lý:** Hệ thống **tuyệt đối không xóa bài viết**. Khi xóa một chuyên mục, các bài viết chỉ được gỡ bỏ nhãn phân loại đó và vẫn lưu trữ an toàn trong danh sách *Văn bản và bài viết*. Thầy/Cô có thể mở bài viết ra để gán sang chuyên mục khác bất cứ lúc nào.
+
+### Tình huống 2: Đổi tên chuyên mục thì đường dẫn (slug) cũ đã chia sẻ có bị lỗi 404 không?
+* **Nguyên nhân:** Khi chuyên mục đổi tên hoặc tinh chỉnh slug, người đọc bấm vào link cũ đã lưu trước đó có thể bị đứt gãy.
+* **Cách xử lý:** Khi sửa slug chuyên mục, hệ thống tự động ghi nhận bản ghi chuyển hướng mã 301 (*Permanent Redirect*). Người dùng bấm vào link cũ sẽ tự động được chuyển mượt mà sang địa chỉ mới mà không gặp lỗi 404.
+
+### Tình huống 3: Một bài viết vừa thuộc "Nghiên cứu khoa học" vừa thuộc "Tin nổi bật" thì xử lý thế nào?
+* **Cách xử lý:** Trong màn hình soạn bài viết, Thầy/Cô chỉ cần tick chọn đồng thời cả 2 chuyên mục này. Bài viết sẽ xuất hiện song song ở cả 2 trang chuyên mục trên website mà không cần phải đăng bài 2 lần.
