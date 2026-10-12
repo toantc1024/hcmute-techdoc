@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+Doc
+Demo pics
+.git
+.github
+*.docx
+*.pdf

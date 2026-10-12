@@ -24,7 +24,7 @@ const securityHeaders = [
 /** @type {import('next').NextConfig} */
 const config = {
   // Use native Next.js on Vercel, or static export for standalone/GitHub Pages
-  ...(isVercel ? {} : { output: 'export' }),
+  output: 'export',
   basePath,
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,

@@ -37,3 +37,4 @@ next-env.d.ts
 *.pptx
 *.ppt
 *.code-workspace
+.env*
