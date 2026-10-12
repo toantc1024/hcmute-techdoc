@@ -33,6 +33,7 @@ const config = {
     unoptimized: true,
   },
   reactStrictMode: true,
+  trailingSlash: true,
   ...((isVercel || process.env.NODE_ENV === 'development') ? {
     async headers() {
       return [
