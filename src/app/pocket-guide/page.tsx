@@ -1,6 +1,7 @@
 'use client';
 
 import React from "react";
+import { brandConfig } from "@/configs/app.config";
 import Link from "next/link";
 import {
   Printer,
@@ -98,15 +99,12 @@ export default function PocketGuidePage() {
             <header className="border-b-2 border-[#0072BC] pb-3 mb-5 flex items-start justify-between gap-4">
               <div className="flex items-center gap-3.5">
                 <img
-                  src="/logo.png"
+                  src={brandConfig.logoUrl}
                   alt="HCM-UTE Logo"
-                  className="w-12 h-12 object-contain shrink-0"
+                  className="w-14 h-14 object-contain shrink-0"
                 />
                 <div>
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-[#536B7D]">
-                    Trường Đại học Công nghệ Kỹ thuật TP.HCM · P. Quản trị thương hiệu & Truyền thông · TT. Thông tin - Máy tính
-                  </div>
-                  <h2 className="text-xl sm:text-2xl font-black text-[#004776] uppercase tracking-tight leading-none mt-1">
+                  <h2 className="text-xl sm:text-2xl font-black text-[#004776] uppercase tracking-tight leading-none">
                     SỔ TAY QUẢN TRỊ WEBSITE BỎ TÚI
                   </h2>
                   <p className="text-[11px] font-medium text-[#536B7D] mt-1">
@@ -120,7 +118,6 @@ export default function PocketGuidePage() {
                   TRANG 1 / 2
                 </span>
                 <div>Phiên bản: <strong className="text-[#004776]">v2.4 (10/2026)</strong></div>
-                <div>Quy chuẩn: <strong className="text-[#004776]">188/QĐ-ĐHCNKT</strong></div>
               </div>
             </header>
 
@@ -418,15 +415,12 @@ export default function PocketGuidePage() {
             <header className="border-b-2 border-[#0072BC] pb-3 mb-5 flex items-start justify-between gap-4">
               <div className="flex items-center gap-3.5">
                 <img
-                  src="/logo.png"
+                  src={brandConfig.logoUrl}
                   alt="HCM-UTE Logo"
-                  className="w-12 h-12 object-contain shrink-0"
+                  className="w-14 h-14 object-contain shrink-0"
                 />
                 <div>
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-[#536B7D]">
-                    Trường Đại học Công nghệ Kỹ thuật TP.HCM · P. Quản trị thương hiệu & Truyền thông · TT. Thông tin - Máy tính
-                  </div>
-                  <h2 className="text-xl sm:text-2xl font-black text-[#004776] uppercase tracking-tight leading-none mt-1">
+                  <h2 className="text-xl sm:text-2xl font-black text-[#004776] uppercase tracking-tight leading-none">
                     CHECKLIST XUẤT BẢN &amp; XỬ LÝ SỰ CỐ
                   </h2>
                   <p className="text-[11px] font-medium text-[#536B7D] mt-1">
