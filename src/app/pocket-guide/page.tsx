@@ -433,8 +433,7 @@ export default function PocketGuidePage() {
                 <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#EBF5FF] text-[#0072BC] font-bold text-[9px] mb-1 border border-[#0072BC]/20">
                   TRANG 2 / 2
                 </span>
-                <div>An toàn: <strong className="text-[#004776]">Luật số 91/2025/QH15</strong></div>
-                <div>Tổng đài: <strong className="text-[#004776]">028.3722.1223</strong></div>
+                <div>Phiên bản: <strong className="text-[#004776]">v2.4 (10/2026)</strong></div>
               </div>
             </header>
 
