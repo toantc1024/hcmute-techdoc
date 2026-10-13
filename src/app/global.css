@@ -500,3 +500,12 @@ header a[href="/"],
   white-space: nowrap !important;
   flex-shrink: 0 !important;
 }
+
+/* =========================================================================
+   TÔ ĐẬM TIÊU ĐỀ CALLOUT (CALLOUT TITLE FONT BOLD)
+   ========================================================================= */
+[style*="--callout-color"] p:first-of-type,
+div:has(> .size-5) > div > p.font-medium {
+  font-weight: 700 !important;
+}
+

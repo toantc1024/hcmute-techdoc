@@ -8,9 +8,21 @@ import { Mermaid } from './Mermaid';
 import { QuickAccessDirectory } from './QuickAccessDirectory';
 import { PosterBlueprintGuide } from './PosterBlueprintGuide';
 
+import { Callout as BaseCallout } from 'fumadocs-ui/components/callout';
+
+export function Callout({ title, ...props }: React.ComponentProps<typeof BaseCallout>) {
+  return (
+    <BaseCallout
+      {...props}
+      title={typeof title === 'string' ? <strong className="font-bold text-foreground">{title.replace(/^⚡\s*/, '')}</strong> : title}
+    />
+  );
+}
+
 export function getMDXComponents(components?: MDXComponents) {
   return {
     ...defaultMdxComponents,
+    Callout,
     Steps,
     Step,
     Tabs,

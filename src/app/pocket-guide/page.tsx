@@ -12,7 +12,6 @@ import {
   FileText,
   Compass,
   Keyboard,
-  Info,
   Building2,
   ShieldCheck,
   LifeBuoy,
@@ -46,10 +45,6 @@ export default function PocketGuidePage() {
             </Link>
 
             <div>
-              <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#0072BC] uppercase tracking-wider">
-                <span className="size-1.5 rounded-full bg-[#0072BC]" />
-                <span>Quy chuẩn ấn phẩm HCM-UTE · 2 Trang A4</span>
-              </div>
               <h1 className="text-base sm:text-lg font-bold text-foreground leading-tight">
                 Sổ tay Quản trị Website Bỏ túi (Pocket Guide)
               </h1>
@@ -67,14 +62,6 @@ export default function PocketGuidePage() {
             </button>
           </div>
 
-        </div>
-
-        {/* Mẹo in chuẩn A4 */}
-        <div className="mt-3 px-4 py-2.5 rounded-xl bg-[#F0F7FD] dark:bg-blue-950/30 border border-[#0072BC]/20 text-xs text-[#004776] dark:text-blue-200 flex items-start sm:items-center gap-2">
-          <Info className="size-4 text-[#0072BC] shrink-0 mt-0.5 sm:mt-0" />
-          <span>
-            <strong>Mẹo in xuất bản:</strong> Khổ giấy <strong>A4</strong>, Tỷ lệ <strong>100%</strong> (hoặc <em>Vừa trang in</em>), Bật tùy chọn <strong>Đồ họa nền (Background graphics)</strong> để giữ trọn vẹn màu sắc nhận diện thương hiệu.
-          </span>
         </div>
       </div>
 
@@ -390,7 +377,7 @@ export default function PocketGuidePage() {
 
             {/* CHÂN TRANG 1 */}
             <footer className="mt-5 pt-3 border-t border-slate-200 flex items-center justify-between text-[10px] text-[#536B7D]">
-              <span>Trường ĐH Công nghệ Kỹ thuật TP.HCM · P. Quản trị thương hiệu & Truyền thông (BMC) · TT. Thông tin - Máy tính (TTMT)</span>
+              <span>Trường ĐH Công nghệ Kỹ thuật TP.HCM</span>
               <span>Trang 1 / 2 · Tra cứu trực tuyến: http://doc.utehub.vn</span>
             </footer>
 
@@ -629,7 +616,7 @@ export default function PocketGuidePage() {
 
             {/* CHÂN TRANG 2 */}
             <footer className="mt-5 pt-3 border-t border-slate-200 flex items-center justify-between text-[10px] text-[#536B7D]">
-              <span>Trường ĐH Công nghệ Kỹ thuật TP.HCM · P. Quản trị thương hiệu & Truyền thông (BMC) · TT. Thông tin - Máy tính (TTMT)</span>
+              <span>Trường ĐH Công nghệ Kỹ thuật TP.HCM</span>
               <span>Trang 2 / 2 · Cổng hướng dẫn quản trị HCM-UTE · Lưu hành nội bộ toàn Trường</span>
             </footer>
 
