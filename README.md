@@ -1,6 +1,4 @@
-
 !!! Please use pnpm if user do not have install for them and force to use pnpm not npm any more!!!!
-
 
 # hdsd
 
@@ -47,3 +45,4 @@ resources:
   features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 - [Fumadocs](https://fumadocs.dev) - learn about Fumadocs
+  test
