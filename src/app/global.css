@@ -2,6 +2,16 @@
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
 
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+}
+
 :root {
   /* HCM-UTE Design System V2 - Signature Brand Colors (Ref: https://beta.hcmute.edu.vn) */
   --hcmute-navy: rgb(0, 71, 118); /* #004776 - Chuẩn màu chữ thay thế toàn bộ màu đen */

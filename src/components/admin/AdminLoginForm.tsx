@@ -62,8 +62,8 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }
   const isLocked = lockSeconds > 0;
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md bg-card rounded-3xl border border-border shadow-lg p-6 sm:p-8 space-y-6 animate-in fade-in zoom-in-95 duration-200">
+    <div className="w-full flex items-center justify-center py-6">
+      <div className="w-full max-w-md bg-white dark:bg-[#132238] rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-2xl p-6 sm:p-8 space-y-6 animate-in fade-in zoom-in-95 duration-200 relative z-20">
         {/* Logo & Header */}
         <div className="text-center space-y-2">
           <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-900 mb-2">

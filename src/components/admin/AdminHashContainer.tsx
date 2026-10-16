@@ -118,9 +118,9 @@ export const AdminHashContainer: React.FC = () => {
     : 0;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-background text-[#004776] dark:text-foreground">
+    <div className="fixed inset-0 z-[99999] overflow-y-auto bg-[#fafbfc] dark:bg-[#0b1523] text-[#004776] dark:text-foreground min-h-screen">
       {/* Top Floating Exit Bar */}
-      <div className="sticky top-0 z-40 bg-[#004776] text-white px-4 py-2 text-xs flex items-center justify-between shadow-md">
+      <div className="sticky top-0 z-40 bg-[#004776] text-white px-4 py-2.5 text-xs flex items-center justify-between shadow-md">
         <div className="flex items-center gap-2">
           <span className="font-bold">ĐƯỜNG DẪN QUẢN TRỊ: /#/admin</span>
           <span className="hidden sm:inline opacity-80">• Cổng điều hành nội bộ HCM-UTE</span>
@@ -135,7 +135,9 @@ export const AdminHashContainer: React.FC = () => {
       </div>
 
       {!isAuthenticated ? (
-        <AdminLoginForm onLoginSuccess={handleLoginSuccess} />
+        <div className="min-h-[calc(100vh-45px)] bg-[#f8fafc] dark:bg-[#0b1523] flex items-center justify-center p-4">
+          <AdminLoginForm onLoginSuccess={handleLoginSuccess} />
+        </div>
       ) : (
         <div className="pb-16">
           <AdminHeader
