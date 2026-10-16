@@ -1,11 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import {
-  UnitWebsiteItem,
-  EvaluationCriterion,
-  CriterionRating,
-} from '@/models/admin.model';
+import { UnitWebsiteItem, EvaluationCriterion, CriterionRating } from '@/models/admin.model';
 import { AdminUnitEvaluationView } from './AdminUnitEvaluationView';
 
 interface AdminUnitDashboardProps {
@@ -31,10 +27,8 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
     const total = units.length;
     const newWebCount = units.filter((u) => u.isNewWeb).length;
     const oldWebCount = units.filter((u) => !u.isNewWeb && !u.notes?.includes('404')).length;
-    const avgCompleteness = Math.round(
-      units.reduce((acc, u) => acc + u.completenessScore, 0) / (total || 1)
-    );
-    return { total, newWebCount, oldWebCount, avgCompleteness };
+    const avgScore = Math.round(units.reduce((acc, u) => acc + u.completenessScore, 0) / (total || 1));
+    return { total, newWebCount, oldWebCount, avgScore };
   }, [units]);
 
   const filteredUnits = useMemo(() => {
@@ -43,18 +37,12 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
       if (selectedGroup !== 'all' && u.group !== selectedGroup) return false;
       if (selectedWebType === 'new' && !u.isNewWeb) return false;
       if (selectedWebType === 'old' && u.isNewWeb) return false;
-
       if (!searchTerm.trim()) return true;
       const term = searchTerm.toLowerCase();
-      return (
-        u.name.toLowerCase().includes(term) ||
-        u.domain.toLowerCase().includes(term) ||
-        u.staff.toLowerCase().includes(term)
-      );
+      return u.name.toLowerCase().includes(term) || u.domain.toLowerCase().includes(term) || u.staff.toLowerCase().includes(term);
     });
   }, [units, selectedStaff, selectedGroup, selectedWebType, searchTerm]);
 
-  const staffList = ['Phi', 'Cal', 'Nhân', 'Ngân'];
   const groupList = [
     { key: 'all', label: 'Tất cả 4 khối' },
     { key: 'khoa-vien', label: 'Khoa/Viện (15)' },
@@ -74,189 +62,164 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
         onUpdateRating={(unitId, critId, rating) => {
           onUpdateRating(unitId, critId, rating);
           const found = units.find((x) => x.id === unitId);
-          if (found) {
-            setInspectingUnit(found);
-          }
+          if (found) setInspectingUnit(found);
         }}
         onUpdateNote={(unitId, critId, note) => {
-          if (onUpdateNote) {
-            onUpdateNote(unitId, critId, note);
-          }
+          if (onUpdateNote) onUpdateNote(unitId, critId, note);
           if (inspectingUnit && inspectingUnit.id === unitId) {
-            setInspectingUnit((prev) => {
-              if (!prev) return null;
-              return {
-                ...prev,
-                criteriaNotes: { ...(prev.criteriaNotes || {}), [critId]: note }
-              };
-            });
+            setInspectingUnit((prev) => (!prev ? null : {
+              ...prev,
+              criteriaNotes: { ...(prev.criteriaNotes || {}), [critId]: note }
+            }));
           }
         }}
       />
     );
   }
 
+  const kpis = [
+    { key: 'all', title: 'Tổng số website', value: `${stats.total} đơn vị`, sub: '100% thuộc HCM-UTE', icon: '🏛️', activeBorder: 'border-[#0072BC]', isSelected: selectedWebType === 'all' },
+    { key: 'new', title: 'Đã trỏ web mới (.189)', value: `${stats.newWebCount} (${Math.round((stats.newWebCount / stats.total) * 100)}%)`, sub: 'Giao diện chuẩn mới', icon: '✓', activeBorder: 'border-emerald-500', isSelected: selectedWebType === 'new' },
+    { key: 'old', title: 'Tạm duy trì web cũ (.181)', value: `${stats.oldWebCount} (${Math.round((stats.oldWebCount / stats.total) * 100)}%)`, sub: 'Chờ chuyển dữ liệu', icon: '⏰', activeBorder: 'border-amber-500', isSelected: selectedWebType === 'old' },
+    { key: 'score', title: 'Độ hoàn thiện trung bình', value: `${stats.avgScore}%`, sub: '7 tiêu chuẩn cốt lõi', icon: '📊', activeBorder: 'border-[#0072BC]', isSelected: false },
+  ];
+
   return (
-    <div className="space-y-6">
-      {/* 4 KPI Metrics */}
+    <div className="space-y-4">
+      {/* 4 KPI Cards - Style matching User Portal Image 2 & 3 */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <div className="p-4 sm:p-5 rounded-2xl border border-border bg-card shadow-xs">
-          <span className="text-xs text-muted-foreground font-medium">Tổng số website</span>
-          <div className="text-2xl sm:text-3xl font-bold text-[#004776] dark:text-foreground mt-1">
-            {stats.total} đơn vị
+        {kpis.map((k) => (
+          <div
+            key={k.title}
+            onClick={() => k.key !== 'score' && setSelectedWebType(k.key === selectedWebType ? 'all' : k.key)}
+            className={`p-4 rounded-xl border bg-white dark:bg-[#132238] shadow-xs transition-all ${
+              k.key !== 'score' ? 'cursor-pointer hover:border-slate-300' : ''
+            } ${k.isSelected ? `border-2 ${k.activeBorder} shadow-sm` : 'border-slate-200 dark:border-slate-800'}`}
+          >
+            <div className="flex items-center justify-between text-xs text-muted-foreground font-medium">
+              <span>{k.title}</span>
+              <span className="p-1 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-[#0072BC] text-xs font-bold">{k.icon}</span>
+            </div>
+            <div className="text-xl sm:text-2xl font-bold text-[#004776] dark:text-foreground mt-2">
+              {k.value}
+            </div>
+            <div className="text-[11px] text-muted-foreground mt-0.5">{k.sub}</div>
           </div>
-          <div className="text-xs text-muted-foreground mt-1">100% thuộc HCM-UTE</div>
-        </div>
-
-        <div className="p-4 sm:p-5 rounded-2xl border border-emerald-200/60 dark:border-emerald-900/60 bg-emerald-50/30 dark:bg-emerald-950/20 shadow-xs">
-          <span className="text-xs text-emerald-800 dark:text-emerald-300 font-medium">Đã trỏ web mới (.189)</span>
-          <div className="text-2xl sm:text-3xl font-bold text-emerald-700 dark:text-emerald-400 mt-1">
-            {stats.newWebCount} <span className="text-xs font-normal">({Math.round((stats.newWebCount / stats.total) * 100)}%)</span>
-          </div>
-          <div className="text-xs text-emerald-600 dark:text-emerald-400 mt-1">Giao diện chuẩn</div>
-        </div>
-
-        <div className="p-4 sm:p-5 rounded-2xl border border-amber-200/60 dark:border-amber-900/60 bg-amber-50/30 dark:bg-amber-950/20 shadow-xs">
-          <span className="text-xs text-amber-800 dark:text-amber-300 font-medium">Tạm duy trì web cũ (.181)</span>
-          <div className="text-2xl sm:text-3xl font-bold text-amber-700 dark:text-amber-400 mt-1">
-            {stats.oldWebCount} <span className="text-xs font-normal">({Math.round((stats.oldWebCount / stats.total) * 100)}%)</span>
-          </div>
-          <div className="text-xs text-amber-600 dark:text-amber-400 mt-1">Chuẩn bị chuyển dữ liệu</div>
-        </div>
-
-        <div className="p-4 sm:p-5 rounded-2xl border border-border bg-card shadow-xs">
-          <span className="text-xs text-muted-foreground font-medium">Độ hoàn thiện trung bình</span>
-          <div className="text-2xl sm:text-3xl font-bold text-[#0072BC] dark:text-sky-400 mt-1">
-            {stats.avgCompleteness}%
-          </div>
-          <div className="text-xs text-muted-foreground mt-1">7 tiêu chuẩn cốt lõi</div>
-        </div>
+        ))}
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="p-4 sm:p-5 rounded-2xl border border-border bg-card shadow-xs space-y-4">
-        <div className="flex flex-col md:flex-row gap-3">
+      <div className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex flex-col md:flex-row gap-2.5">
+        <div className="relative flex-1">
+          <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground text-xs">🔍</span>
           <input
             type="text"
-            placeholder="Tìm theo tên đơn vị, tên miền hoặc cán bộ..."
+            placeholder="Tìm theo mã, tên đơn vị, người phụ trách..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="flex-1 h-11 px-4 rounded-xl border border-border bg-background text-[#004776] dark:text-foreground leading-[2.05] focus:ring-2 focus:ring-[#0072BC]/30"
+            className="w-full h-9 pl-8 pr-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-background text-xs sm:text-sm text-[#004776] dark:text-foreground focus:ring-2 focus:ring-[#0072BC]/20 focus:border-[#0072BC] outline-none"
           />
-
-          <div className="flex flex-wrap items-center gap-2">
-            <select
-              value={selectedStaff}
-              onChange={(e) => setSelectedStaff(e.target.value)}
-              className="min-h-[44px] px-3 rounded-xl border border-border bg-background text-xs sm:text-sm font-medium text-[#004776] dark:text-foreground focus:ring-2 focus:ring-[#0072BC]/30"
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <select
+            value={selectedStaff}
+            onChange={(e) => setSelectedStaff(e.target.value)}
+            className="h-9 px-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-background text-xs font-medium text-[#004776] dark:text-foreground focus:ring-2 focus:ring-[#0072BC]/20 outline-none"
+          >
+            <option value="all">Tất cả cán bộ</option>
+            {['Phi', 'Cal', 'Nhân', 'Ngân'].map((s) => (<option key={s} value={s}>Cán bộ: {s}</option>))}
+          </select>
+          <select
+            value={selectedGroup}
+            onChange={(e) => setSelectedGroup(e.target.value)}
+            className="h-9 px-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-background text-xs font-medium text-[#004776] dark:text-foreground focus:ring-2 focus:ring-[#0072BC]/20 outline-none"
+          >
+            {groupList.map((g) => (<option key={g.key} value={g.key}>{g.label}</option>))}
+          </select>
+          <select
+            value={selectedWebType}
+            onChange={(e) => setSelectedWebType(e.target.value)}
+            className="h-9 px-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-background text-xs font-medium text-[#004776] dark:text-foreground focus:ring-2 focus:ring-[#0072BC]/20 outline-none"
+          >
+            <option value="all">Tất cả trạng thái web</option>
+            <option value="new">Web mới (.189)</option>
+            <option value="old">Web cũ (.181)</option>
+          </select>
+          {(searchTerm || selectedStaff !== 'all' || selectedGroup !== 'all' || selectedWebType !== 'all') && (
+            <button
+              type="button"
+              onClick={() => { setSearchTerm(''); setSelectedStaff('all'); setSelectedGroup('all'); setSelectedWebType('all'); }}
+              className="h-9 px-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-50 text-xs font-medium text-muted-foreground hover:text-[#004776]"
             >
-              <option value="all">Tất cả cán bộ phụ trách</option>
-              {staffList.map((s) => (
-                <option key={s} value={s}>Cán bộ: {s}</option>
-              ))}
-            </select>
-
-            <select
-              value={selectedGroup}
-              onChange={(e) => setSelectedGroup(e.target.value)}
-              className="min-h-[44px] px-3 rounded-xl border border-border bg-background text-xs sm:text-sm font-medium text-[#004776] dark:text-foreground focus:ring-2 focus:ring-[#0072BC]/30"
-            >
-              {groupList.map((g) => (
-                <option key={g.key} value={g.key}>{g.label}</option>
-              ))}
-            </select>
-
-            <select
-              value={selectedWebType}
-              onChange={(e) => setSelectedWebType(e.target.value)}
-              className="min-h-[44px] px-3 rounded-xl border border-border bg-background text-xs sm:text-sm font-medium text-[#004776] dark:text-foreground focus:ring-2 focus:ring-[#0072BC]/30"
-            >
-              <option value="all">Tất cả trạng thái</option>
-              <option value="new">Web mới (.189)</option>
-              <option value="old">Web cũ (.181)</option>
-            </select>
-          </div>
+              ↻ Xóa lọc
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Units Table */}
-      <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-xs">
-        <div className="px-5 py-4 border-b border-border/80 flex items-center justify-between">
-          <h2 className="text-base font-bold text-[#004776] dark:text-foreground">
-            Bảng ma trận đánh giá 51 website ({filteredUnits.length} đơn vị)
+      {/* Units Table - Style matching Image 1, 2, 3 */}
+      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] overflow-hidden shadow-xs">
+        <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/60 dark:bg-slate-900/40">
+          <h2 className="text-sm font-bold text-[#004776] dark:text-foreground flex items-center gap-2">
+            <span>Bảng ma trận đánh giá 51 website</span>
+            <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-[#004776] dark:bg-blue-950/80 dark:text-sky-300">
+              {filteredUnits.length} đơn vị
+            </span>
           </h2>
-          <span className="text-xs text-muted-foreground hidden sm:inline">
-            Bấm vào hàng để xem và điều chỉnh điểm tiêu chí
-          </span>
+          <span className="text-xs text-muted-foreground hidden sm:inline">Bấm hàng để chấm điểm 7 tiêu chuẩn</span>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse min-w-[750px]">
+          <table className="w-full text-left border-collapse min-w-[760px]">
             <thead>
-              <tr className="border-b border-border/60 bg-muted/30 text-xs font-semibold text-muted-foreground">
-                <th className="py-3 px-3 text-center w-12">STT</th>
-                <th className="py-3 px-4">Tên đơn vị & Tên miền</th>
-                <th className="py-3 px-3 w-24">Cán bộ</th>
-                <th className="py-3 px-3 w-32">Trạng thái</th>
-                <th className="py-3 px-4 w-40">Độ hoàn thiện</th>
-                <th className="py-3 px-4 w-28 text-right">Chi tiết</th>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/80 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                <th className="py-2.5 px-3 text-center w-12">STT</th>
+                <th className="py-2.5 px-4">Đơn vị & Tên miền</th>
+                <th className="py-2.5 px-3 w-28">Cán bộ</th>
+                <th className="py-2.5 px-3 w-36">Trạng thái</th>
+                <th className="py-2.5 px-4 w-40">Độ hoàn thiện</th>
+                <th className="py-2.5 px-4 w-28 text-right">Thao tác</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border/60 text-sm">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80 text-sm">
               {filteredUnits.map((u) => {
-                const scoreColor =
-                  u.completenessScore >= 80
-                    ? 'text-emerald-600 dark:text-emerald-400'
-                    : u.completenessScore >= 50
-                    ? 'text-amber-600 dark:text-amber-400'
-                    : 'text-rose-600 dark:text-rose-400';
-
-                const barBg =
-                  u.completenessScore >= 80
-                    ? 'bg-emerald-500'
-                    : u.completenessScore >= 50
-                    ? 'bg-amber-500'
-                    : 'bg-rose-500';
-
+                const scoreColor = u.completenessScore >= 80 ? 'text-emerald-600' : u.completenessScore >= 50 ? 'text-amber-600' : 'text-rose-600';
+                const barBg = u.completenessScore >= 80 ? 'bg-emerald-500' : u.completenessScore >= 50 ? 'bg-amber-500' : 'bg-rose-500';
                 return (
                   <tr
                     key={u.id}
                     onClick={() => setInspectingUnit(u)}
-                    className="hover:bg-muted/20 cursor-pointer transition-colors"
+                    className="hover:bg-slate-50/70 dark:hover:bg-slate-900/40 cursor-pointer transition-colors"
                   >
-                    <td className="py-3.5 px-3 text-center font-mono text-xs text-muted-foreground">
-                      {u.stt}
-                    </td>
-                    <td className="py-3.5 px-4">
-                      <div>
-                        <div className="font-semibold text-sm text-[#004776] dark:text-foreground">
-                          {u.name}
+                    <td className="py-3 px-3 text-center font-mono text-xs text-muted-foreground">{u.stt}</td>
+                    <td className="py-3 px-4">
+                      <div className="flex items-center gap-2.5">
+                        <div className="size-8 rounded-full bg-blue-50 dark:bg-blue-950/60 text-[#0072BC] dark:text-sky-300 font-bold text-xs flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900">
+                          {u.stt}
                         </div>
-                        <div className="text-xs font-mono text-[#0072BC] dark:text-sky-400">
-                          {u.domain} <span className="text-muted-foreground font-sans">({u.groupLabel})</span>
-                        </div>
-                        {u.notes && (
-                          <div className="text-[11px] text-muted-foreground line-clamp-1 mt-0.5">
-                            {u.notes}
+                        <div>
+                          <div className="font-semibold text-sm text-[#004776] dark:text-foreground">{u.name}</div>
+                          <div className="text-xs font-mono text-[#0072BC] dark:text-sky-400">
+                            {u.domain} <span className="text-muted-foreground font-sans">({u.groupLabel})</span>
                           </div>
-                        )}
+                          {u.notes && <div className="text-[11px] text-muted-foreground line-clamp-1 mt-0.5">{u.notes}</div>}
+                        </div>
                       </div>
                     </td>
-                    <td className="py-3.5 px-3 text-xs font-semibold text-[#004776] dark:text-foreground">
-                      {u.staff}
-                    </td>
-                    <td className="py-3.5 px-3">
-                      <span
-                        className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold ${
-                          u.isNewWeb
-                            ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
-                            : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
-                        }`}
-                      >
-                        {u.isNewWeb ? 'Web mới (.189)' : 'Web cũ (.181)'}
+                    <td className="py-3 px-3">
+                      <span className="inline-flex items-center px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                        {u.staff}
                       </span>
                     </td>
-                    <td className="py-3.5 px-4">
+                    <td className="py-3 px-3">
+                      <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border ${
+                        u.isNewWeb ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-amber-50 text-amber-700 border-amber-200'
+                      }`}>
+                        <span className={`size-1.5 rounded-full ${u.isNewWeb ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+                        <span>{u.isNewWeb ? 'Web mới (.189)' : 'Web cũ (.181)'}</span>
+                      </span>
+                    </td>
+                    <td className="py-3 px-4">
                       <div className="space-y-1">
                         <div className="flex justify-between items-center text-xs font-bold font-mono">
                           <span className={scoreColor}>{u.completenessScore}%</span>
@@ -264,24 +227,18 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
                             {u.completenessScore >= 80 ? 'Tốt' : u.completenessScore >= 50 ? 'Cần sửa' : 'Chưa đạt'}
                           </span>
                         </div>
-                        <div className="w-full bg-muted/80 h-2 rounded-full overflow-hidden">
-                          <div
-                            className={`h-full rounded-full transition-all duration-300 ${barBg}`}
-                            style={{ width: `${u.completenessScore}%` }}
-                          />
+                        <div className="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                          <div className={`h-full rounded-full transition-all duration-300 ${barBg}`} style={{ width: `${u.completenessScore}%` }} />
                         </div>
                       </div>
                     </td>
-                    <td className="py-3.5 px-4 text-right">
+                    <td className="py-3 px-4 text-right">
                       <button
                         type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setInspectingUnit(u);
-                        }}
-                        className="min-h-[44px] px-3 py-1.5 rounded-xl border border-border text-xs font-medium text-[#0072BC] hover:bg-muted transition-colors"
+                        onClick={(e) => { e.stopPropagation(); setInspectingUnit(u); }}
+                        className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-[#0072BC] text-[#0072BC] dark:text-sky-300 bg-white dark:bg-slate-900 hover:bg-slate-50 text-xs font-semibold inline-flex items-center gap-1 shadow-2xs transition-colors"
                       >
-                        Đánh giá
+                        Chấm điểm →
                       </button>
                     </td>
                   </tr>

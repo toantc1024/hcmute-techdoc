@@ -63,10 +63,10 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }
 
   return (
     <div className="w-full flex items-center justify-center py-6">
-      <div className="w-full max-w-md bg-white dark:bg-[#132238] rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-2xl p-6 sm:p-8 space-y-6 animate-in fade-in zoom-in-95 duration-200 relative z-20">
+      <div className="w-full max-w-md bg-white dark:bg-[#132238] rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-xl p-6 sm:p-8 space-y-6 animate-in fade-in zoom-in-95 duration-200 relative z-20">
         {/* Logo & Header */}
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-900 mb-2">
+          <div className="inline-flex items-center justify-center p-3 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-900 mb-2">
             <img
               src={brandConfig.logoUrl}
               alt="HCM-UTE Logo"
@@ -83,7 +83,7 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }
 
         {/* Lockout or Error Banner */}
         {isLocked ? (
-          <div className="p-4 rounded-xl border border-rose-300 bg-rose-50 dark:border-rose-900 dark:bg-rose-950/40 text-rose-800 dark:text-rose-200 text-xs font-medium space-y-1">
+          <div className="p-4 rounded-lg border border-rose-300 bg-rose-50 dark:border-rose-900 dark:bg-rose-950/40 text-rose-800 dark:text-rose-200 text-xs font-medium space-y-1">
             <div className="flex items-center gap-2 font-bold">
               <span className="animate-spin">⏳</span>
               <span>Tài khoản tạm thời bị khóa bảo vệ</span>
@@ -93,7 +93,7 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }
             </p>
           </div>
         ) : errorMsg ? (
-          <div className="p-3.5 rounded-xl border border-rose-200 bg-rose-50 dark:border-rose-900/60 dark:bg-rose-950/30 text-rose-700 dark:text-rose-300 text-xs font-medium flex items-center gap-2">
+          <div className="p-3.5 rounded-lg border border-rose-200 bg-rose-50 dark:border-rose-900/60 dark:bg-rose-950/30 text-rose-700 dark:text-rose-300 text-xs font-medium flex items-center gap-2">
             <svg className="size-4 shrink-0 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
@@ -113,7 +113,7 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }
               disabled={isLocked}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full h-11 px-3.5 rounded-xl border border-border bg-background text-[#004776] dark:text-foreground leading-[2.05] focus:outline-hidden focus:ring-2 focus:ring-[#0072BC]/30 focus:border-[#0072BC] disabled:opacity-60"
+              className="w-full h-10 px-3.5 rounded-lg border border-border bg-background text-[#004776] dark:text-foreground leading-[2.05] focus:outline-hidden focus:ring-2 focus:ring-[#0072BC]/30 focus:border-[#0072BC] disabled:opacity-60 text-sm"
               placeholder="admin@hcmute.edu.vn"
             />
           </div>
@@ -139,7 +139,7 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Nhập mật khẩu quản trị..."
-                className="w-full h-11 pl-3.5 pr-10 rounded-xl border border-border bg-background text-[#004776] dark:text-foreground leading-[2.05] focus:outline-hidden focus:ring-2 focus:ring-[#0072BC]/30 focus:border-[#0072BC] disabled:opacity-60"
+                className="w-full h-10 pl-3.5 pr-10 rounded-lg border border-border bg-background text-[#004776] dark:text-foreground leading-[2.05] focus:outline-hidden focus:ring-2 focus:ring-[#0072BC]/30 focus:border-[#0072BC] disabled:opacity-60 text-sm"
               />
               <button
                 type="button"
@@ -165,7 +165,7 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }
           <button
             type="submit"
             disabled={isLoading || isLocked}
-            className="w-full min-h-[44px] px-4 rounded-xl text-sm font-semibold bg-[#0072BC] hover:bg-[#005a96] text-white transition-all shadow-md hover:shadow-lg disabled:opacity-50 flex items-center justify-center gap-2 mt-4"
+            className="w-full min-h-[42px] px-4 rounded-lg text-sm font-semibold bg-[#0072BC] hover:bg-[#005a96] text-white transition-all shadow-sm hover:shadow disabled:opacity-50 flex items-center justify-center gap-2 mt-4"
           >
             {isLoading ? (
               <>

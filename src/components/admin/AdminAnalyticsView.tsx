@@ -75,7 +75,7 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* Top Banner: Reset & Status */}
-      <div className="p-5 sm:p-6 rounded-3xl border border-border bg-white dark:bg-[#132238] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <span className="size-2.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -83,7 +83,7 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
               Đang ghi nhận số liệu trực tiếp
             </span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#004776] dark:text-foreground">
+          <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[#004776] dark:text-foreground">
             Thống kê lượt xem chuyên mục tài liệu
           </h2>
           <p className="text-xs text-muted-foreground flex items-center gap-1.5 pt-0.5">
@@ -95,9 +95,9 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <div className="p-3 px-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-border text-center sm:text-right min-w-[140px]">
+          <div className="p-2.5 px-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-center sm:text-right min-w-[140px]">
             <div className="text-[11px] text-muted-foreground font-medium">Tổng lượt truy cập</div>
-            <div className="text-2xl font-extrabold font-mono text-[#004776] dark:text-sky-300">
+            <div className="text-xl sm:text-2xl font-extrabold font-mono text-[#004776] dark:text-sky-300">
               {totalViews.toLocaleString()}
             </div>
           </div>
@@ -105,7 +105,7 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
           <button
             type="button"
             onClick={handleResetViews}
-            className="min-h-[44px] px-4 py-2 rounded-2xl border border-rose-200 dark:border-rose-900 bg-rose-50/70 hover:bg-rose-100 text-rose-700 dark:text-rose-300 text-xs sm:text-sm font-bold transition-all shadow-xs inline-flex items-center gap-2"
+            className="h-10 px-3.5 py-1.5 rounded-lg border border-rose-200 dark:border-rose-900 bg-rose-50/70 hover:bg-rose-100 text-rose-700 dark:text-rose-300 text-xs sm:text-sm font-semibold transition-all shadow-xs inline-flex items-center gap-2"
             title="Đưa toàn bộ số lượt xem về 0 và lưu lại mốc thời gian hiện tại"
           >
             <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -117,7 +117,7 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
       </div>
 
       {/* Biểu đồ thanh tỷ trọng phân khúc (Segmented Stream Bar) */}
-      <div className="p-5 sm:p-6 rounded-3xl border border-border bg-white dark:bg-[#132238] shadow-sm space-y-4">
+      <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-bold text-[#004776] dark:text-foreground">
             Phân bổ cơ cấu theo luồng chuyên môn
@@ -128,7 +128,7 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
         </div>
 
         {/* Thanh bar phân bổ trực quan */}
-        <div className="w-full h-4 rounded-full bg-slate-100 dark:bg-slate-900 overflow-hidden flex shadow-inner">
+        <div className="w-full h-3.5 rounded-full bg-slate-100 dark:bg-slate-900 overflow-hidden flex shadow-inner">
           {streamStats.map((item) => {
             const pct = totalViews > 0 ? (item.count / totalViews) * 100 : 20;
             return (
@@ -143,11 +143,11 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
         </div>
 
         {/* Chú giải phân bổ */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 pt-1">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 pt-1">
           {streamStats.map((item) => {
             const pct = totalViews > 0 ? Math.round((item.count / totalViews) * 100) : 0;
             return (
-              <div key={item.label} className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-border/80 space-y-1">
+              <div key={item.label} className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-1">
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                   <span className={`size-2 rounded-full ${item.barColor}`} />
                   <span className="truncate font-medium">{item.label}</span>
@@ -162,7 +162,7 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
       </div>
 
       {/* BIỂU ĐỒ CỘT TRỰC QUAN GỌN NHẸ (Visual Horizontal Bar Chart) */}
-      <div className="p-5 sm:p-6 rounded-3xl border border-border bg-white dark:bg-[#132238] shadow-sm space-y-5">
+      <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-border">
           <div>
             <h3 className="text-base font-bold text-[#004776] dark:text-foreground">
