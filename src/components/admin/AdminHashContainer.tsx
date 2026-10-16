@@ -11,6 +11,7 @@ import {
 } from '@/models/admin.model';
 import { adminService } from '@/services/admin.service';
 import { securityService } from '@/services/security.service';
+import { brandConfig } from '@/configs/app.config';
 import { AdminLoginForm } from './AdminLoginForm';
 import { AdminHeader } from './AdminHeader';
 import { AdminContentManager } from './AdminContentManager';
@@ -122,7 +123,12 @@ export const AdminHashContainer: React.FC = () => {
       {/* Top Floating Exit Bar */}
       <div className="sticky top-0 z-40 bg-[#004776] text-white px-4 py-2 text-xs flex items-center justify-between shadow-xs">
         <div className="flex items-center gap-2 font-semibold">
-          <span>HCM-UTE TECH DOC</span>
+          <img
+            src={brandConfig.logoUrl}
+            alt="HCM-UTE"
+            className="size-5 object-contain"
+          />
+          <span className="tracking-wide">HCM-UTE TECH DOC</span>
         </div>
         <button
           type="button"

@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { DocSectionItem, LuongType } from '@/models/admin.model';
+import { brandConfig } from '@/configs/app.config';
 import { AdminEditSectionModal } from './AdminEditSectionModal';
 
 interface AdminContentManagerProps {
@@ -84,10 +85,13 @@ export const AdminContentManager: React.FC<AdminContentManagerProps> = ({
       </div>
 
       {/* Sections Table / Cards */}
-      <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-xs">
-        <div className="px-5 py-4 border-b border-border/80 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <h2 className="text-base font-bold text-[#004776] dark:text-foreground">
+      <div className="rounded-xl border border-border bg-card overflow-hidden shadow-xs">
+        <div className="px-5 py-3.5 border-b border-border/80 flex items-center justify-between bg-slate-50/50 dark:bg-slate-900/40">
+          <div className="flex items-center gap-2.5">
+            <div className="size-8 rounded-lg bg-white dark:bg-blue-950/60 p-1 border border-slate-200/90 dark:border-slate-800 shadow-2xs shrink-0 flex items-center justify-center">
+              <img src={brandConfig.logoUrl} alt="HCM-UTE Logo" className="size-6 object-contain" />
+            </div>
+            <h2 className="text-sm sm:text-base font-bold text-[#004776] dark:text-foreground">
               Danh mục cấu trúc tài liệu ({filteredSections.length} mục)
             </h2>
           </div>

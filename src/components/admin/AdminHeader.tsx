@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { AdminTab } from '@/models/admin.model';
+import { brandConfig } from '@/configs/app.config';
 
 interface AdminHeaderProps {
   activeTab: AdminTab;
@@ -36,16 +37,25 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
       {/* Top Banner */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-[#004776] dark:bg-blue-950/80 dark:text-sky-300">
-                Cổng quản trị hệ thống
-              </span>
-              <span className="text-xs text-muted-foreground">Cập nhật: Tháng 10/2026</span>
+          <div className="flex items-center gap-3.5">
+            <div className="size-11 sm:size-12 rounded-xl bg-white dark:bg-blue-950/60 p-1.5 border border-slate-200/90 dark:border-slate-800 shadow-2xs shrink-0 flex items-center justify-center">
+              <img
+                src={brandConfig.logoUrl}
+                alt="HCM-UTE Logo"
+                className="size-8 sm:size-9 object-contain"
+              />
             </div>
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#004776] dark:text-foreground">
-              Quản trị HCM-UTE TechDoc & Tiến độ 51 website
-            </h1>
+            <div className="space-y-0.5">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-[#004776] dark:bg-blue-950/80 dark:text-sky-300">
+                  Cổng quản trị hệ thống
+                </span>
+                <span className="text-xs text-muted-foreground">Cập nhật: Tháng 10/2026</span>
+              </div>
+              <h1 className="text-lg sm:text-2xl font-bold tracking-tight text-[#004776] dark:text-foreground">
+                Quản trị HCM-UTE TechDoc & Tiến độ 51 website
+              </h1>
+            </div>
           </div>
 
           {/* Quick Metrics & Actions */}

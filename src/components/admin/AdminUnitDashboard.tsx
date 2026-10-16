@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { UnitWebsiteItem, EvaluationCriterion, CriterionRating } from '@/models/admin.model';
+import { brandConfig } from '@/configs/app.config';
 import { AdminUnitEvaluationView } from './AdminUnitEvaluationView';
 
 interface AdminUnitDashboardProps {
@@ -78,10 +79,10 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
   }
 
   const kpis = [
-    { key: 'all', title: 'Tổng số website', value: `${stats.total} đơn vị`, sub: '100% thuộc HCM-UTE', icon: '🏛️', activeBorder: 'border-[#0072BC]', isSelected: selectedWebType === 'all' },
-    { key: 'new', title: 'Đã trỏ web mới (.189)', value: `${stats.newWebCount} (${Math.round((stats.newWebCount / stats.total) * 100)}%)`, sub: 'Giao diện chuẩn mới', icon: '✓', activeBorder: 'border-emerald-500', isSelected: selectedWebType === 'new' },
-    { key: 'old', title: 'Tạm duy trì web cũ (.181)', value: `${stats.oldWebCount} (${Math.round((stats.oldWebCount / stats.total) * 100)}%)`, sub: 'Chờ chuyển dữ liệu', icon: '⏰', activeBorder: 'border-amber-500', isSelected: selectedWebType === 'old' },
-    { key: 'score', title: 'Độ hoàn thiện trung bình', value: `${stats.avgScore}%`, sub: '7 tiêu chuẩn cốt lõi', icon: '📊', activeBorder: 'border-[#0072BC]', isSelected: false },
+    { key: 'all', title: 'Tổng số website', value: `${stats.total} đơn vị`, sub: '100% thuộc HCM-UTE', icon: <img src={brandConfig.logoUrl} alt="HCM-UTE" className="size-4 object-contain" />, activeBorder: 'border-[#0072BC]', isSelected: selectedWebType === 'all' },
+    { key: 'new', title: 'Đã trỏ web mới (.189)', value: `${stats.newWebCount} (${Math.round((stats.newWebCount / stats.total) * 100)}%)`, sub: 'Giao diện chuẩn mới', icon: <span className="text-emerald-600 font-bold">✓</span>, activeBorder: 'border-emerald-500', isSelected: selectedWebType === 'new' },
+    { key: 'old', title: 'Tạm duy trì web cũ (.181)', value: `${stats.oldWebCount} (${Math.round((stats.oldWebCount / stats.total) * 100)}%)`, sub: 'Chờ chuyển dữ liệu', icon: <span className="text-amber-600 font-bold">⏱</span>, activeBorder: 'border-amber-500', isSelected: selectedWebType === 'old' },
+    { key: 'score', title: 'Độ hoàn thiện trung bình', value: `${stats.avgScore}%`, sub: '7 tiêu chuẩn cốt lõi', icon: <span className="text-[#0072BC] font-bold">📈</span>, activeBorder: 'border-[#0072BC]', isSelected: false },
   ];
 
   return (
@@ -98,7 +99,7 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
           >
             <div className="flex items-center justify-between text-xs text-muted-foreground font-medium">
               <span>{k.title}</span>
-              <span className="p-1 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-[#0072BC] text-xs font-bold">{k.icon}</span>
+              <span className="p-1 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-xs font-bold flex items-center justify-center size-6">{k.icon}</span>
             </div>
             <div className="text-xl sm:text-2xl font-bold text-[#004776] dark:text-foreground mt-2">
               {k.value}

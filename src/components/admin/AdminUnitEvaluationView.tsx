@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { UnitWebsiteItem, EvaluationCriterion, CriterionRating } from '@/models/admin.model';
+import { brandConfig } from '@/configs/app.config';
 
 interface AdminUnitEvaluationViewProps {
   unit: UnitWebsiteItem;
@@ -87,9 +88,9 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
 
       {/* Hero Unit Card - Style matching Image 4 & 5 cards */}
       <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-        <div className="flex items-start gap-3">
-          <div className="size-11 rounded-full bg-blue-100 dark:bg-blue-950/80 text-[#0072BC] dark:text-sky-300 font-bold text-sm flex items-center justify-center shrink-0 border border-blue-200 dark:border-blue-900 mt-1">
-            #{unit.stt}
+        <div className="flex items-start gap-3.5">
+          <div className="size-12 rounded-xl bg-white dark:bg-blue-950/80 p-1.5 border border-slate-200 dark:border-slate-800 shadow-2xs shrink-0 flex items-center justify-center mt-0.5">
+            <img src={brandConfig.logoUrl} alt="HCM-UTE Logo" className="size-9 object-contain" />
           </div>
           <div className="space-y-1.5">
             <div className="flex flex-wrap items-center gap-1.5">

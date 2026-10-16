@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { EvaluationCriterion, ProjectPhase } from '@/models/admin.model';
+import { brandConfig } from '@/configs/app.config';
 import { AdminCriterionModal } from './AdminCriterionModal';
 
 interface AdminProgressManagerProps {
@@ -48,15 +49,20 @@ export const AdminProgressManager: React.FC<AdminProgressManagerProps> = ({
   return (
     <div className="space-y-6">
       {/* Overall Progress Banner */}
-      <div className="p-5 sm:p-6 rounded-2xl border border-border bg-card shadow-xs space-y-4">
+      <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <span className="text-xs font-semibold text-[#0072BC] dark:text-sky-400 uppercase tracking-wider">
-              Kế hoạch tổng thể HCM-UTE
-            </span>
-            <h2 className="text-lg sm:text-xl font-bold text-[#004776] dark:text-foreground">
-              Tiến độ nâng cấp & chuẩn hóa website 51 đơn vị
-            </h2>
+          <div className="flex items-center gap-3.5">
+            <div className="size-11 sm:size-12 rounded-xl bg-white dark:bg-blue-950/60 p-1.5 border border-slate-200/90 dark:border-slate-800 shadow-2xs shrink-0 flex items-center justify-center">
+              <img src={brandConfig.logoUrl} alt="HCM-UTE Logo" className="size-8 sm:size-9 object-contain" />
+            </div>
+            <div>
+              <span className="text-xs font-semibold text-[#0072BC] dark:text-sky-400 uppercase tracking-wider">
+                Kế hoạch tổng thể HCM-UTE
+              </span>
+              <h2 className="text-lg sm:text-xl font-bold text-[#004776] dark:text-foreground">
+                Tiến độ nâng cấp & chuẩn hóa website 51 đơn vị
+              </h2>
+            </div>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-xs text-muted-foreground">Tiến độ tích lũy:</span>

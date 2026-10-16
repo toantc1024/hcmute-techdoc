@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { DocSectionItem } from '@/models/admin.model';
 import { adminService } from '@/services/admin.service';
+import { brandConfig } from '@/configs/app.config';
 
 interface AdminAnalyticsViewProps {
   sections: DocSectionItem[];
@@ -76,22 +77,27 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* Top Banner: Reset & Status */}
       <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <span className="size-2.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">
-              Đang ghi nhận số liệu trực tiếp
-            </span>
+        <div className="flex items-center gap-3.5">
+          <div className="size-11 sm:size-12 rounded-xl bg-white dark:bg-blue-950/60 p-1.5 border border-slate-200/90 dark:border-slate-800 shadow-2xs shrink-0 flex items-center justify-center">
+            <img src={brandConfig.logoUrl} alt="HCM-UTE Logo" className="size-8 sm:size-9 object-contain" />
           </div>
-          <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[#004776] dark:text-foreground">
-            Thống kê lượt xem chuyên mục tài liệu
-          </h2>
-          <p className="text-xs text-muted-foreground flex items-center gap-1.5 pt-0.5">
-            <span>Bắt đầu đo lường từ:</span>
-            <strong className="font-mono text-[#0072BC] dark:text-sky-400 bg-blue-50 dark:bg-blue-950 px-2 py-0.5 rounded-md">
-              {startDate}
-            </strong>
-          </p>
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-2">
+              <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+                Đang ghi nhận số liệu trực tiếp
+              </span>
+            </div>
+            <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[#004776] dark:text-foreground">
+              Thống kê lượt xem chuyên mục tài liệu
+            </h2>
+            <p className="text-xs text-muted-foreground flex items-center gap-1.5 pt-0.5">
+              <span>Bắt đầu đo lường từ:</span>
+              <strong className="font-mono text-[#0072BC] dark:text-sky-400 bg-blue-50 dark:bg-blue-950 px-2 py-0.5 rounded-md">
+                {startDate}
+              </strong>
+            </p>
+          </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
