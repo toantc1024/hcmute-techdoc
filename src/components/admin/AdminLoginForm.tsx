@@ -162,20 +162,15 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }
             </div>
           </div>
 
-          <div className="flex items-center justify-between text-[11px] text-muted-foreground pt-1">
-            <span>Bảo vệ Brute-Force: Max 5 lần</span>
-            <span>Số lần thử còn lại: <strong className="text-[#0072BC] dark:text-sky-400">{remainingAttempts}/5</strong></span>
-          </div>
-
           <button
             type="submit"
             disabled={isLoading || isLocked}
-            className="w-full min-h-[44px] px-4 rounded-xl text-sm font-semibold bg-[#0072BC] hover:bg-[#005a96] text-white transition-all shadow-md hover:shadow-lg disabled:opacity-50 flex items-center justify-center gap-2 mt-2"
+            className="w-full min-h-[44px] px-4 rounded-xl text-sm font-semibold bg-[#0072BC] hover:bg-[#005a96] text-white transition-all shadow-md hover:shadow-lg disabled:opacity-50 flex items-center justify-center gap-2 mt-4"
           >
             {isLoading ? (
               <>
                 <div className="size-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                <span>Đang mã hóa & xác thực SHA-256...</span>
+                <span>Đang xác thực...</span>
               </>
             ) : (
               <span>Xác thực & Vào quản trị</span>
@@ -183,11 +178,7 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }
           </button>
         </form>
 
-        {/* Security badge and note */}
-        <div className="pt-4 border-t border-border text-center space-y-2">
-          <p className="text-[11px] text-muted-foreground">
-            Hệ thống quản trị nội bộ áp dụng cơ chế băm mật mã và tự động đăng xuất sau 30 phút bất hoạt.
-          </p>
+        <div className="pt-3 border-t border-border text-center">
           <a
             href="/"
             className="inline-block text-xs font-medium text-[#0072BC] dark:text-sky-400 hover:underline"

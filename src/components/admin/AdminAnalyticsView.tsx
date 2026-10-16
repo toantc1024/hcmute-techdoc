@@ -1,202 +1,159 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { DocSectionItem } from '@/models/admin.model';
+import { adminService } from '@/services/admin.service';
 
 interface AdminAnalyticsViewProps {
   sections: DocSectionItem[];
+  onUpdateSections?: (sections: DocSectionItem[]) => void;
 }
 
-export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({ sections }) => {
-  const [timeRange, setTimeRange] = useState<'7d' | '30d' | 'all'>('30d');
+export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
+  sections: initialSections,
+  onUpdateSections,
+}) => {
+  const [sections, setSections] = useState<DocSectionItem[]>(initialSections);
+  const [startDate, setStartDate] = useState<string>('16/10/2026');
 
-  // Multiplier dựa theo mốc thời gian lọc
-  const multiplier = timeRange === '7d' ? 0.28 : timeRange === '30d' ? 0.75 : 1;
+  useEffect(() => {
+    setSections(initialSections);
+    setStartDate(adminService.getViewsStartDate());
+  }, [initialSections]);
 
-  const rankedSections = useMemo(() => {
-    return [...sections]
-      .map((s) => ({
-        ...s,
-        calculatedViews: Math.round(s.viewCount * multiplier),
-      }))
-      .sort((a, b) => b.calculatedViews - a.calculatedViews);
-  }, [sections, multiplier]);
+  const totalViews = useMemo(() => {
+    return sections.reduce((sum, s) => sum + s.viewCount, 0);
+  }, [sections]);
 
-  const totalCalculatedViews = useMemo(() => {
-    return rankedSections.reduce((acc, curr) => acc + curr.calculatedViews, 0);
-  }, [rankedSections]);
+  const maxViews = useMemo(() => {
+    return Math.max(...sections.map((s) => s.viewCount), 1);
+  }, [sections]);
 
-  // Phân bổ theo luồng
-  const distributionByLuong = useMemo(() => {
-    const map: Record<string, { label: string; count: number; color: string }> = {
-      B: { label: 'Luồng B (Tin tức & PDF)', count: 0, color: 'bg-emerald-500' },
-      A: { label: 'Luồng A (Trang con)', count: 0, color: 'bg-blue-600' },
-      TONG_QUAN: { label: 'Tổng quan & Khởi động', count: 0, color: 'bg-indigo-500' },
-      C: { label: 'Luồng C (Menu & Footer)', count: 0, color: 'bg-amber-500' },
-      HE_THONG: { label: 'Hệ thống & Tiện ích', count: 0, color: 'bg-purple-500' },
+  // Sắp xếp các mục theo lượt xem giảm dần
+  const sortedSections = useMemo(() => {
+    return [...sections].sort((a, b) => b.viewCount - a.viewCount);
+  }, [sections]);
+
+  // Phân bổ lượt xem theo Luồng
+  const streamStats = useMemo(() => {
+    const map: Record<string, { label: string; count: number; color: string; barColor: string }> = {
+      B: { label: 'Luồng B (Tin tức & PDF)', count: 0, color: 'text-emerald-600', barColor: 'bg-emerald-500' },
+      A: { label: 'Luồng A (Trang con)', count: 0, color: 'text-blue-600', barColor: 'bg-[#0072BC]' },
+      TONG_QUAN: { label: 'Tổng quan & Khởi động', count: 0, color: 'text-indigo-600', barColor: 'bg-indigo-500' },
+      C: { label: 'Luồng C (Menu & Footer)', count: 0, color: 'text-amber-600', barColor: 'bg-amber-500' },
+      HE_THONG: { label: 'Hệ thống & Tiện ích', count: 0, color: 'text-purple-600', barColor: 'bg-purple-500' },
     };
 
-    rankedSections.forEach((s) => {
+    sections.forEach((s) => {
       if (map[s.luong]) {
-        map[s.luong].count += s.calculatedViews;
+        map[s.luong].count += s.viewCount;
       }
     });
 
     return Object.values(map);
-  }, [rankedSections]);
+  }, [sections]);
+
+  const handleResetViews = () => {
+    if (confirm('Bạn có chắc chắn muốn đặt lại toàn bộ lượt xem về 0 và bắt đầu tính từ thời điểm này?')) {
+      const { items, startDate: newDate } = adminService.resetViews();
+      setSections(items);
+      setStartDate(newDate);
+      if (onUpdateSections) {
+        onUpdateSections(items);
+      }
+    }
+  };
+
+  const handleSimulateView = (id: string) => {
+    const updated = adminService.incrementView(id);
+    setSections(updated);
+    if (onUpdateSections) {
+      onUpdateSections(updated);
+    }
+  };
 
   return (
-    <div className="space-y-6">
-      {/* Metric Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 rounded-2xl border border-border bg-card shadow-xs">
-          <span className="text-xs text-muted-foreground font-medium">Tổng lượt xem tài liệu</span>
-          <div className="text-2xl sm:text-3xl font-bold text-[#004776] dark:text-sky-400 mt-1">
-            {totalCalculatedViews.toLocaleString()}
+    <div className="space-y-6 animate-in fade-in duration-200">
+      {/* Top Banner: Reset & Status */}
+      <div className="p-5 sm:p-6 rounded-3xl border border-border bg-white dark:bg-[#132238] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="size-2.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+              Đang ghi nhận số liệu trực tiếp
+            </span>
           </div>
-          <div className="flex items-center gap-1.5 mt-2 text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
-            <span>↑ 18.4%</span>
-            <span className="text-muted-foreground font-normal">so với chu kỳ trước</span>
-          </div>
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#004776] dark:text-foreground">
+            Thống kê lượt xem chuyên mục tài liệu
+          </h2>
+          <p className="text-xs text-muted-foreground flex items-center gap-1.5 pt-0.5">
+            <span>Bắt đầu đo lường từ:</span>
+            <strong className="font-mono text-[#0072BC] dark:text-sky-400 bg-blue-50 dark:bg-blue-950 px-2 py-0.5 rounded-md">
+              {startDate}
+            </strong>
+          </p>
         </div>
 
-        <div className="p-5 rounded-2xl border border-border bg-card shadow-xs">
-          <span className="text-xs text-muted-foreground font-medium">Thời gian đọc trung bình</span>
-          <div className="text-2xl sm:text-3xl font-bold text-[#004776] dark:text-sky-400 mt-1">
-            6.8 phút
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="p-3 px-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-border text-center sm:text-right min-w-[140px]">
+            <div className="text-[11px] text-muted-foreground font-medium">Tổng lượt truy cập</div>
+            <div className="text-2xl font-extrabold font-mono text-[#004776] dark:text-sky-300">
+              {totalViews.toLocaleString()}
+            </div>
           </div>
-          <div className="flex items-center gap-1.5 mt-2 text-xs text-blue-600 dark:text-blue-400 font-semibold">
-            <span>Đọc sâu & thực hành</span>
-            <span className="text-muted-foreground font-normal">theo quy trình</span>
-          </div>
-        </div>
 
-        <div className="p-5 rounded-2xl border border-border bg-card shadow-xs">
-          <span className="text-xs text-muted-foreground font-medium">Phần được quan tâm nhất</span>
-          <div className="text-base sm:text-lg font-bold text-[#004776] dark:text-foreground mt-1 truncate">
-            {rankedSections[0]?.pageTitle || 'Luồng B: Tin bài'}
-          </div>
-          <div className="mt-2 text-xs text-muted-foreground">
-            {rankedSections[0]?.calculatedViews.toLocaleString()} lượt xem ({Math.round(((rankedSections[0]?.calculatedViews || 0) / (totalCalculatedViews || 1)) * 100)}%)
-          </div>
-        </div>
-
-        <div className="p-5 rounded-2xl border border-border bg-card shadow-xs">
-          <span className="text-xs text-muted-foreground font-medium">Đơn vị truy cập nhiều</span>
-          <div className="text-2xl sm:text-3xl font-bold text-[#004776] dark:text-sky-400 mt-1">
-            15 Khoa/Viện
-          </div>
-          <div className="mt-2 text-xs text-muted-foreground">
-            Chiếm 48% tổng lượt truy vấn hướng dẫn
-          </div>
+          <button
+            type="button"
+            onClick={handleResetViews}
+            className="min-h-[44px] px-4 py-2 rounded-2xl border border-rose-200 dark:border-rose-900 bg-rose-50/70 hover:bg-rose-100 text-rose-700 dark:text-rose-300 text-xs sm:text-sm font-bold transition-all shadow-xs inline-flex items-center gap-2"
+            title="Đưa toàn bộ số lượt xem về 0 và lưu lại mốc thời gian hiện tại"
+          >
+            <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span>Đặt lại về 0 (Bắt đầu từ bây giờ)</span>
+          </button>
         </div>
       </div>
 
-      {/* Filter and Top Viewed Rankings */}
-      <div className="p-5 sm:p-6 rounded-2xl border border-border bg-card shadow-xs space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border/80">
-          <div>
-            <h2 className="text-base sm:text-lg font-bold text-[#004776] dark:text-foreground">
-              Bảng xếp hạng phần được xem nhiều nhất (Top Viewed)
-            </h2>
-            <p className="text-xs text-muted-foreground mt-0.5">
-              Thống kê trực quan nhu cầu tra cứu tài liệu của cán bộ, giảng viên và quản trị viên 51 đơn vị
-            </p>
-          </div>
-
-          {/* Time Filter Pills */}
-          <div className="flex items-center gap-1.5 bg-muted/50 p-1 rounded-xl border border-border/60">
-            {[
-              { key: '7d', label: '7 ngày qua' },
-              { key: '30d', label: '30 ngày qua' },
-              { key: 'all', label: 'Toàn thời gian' },
-            ].map((t) => (
-              <button
-                key={t.key}
-                type="button"
-                onClick={() => setTimeRange(t.key as '7d' | '30d' | 'all')}
-                className={`min-h-[44px] px-3 sm:px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                  timeRange === t.key
-                    ? 'bg-card text-[#004776] dark:text-sky-300 shadow-xs'
-                    : 'text-muted-foreground hover:text-[#004776]'
-                }`}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
+      {/* Biểu đồ thanh tỷ trọng phân khúc (Segmented Stream Bar) */}
+      <div className="p-5 sm:p-6 rounded-3xl border border-border bg-white dark:bg-[#132238] shadow-sm space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-bold text-[#004776] dark:text-foreground">
+            Phân bổ cơ cấu theo luồng chuyên môn
+          </h3>
+          <span className="text-xs text-muted-foreground font-mono">
+            100% tài liệu TechDoc
+          </span>
         </div>
 
-        {/* Top List with Progress Bars */}
-        <div className="space-y-4">
-          {rankedSections.map((item, index) => {
-            const percentage = totalCalculatedViews > 0
-              ? Math.round((item.calculatedViews / totalCalculatedViews) * 100)
-              : 0;
-            const isTop = index === 0;
-
+        {/* Thanh bar phân bổ trực quan */}
+        <div className="w-full h-4 rounded-full bg-slate-100 dark:bg-slate-900 overflow-hidden flex shadow-inner">
+          {streamStats.map((item) => {
+            const pct = totalViews > 0 ? (item.count / totalViews) * 100 : 20;
             return (
               <div
-                key={item.id}
-                className="p-4 rounded-xl border border-border/70 hover:border-[#0072BC]/40 hover:bg-muted/10 transition-all space-y-2"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <div className="flex items-center gap-3">
-                    <span
-                      className={`size-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
-                        index === 0
-                          ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-300'
-                          : index === 1
-                          ? 'bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-slate-300'
-                          : index === 2
-                          ? 'bg-amber-700/10 text-amber-900 dark:text-amber-200'
-                          : 'bg-muted text-muted-foreground'
-                      }`}
-                    >
-                      #{index + 1}
-                    </span>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-semibold text-[#0072BC] dark:text-sky-400">
-                          Chương {item.chapterNumber}: {item.chapterTitle}
-                        </span>
-                        {isTop && (
-                          <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300">
-                            Quan tâm nhất
-                          </span>
-                        )}
-                      </div>
-                      <h3 className="font-semibold text-sm text-[#004776] dark:text-foreground">
-                        {item.pageTitle}
-                      </h3>
-                    </div>
-                  </div>
+                key={item.label}
+                className={`${item.barColor} h-full transition-all duration-500 first:rounded-l-full last:rounded-r-full`}
+                style={{ width: `${pct}%` }}
+                title={`${item.label}: ${item.count} lượt (${Math.round(pct)}%)`}
+              />
+            );
+          })}
+        </div>
 
-                  <div className="flex items-center sm:justify-end gap-3 text-right">
-                    <div>
-                      <div className="font-bold text-sm font-mono text-[#004776] dark:text-foreground">
-                        {item.calculatedViews.toLocaleString()} lượt xem
-                      </div>
-                      <div className="text-[11px] text-muted-foreground">
-                        {item.readingTimeMinutes} phút đọc trung bình
-                      </div>
-                    </div>
-                    <span className="min-w-[48px] text-right font-bold text-xs text-[#0072BC] dark:text-sky-400">
-                      {percentage}%
-                    </span>
-                  </div>
+        {/* Chú giải phân bổ */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 pt-1">
+          {streamStats.map((item) => {
+            const pct = totalViews > 0 ? Math.round((item.count / totalViews) * 100) : 0;
+            return (
+              <div key={item.label} className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-border/80 space-y-1">
+                <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <span className={`size-2 rounded-full ${item.barColor}`} />
+                  <span className="truncate font-medium">{item.label}</span>
                 </div>
-
-                {/* Visual Progress Bar */}
-                <div className="w-full bg-muted/80 h-2.5 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full rounded-full transition-all duration-500 ${
-                      index === 0
-                        ? 'bg-gradient-to-r from-[#0072BC] to-emerald-500'
-                        : 'bg-[#0072BC]/80'
-                    }`}
-                    style={{ width: `${percentage}%` }}
-                  />
+                <div className="text-base font-extrabold font-mono text-[#004776] dark:text-foreground">
+                  {item.count.toLocaleString()} <span className="text-xs font-normal text-muted-foreground">({pct}%)</span>
                 </div>
               </div>
             );
@@ -204,26 +161,77 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({ sections
         </div>
       </div>
 
-      {/* Distribution by Stream / Luồng */}
-      <div className="p-5 sm:p-6 rounded-2xl border border-border bg-card shadow-xs space-y-4">
-        <h2 className="text-base font-bold text-[#004776] dark:text-foreground">
-          Cơ cấu lượt xem theo phân luồng chuyên môn
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-          {distributionByLuong.map((item) => {
-            const pct = totalCalculatedViews > 0
-              ? Math.round((item.count / totalCalculatedViews) * 100)
-              : 0;
+      {/* BIỂU ĐỒ CỘT TRỰC QUAN GỌN NHẸ (Visual Horizontal Bar Chart) */}
+      <div className="p-5 sm:p-6 rounded-3xl border border-border bg-white dark:bg-[#132238] shadow-sm space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-border">
+          <div>
+            <h3 className="text-base font-bold text-[#004776] dark:text-foreground">
+              Biểu đồ trực quan: Top chuyên mục được quan tâm nhiều nhất
+            </h3>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              Chiều dài thanh biểu đồ phản ánh trực tiếp số lượt tra cứu của 51 đơn vị
+            </p>
+          </div>
+          <span className="text-xs font-mono text-muted-foreground">8 chuyên đề chính</span>
+        </div>
+
+        {/* Danh sách thanh biểu đồ */}
+        <div className="space-y-3.5">
+          {sortedSections.map((item, index) => {
+            const percentage = totalViews > 0 ? Math.round((item.viewCount / totalViews) * 100) : 0;
+            const barWidth = maxViews > 0 ? Math.max(2, Math.round((item.viewCount / maxViews) * 100)) : 2;
+
             return (
-              <div key={item.label} className="p-3.5 rounded-xl border border-border/70 bg-background space-y-1">
-                <div className="flex items-center gap-2">
-                  <span className={`size-2.5 rounded-full ${item.color}`} />
-                  <span className="text-xs font-semibold text-muted-foreground truncate">{item.label}</span>
+              <div
+                key={item.id}
+                className="p-3.5 rounded-2xl border border-border/70 hover:border-[#0072BC]/40 bg-slate-50/40 dark:bg-slate-900/30 transition-all space-y-2 group"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
+                  <div className="flex items-center gap-2.5">
+                    <span className={`size-6 rounded-lg flex items-center justify-center font-bold text-xs font-mono shrink-0 ${
+                      index === 0 ? 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300' :
+                      index === 1 ? 'bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-slate-300' :
+                      'bg-slate-100 text-muted-foreground'
+                    }`}>
+                      #{index + 1}
+                    </span>
+                    <span className="font-bold text-[#004776] dark:text-foreground">
+                      Chương {item.chapterNumber}: {item.chapterTitle}
+                    </span>
+                    <span className="text-muted-foreground hidden md:inline">({item.pageTitle})</span>
+                  </div>
+
+                  <div className="flex items-center gap-3 self-end sm:self-auto">
+                    <button
+                      type="button"
+                      onClick={() => handleSimulateView(item.id)}
+                      className="px-2 py-0.5 rounded-md text-[10px] font-medium border border-border bg-background hover:bg-muted text-muted-foreground hover:text-[#004776] transition-colors"
+                      title="Mô phỏng 1 lượt truy cập thực tế"
+                    >
+                      +1 Test
+                    </button>
+                    <span className="font-mono font-extrabold text-sm text-[#004776] dark:text-sky-300 min-w-[70px] text-right">
+                      {item.viewCount.toLocaleString()} lượt
+                    </span>
+                    <span className="font-mono text-xs text-muted-foreground min-w-[40px] text-right">
+                      {percentage}%
+                    </span>
+                  </div>
                 </div>
-                <div className="text-lg font-bold text-[#004776] dark:text-foreground">
-                  {item.count.toLocaleString()}
+
+                {/* Thanh Bar Gradient */}
+                <div className="w-full bg-slate-200/80 dark:bg-slate-800/80 h-3 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all duration-700 ${
+                      index === 0
+                        ? 'bg-gradient-to-r from-[#0072BC] to-emerald-400'
+                        : index === 1
+                        ? 'bg-gradient-to-r from-[#0072BC] to-sky-400'
+                        : 'bg-[#0072BC]/70'
+                    }`}
+                    style={{ width: `${barWidth}%` }}
+                  />
                 </div>
-                <div className="text-xs font-medium text-muted-foreground">{pct}% tổng lượng xem</div>
               </div>
             );
           })}

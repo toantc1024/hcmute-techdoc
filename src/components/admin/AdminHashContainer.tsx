@@ -120,10 +120,9 @@ export const AdminHashContainer: React.FC = () => {
   return (
     <div className="fixed inset-0 z-[99999] overflow-y-auto bg-[#fafbfc] dark:bg-[#0b1523] text-[#004776] dark:text-foreground min-h-screen">
       {/* Top Floating Exit Bar */}
-      <div className="sticky top-0 z-40 bg-[#004776] text-white px-4 py-2.5 text-xs flex items-center justify-between shadow-md">
-        <div className="flex items-center gap-2">
-          <span className="font-bold">ĐƯỜNG DẪN QUẢN TRỊ: /#/admin</span>
-          <span className="hidden sm:inline opacity-80">• Cổng điều hành nội bộ HCM-UTE</span>
+      <div className="sticky top-0 z-40 bg-[#004776] text-white px-4 py-2 text-xs flex items-center justify-between shadow-xs">
+        <div className="flex items-center gap-2 font-semibold">
+          <span>HCM-UTE TECH DOC</span>
         </div>
         <button
           type="button"
@@ -169,7 +168,7 @@ export const AdminHashContainer: React.FC = () => {
             )}
 
             {activeTab === 'analytics' && (
-              <AdminAnalyticsView sections={sections} />
+              <AdminAnalyticsView sections={sections} onUpdateSections={setSections} />
             )}
 
             {activeTab === 'progress' && (

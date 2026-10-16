@@ -46,9 +46,6 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#004776] dark:text-foreground">
               Quản trị HCM-UTE TechDoc & Tiến độ 51 website
             </h1>
-            <p className="text-xs sm:text-sm text-muted-foreground">
-              Điều chỉnh ẩn/hiện nội dung, giám sát lượng truy cập và đánh giá độ hoàn thiện website toàn trường
-            </p>
           </div>
 
           {/* Quick Metrics & Actions */}
