@@ -73,9 +73,6 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }
               className="size-12 object-contain"
             />
           </div>
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-[#0072BC]/10 text-[#004776] dark:text-sky-300">
-            Khu vực bảo mật SHA-256
-          </span>
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#004776] dark:text-foreground">
             Đăng nhập hệ thống quản trị
           </h1>

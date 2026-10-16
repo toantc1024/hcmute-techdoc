@@ -11,7 +11,8 @@ const STORAGE_KEYS = {
   DOC_SECTIONS: 'hcmute_techdoc_admin_sections',
   CRITERIA: 'hcmute_techdoc_admin_criteria',
   UNITS: 'hcmute_techdoc_admin_units',
-  PHASES: 'hcmute_techdoc_admin_phases'
+  PHASES: 'hcmute_techdoc_admin_phases',
+  VIEWS_START_DATE: 'hcmute_techdoc_views_start_date',
 };
 
 function isClient(): boolean {
@@ -65,6 +66,35 @@ export const adminService = {
   updateDocSection(updated: DocSectionItem): DocSectionItem[] {
     const list = this.getDocSections().map((item) =>
       item.id === updated.id ? { ...updated, lastUpdated: new Date().toISOString().split('T')[0] } : item
+    );
+    this.saveDocSections(list);
+    return list;
+  },
+
+  getViewsStartDate(): string {
+    if (!isClient()) return '16/10/2026';
+    return localStorage.getItem(STORAGE_KEYS.VIEWS_START_DATE) || '16/10/2026';
+  },
+
+  resetViews(): { items: DocSectionItem[]; startDate: string } {
+    const nowStr = new Date().toLocaleString('vi-VN', {
+      hour: '2-digit',
+      minute: '2-digit',
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+    if (isClient()) {
+      localStorage.setItem(STORAGE_KEYS.VIEWS_START_DATE, nowStr);
+    }
+    const zeroed = this.getDocSections().map((item) => ({ ...item, viewCount: 0 }));
+    this.saveDocSections(zeroed);
+    return { items: zeroed, startDate: nowStr };
+  },
+
+  incrementView(id: string): DocSectionItem[] {
+    const list = this.getDocSections().map((item) =>
+      item.id === id ? { ...item, viewCount: item.viewCount + 1 } : item
     );
     this.saveDocSections(list);
     return list;
