@@ -27,42 +27,30 @@ export default function PocketGuidePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F6F9] dark:bg-[#0B0F19] text-[#11324D] dark:text-[#E2E8F0] py-6 sm:py-8 px-3 sm:px-6">
+    <div className="min-h-screen bg-[#F4F6F9] dark:bg-[#0B0F19] text-[#11324D] dark:text-[#E2E8F0] pt-3 sm:pt-5 pb-8 px-3 sm:px-6">
       
       {/* =========================================================================
-          THANH ĐIỀU KHIỂN TRÊN MÀN HÌNH (ẨN HOÀN TOÀN KHI IN / XUẤT PDF)
+          CỤM NÚT ĐIỀU KHIỂN GỌN GÀNG Ở GÓC (ẨN HOÀN TOÀN KHI IN / XUẤT PDF)
           ========================================================================= */}
-      <div className="no-print max-w-[210mm] mx-auto mb-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white dark:bg-card border border-border/80 shadow-xs">
-          
-          <div className="flex items-center gap-3">
-            <Link
-              href="/docs"
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-muted-foreground hover:text-primary transition-colors px-3 py-1.5 rounded-lg border border-border/70 hover:bg-muted/50"
-            >
-              <ArrowLeft className="size-4" />
-              <span>Cổng tài liệu</span>
-            </Link>
-
-            <div>
-              <h1 className="text-base sm:text-lg font-bold text-foreground leading-tight">
-                Sổ tay Quản trị Website Bỏ túi (Pocket Guide)
-              </h1>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2.5 shrink-0">
-            <button
-              type="button"
-              onClick={handlePrint}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0072BC] hover:bg-[#005A96] text-white font-bold text-xs sm:text-sm transition-all shadow-sm hover:shadow-md active:scale-95 cursor-pointer"
-            >
-              <Printer className="size-4" />
-              <span>In / Lưu file PDF (2 Trang A4)</span>
-            </button>
-          </div>
-
-        </div>
+      <div className="no-print fixed top-3 right-3 sm:top-4 sm:right-6 z-50 flex items-center gap-1.5 p-1.5 rounded-xl bg-white/95 dark:bg-card/95 backdrop-blur-md border border-slate-200/90 dark:border-border/80 shadow-md hover:shadow-lg transition-all">
+        <Link
+          href="/docs"
+          title="Quay lại Cổng tài liệu"
+          aria-label="Quay lại Cổng tài liệu"
+          className="p-2 sm:p-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-[#0072BC] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-center cursor-pointer"
+        >
+          <ArrowLeft className="size-4 sm:size-5" />
+        </Link>
+        <div className="w-px h-5 bg-slate-200 dark:bg-slate-700" />
+        <button
+          type="button"
+          onClick={handlePrint}
+          title="In / Lưu file PDF (2 Trang A4)"
+          aria-label="In / Lưu file PDF (2 Trang A4)"
+          className="p-2 sm:p-2.5 rounded-lg bg-[#0072BC] hover:bg-[#005A96] text-white transition-all shadow-xs hover:shadow active:scale-95 cursor-pointer flex items-center justify-center"
+        >
+          <Printer className="size-4 sm:size-5" />
+        </button>
       </div>
 
       {/* =========================================================================
