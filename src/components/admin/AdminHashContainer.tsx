@@ -206,6 +206,10 @@ export const AdminHashContainer: React.FC = () => {
                   setUnits(updated);
                   securityService.addAuditLog('UNIT_UPDATE', 'admin', `Đơn vị #${unitId}: ${critId} -> ${rating}`);
                 }}
+                onUpdateNote={(unitId, critId, note) => {
+                  const updated = adminService.updateUnitCriterionNote(unitId, critId, note);
+                  setUnits(updated);
+                }}
               />
             )}
           </main>

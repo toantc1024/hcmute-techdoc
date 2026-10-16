@@ -47,6 +47,7 @@ export interface UnitWebsiteItem {
   isNewWeb: boolean; // true = trỏ IP .189, false = web cũ .181 hoặc nxdomain
   staff: string; // Cán bộ phụ trách (Phi, Cal, Nhân, Ngân)
   criteriaRatings: Record<string, CriterionRating>;
+  criteriaNotes?: Record<string, string>;
   completenessScore: number; // 0 - 100%
   notes?: string;
   contactEmail?: string;

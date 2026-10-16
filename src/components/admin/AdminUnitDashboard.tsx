@@ -12,12 +12,14 @@ interface AdminUnitDashboardProps {
   units: UnitWebsiteItem[];
   criteria: EvaluationCriterion[];
   onUpdateRating: (unitId: number, criterionId: string, rating: CriterionRating) => void;
+  onUpdateNote?: (unitId: number, criterionId: string, note: string) => void;
 }
 
 export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
   units,
   criteria,
   onUpdateRating,
+  onUpdateNote,
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStaff, setSelectedStaff] = useState<string>('all');
@@ -74,6 +76,20 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
           const found = units.find((x) => x.id === unitId);
           if (found) {
             setInspectingUnit(found);
+          }
+        }}
+        onUpdateNote={(unitId, critId, note) => {
+          if (onUpdateNote) {
+            onUpdateNote(unitId, critId, note);
+          }
+          if (inspectingUnit && inspectingUnit.id === unitId) {
+            setInspectingUnit((prev) => {
+              if (!prev) return null;
+              return {
+                ...prev,
+                criteriaNotes: { ...(prev.criteriaNotes || {}), [critId]: note }
+              };
+            });
           }
         }}
       />

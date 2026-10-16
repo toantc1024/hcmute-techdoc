@@ -176,6 +176,19 @@ export const adminService = {
     return units;
   },
 
+  updateUnitCriterionNote(unitId: number, criterionId: string, note: string): UnitWebsiteItem[] {
+    const units = this.getUnits().map((u) => {
+      if (u.id !== unitId) return u;
+      const nextNotes = { ...(u.criteriaNotes || {}), [criterionId]: note };
+      return {
+        ...u,
+        criteriaNotes: nextNotes
+      };
+    });
+    this.saveUnits(units);
+    return units;
+  },
+
   getPhases(): ProjectPhase[] {
     if (!isClient()) return seedData.phases as ProjectPhase[];
     const raw = localStorage.getItem(STORAGE_KEYS.PHASES);
