@@ -30,26 +30,26 @@ export default function PocketGuidePage() {
     <div className="min-h-screen bg-[#F4F6F9] dark:bg-[#0B0F19] text-[#11324D] dark:text-[#E2E8F0] pt-3 sm:pt-5 pb-8 px-3 sm:px-6">
       
       {/* =========================================================================
-          CỤM NÚT ĐIỀU KHIỂN GỌN GÀNG Ở GÓC (ẨN HOÀN TOÀN KHI IN / XUẤT PDF)
+          CỤM NÚT ĐIỀU KHIỂN DỌC TINH GỌN DƯỚI THANH ĐẦU TRANG (ẨN HOÀN TOÀN KHI IN)
           ========================================================================= */}
-      <div className="no-print fixed top-3 right-3 sm:top-4 sm:right-6 z-50 flex items-center gap-1.5 p-1.5 rounded-xl bg-white/95 dark:bg-card/95 backdrop-blur-md border border-slate-200/90 dark:border-border/80 shadow-md hover:shadow-lg transition-all">
+      <div className="no-print fixed top-[70px] sm:top-[78px] right-3 sm:right-5 z-40 flex flex-col items-center gap-0.5 p-1 rounded-xl bg-white/85 dark:bg-slate-900/85 backdrop-blur-md border border-slate-200/80 dark:border-slate-800/80 shadow-xs hover:shadow-md transition-all">
         <Link
           href="/docs"
           title="Quay lại Cổng tài liệu"
           aria-label="Quay lại Cổng tài liệu"
-          className="p-2 sm:p-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-[#0072BC] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-center cursor-pointer"
+          className="p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors flex items-center justify-center cursor-pointer"
         >
-          <ArrowLeft className="size-4 sm:size-5" />
+          <ArrowLeft className="size-4 sm:size-[18px]" />
         </Link>
-        <div className="w-px h-5 bg-slate-200 dark:bg-slate-700" />
+        <div className="w-3.5 h-px bg-slate-200 dark:bg-slate-800 my-0.5" />
         <button
           type="button"
           onClick={handlePrint}
           title="In / Lưu file PDF (2 Trang A4)"
           aria-label="In / Lưu file PDF (2 Trang A4)"
-          className="p-2 sm:p-2.5 rounded-lg bg-[#0072BC] hover:bg-[#005A96] text-white transition-all shadow-xs hover:shadow active:scale-95 cursor-pointer flex items-center justify-center"
+          className="p-2 rounded-lg text-slate-500 hover:text-[#0072BC] dark:text-slate-400 dark:hover:text-sky-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors flex items-center justify-center cursor-pointer active:scale-95"
         >
-          <Printer className="size-4 sm:size-5" />
+          <Printer className="size-4 sm:size-[18px]" />
         </button>
       </div>
 

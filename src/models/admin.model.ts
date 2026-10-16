@@ -1,0 +1,65 @@
+/**
+ * Mô hình dữ liệu quản trị HCM-UTE TechDoc
+ * Tuân thủ quy chuẩn dự án HCM-UTE và phân tách mô-đun < 300 dòng
+ */
+
+export type LuongType = 'A' | 'B' | 'C' | 'TONG_QUAN' | 'HE_THONG';
+
+export interface DocSectionItem {
+  id: string;
+  slug: string;
+  chapterNumber: number;
+  chapterTitle: string;
+  pageTitle: string;
+  pageSlug: string;
+  summary: string;
+  luong: LuongType;
+  isVisible: boolean;
+  viewCount: number;
+  readingTimeMinutes: number;
+  lastUpdated: string;
+  tags: string[];
+}
+
+export type CriterionRating = 'pass' | 'warning' | 'fail';
+
+export interface EvaluationCriterion {
+  id: string;
+  code: string;
+  name: string;
+  description: string;
+  weight: number; // Tỷ trọng phần trăm (ví dụ: 15, 20)
+  passCondition: string;
+  warningCondition: string;
+  failCondition: string;
+  isCustom?: boolean; // Tiêu chí do quản trị viên tự thêm
+}
+
+export type UnitGroupType = 'khoa-vien' | 'phong-ban' | 'trung-tam' | 'doan-the';
+
+export interface UnitWebsiteItem {
+  id: number;
+  stt: number;
+  group: UnitGroupType;
+  groupLabel: string;
+  name: string;
+  domain: string;
+  isNewWeb: boolean; // true = trỏ IP .189, false = web cũ .181 hoặc nxdomain
+  staff: string; // Cán bộ phụ trách (Phi, Cal, Nhân, Ngân)
+  criteriaRatings: Record<string, CriterionRating>;
+  completenessScore: number; // 0 - 100%
+  notes?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+}
+
+export interface ProjectPhase {
+  phaseId: number;
+  title: string;
+  timeFrame: string;
+  target: string;
+  status: 'completed' | 'in-progress' | 'upcoming';
+  completionRate: number; // %
+}
+
+export type AdminTab = 'content' | 'analytics' | 'progress' | 'units';
