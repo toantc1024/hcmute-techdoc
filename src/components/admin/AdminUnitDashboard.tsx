@@ -6,7 +6,7 @@ import {
   EvaluationCriterion,
   CriterionRating,
 } from '@/models/admin.model';
-import { AdminUnitDetailModal } from './AdminUnitDetailModal';
+import { AdminUnitEvaluationView } from './AdminUnitEvaluationView';
 
 interface AdminUnitDashboardProps {
   units: UnitWebsiteItem[];
@@ -60,6 +60,25 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
     { key: 'trung-tam', label: 'Trung tâm (13)' },
     { key: 'doan-the', label: 'Đoàn thể (7)' },
   ];
+
+  if (inspectingUnit) {
+    return (
+      <AdminUnitEvaluationView
+        unit={inspectingUnit}
+        allUnits={units}
+        criteria={criteria}
+        onBack={() => setInspectingUnit(null)}
+        onSelectUnit={(next) => setInspectingUnit(next)}
+        onUpdateRating={(unitId, critId, rating) => {
+          onUpdateRating(unitId, critId, rating);
+          const found = units.find((x) => x.id === unitId);
+          if (found) {
+            setInspectingUnit(found);
+          }
+        }}
+      />
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -256,21 +275,6 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
           </table>
         </div>
       </div>
-
-      {/* Unit Detail Modal */}
-      <AdminUnitDetailModal
-        unit={inspectingUnit}
-        criteria={criteria}
-        isOpen={!!inspectingUnit}
-        onClose={() => setInspectingUnit(null)}
-        onUpdateRating={(unitId, critId, rating) => {
-          onUpdateRating(unitId, critId, rating);
-          const found = units.find((x) => x.id === unitId);
-          if (found) {
-            setInspectingUnit(found);
-          }
-        }}
-      />
     </div>
   );
 };
