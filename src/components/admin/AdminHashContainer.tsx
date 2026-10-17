@@ -19,12 +19,15 @@ import { AdminAnalyticsView } from './AdminAnalyticsView';
 import { AdminProgressManager } from './AdminProgressManager';
 import { AdminUnitDashboard } from './AdminUnitDashboard';
 import { AdminSecurityModal } from './AdminSecurityModal';
+import { AdminSupabaseModal } from './AdminSupabaseModal';
+import { supabaseService } from '@/services/supabase.service';
 
 export const AdminHashContainer: React.FC = () => {
   const [isAdminHash, setIsAdminHash] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState<AdminTab>('content');
   const [isSecurityModalOpen, setIsSecurityModalOpen] = useState(false);
+  const [isSupabaseModalOpen, setIsSupabaseModalOpen] = useState(false);
 
   const [sections, setSections] = useState<DocSectionItem[]>([]);
   const [criteria, setCriteria] = useState<EvaluationCriterion[]>([]);
@@ -48,12 +51,21 @@ export const AdminHashContainer: React.FC = () => {
     return () => window.removeEventListener('hashchange', checkHash);
   }, [checkHash]);
 
-  // Tải dữ liệu ban đầu
+  // Tải dữ liệu ban đầu và thử đồng bộ Supabase nếu có
   const loadData = useCallback(() => {
     setSections(adminService.getDocSections());
     setCriteria(adminService.getCriteria());
     setUnits(adminService.getUnits());
     setPhases(adminService.getPhases());
+
+    adminService.syncFromCloud().then((synced) => {
+      if (synced) {
+        setSections(adminService.getDocSections());
+        setCriteria(adminService.getCriteria());
+        setUnits(adminService.getUnits());
+        setPhases(adminService.getPhases());
+      }
+    });
   }, []);
 
   useEffect(() => {
@@ -151,6 +163,8 @@ export const AdminHashContainer: React.FC = () => {
             onReset={handleResetData}
             onLogout={handleLogout}
             onOpenSecurity={() => setIsSecurityModalOpen(true)}
+            onOpenSupabase={() => setIsSupabaseModalOpen(true)}
+            isSupabaseConnected={supabaseService.isConfigured()}
             totalViews={totalViews}
             totalUnits={units.length}
             avgScore={avgScore}
@@ -222,6 +236,12 @@ export const AdminHashContainer: React.FC = () => {
           <AdminSecurityModal
             isOpen={isSecurityModalOpen}
             onClose={() => setIsSecurityModalOpen(false)}
+          />
+
+          <AdminSupabaseModal
+            isOpen={isSupabaseModalOpen}
+            onClose={() => setIsSupabaseModalOpen(false)}
+            onDataSynced={loadData}
           />
         </div>
       )}

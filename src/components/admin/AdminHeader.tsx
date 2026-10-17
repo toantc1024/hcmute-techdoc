@@ -10,6 +10,8 @@ interface AdminHeaderProps {
   onReset: () => void;
   onLogout: () => void;
   onOpenSecurity?: () => void;
+  onOpenSupabase?: () => void;
+  isSupabaseConnected?: boolean;
   totalViews: number;
   totalUnits: number;
   avgScore: number;
@@ -21,6 +23,8 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
   onReset,
   onLogout,
   onOpenSecurity,
+  onOpenSupabase,
+  isSupabaseConnected,
   totalViews,
   totalUnits,
   avgScore
@@ -71,6 +75,18 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
                 <div className="text-base font-bold text-[#004776] dark:text-foreground">{totalUnits}</div>
               </div>
             </div>
+
+            {onOpenSupabase && (
+              <button
+                type="button"
+                onClick={onOpenSupabase}
+                className="inline-flex items-center justify-center min-h-[44px] px-3.5 rounded-xl text-xs sm:text-sm font-medium border border-emerald-200 dark:border-emerald-900 bg-emerald-50/50 dark:bg-emerald-950/20 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100/60 transition-colors"
+                title="Cấu hình kết nối Cơ sở dữ liệu Supabase Cloud"
+              >
+                <span className={`size-2 rounded-full mr-1.5 ${isSupabaseConnected ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+                <span>Supabase Cloud</span>
+              </button>
+            )}
 
             {onOpenSecurity && (
               <button

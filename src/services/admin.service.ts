@@ -6,6 +6,7 @@ import {
   CriterionRating
 } from '@/models/admin.model';
 import seedData from './admin-seed.json';
+import { supabaseService } from './supabase.service';
 
 const STORAGE_KEYS = {
   DOC_SECTIONS: 'hcmute_techdoc_admin_sections',
@@ -52,6 +53,7 @@ export const adminService = {
   saveDocSections(items: DocSectionItem[]): void {
     if (isClient()) {
       localStorage.setItem(STORAGE_KEYS.DOC_SECTIONS, JSON.stringify(items));
+      supabaseService.saveRemoteValue('sections', items).catch(() => {});
     }
   },
 
@@ -86,6 +88,7 @@ export const adminService = {
     });
     if (isClient()) {
       localStorage.setItem(STORAGE_KEYS.VIEWS_START_DATE, nowStr);
+      supabaseService.saveRemoteValue('views_start_date', nowStr).catch(() => {});
     }
     const zeroed = this.getDocSections().map((item) => ({ ...item, viewCount: 0 }));
     this.saveDocSections(zeroed);
@@ -114,6 +117,7 @@ export const adminService = {
   saveCriteria(items: EvaluationCriterion[]): void {
     if (isClient()) {
       localStorage.setItem(STORAGE_KEYS.CRITERIA, JSON.stringify(items));
+      supabaseService.saveRemoteValue('criteria', items).catch(() => {});
     }
   },
 
@@ -188,6 +192,7 @@ export const adminService = {
   saveUnits(items: UnitWebsiteItem[]): void {
     if (isClient()) {
       localStorage.setItem(STORAGE_KEYS.UNITS, JSON.stringify(items));
+      supabaseService.saveRemoteValue('units', items).catch(() => {});
     }
   },
 
@@ -228,6 +233,27 @@ export const adminService = {
     } catch {
       return seedData.phases as ProjectPhase[];
     }
+  },
+
+  savePhases(items: ProjectPhase[]): void {
+    if (isClient()) {
+      localStorage.setItem(STORAGE_KEYS.PHASES, JSON.stringify(items));
+      supabaseService.saveRemoteValue('phases', items).catch(() => {});
+    }
+  },
+
+  async syncFromCloud(): Promise<boolean> {
+    if (!supabaseService.isConfigured()) return false;
+    const remote = await supabaseService.fetchAllRemote();
+    if (!remote || !remote.units) return false;
+    if (remote.units) this.saveUnits(remote.units);
+    if (remote.criteria) this.saveCriteria(remote.criteria);
+    if (remote.sections) this.saveDocSections(remote.sections);
+    if (remote.phases) this.savePhases(remote.phases);
+    if (remote.viewsStartDate && isClient()) {
+      localStorage.setItem(STORAGE_KEYS.VIEWS_START_DATE, remote.viewsStartDate);
+    }
+    return true;
   },
 
   resetToDefault(): void {

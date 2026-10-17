@@ -10,6 +10,7 @@
     "postinstall": "node scripts/patch-fumadocs.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
     "cn": "^0.4.0",
     "fumadocs-core": "16.17.1",
     "fumadocs-mdx": "15.4.7",
