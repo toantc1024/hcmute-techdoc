@@ -107,7 +107,7 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
               // Huy chương top 3
               const rankBadge =
                 rank === 1 ? 'bg-amber-100 text-amber-900 border-amber-300 font-black shadow-2xs' :
-                rank === 2 ? 'bg-slate-200 text-slate-800 border-slate-300 font-extrabold' :
+                rank === 2 ? 'bg-slate-200 text-[#004776] border-slate-300 font-extrabold' :
                 rank === 3 ? 'bg-orange-100 text-orange-900 border-orange-300 font-extrabold' :
                 'bg-slate-50 text-slate-600 dark:bg-slate-900 dark:text-slate-400 font-bold';
 
@@ -130,7 +130,7 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                   <td className="py-2 px-3">
                     <div className="flex items-center justify-between gap-2">
                       <div className="min-w-0">
-                        <div className="font-bold text-[13px] text-slate-900 dark:text-foreground truncate flex items-center gap-1.5">
+                        <div className="font-bold text-[13px] text-[#004776] dark:text-foreground truncate flex items-center gap-1.5">
                           <span className="truncate">{u.name}</span>
                           {/* Live pulse indicator cho web mới hoặc top */}
                           {hasAlert ? (
@@ -153,7 +153,7 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
 
                   {/* Cột Số bài (Số TC đạt) */}
                   <td className="py-2 px-2 text-center">
-                    <span className="font-extrabold font-mono text-[13px] text-slate-800 dark:text-slate-200">
+                    <span className="font-extrabold font-mono text-[13px] text-[#004776] dark:text-slate-200">
                       {passCount}
                     </span>
                     <span className="text-[10px] text-muted-foreground block font-mono leading-none">

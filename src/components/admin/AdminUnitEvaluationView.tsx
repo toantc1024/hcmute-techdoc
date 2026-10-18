@@ -48,7 +48,7 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
         <button
           type="button"
           onClick={onBack}
-          className="h-9 px-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-50 dark:hover:bg-slate-900 text-xs font-semibold text-[#004776] dark:text-sky-300 transition-colors inline-flex items-center gap-1.5"
+          className="min-h-[44px] px-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-50 dark:hover:bg-slate-900 text-xs font-semibold text-[#004776] dark:text-sky-300 transition-colors inline-flex items-center gap-1.5 shadow-2xs"
         >
           <span>←</span>
           <span>Quay lại danh sách 51 đơn vị</span>
@@ -59,7 +59,7 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
             <button
               type="button"
               onClick={() => onSelectUnit(prevUnit)}
-              className="h-9 px-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-50 text-xs font-medium text-muted-foreground hover:text-[#004776]"
+              className="min-h-[44px] px-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-50 text-xs font-medium text-muted-foreground hover:text-[#004776] transition-colors"
             >
               ← #{prevUnit.stt} {prevUnit.name.slice(0, 12)}...
             </button>
@@ -69,7 +69,7 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
             <button
               type="button"
               onClick={() => onSelectUnit(nextUnit)}
-              className="h-9 px-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-50 text-xs font-medium text-muted-foreground hover:text-[#004776]"
+              className="min-h-[44px] px-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-50 text-xs font-medium text-muted-foreground hover:text-[#004776] transition-colors"
             >
               #{nextUnit.stt} {nextUnit.name.slice(0, 12)}... →
             </button>
@@ -79,9 +79,10 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
             href={`https://${unit.domain}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="h-9 px-3.5 rounded-lg bg-[#0072BC] hover:bg-[#005a96] text-white text-xs font-semibold transition-colors inline-flex items-center gap-1 shadow-2xs"
+            className="min-h-[44px] px-4 rounded-xl bg-[#0072BC] hover:bg-[#005a96] text-white text-xs font-semibold transition-colors inline-flex items-center gap-1.5 shadow-2xs"
           >
-            <span>Mở website ↗</span>
+            <span>Mở website</span>
+            <span>↗</span>
           </a>
         </div>
       </div>

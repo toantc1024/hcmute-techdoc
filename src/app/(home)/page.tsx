@@ -147,22 +147,8 @@ export default function HomePage() {
         </p>
 
         {/* 1. Ô tìm kiếm lớn + Gợi ý tìm kiếm */}
-        <div className="w-full flex justify-center mb-8">
+        <div className="w-full flex justify-center mb-16">
           <HomeSearchButton />
-        </div>
-
-        {/* Nút truy cập nhanh Bảng tiến độ 51 đơn vị */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
-          <Link
-            href="/tien-do"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-500/10 to-emerald-500/10 border border-blue-500/20 hover:border-blue-500 text-xs font-bold text-[#004776] dark:text-sky-300 shadow-2xs hover:shadow-xs transition-all"
-          >
-            <span className="relative flex size-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full size-2 bg-emerald-500"></span>
-            </span>
-            <span>Xem Bảng Tiến độ Giám sát 51 Website (Live Scoreboard) →</span>
-          </Link>
         </div>
 
         {/* 2. Khối 6 thẻ: Tác vụ thường dùng */}
