@@ -92,14 +92,14 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
             </div>
             <div className="space-y-0.5">
               <div className="flex flex-wrap items-center gap-2">
-                <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${
+                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-xl text-xs font-semibold ${
                   userRole === 'admin'
                     ? 'bg-blue-100 text-[#004776] dark:bg-blue-950/80 dark:text-sky-300'
                     : 'bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300'
                 }`}>
                   {userRole === 'admin' ? 'Quản trị viên (Admin)' : 'Đánh giá viên (Evaluator)'}
                 </span>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-xl text-[11px] font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300">
                   <span className="size-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse" />
                   Supabase RLS Protected
                 </span>
@@ -194,7 +194,7 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
                 <span>{tab.label}</span>
                 {tab.badge && (
                   <span
-                    className={`ml-1 px-2 py-0.5 rounded-full text-[11px] font-semibold ${
+                    className={`ml-1 px-2 py-0.5 rounded-lg text-[11px] font-semibold ${
                       isActive
                         ? 'bg-[#0072BC] text-white shadow-2xs'
                         : 'bg-muted text-muted-foreground group-hover:bg-muted/80'

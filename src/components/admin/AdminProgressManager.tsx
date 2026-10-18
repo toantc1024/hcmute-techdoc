@@ -98,7 +98,7 @@ export const AdminProgressManager: React.FC<AdminProgressManagerProps> = ({
                   Giai đoạn {phase.phaseId}
                 </span>
                 <span
-                  className={`px-2 py-0.5 rounded-full text-[11px] font-semibold ${
+                  className={`px-2 py-0.5 rounded-lg text-[11px] font-semibold ${
                     phase.status === 'completed'
                       ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200'
                       : phase.status === 'in-progress'
@@ -128,7 +128,7 @@ export const AdminProgressManager: React.FC<AdminProgressManagerProps> = ({
       </div>
 
       {/* Criteria Management Section */}
-      <div className="p-5 sm:p-6 rounded-2xl border border-border bg-card shadow-xs space-y-5">
+      <div className="p-5 sm:p-6 rounded-xl border border-border bg-card shadow-xs space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border/80">
           <div>
             <div className="flex items-center gap-2">
@@ -187,7 +187,7 @@ export const AdminProgressManager: React.FC<AdminProgressManagerProps> = ({
                   <button
                     type="button"
                     onClick={() => handleOpenEdit(c)}
-                    className="min-h-[44px] px-3 py-1.5 rounded-lg border border-border text-xs font-medium text-muted-foreground hover:text-[#004776] hover:bg-muted transition-colors"
+                    className="min-h-[44px] px-3 py-1.5 rounded-xl border border-border text-xs font-medium text-muted-foreground hover:text-[#004776] hover:bg-muted transition-colors"
                   >
                     Chỉnh sửa
                   </button>
@@ -195,7 +195,7 @@ export const AdminProgressManager: React.FC<AdminProgressManagerProps> = ({
                     <button
                       type="button"
                       onClick={() => onDeleteCriterion(c.id)}
-                      className="min-h-[44px] px-3 py-1.5 rounded-lg border border-rose-200 text-xs font-medium text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/50 transition-colors"
+                      className="min-h-[44px] px-3 py-1.5 rounded-xl border border-rose-200 text-xs font-medium text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/50 transition-colors"
                     >
                       Xóa
                     </button>

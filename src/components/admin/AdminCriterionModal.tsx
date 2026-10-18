@@ -66,7 +66,7 @@ export const AdminCriterionModal: React.FC<AdminCriterionModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs">
-      <div className="bg-card w-full max-w-xl rounded-2xl border border-border shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] flex flex-col">
+      <div className="bg-card w-full max-w-xl rounded-xl border border-border shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] flex flex-col">
         <div className="flex items-center justify-between px-6 py-4 border-b border-border/80">
           <h3 className="text-lg font-bold text-[#004776] dark:text-foreground">
             {criterion ? 'Chỉnh sửa tiêu chí đánh giá' : 'Thêm tiêu chí đánh giá mới'}
@@ -74,7 +74,7 @@ export const AdminCriterionModal: React.FC<AdminCriterionModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="size-9 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-muted hover:text-[#004776] transition-colors"
+            className="size-9 rounded-xl flex items-center justify-center text-muted-foreground hover:bg-muted hover:text-[#004776] transition-colors"
           >
             ✕
           </button>

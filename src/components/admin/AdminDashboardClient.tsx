@@ -12,11 +12,13 @@ import {
 } from '@/models/admin.model';
 import { techdocsDbService } from '@/services/techdocs-db.service';
 import { getBrowserClient } from '@/lib/supabase/client';
-import { AdminHeader } from './AdminHeader';
-import { AdminContentManager } from './AdminContentManager';
+import { AdminSidebar } from './AdminSidebar';
+import { AdminTopBar } from './AdminTopBar';
+import { AdminOverviewView } from './AdminOverviewView';
+import { AdminUnitDashboard } from './AdminUnitDashboard';
 import { AdminAnalyticsView } from './AdminAnalyticsView';
 import { AdminProgressManager } from './AdminProgressManager';
-import { AdminUnitDashboard } from './AdminUnitDashboard';
+import { AdminContentManager } from './AdminContentManager';
 import { AdminSecurityModal } from './AdminSecurityModal';
 
 interface AdminDashboardClientProps {
@@ -26,8 +28,10 @@ interface AdminDashboardClientProps {
 
 export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user, role }) => {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<AdminTab>('units');
+  const [activeTab, setActiveTab] = useState<AdminTab>('overview');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSecurityModalOpen, setIsSecurityModalOpen] = useState(false);
+
   const initial = techdocsDbService.getInstantData();
   const [isLoading, setIsLoading] = useState(!initial.fromDatabase && initial.units.length === 0);
 
@@ -64,7 +68,6 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
   };
 
   const handleUpdateUnitRating = async (unitId: number, criterionId: string, rating: CriterionRating) => {
-    // 1. Optimistic UI update
     setUnits((prev) =>
       prev.map((u) => {
         if (u.id !== unitId) return u;
@@ -72,8 +75,6 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
         return { ...u, criteriaRatings: nextRatings };
       })
     );
-
-    // 2. Persist to Supabase under RLS
     await techdocsDbService.updateUnitRatingItem(unitId, criterionId, rating);
   };
 
@@ -85,7 +86,6 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
         return { ...u, criteriaNotes: nextNotes };
       })
     );
-
     const targetUnit = units.find((u) => u.id === unitId);
     const currentRating = targetUnit?.criteriaRatings[criterionId] || 'warning';
     await techdocsDbService.updateUnitRatingItem(unitId, criterionId, currentRating, note);
@@ -105,69 +105,89 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
   };
 
   const totalViews = sections.reduce((sum, s) => sum + s.viewCount, 0);
-  const totalUnits = units.length;
-  const avgScore = units.length > 0 ? Math.round(units.reduce((sum, u) => sum + u.completenessScore, 0) / units.length) : 0;
+  const totalChapters = new Set(sections.map((s) => s.chapterNumber)).size || 8;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0B1525] text-foreground pb-16">
-      <AdminHeader
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0B1525] text-foreground flex">
+      {/* Left Navigation Sidebar */}
+      <AdminSidebar
         activeTab={activeTab}
         onTabChange={setActiveTab}
-        onReset={loadData}
-        onLogout={handleLogout}
         onOpenSecurity={() => setIsSecurityModalOpen(true)}
-        userEmail={user.email}
-        userRole={role}
-        totalViews={totalViews}
-        totalUnits={totalUnits}
-        avgScore={avgScore}
+        isOpenMobile={isMobileMenuOpen}
+        onCloseMobile={() => setIsMobileMenuOpen(false)}
       />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6">
-        {isLoading ? (
-          <div className="flex flex-col items-center justify-center p-16 space-y-4">
-            <div className="animate-spin size-8 border-3 border-[#0072BC] border-t-transparent rounded-full" />
-            <p className="text-sm text-muted-foreground font-medium">Đang tải dữ liệu từ Supabase Cloud...</p>
-          </div>
-        ) : (
-          <>
-            {activeTab === 'content' && (
-              <AdminContentManager
-                sections={sections}
-                onToggleVisibility={handleToggleDocSectionVisibility}
-                onUpdateSection={handleUpdateDocSection}
-              />
-            )}
+      {/* Main Content Workspace */}
+      <div className="flex-1 flex flex-col min-w-0 lg:pl-64">
+        {/* Top Header Bar */}
+        <AdminTopBar
+          onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
+          onLogout={handleLogout}
+          userEmail={user.email}
+          userRole={role}
+        />
 
-            {activeTab === 'analytics' && (
-              <AdminAnalyticsView
-                sections={sections}
-                onUpdateSections={setSections}
-              />
-            )}
+        {/* View Content */}
+        <main className="flex-1 p-4 sm:p-6 max-w-7xl w-full mx-auto pb-16">
+          {isLoading ? (
+            <div className="flex flex-col items-center justify-center p-16 space-y-4">
+              <div className="animate-spin size-8 border-3 border-[#0072BC] border-t-transparent rounded-full" />
+              <p className="text-sm text-muted-foreground font-medium">Đang tải dữ liệu từ Supabase Cloud...</p>
+            </div>
+          ) : (
+            <>
+              {activeTab === 'overview' && (
+                <AdminOverviewView
+                  units={units}
+                  criteria={criteria}
+                  totalViews={totalViews}
+                  totalChapters={totalChapters}
+                  onUpdateRating={handleUpdateUnitRating}
+                  onUpdateNote={handleUpdateUnitNote}
+                  onSwitchToUnitsTab={() => setActiveTab('units')}
+                />
+              )}
 
-            {activeTab === 'progress' && (
-              <AdminProgressManager
-                phases={phases}
-                criteria={criteria}
-                onAddCriterion={(c) => setCriteria((prev) => [...prev, { ...c, id: `crit_${Date.now()}` }])}
-                onUpdateCriterion={(c) => setCriteria((prev) => prev.map((item) => (item.id === c.id ? c : item)))}
-                onDeleteCriterion={(id) => setCriteria((prev) => prev.filter((item) => item.id !== id))}
-              />
-            )}
+              {activeTab === 'units' && (
+                <AdminUnitDashboard
+                  units={units}
+                  criteria={criteria}
+                  onUpdateRating={handleUpdateUnitRating}
+                  onUpdateNote={handleUpdateUnitNote}
+                />
+              )}
 
-            {activeTab === 'units' && (
-              <AdminUnitDashboard
-                units={units}
-                criteria={criteria}
-                onUpdateRating={handleUpdateUnitRating}
-                onUpdateNote={handleUpdateUnitNote}
-              />
-            )}
-          </>
-        )}
-      </main>
+              {activeTab === 'analytics' && (
+                <AdminAnalyticsView
+                  sections={sections}
+                  onUpdateSections={setSections}
+                />
+              )}
 
+              {activeTab === 'progress' && (
+                <AdminProgressManager
+                  phases={phases}
+                  criteria={criteria}
+                  onAddCriterion={(c) => setCriteria((prev) => [...prev, { ...c, id: `crit_${Date.now()}` }])}
+                  onUpdateCriterion={(c) => setCriteria((prev) => prev.map((item) => (item.id === c.id ? c : item)))}
+                  onDeleteCriterion={(id) => setCriteria((prev) => prev.filter((item) => item.id !== id))}
+                />
+              )}
+
+              {activeTab === 'content' && (
+                <AdminContentManager
+                  sections={sections}
+                  onToggleVisibility={handleToggleDocSectionVisibility}
+                  onUpdateSection={handleUpdateDocSection}
+                />
+              )}
+            </>
+          )}
+        </main>
+      </div>
+
+      {/* Security & RLS Modal */}
       <AdminSecurityModal
         isOpen={isSecurityModalOpen}
         onClose={() => setIsSecurityModalOpen(false)}

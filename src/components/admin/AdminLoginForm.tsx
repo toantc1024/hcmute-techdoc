@@ -116,7 +116,7 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }
 
   return (
     <div className="w-full flex items-center justify-center py-6">
-      <div className="w-full max-w-md bg-white dark:bg-[#132238] rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-xl p-6 sm:p-8 space-y-6 relative z-10">
+      <div className="w-full max-w-md bg-white dark:bg-[#132238] rounded-xl border border-slate-200/90 dark:border-slate-800 shadow-xl p-6 sm:p-8 space-y-6 relative z-10">
         {/* Logo & Header */}
         <div className="text-center space-y-2">
           <div className="inline-flex items-center justify-center p-3 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-900 mb-2">

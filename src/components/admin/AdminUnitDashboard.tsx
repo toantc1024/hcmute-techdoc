@@ -145,7 +145,7 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
           <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/60 dark:bg-slate-900/40">
             <h2 className="text-sm font-bold text-[#004776] dark:text-foreground flex items-center gap-2">
               <span>Danh sách chi tiết 51 website</span>
-              <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-[#004776] dark:bg-blue-950/80 dark:text-sky-300">
+              <span className="px-2 py-0.5 rounded-lg text-xs font-semibold bg-blue-100 text-[#004776] dark:bg-blue-950/80 dark:text-sky-300">
                 {filteredUnits.length} đơn vị
               </span>
             </h2>
@@ -195,7 +195,7 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
                         </span>
                       </td>
                       <td className="py-3 px-3">
-                        <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border ${
+                        <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium border ${
                           u.isNewWeb ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-amber-50 text-amber-700 border-amber-200'
                         }`}>
                           <span className={`size-1.5 rounded-full ${u.isNewWeb ? 'bg-emerald-500' : 'bg-amber-500'}`} />
@@ -219,7 +219,7 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
                         <button
                           type="button"
                           onClick={(e) => { e.stopPropagation(); setInspectingUnit(u); }}
-                          className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-[#0072BC] text-[#0072BC] dark:text-sky-300 bg-white dark:bg-slate-900 hover:bg-slate-50 text-xs font-semibold inline-flex items-center gap-1 shadow-2xs transition-colors"
+                          className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-[#0072BC] text-[#0072BC] dark:text-sky-300 bg-white dark:bg-slate-900 hover:bg-slate-50 text-xs font-semibold inline-flex items-center gap-1 shadow-2xs transition-colors"
                         >
                           Chấm điểm →
                         </button>

@@ -63,4 +63,4 @@ export interface ProjectPhase {
   completionRate: number; // %
 }
 
-export type AdminTab = 'content' | 'analytics' | 'progress' | 'units';
+export type AdminTab = 'overview' | 'units' | 'analytics' | 'progress' | 'content';

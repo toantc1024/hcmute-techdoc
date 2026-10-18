@@ -42,7 +42,7 @@ export const ScoreboardFilterBar: React.FC<ScoreboardFilterBarProps> = ({
   const staffList = ['Phi', 'Cal', 'Nhân', 'Chị Ngân'];
 
   return (
-    <div className="p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-3">
+    <div className="p-3.5 sm:p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-3">
       {/* Row 1: Fast Filter Pills by Department Group + View Mode Switcher */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800/80 pb-3">
         <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">

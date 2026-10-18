@@ -31,15 +31,15 @@ export const AdminForbidden: React.FC<AdminForbiddenProps> = ({ email }) => {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#0B1525] flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white dark:bg-[#132238] rounded-2xl border border-rose-200 dark:border-rose-900/60 shadow-xl p-6 sm:p-8 text-center space-y-6">
-        <div className="inline-flex items-center justify-center size-16 rounded-2xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-900 text-rose-600 dark:text-rose-400">
+      <div className="max-w-md w-full bg-white dark:bg-[#132238] rounded-xl border border-rose-200 dark:border-rose-900/60 shadow-xl p-6 sm:p-8 text-center space-y-6">
+        <div className="inline-flex items-center justify-center size-16 rounded-xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-900 text-rose-600 dark:text-rose-400">
           <svg className="size-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
           </svg>
         </div>
 
         <div className="space-y-2">
-          <span className="inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-100 text-rose-800 dark:bg-rose-950/80 dark:text-rose-300">
+          <span className="inline-block px-2.5 py-1 rounded-xl text-xs font-semibold bg-rose-100 text-rose-800 dark:bg-rose-950/80 dark:text-rose-300">
             HTTP 403 • Truy cập bị từ chối
           </span>
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">

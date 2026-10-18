@@ -177,7 +177,7 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                       <button
                         type="button"
                         onClick={() => onUpdateRating(unit.id, c.id, 'pass')}
-                        className={`w-full min-h-[34px] px-3 py-1 rounded-lg text-xs font-semibold transition-all border flex items-center justify-center gap-1.5 ${
+                        className={`w-full min-h-[34px] px-3 py-1 rounded-xl text-xs font-semibold transition-all border flex items-center justify-center gap-1.5 ${
                           currentRating === 'pass'
                             ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
                             : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-700'
@@ -189,7 +189,7 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                       <button
                         type="button"
                         onClick={() => onUpdateRating(unit.id, c.id, 'warning')}
-                        className={`w-full min-h-[34px] px-3 py-1 rounded-lg text-xs font-semibold transition-all border flex items-center justify-center gap-1.5 ${
+                        className={`w-full min-h-[34px] px-3 py-1 rounded-xl text-xs font-semibold transition-all border flex items-center justify-center gap-1.5 ${
                           currentRating === 'warning'
                             ? 'bg-amber-500 text-white border-amber-500 shadow-2xs'
                             : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700'
@@ -201,7 +201,7 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                       <button
                         type="button"
                         onClick={() => onUpdateRating(unit.id, c.id, 'fail')}
-                        className={`w-full min-h-[34px] px-3 py-1 rounded-lg text-xs font-semibold transition-all border flex items-center justify-center gap-1.5 ${
+                        className={`w-full min-h-[34px] px-3 py-1 rounded-xl text-xs font-semibold transition-all border flex items-center justify-center gap-1.5 ${
                           currentRating === 'fail'
                             ? 'bg-rose-600 text-white border-rose-600 shadow-2xs'
                             : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:border-rose-300 hover:bg-rose-50 hover:text-rose-700'
@@ -254,7 +254,7 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                         value={currentNote}
                         onChange={(e) => onUpdateNote(unit.id, c.id, e.target.value)}
                         placeholder="Admin ghi chú lại nội dung cần lưu ý..."
-                        className="w-full p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900 text-xs text-[#004776] dark:text-foreground leading-relaxed focus:ring-2 focus:ring-[#0072BC]/20 focus:bg-background focus:border-[#0072BC] outline-none resize-y min-h-[84px]"
+                        className="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900 text-xs text-[#004776] dark:text-foreground leading-relaxed focus:ring-2 focus:ring-[#0072BC]/20 focus:bg-background focus:border-[#0072BC] outline-none resize-y min-h-[84px]"
                       />
                       {currentNote.trim() && (
                         <span className="inline-flex items-center gap-1 text-[11px] text-emerald-600 dark:text-emerald-400 font-medium px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">

@@ -45,7 +45,7 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
   };
 
   return (
-    <div className="w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-sm overflow-hidden">
+    <div className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-sm overflow-hidden">
       {/* Header chú giải theo chuẩn ICPC Scoreboard */}
       <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/60 flex flex-wrap items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2">

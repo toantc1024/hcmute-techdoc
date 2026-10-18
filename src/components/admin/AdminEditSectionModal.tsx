@@ -36,7 +36,7 @@ export const AdminEditSectionModal: React.FC<AdminEditSectionModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs">
-      <div className="bg-card w-full max-w-xl rounded-2xl border border-border shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+      <div className="bg-card w-full max-w-xl rounded-xl border border-border shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
         <div className="flex items-center justify-between px-6 py-4 border-b border-border/80">
           <div>
             <span className="text-xs font-semibold text-[#0072BC] dark:text-sky-400 uppercase tracking-wider">
@@ -49,7 +49,7 @@ export const AdminEditSectionModal: React.FC<AdminEditSectionModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="size-9 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-muted hover:text-[#004776] transition-colors"
+            className="size-9 rounded-xl flex items-center justify-center text-muted-foreground hover:bg-muted hover:text-[#004776] transition-colors"
           >
             ✕
           </button>

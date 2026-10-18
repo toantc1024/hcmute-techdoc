@@ -48,7 +48,7 @@ export const AdminContentManager: React.FC<AdminContentManagerProps> = ({
   return (
     <div className="space-y-6">
       {/* Search & Filter Toolbar */}
-      <div className="p-4 sm:p-5 rounded-2xl border border-border bg-card shadow-xs">
+      <div className="p-4 sm:p-5 rounded-xl border border-border bg-card shadow-xs">
         <div className="flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
           <div className="relative flex-1">
             <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-muted-foreground">
@@ -88,7 +88,7 @@ export const AdminContentManager: React.FC<AdminContentManagerProps> = ({
       <div className="rounded-xl border border-border bg-card overflow-hidden shadow-xs">
         <div className="px-5 py-3.5 border-b border-border/80 flex items-center justify-between bg-slate-50/50 dark:bg-slate-900/40">
           <div className="flex items-center gap-2.5">
-            <div className="size-8 rounded-lg bg-white dark:bg-blue-950/60 p-1 border border-slate-200/90 dark:border-slate-800 shadow-2xs shrink-0 flex items-center justify-center">
+            <div className="size-8 rounded-xl bg-white dark:bg-blue-950/60 p-1 border border-slate-200/90 dark:border-slate-800 shadow-2xs shrink-0 flex items-center justify-center">
               <img src={brandConfig.logoUrl} alt="HCM-UTE Logo" className="size-6 object-contain" />
             </div>
             <h2 className="text-sm sm:text-base font-bold text-[#004776] dark:text-foreground">

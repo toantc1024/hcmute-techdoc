@@ -58,7 +58,7 @@ export const AdminSecurityModal: React.FC<AdminSecurityModalProps> = ({ isOpen, 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs">
-      <div className="bg-card w-full max-w-2xl rounded-2xl border border-border shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-150 max-h-[88vh] flex flex-col">
+      <div className="bg-card w-full max-w-2xl rounded-xl border border-border shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-150 max-h-[88vh] flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-border/80">
           <div className="flex items-center gap-2.5">
@@ -79,7 +79,7 @@ export const AdminSecurityModal: React.FC<AdminSecurityModalProps> = ({ isOpen, 
           <button
             type="button"
             onClick={onClose}
-            className="size-9 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-muted hover:text-[#004776]"
+            className="size-9 rounded-xl flex items-center justify-center text-muted-foreground hover:bg-muted hover:text-[#004776]"
           >
             ✕
           </button>

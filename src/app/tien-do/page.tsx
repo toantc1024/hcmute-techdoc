@@ -65,10 +65,10 @@ export default function TienDoPage() {
     <div className="min-h-screen bg-slate-50 dark:bg-[#0B1525] text-foreground py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
         {/* Banner tiêu đề phong cách ICPC Competition Board */}
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] p-6 sm:p-8 shadow-sm relative overflow-hidden">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] p-6 sm:p-8 shadow-sm relative overflow-hidden">
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900 text-[#0072BC] dark:text-sky-300 text-xs font-bold">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900 text-[#0072BC] dark:text-sky-300 text-xs font-bold">
                 <span className="relative flex size-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0072BC] opacity-75"></span>
                   <span className="relative inline-flex rounded-full size-2 bg-[#0072BC]"></span>
@@ -85,7 +85,7 @@ export default function TienDoPage() {
 
             {/* Quick KPI Badge */}
             <div className="flex sm:flex-row flex-col gap-3 shrink-0">
-              <div className="p-3.5 rounded-2xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 text-center min-w-[120px]">
+              <div className="p-3.5 rounded-xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 text-center min-w-[120px]">
                 <div className="text-2xl font-black text-[#0072BC] dark:text-sky-300 font-mono">
                   {stats.avgScore}%
                 </div>
@@ -93,7 +93,7 @@ export default function TienDoPage() {
                   Độ hoàn thiện TB
                 </div>
               </div>
-              <div className="p-3.5 rounded-2xl bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/60 text-center min-w-[120px]">
+              <div className="p-3.5 rounded-xl bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/60 text-center min-w-[120px]">
                 <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400 font-mono">
                   {stats.newWebCount}/51
                 </div>
@@ -146,7 +146,7 @@ export default function TienDoPage() {
             onClick={() => setSelectedUnit(null)}
           >
             <div
-              className="w-full max-w-lg bg-white dark:bg-[#132238] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl p-6 space-y-4"
+              className="w-full max-w-lg bg-white dark:bg-[#132238] rounded-xl border border-slate-200 dark:border-slate-800 shadow-2xl p-6 space-y-4"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-start justify-between border-b border-border/80 pb-3">
@@ -166,7 +166,7 @@ export default function TienDoPage() {
                 <button
                   type="button"
                   onClick={() => setSelectedUnit(null)}
-                  className="size-8 rounded-lg border border-border flex items-center justify-center text-xs font-bold hover:bg-muted"
+                  className="size-8 rounded-xl border border-border flex items-center justify-center text-xs font-bold hover:bg-muted"
                 >
                   ✕
                 </button>
