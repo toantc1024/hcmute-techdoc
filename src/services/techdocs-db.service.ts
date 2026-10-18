@@ -243,6 +243,16 @@ export const techdocsDbService = {
     }
   },
 
+  async updateUnitServerStatus(unitLegacyId: number, isNewWeb: boolean): Promise<boolean> {
+    const supabase = getBrowserClient();
+    this.invalidateCache();
+    const { error } = await supabase
+      .from('organizational_units')
+      .update({ is_new_web: isNewWeb, updated_at: new Date().toISOString() })
+      .eq('legacy_id', unitLegacyId);
+    return !error;
+  },
+
   async updateDocSection(section: DocSectionItem): Promise<boolean> {
     const supabase = getBrowserClient();
     this.invalidateCache();

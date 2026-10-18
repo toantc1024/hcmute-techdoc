@@ -14,6 +14,7 @@ interface AdminOverviewViewProps {
   totalChapters: number;
   onUpdateRating: (unitId: number, criterionId: string, rating: CriterionRating) => void;
   onUpdateNote?: (unitId: number, criterionId: string, note: string) => void;
+  onToggleServerStatus?: (unitId: number) => void;
   onSwitchToUnitsTab?: () => void;
 }
 
@@ -24,6 +25,7 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
   totalChapters,
   onUpdateRating,
   onUpdateNote,
+  onToggleServerStatus,
   onSwitchToUnitsTab,
 }) => {
   const [selectedGroup, setSelectedGroup] = useState<string>('all');
@@ -85,6 +87,11 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
           if (found) setInspectingUnit(found);
         }}
         onUpdateNote={onUpdateNote || (() => {})}
+        onToggleServerStatus={(id) => {
+          if (onToggleServerStatus) onToggleServerStatus(id);
+          const found = units.find((x) => x.id === id);
+          if (found) setInspectingUnit({ ...found, isNewWeb: !found.isNewWeb });
+        }}
       />
     );
   }
@@ -255,6 +262,7 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
         criteria={criteria}
         onSelectUnit={(u) => setInspectingUnit(u)}
         onUpdateRating={onUpdateRating}
+        onToggleServerStatus={onToggleServerStatus}
         isAdmin={true}
       />
     </div>

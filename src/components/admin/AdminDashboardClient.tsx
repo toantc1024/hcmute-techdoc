@@ -89,6 +89,18 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
     await techdocsDbService.updateUnitRatingItem(unitId, criterionId, currentRating, note);
   };
 
+  const handleToggleUnitServerStatus = async (unitId: number) => {
+    let nextVal = false;
+    setUnits((prev) =>
+      prev.map((u) => {
+        if (u.id !== unitId) return u;
+        nextVal = !u.isNewWeb;
+        return { ...u, isNewWeb: nextVal };
+      })
+    );
+    await techdocsDbService.updateUnitServerStatus(unitId, nextVal);
+  };
+
   const handleToggleDocSectionVisibility = async (id: string) => {
     const updated = sections.map((s) => (s.id === id ? { ...s, isVisible: !s.isVisible } : s));
     setSections(updated);
@@ -137,6 +149,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
                 totalChapters={totalChapters}
                 onUpdateRating={handleUpdateUnitRating}
                 onUpdateNote={handleUpdateUnitNote}
+                onToggleServerStatus={handleToggleUnitServerStatus}
                 onSwitchToUnitsTab={() => setActiveTab('units')}
               />
             )}
@@ -147,6 +160,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
                 criteria={criteria}
                 onUpdateRating={handleUpdateUnitRating}
                 onUpdateNote={handleUpdateUnitNote}
+                onToggleServerStatus={handleToggleUnitServerStatus}
               />
             )}
 

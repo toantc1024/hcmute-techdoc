@@ -8,6 +8,7 @@ interface ScoreboardMatrixProps {
   criteria: EvaluationCriterion[];
   onSelectUnit?: (unit: UnitWebsiteItem) => void;
   onUpdateRating?: (unitId: number, criterionId: string, rating: CriterionRating) => void;
+  onToggleServerStatus?: (unitId: number) => void;
   isAdmin?: boolean;
 }
 
@@ -16,6 +17,7 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
   criteria,
   onSelectUnit,
   onUpdateRating,
+  onToggleServerStatus,
   isAdmin = false,
 }) => {
   const [hoveredCell, setHoveredCell] = useState<{ unitId: number; critCode: string } | null>(null);
@@ -172,15 +174,32 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                     </div>
                   </td>
 
-                  {/* Máy chủ */}
-                  <td className="py-2 px-2 text-center">
-                    <span className={`inline-block px-1.5 py-0.5 rounded text-[11px] font-medium border ${
-                      u.isNewWeb
-                        ? 'bg-emerald-50 text-emerald-800 border-emerald-200/80 dark:bg-emerald-950/40 dark:text-emerald-300'
-                        : 'bg-amber-50 text-amber-800 border-amber-200/80 dark:bg-amber-950/40 dark:text-amber-300'
-                    }`}>
-                      {u.isNewWeb ? '.189' : '.181'}
-                    </span>
+                  {/* Máy chủ - Nút chuyển trạng thái nhanh */}
+                  <td className="py-2 px-2 text-center" onClick={(e) => e.stopPropagation()}>
+                    {onToggleServerStatus && isAdmin ? (
+                      <button
+                        type="button"
+                        onClick={() => onToggleServerStatus(u.id)}
+                        className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-semibold border transition-all cursor-pointer active:scale-95 ${
+                          u.isNewWeb
+                            ? 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-300/80 dark:bg-emerald-950/50 dark:text-emerald-300'
+                            : 'bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-300/80 dark:bg-amber-950/50 dark:text-amber-300'
+                        }`}
+                        title="Bấm để chuyển trạng thái máy chủ (.189 Mới ⇄ .181 Cũ)"
+                      >
+                        <span className={`size-1.5 rounded-full ${u.isNewWeb ? 'bg-emerald-600' : 'bg-amber-600'}`} />
+                        <span>{u.isNewWeb ? '.189' : '.181'}</span>
+                        <span className="opacity-60 text-[9px]">⇄</span>
+                      </button>
+                    ) : (
+                      <span className={`inline-block px-1.5 py-0.5 rounded text-[11px] font-medium border ${
+                        u.isNewWeb
+                          ? 'bg-emerald-50 text-emerald-800 border-emerald-200/80 dark:bg-emerald-950/40 dark:text-emerald-300'
+                          : 'bg-amber-50 text-amber-800 border-amber-200/80 dark:bg-amber-950/40 dark:text-amber-300'
+                      }`}>
+                        {u.isNewWeb ? '.189' : '.181'}
+                      </span>
+                    )}
                   </td>
 
                   {/* 7 Khối màu tiêu chuẩn - Màu full ô vuông, bỏ nút bên trong */}

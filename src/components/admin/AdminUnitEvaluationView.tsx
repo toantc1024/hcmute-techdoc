@@ -12,6 +12,7 @@ interface AdminUnitEvaluationViewProps {
   onSelectUnit: (unit: UnitWebsiteItem) => void;
   onUpdateRating: (unitId: number, criterionId: string, rating: CriterionRating) => void;
   onUpdateNote: (unitId: number, criterionId: string, note: string) => void;
+  onToggleServerStatus?: (unitId: number) => void;
 }
 
 export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = ({
@@ -22,6 +23,7 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
   onSelectUnit,
   onUpdateRating,
   onUpdateNote,
+  onToggleServerStatus,
 }) => {
   const [expandedDetails, setExpandedDetails] = useState<Record<string, boolean>>({});
 
@@ -101,13 +103,30 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
               <span className="px-2 py-0.5 rounded-md text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-muted-foreground border border-slate-200/60 dark:border-slate-700">
                 {unit.groupLabel}
               </span>
-              <span className={`px-2 py-0.5 rounded-md text-xs font-semibold border ${
-                unit.isNewWeb
-                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300'
-                  : 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-300'
-              }`}>
-                {unit.isNewWeb ? 'Đã trỏ web mới (.189)' : 'Đang duy trì web cũ (.181)'}
-              </span>
+              {onToggleServerStatus ? (
+                <button
+                  type="button"
+                  onClick={() => onToggleServerStatus(unit.id)}
+                  className={`px-2.5 py-0.5 rounded-md text-xs font-semibold border inline-flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 ${
+                    unit.isNewWeb
+                      ? 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-emerald-950/40 dark:text-emerald-300'
+                      : 'bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950/40 dark:text-amber-300'
+                  }`}
+                  title="Bấm để chuyển trạng thái máy chủ (.189 Mới ⇄ .181 Cũ)"
+                >
+                  <span className={`size-1.5 rounded-full ${unit.isNewWeb ? 'bg-emerald-600' : 'bg-amber-600'}`} />
+                  <span>{unit.isNewWeb ? 'Web mới (.189)' : 'Web cũ (.181)'}</span>
+                  <span className="opacity-70 text-[10px] font-mono">⇄ Đổi máy chủ</span>
+                </button>
+              ) : (
+                <span className={`px-2 py-0.5 rounded-md text-xs font-semibold border ${
+                  unit.isNewWeb
+                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300'
+                    : 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-300'
+                }`}>
+                  {unit.isNewWeb ? 'Đã trỏ web mới (.189)' : 'Đang duy trì web cũ (.181)'}
+                </span>
+              )}
             </div>
 
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#004776] dark:text-foreground">
