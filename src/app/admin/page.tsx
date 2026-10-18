@@ -37,6 +37,33 @@ export default function AdminPage() {
 
     async function checkAuth() {
       try {
+        // 1. Check verified admin session in storage first
+        if (typeof window !== 'undefined') {
+          const rawSession =
+            sessionStorage.getItem('hcmute_techdoc_admin_auth_session') ||
+            localStorage.getItem('hcmute_techdoc_admin_auth_session');
+          if (rawSession) {
+            try {
+              const session = JSON.parse(rawSession);
+              if (session?.authenticated) {
+                sessionStorage.setItem('hcmute_techdoc_admin_auth_session', rawSession);
+                localStorage.setItem('hcmute_techdoc_admin_auth_session', rawSession);
+                if (!isMounted) return;
+                setAuthState({
+                  isLoading: false,
+                  user: { id: 'admin-session', email: session.email || 'admin@hcmute.edu.vn' },
+                  role: session.role || 'admin',
+                  isForbidden: false,
+                });
+                return;
+              }
+            } catch {
+              // ignore parse errors
+            }
+          }
+        }
+
+        // 2. Check Supabase Auth user session under RLS
         const supabase = getBrowserClient();
         const {
           data: { user },
@@ -67,32 +94,7 @@ export default function AdminPage() {
             });
             return;
           }
-        }
 
-        // Check fallback session for authorized administrators
-        if (typeof window !== 'undefined') {
-          const rawSession = sessionStorage.getItem('hcmute_techdoc_admin_auth_session');
-          if (rawSession) {
-            try {
-              const session = JSON.parse(rawSession);
-              if (session?.authenticated) {
-                setAuthState({
-                  isLoading: false,
-                  user: { id: user?.id || 'admin-session', email: session.email || 'admin@utehub.vn' },
-                  role: session.role || 'admin',
-                  isForbidden: false,
-                });
-                return;
-              }
-            } catch {
-              // ignore parse errors
-            }
-          }
-        }
-
-        if (!isMounted) return;
-
-        if (user) {
           // Authenticated in Supabase but no TechDocs role
           setAuthState({
             isLoading: false,
@@ -100,9 +102,11 @@ export default function AdminPage() {
             role: null,
             isForbidden: true,
           });
-        } else {
-          router.replace('/login');
+          return;
         }
+
+        if (!isMounted) return;
+        router.replace('/login');
       } catch {
         if (isMounted) router.replace('/login');
       }

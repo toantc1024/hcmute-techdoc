@@ -11,11 +11,17 @@ const ADMIN_PASSKEY_HASH = '0a5de87db3d6c7d52645c1581269a880b1bbc613abc8e4c8e0f5
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('admin@hcmute.edu.vn');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleFillAdminCredentials = () => {
+    setEmail('admin@hcmute.edu.vn');
+    setPassword('Hcmute@2026*#');
+    setErrorMsg('');
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,15 +44,14 @@ export default function LoginPage() {
       if (error) {
         // Master admin bypass fallback for verified administrators
         if (isMasterPasskey) {
-          sessionStorage.setItem(
-            'hcmute_techdoc_admin_auth_session',
-            JSON.stringify({
-              authenticated: true,
-              email: email.trim(),
-              role: 'admin',
-              lastActive: Date.now(),
-            })
-          );
+          const sessionPayload = JSON.stringify({
+            authenticated: true,
+            email: email.trim() || 'admin@hcmute.edu.vn',
+            role: 'admin',
+            lastActive: Date.now(),
+          });
+          sessionStorage.setItem('hcmute_techdoc_admin_auth_session', sessionPayload);
+          localStorage.setItem('hcmute_techdoc_admin_auth_session', sessionPayload);
           window.location.href = '/admin';
           return;
         }
@@ -63,29 +68,27 @@ export default function LoginPage() {
       }
 
       if (data?.user) {
-        sessionStorage.setItem(
-          'hcmute_techdoc_admin_auth_session',
-          JSON.stringify({
-            authenticated: true,
-            email: data.user.email || email.trim(),
-            role: 'admin',
-            lastActive: Date.now(),
-          })
-        );
+        const sessionPayload = JSON.stringify({
+          authenticated: true,
+          email: data.user.email || email.trim() || 'admin@hcmute.edu.vn',
+          role: 'admin',
+          lastActive: Date.now(),
+        });
+        sessionStorage.setItem('hcmute_techdoc_admin_auth_session', sessionPayload);
+        localStorage.setItem('hcmute_techdoc_admin_auth_session', sessionPayload);
         window.location.href = '/admin';
       }
     } catch (err: unknown) {
       const isMasterPasskey = (await hashSha256(password)) === ADMIN_PASSKEY_HASH;
       if (isMasterPasskey) {
-        sessionStorage.setItem(
-          'hcmute_techdoc_admin_auth_session',
-          JSON.stringify({
-            authenticated: true,
-            email: email.trim(),
-            role: 'admin',
-            lastActive: Date.now(),
-          })
-        );
+        const sessionPayload = JSON.stringify({
+          authenticated: true,
+          email: email.trim() || 'admin@hcmute.edu.vn',
+          role: 'admin',
+          lastActive: Date.now(),
+        });
+        sessionStorage.setItem('hcmute_techdoc_admin_auth_session', sessionPayload);
+        localStorage.setItem('hcmute_techdoc_admin_auth_session', sessionPayload);
         window.location.href = '/admin';
         return;
       }
@@ -173,6 +176,29 @@ export default function LoginPage() {
                   </svg>
                 )}
               </button>
+            </div>
+          </div>
+
+          {/* Quick Demo Credentials Box */}
+          <div className="p-3 rounded-xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 text-xs space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-semibold text-blue-900 dark:text-blue-200 flex items-center gap-1.5">
+                <svg className="size-3.5 text-[#0072BC]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                </svg>
+                Tài khoản quản trị nội bộ:
+              </span>
+              <button
+                type="button"
+                onClick={handleFillAdminCredentials}
+                className="text-[11px] font-semibold text-[#0072BC] hover:underline cursor-pointer px-1.5 py-0.5 rounded bg-blue-100/60 dark:bg-blue-900/50"
+              >
+                Điền mẫu nhanh
+              </button>
+            </div>
+            <div className="text-[11px] text-slate-600 dark:text-slate-300 font-mono space-y-0.5">
+              <p>Email: <span className="font-semibold text-foreground">admin@hcmute.edu.vn</span></p>
+              <p>Mật khẩu: <span className="font-semibold text-foreground">Hcmute@2026*#</span></p>
             </div>
           </div>
 

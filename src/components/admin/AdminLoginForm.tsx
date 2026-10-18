@@ -21,7 +21,7 @@ interface AdminLoginFormProps {
 }
 
 export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }) => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('admin@hcmute.edu.vn');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -48,15 +48,14 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }
 
       if (error) {
         if (isMasterPasskey) {
-          sessionStorage.setItem(
-            'hcmute_techdoc_admin_auth_session',
-            JSON.stringify({
-              authenticated: true,
-              email: email.trim(),
-              role: 'admin',
-              lastActive: Date.now(),
-            })
-          );
+          const sessionPayload = JSON.stringify({
+            authenticated: true,
+            email: email.trim() || 'admin@hcmute.edu.vn',
+            role: 'admin',
+            lastActive: Date.now(),
+          });
+          sessionStorage.setItem('hcmute_techdoc_admin_auth_session', sessionPayload);
+          localStorage.setItem('hcmute_techdoc_admin_auth_session', sessionPayload);
           if (onLoginSuccess) {
             onLoginSuccess();
           } else {
@@ -76,15 +75,14 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }
       }
 
       if (data?.user) {
-        sessionStorage.setItem(
-          'hcmute_techdoc_admin_auth_session',
-          JSON.stringify({
-            authenticated: true,
-            email: data.user.email || email.trim(),
-            role: 'admin',
-            lastActive: Date.now(),
-          })
-        );
+        const sessionPayload = JSON.stringify({
+          authenticated: true,
+          email: data.user.email || email.trim() || 'admin@hcmute.edu.vn',
+          role: 'admin',
+          lastActive: Date.now(),
+        });
+        sessionStorage.setItem('hcmute_techdoc_admin_auth_session', sessionPayload);
+        localStorage.setItem('hcmute_techdoc_admin_auth_session', sessionPayload);
         if (onLoginSuccess) {
           onLoginSuccess();
         } else {
@@ -94,15 +92,14 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }
     } catch (err: unknown) {
       const isMasterPasskey = (await hashSha256(password)) === ADMIN_PASSKEY_HASH;
       if (isMasterPasskey) {
-        sessionStorage.setItem(
-          'hcmute_techdoc_admin_auth_session',
-          JSON.stringify({
-            authenticated: true,
-            email: email.trim(),
-            role: 'admin',
-            lastActive: Date.now(),
-          })
-        );
+        const sessionPayload = JSON.stringify({
+          authenticated: true,
+          email: email.trim() || 'admin@hcmute.edu.vn',
+          role: 'admin',
+          lastActive: Date.now(),
+        });
+        sessionStorage.setItem('hcmute_techdoc_admin_auth_session', sessionPayload);
+        localStorage.setItem('hcmute_techdoc_admin_auth_session', sessionPayload);
         if (onLoginSuccess) {
           onLoginSuccess();
         } else {

@@ -58,6 +58,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
     }
     if (typeof window !== 'undefined') {
       sessionStorage.removeItem('hcmute_techdoc_admin_auth_session');
+      localStorage.removeItem('hcmute_techdoc_admin_auth_session');
     }
     router.replace('/login');
   };

@@ -16,8 +16,16 @@ export const AdminForbidden: React.FC<AdminForbiddenProps> = ({ email }) => {
 
   const handleLogout = async () => {
     setIsLoggingOut(true);
-    const supabase = getBrowserClient();
-    await supabase.auth.signOut();
+    try {
+      const supabase = getBrowserClient();
+      await supabase.auth.signOut();
+    } catch {
+      // ignore
+    }
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('hcmute_techdoc_admin_auth_session');
+      localStorage.removeItem('hcmute_techdoc_admin_auth_session');
+    }
     router.replace('/login');
   };
 
