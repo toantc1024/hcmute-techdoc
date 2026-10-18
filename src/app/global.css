@@ -10,7 +10,34 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
+
+  --font-weight-semibold: 550;
+  --font-weight-bold: 644;
+  --font-weight-extrabold: 736;
+  --font-weight-black: 828;
 }
+
+/* Quy chuẩn giảm in đậm các chữ đã in đậm còn 92% hiện tại */
+b, strong, th {
+  font-weight: 644;
+}
+
+.font-bold {
+  font-weight: 644 !important;
+}
+
+.font-extrabold {
+  font-weight: 736 !important;
+}
+
+.font-black {
+  font-weight: 828 !important;
+}
+
+.font-semibold {
+  font-weight: 550 !important;
+}
+
 
 :root {
   /* HCM-UTE Design System V2 - Signature Brand Colors (Ref: https://beta.hcmute.edu.vn) */

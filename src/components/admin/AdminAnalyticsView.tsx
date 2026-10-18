@@ -102,7 +102,7 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
                 Đo lường thời gian thực từ {startDate}
               </span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-black tracking-tight text-[#004776] dark:text-foreground">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#004776] dark:text-foreground">
               Phân tích dữ liệu &amp; Xu hướng truy cập chuyên mục
             </h2>
           </div>
@@ -146,7 +146,7 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
                 <circle cx="50" cy="50" r="38" fill="none" stroke="#A855F7" strokeWidth="12" strokeDasharray="31 207" strokeDashoffset="-207" />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                <span className="text-xl font-black font-mono text-[#004776] dark:text-foreground">
+                <span className="text-xl font-bold font-mono text-[#004776] dark:text-foreground">
                   {totalViews.toLocaleString()}
                 </span>
                 <span className="text-[10px] text-muted-foreground">lượt xem</span>

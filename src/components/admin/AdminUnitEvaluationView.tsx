@@ -124,7 +124,7 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
 
         <div className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/60 min-w-[200px] space-y-1.5 text-center lg:text-right">
           <div className="text-xs text-muted-foreground font-medium">Độ hoàn thiện tổng quan</div>
-          <div className={`text-3xl font-extrabold font-mono ${scoreColor}`}>{unit.completenessScore}%</div>
+          <div className={`text-3xl font-bold font-mono ${scoreColor}`}>{unit.completenessScore}%</div>
           <div className="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
             <div className={`h-full rounded-full transition-all duration-500 ${barColor}`} style={{ width: `${unit.completenessScore}%` }} />
           </div>
