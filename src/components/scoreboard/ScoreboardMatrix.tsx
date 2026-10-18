@@ -45,12 +45,12 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
   };
 
   return (
-    <div className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] overflow-hidden">
+    <div className="w-full rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-[0_1px_2px_rgba(15,23,42,0.03)] overflow-hidden">
       {/* Header chú giải thanh lịch, màu dịu mắt */}
-      <div className="px-4 sm:px-5 py-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/60 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div className="px-4 sm:px-5 py-3 border-b border-slate-200/80 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/60 flex flex-wrap items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2">
           <span className="size-2 rounded-full bg-emerald-500" />
-          <span className="font-bold text-[#004776] dark:text-sky-300 text-sm tracking-tight">
+          <span className="text-[16px] font-semibold text-[#004776] dark:text-sky-300 tracking-tight">
             Bảng Giám sát Tiến độ 51 Đơn vị
           </span>
         </div>
@@ -70,13 +70,13 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
         </div>
       </div>
 
-      {/* Bảng ma trận trực quan & dịu mắt */}
-      <div className="overflow-x-auto w-full">
+      {/* Bảng ma trận trực quan & dịu mắt với Sticky columns */}
+      <div className="overflow-x-auto w-full max-h-[680px] overflow-y-auto">
         <table className="w-full text-left border-collapse min-w-[980px]">
           <thead>
-            <tr className="border-b border-slate-200 dark:border-slate-800 bg-[#004776] text-white text-xs uppercase tracking-wider font-semibold">
-              <th className="py-2.5 px-2.5 text-center w-12">Hạng</th>
-              <th className="py-2.5 px-3 min-w-[240px]">Đơn vị &amp; Website</th>
+            <tr className="sticky top-0 z-20 border-b border-slate-200 dark:border-slate-800 bg-[#004776] text-white text-xs uppercase tracking-wider font-semibold">
+              <th className="sticky left-0 top-0 z-30 bg-[#004776] py-2.5 px-2.5 text-center w-12">Hạng</th>
+              <th className="sticky left-12 top-0 z-30 bg-[#004776] border-r border-[#00385e] py-2.5 px-3 min-w-[240px]">Đơn vị &amp; Website</th>
               <th className="py-2.5 px-2.5 text-center w-16" title="Số tiêu chuẩn đạt">Số TC</th>
               <th className="py-2.5 px-2.5 text-center w-20" title="Độ hoàn thiện">Điểm %</th>
               <th className="py-2.5 px-2.5 text-center w-20">Máy chủ</th>
@@ -108,19 +108,19 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                 <tr
                   key={u.id}
                   onClick={() => onSelectUnit && onSelectUnit(u)}
-                  className={`hover:bg-blue-50/40 dark:hover:bg-blue-950/20 transition-colors cursor-pointer group ${
+                  className={`hover:bg-slate-50/70 dark:hover:bg-slate-800/40 transition-colors duration-150 cursor-pointer group ${
                     rank <= 3 ? 'bg-amber-50/15 dark:bg-amber-950/10' : ''
                   }`}
                 >
-                  {/* Hạng */}
-                  <td className="py-2 px-2 text-center">
-                    <span className={`inline-flex items-center justify-center size-6 rounded text-xs border ${rankBadge}`}>
+                  {/* Hạng - Sticky left-0 */}
+                  <td className="sticky left-0 z-10 bg-white dark:bg-[#132238] group-hover:bg-slate-50 dark:group-hover:bg-slate-800/60 py-2 px-2 text-center transition-colors">
+                    <span className={`inline-flex items-center justify-center size-6 rounded text-xs border tabular-nums font-mono ${rankBadge}`}>
                       {rank}
                     </span>
                   </td>
 
-                  {/* Đơn vị & Website */}
-                  <td className="py-2 px-3">
+                  {/* Đơn vị & Website - Sticky left-12 */}
+                  <td className="sticky left-12 z-10 bg-white dark:bg-[#132238] border-r border-slate-200/80 dark:border-slate-800 group-hover:bg-slate-50 dark:group-hover:bg-slate-800/60 py-2 px-3 transition-colors">
                     <div className="flex items-center justify-between gap-2">
                       <div className="min-w-0">
                         <div className="font-semibold text-sm text-[#004776] dark:text-foreground truncate flex items-center gap-1.5">
@@ -145,10 +145,10 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
 
                   {/* Số TC */}
                   <td className="py-2 px-2 text-center">
-                    <span className="font-bold font-mono text-sm text-[#004776] dark:text-slate-200">
+                    <span className="font-bold font-mono text-sm text-[#004776] dark:text-slate-200 tabular-nums">
                       {passCount}
                     </span>
-                    <span className="text-[11px] text-muted-foreground inline font-mono">
+                    <span className="text-[11px] text-muted-foreground inline font-mono tabular-nums">
                       /{criteria.length}
                     </span>
                   </td>
@@ -156,7 +156,7 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                   {/* Điểm % */}
                   <td className="py-2 px-2 text-center">
                     <div className="inline-flex flex-col items-center">
-                      <span className={`font-bold font-mono text-xs leading-tight ${
+                      <span className={`font-bold font-mono text-xs leading-tight tabular-nums ${
                         u.completenessScore >= 80 ? 'text-emerald-700 dark:text-emerald-400' :
                         u.completenessScore >= 50 ? 'text-amber-700 dark:text-amber-400' : 'text-rose-700 dark:text-rose-400'
                       }`}>
@@ -180,7 +180,7 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                       <button
                         type="button"
                         onClick={() => onToggleServerStatus(u.id)}
-                        className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-semibold border transition-all cursor-pointer active:scale-95 ${
+                        className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-semibold border transition-all cursor-pointer active:scale-95 tabular-nums ${
                           u.isNewWeb
                             ? 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-300/80 dark:bg-emerald-950/50 dark:text-emerald-300'
                             : 'bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-300/80 dark:bg-amber-950/50 dark:text-amber-300'
@@ -192,7 +192,7 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                         <span className="opacity-60 text-[9px]">⇄</span>
                       </button>
                     ) : (
-                      <span className={`inline-block px-1.5 py-0.5 rounded text-[11px] font-medium border ${
+                      <span className={`inline-block px-1.5 py-0.5 rounded text-[11px] font-medium border tabular-nums ${
                         u.isNewWeb
                           ? 'bg-emerald-50 text-emerald-800 border-emerald-200/80 dark:bg-emerald-950/40 dark:text-emerald-300'
                           : 'bg-amber-50 text-amber-800 border-amber-200/80 dark:bg-amber-950/40 dark:text-amber-300'
@@ -238,7 +238,7 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                         }}
                       >
                         <div className="w-full py-2.5 px-1 flex flex-col items-center justify-center">
-                          <span className="font-bold font-mono text-xs leading-none">{mainText}</span>
+                          <span className="font-bold font-mono text-xs leading-none tabular-nums">{mainText}</span>
                           {subText && (
                             <span className="text-[10px] font-medium leading-none mt-1 opacity-90">{subText}</span>
                           )}

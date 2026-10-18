@@ -97,8 +97,8 @@ export const AdminTopBar: React.FC<AdminTopBarProps> = ({
   ];
 
   return (
-    <header className="w-full bg-white dark:bg-[#132238] border-b border-slate-200 dark:border-slate-800">
-      <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 py-3 space-y-3">
+    <header className="w-full bg-white dark:bg-[#132238] border-b border-slate-200/80 dark:border-slate-800">
+      <div className="w-full max-w-[1440px] mx-auto px-5 lg:px-6 py-3.5 space-y-3">
         {/* ROW 1: Brand Title & Elegant Minimalist Actions */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-3">
@@ -106,7 +106,7 @@ export const AdminTopBar: React.FC<AdminTopBarProps> = ({
               <img src={brandConfig.logoUrl} alt="HCM-UTE Logo" className="size-7 sm:size-8 object-contain" />
             </div>
             <div>
-              <h1 className="text-lg sm:text-xl font-bold tracking-tight text-[#004776] dark:text-foreground">
+              <h1 className="text-[22px] sm:text-[24px] font-[650] tracking-tight text-[#004776] dark:text-foreground leading-tight">
                 Quản trị HCM-UTE TechDoc
               </h1>
             </div>
@@ -126,7 +126,7 @@ export const AdminTopBar: React.FC<AdminTopBarProps> = ({
               <button
                 type="button"
                 onClick={onOpenSecurity}
-                className="inline-flex items-center gap-1.5 min-h-[36px] px-3 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-900/50 text-slate-700 dark:text-slate-300 hover:bg-slate-100 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 min-h-[38px] px-3.5 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-900/50 text-slate-700 dark:text-slate-300 hover:bg-slate-100 transition-colors duration-150 cursor-pointer shadow-[0_1px_2px_rgba(15,23,42,0.03)]"
                 title="Xem trung tâm giám sát an ninh & nhật ký kiểm toán"
               >
                 <svg className="size-3.5 text-[#0072BC]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
@@ -138,7 +138,7 @@ export const AdminTopBar: React.FC<AdminTopBarProps> = ({
 
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 min-h-[36px] px-3 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-background hover:bg-slate-100 text-slate-700 dark:text-slate-300 transition-colors"
+              className="inline-flex items-center gap-1.5 min-h-[38px] px-3.5 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-background hover:bg-slate-100 text-slate-700 dark:text-slate-300 transition-colors duration-150 shadow-[0_1px_2px_rgba(15,23,42,0.03)]"
               title="Về cổng tài liệu người dùng"
             >
               <svg className="size-3.5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
@@ -150,7 +150,7 @@ export const AdminTopBar: React.FC<AdminTopBarProps> = ({
             <button
               type="button"
               onClick={onLogout}
-              className="inline-flex items-center gap-1.5 min-h-[36px] px-3.5 rounded-lg text-xs font-semibold bg-[#0072BC] hover:bg-[#005a96] text-white transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 min-h-[38px] px-4 rounded-lg text-xs font-semibold bg-[#0072BC] hover:bg-[#005a96] text-white transition-colors duration-150 cursor-pointer shadow-[0_1px_2px_rgba(15,23,42,0.03)]"
               title="Đăng xuất khỏi phiên quản trị"
             >
               <span>Đăng xuất</span>
@@ -162,7 +162,7 @@ export const AdminTopBar: React.FC<AdminTopBarProps> = ({
         </div>
 
         {/* ROW 2: Compact Minimalist Tabs */}
-        <nav className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-2 border-t border-slate-100 dark:border-slate-800" aria-label="Admin Navigation Tabs">
+        <nav className="flex items-center gap-2 overflow-x-auto no-scrollbar pt-2 border-t border-slate-100 dark:border-slate-800" aria-label="Admin Navigation Tabs">
           {navTabs.map((t) => {
             const isActive = activeTab === t.key;
             return (
@@ -170,10 +170,10 @@ export const AdminTopBar: React.FC<AdminTopBarProps> = ({
                 key={t.key}
                 type="button"
                 onClick={() => onTabChange(t.key)}
-                className={`min-h-[38px] px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-colors inline-flex items-center gap-2 cursor-pointer ${
+                className={`min-h-[40px] px-4 py-2 rounded-xl text-[13px] sm:text-[14px] font-semibold whitespace-nowrap transition-colors duration-150 inline-flex items-center gap-2 cursor-pointer ${
                   isActive
-                    ? 'bg-[#0072BC] text-white'
-                    : 'bg-slate-100/70 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 hover:bg-slate-200/70 hover:text-[#004776]'
+                    ? 'bg-[#0072BC] text-white shadow-[0_1px_2px_rgba(15,23,42,0.03)]'
+                    : 'bg-slate-100/80 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 hover:bg-slate-200/70 hover:text-[#004776]'
                 }`}
               >
                 <span>{t.icon}</span>

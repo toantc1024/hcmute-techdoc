@@ -47,9 +47,9 @@ export const AdminProgressManager: React.FC<AdminProgressManagerProps> = ({
   };
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-5 animate-in fade-in duration-200">
       {/* Overall Progress Banner */}
-      <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-4">
+      <div className="p-4 sm:p-5 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-[0_1px_2px_rgba(15,23,42,0.03)] space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-3.5">
             <div className="size-11 sm:size-12 rounded-xl bg-white dark:bg-blue-950/60 p-1.5 border border-slate-200/90 dark:border-slate-800 shadow-2xs shrink-0 flex items-center justify-center">
@@ -59,67 +59,69 @@ export const AdminProgressManager: React.FC<AdminProgressManagerProps> = ({
               <span className="text-xs font-semibold text-[#0072BC] dark:text-sky-400 uppercase tracking-wider">
                 Kế hoạch tổng thể HCM-UTE
               </span>
-              <h2 className="text-lg sm:text-xl font-bold text-[#004776] dark:text-foreground">
-                Tiến độ nâng cấp & chuẩn hóa website 51 đơn vị
+              <h2 className="text-[20px] sm:text-[22px] font-[650] tracking-tight text-[#004776] dark:text-foreground">
+                Tiến độ nâng cấp &amp; chuẩn hóa website 51 đơn vị
               </h2>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground">Tiến độ tích lũy:</span>
-            <span className="text-xl font-bold font-mono text-[#004776] dark:text-sky-300">
+            <span className="text-xs text-muted-foreground font-medium">Tiến độ tích lũy:</span>
+            <span className="text-[28px] sm:text-[32px] font-[650] font-mono tabular-nums text-[#0072BC] dark:text-sky-300">
               {overallProgress}%
             </span>
           </div>
         </div>
 
         {/* Global Progress Bar */}
-        <div className="w-full bg-muted/80 h-3 rounded-full overflow-hidden">
+        <div className="w-full bg-slate-100 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-[#0072BC] to-emerald-500 rounded-full transition-all duration-700"
+            className="h-full bg-[#0072BC] rounded-full transition-all duration-700"
             style={{ width: `${overallProgress}%` }}
           />
         </div>
 
-        {/* 3 Roadmap Phases Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+        {/* 3 Roadmap Phases Cards - Hierarchy: Emerald / UTE Blue / Slate */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1 items-stretch">
           {phases.map((phase) => (
             <div
               key={phase.phaseId}
-              className={`p-4 rounded-xl border space-y-2.5 transition-all ${
+              className={`h-full flex flex-col justify-between p-4 rounded-xl border space-y-2.5 transition-all shadow-[0_1px_2px_rgba(15,23,42,0.03)] ${
                 phase.status === 'completed'
-                  ? 'border-emerald-200 bg-emerald-50/50 dark:border-emerald-900/60 dark:bg-emerald-950/20'
+                  ? 'border-emerald-200/90 bg-emerald-50/50 dark:border-emerald-900/60 dark:bg-emerald-950/20'
                   : phase.status === 'in-progress'
                   ? 'border-[#0072BC]/40 bg-blue-50/40 dark:border-blue-900/60 dark:bg-blue-950/20 ring-1 ring-[#0072BC]/20'
-                  : 'border-border bg-card'
+                  : 'border-slate-200/80 bg-slate-50/50 dark:border-slate-800 dark:bg-slate-900/30'
               }`}
             >
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold font-mono text-muted-foreground">
-                  Giai đoạn {phase.phaseId}
-                </span>
-                <span
-                  className={`px-2 py-0.5 rounded-lg text-[11px] font-semibold ${
-                    phase.status === 'completed'
-                      ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200'
+              <div>
+                <div className="flex items-center justify-between pb-1">
+                  <span className="text-xs font-bold font-mono text-muted-foreground">
+                    Giai đoạn {phase.phaseId}
+                  </span>
+                  <span
+                    className={`px-2 py-0.5 rounded text-[11px] font-semibold tabular-nums ${
+                      phase.status === 'completed'
+                        ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200'
+                        : phase.status === 'in-progress'
+                        ? 'bg-[#0072BC] text-white'
+                        : 'bg-slate-200/70 text-slate-700 dark:bg-slate-800 dark:text-slate-300'
+                    }`}
+                  >
+                    {phase.status === 'completed'
+                      ? 'Hoàn thành 100%'
                       : phase.status === 'in-progress'
-                      ? 'bg-blue-100 text-[#004776] dark:bg-blue-900 dark:text-sky-200 animate-pulse'
-                      : 'bg-muted text-muted-foreground'
-                  }`}
-                >
-                  {phase.status === 'completed'
-                    ? 'Hoàn thành 100%'
-                    : phase.status === 'in-progress'
-                    ? `Đang thực hiện (${phase.completionRate}%)`
-                    : 'Kế hoạch sắp tới'}
-                </span>
+                      ? `Đang thực hiện (${phase.completionRate}%)`
+                      : 'Kế hoạch sắp tới'}
+                  </span>
+                </div>
+                <h3 className="font-semibold text-sm text-[#004776] dark:text-foreground">
+                  {phase.title}
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed pt-1">
+                  {phase.target}
+                </p>
               </div>
-              <h3 className="font-bold text-sm text-[#004776] dark:text-foreground">
-                {phase.title}
-              </h3>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                {phase.target}
-              </p>
-              <div className="text-[11px] font-mono text-muted-foreground pt-1 border-t border-border/60">
+              <div className="text-[11px] font-mono text-muted-foreground pt-1.5 border-t border-slate-200/70 dark:border-slate-800">
                 Thời gian: {phase.timeFrame}
               </div>
             </div>
@@ -128,28 +130,28 @@ export const AdminProgressManager: React.FC<AdminProgressManagerProps> = ({
       </div>
 
       {/* Criteria Management Section */}
-      <div className="p-5 sm:p-6 rounded-xl border border-border bg-card shadow-xs space-y-5">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border/80">
+      <div className="p-4 sm:p-5 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-[0_1px_2px_rgba(15,23,42,0.03)] space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-slate-100 dark:border-slate-800/80">
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-base sm:text-lg font-bold text-[#004776] dark:text-foreground">
+              <h2 className="text-[16px] font-semibold text-[#004776] dark:text-foreground">
                 Hệ thống tiêu chí đánh giá ({criteria.length} tiêu chí)
               </h2>
               {totalWeight !== 100 && (
-                <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">
+                <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 tabular-nums">
                   Tổng tỷ trọng: {totalWeight}% (Khuyến nghị 100%)
                 </span>
               )}
             </div>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Bộ tiêu chí chuẩn hóa từ báo cáo rà soát và sổ tay TechDoc. Bạn có thể thêm tiêu chí mới theo yêu cầu nghiệp vụ.
+              Bộ tiêu chí chuẩn hóa từ sổ tay TechDoc. Bạn có thể thêm tiêu chí mới theo yêu cầu nghiệp vụ.
             </p>
           </div>
 
           <button
             type="button"
             onClick={handleOpenAdd}
-            className="min-h-[44px] px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-[#0072BC] hover:bg-[#005a96] text-white shadow-xs inline-flex items-center justify-center transition-colors shrink-0"
+            className="min-h-[38px] px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-[#0072BC] hover:bg-[#005a96] text-white shadow-2xs inline-flex items-center justify-center transition-colors shrink-0"
           >
             <svg className="size-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -158,19 +160,19 @@ export const AdminProgressManager: React.FC<AdminProgressManagerProps> = ({
           </button>
         </div>
 
-        {/* Criteria List */}
-        <div className="grid grid-cols-1 gap-3.5">
+        {/* Criteria List - Flattened cards */}
+        <div className="grid grid-cols-1 gap-3">
           {criteria.map((c) => (
             <div
               key={c.id}
-              className="p-4 rounded-xl border border-border/70 hover:border-[#0072BC]/40 bg-background transition-all space-y-3"
+              className="p-3.5 sm:p-4 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-[0_1px_2px_rgba(15,23,42,0.03)] transition-all space-y-2.5"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div className="flex items-center gap-2.5">
-                  <span className="px-2 py-1 rounded-md text-xs font-mono font-bold bg-muted text-[#004776] dark:text-sky-300">
+                  <span className="px-2 py-0.5 rounded-md text-xs font-mono font-bold bg-[#0072BC]/10 text-[#004776] dark:text-sky-300">
                     {c.code}
                   </span>
-                  <h3 className="text-sm font-bold text-[#004776] dark:text-foreground">
+                  <h3 className="text-sm font-semibold text-[#004776] dark:text-foreground">
                     {c.name}
                   </h3>
                   {c.isCustom && (
@@ -181,13 +183,13 @@ export const AdminProgressManager: React.FC<AdminProgressManagerProps> = ({
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-blue-50 text-[#004776] dark:bg-blue-950/60 dark:text-sky-300">
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-blue-50 text-[#004776] dark:bg-blue-950/60 dark:text-sky-300 tabular-nums">
                     Trọng số: {c.weight}%
                   </span>
                   <button
                     type="button"
                     onClick={() => handleOpenEdit(c)}
-                    className="min-h-[44px] px-3 py-1.5 rounded-xl border border-border text-xs font-medium text-muted-foreground hover:text-[#004776] hover:bg-muted transition-colors"
+                    className="min-h-[34px] px-3 py-1 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-[#004776] hover:bg-slate-50 transition-colors"
                   >
                     Chỉnh sửa
                   </button>
@@ -195,7 +197,7 @@ export const AdminProgressManager: React.FC<AdminProgressManagerProps> = ({
                     <button
                       type="button"
                       onClick={() => onDeleteCriterion(c.id)}
-                      className="min-h-[44px] px-3 py-1.5 rounded-xl border border-rose-200 text-xs font-medium text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/50 transition-colors"
+                      className="min-h-[34px] px-3 py-1 rounded-lg border border-rose-200 text-xs font-medium text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/50 transition-colors"
                     >
                       Xóa
                     </button>
@@ -203,27 +205,27 @@ export const AdminProgressManager: React.FC<AdminProgressManagerProps> = ({
                 </div>
               </div>
 
-              {/* 3 Conditions Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 text-xs">
-                <div className="p-2.5 rounded-lg bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200/60 dark:border-emerald-900/40">
+              {/* 3 Conditions Cards - Equal height pastels */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 text-xs items-stretch">
+                <div className="h-full flex flex-col justify-start p-2.5 rounded-lg bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200/60 dark:border-emerald-900/40">
                   <div className="font-semibold text-emerald-700 dark:text-emerald-400 mb-1">
                     ✓ Điều kiện [ĐẠT]
                   </div>
-                  <p className="text-muted-foreground leading-relaxed">{c.passCondition}</p>
+                  <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{c.passCondition}</p>
                 </div>
 
-                <div className="p-2.5 rounded-lg bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-900/40">
+                <div className="h-full flex flex-col justify-start p-2.5 rounded-lg bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-900/40">
                   <div className="font-semibold text-amber-700 dark:text-amber-400 mb-1">
-                    ⚠ Điều kiện [CẦN CHỈNH SỬA]
+                    ◐ Điều kiện [CẦN SỬA]
                   </div>
-                  <p className="text-muted-foreground leading-relaxed">{c.warningCondition}</p>
+                  <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{c.warningCondition}</p>
                 </div>
 
-                <div className="p-2.5 rounded-lg bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200/60 dark:border-rose-900/40">
+                <div className="h-full flex flex-col justify-start p-2.5 rounded-lg bg-rose-50/50 dark:bg-rose-950/20 border border-rose-200/60 dark:border-rose-900/40">
                   <div className="font-semibold text-rose-700 dark:text-rose-400 mb-1">
-                    ✕ Điều kiện [KHÔNG ĐẠT]
+                    × Điều kiện [CHƯA ĐẠT]
                   </div>
-                  <p className="text-muted-foreground leading-relaxed">{c.failCondition}</p>
+                  <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{c.failCondition}</p>
                 </div>
               </div>
             </div>

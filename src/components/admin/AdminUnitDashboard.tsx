@@ -106,18 +106,18 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
           <div
             key={k.title}
             onClick={() => k.key !== 'score' && setSelectedWebType(k.key === selectedWebType ? 'all' : k.key)}
-            className={`p-4 sm:p-5 rounded-xl border bg-white dark:bg-[#132238] transition-colors ${
+            className={`p-4 sm:p-5 rounded-xl border bg-white dark:bg-[#132238] shadow-[0_1px_2px_rgba(15,23,42,0.03)] transition-colors ${
               k.key !== 'score' ? 'cursor-pointer hover:border-slate-300' : ''
-            } ${k.isSelected ? `border-2 ${k.activeBorder}` : 'border-slate-200 dark:border-slate-800'}`}
+            } ${k.isSelected ? `border-2 ${k.activeBorder}` : 'border-slate-200/80 dark:border-slate-800'}`}
           >
-            <div className="flex items-center justify-between text-xs font-semibold text-slate-600 dark:text-slate-300">
+            <div className="flex items-center justify-between text-[14px] sm:text-[15px] font-semibold text-slate-700 dark:text-slate-300">
               <span>{k.title}</span>
               <span className="p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 flex items-center justify-center size-8 shrink-0">{k.icon}</span>
             </div>
-            <div className="text-2xl sm:text-3xl font-bold font-mono text-[#004776] dark:text-foreground mt-2">
+            <div className="text-[28px] sm:text-[32px] font-[650] font-mono tabular-nums text-[#004776] dark:text-foreground mt-2">
               {k.value}
             </div>
-            <div className="text-[11px] text-slate-500 font-medium mt-0.5">{k.sub}</div>
+            <div className="text-[11px] sm:text-[12px] text-muted-foreground font-medium mt-0.5">{k.sub}</div>
           </div>
         ))}
       </div>

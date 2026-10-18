@@ -52,45 +52,28 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
           onClick={onBack}
           className="min-h-[40px] px-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-50 dark:hover:bg-slate-900 text-xs font-semibold text-[#004776] dark:text-sky-300 transition-colors inline-flex items-center gap-1.5"
         >
-          <span>←</span>
-          <span>Quay lại danh sách 51 đơn vị</span>
+          <span>←</span><span>Quay lại danh sách 51 đơn vị</span>
         </button>
 
         <div className="flex flex-wrap items-center gap-2">
           {prevUnit && (
-            <button
-              type="button"
-              onClick={() => onSelectUnit(prevUnit)}
-              className="min-h-[44px] px-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-50 text-xs font-medium text-muted-foreground hover:text-[#004776] transition-colors"
-            >
+            <button type="button" onClick={() => onSelectUnit(prevUnit)} className="min-h-[40px] px-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-50 text-xs font-medium text-muted-foreground hover:text-[#004776] transition-colors">
               ← #{prevUnit.stt} {prevUnit.name.slice(0, 12)}...
             </button>
           )}
-
           {nextUnit && (
-            <button
-              type="button"
-              onClick={() => onSelectUnit(nextUnit)}
-              className="min-h-[44px] px-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-50 text-xs font-medium text-muted-foreground hover:text-[#004776] transition-colors"
-            >
+            <button type="button" onClick={() => onSelectUnit(nextUnit)} className="min-h-[40px] px-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-50 text-xs font-medium text-muted-foreground hover:text-[#004776] transition-colors">
               #{nextUnit.stt} {nextUnit.name.slice(0, 12)}... →
             </button>
           )}
-
-          <a
-            href={`https://${unit.domain}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="min-h-[44px] px-4 rounded-xl bg-[#0072BC] hover:bg-[#005a96] text-white text-xs font-semibold transition-colors inline-flex items-center gap-1.5 shadow-2xs"
-          >
-            <span>Mở website</span>
-            <span>↗</span>
+          <a href={`https://${unit.domain}`} target="_blank" rel="noopener noreferrer" className="min-h-[40px] px-3.5 rounded-lg bg-[#0072BC] hover:bg-[#005a96] text-white text-xs font-semibold transition-colors inline-flex items-center gap-1.5 shadow-2xs">
+            <span>Mở website</span><span>↗</span>
           </a>
         </div>
       </div>
 
-      {/* Hero Unit Card - Style matching Image 4 & 5 cards */}
-      <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      {/* Hero Unit Card */}
+      <div className="p-4 sm:p-5 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-[0_1px_2px_rgba(15,23,42,0.03)] flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div className="flex items-start gap-3.5">
           <div className="size-12 rounded-xl bg-white dark:bg-blue-950/80 p-1.5 border border-slate-200 dark:border-slate-800 shadow-2xs shrink-0 flex items-center justify-center mt-0.5">
             <img src={brandConfig.logoUrl} alt="HCM-UTE Logo" className="size-9 object-contain" />
@@ -107,7 +90,7 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                 <button
                   type="button"
                   onClick={() => onToggleServerStatus(unit.id)}
-                  className={`px-2.5 py-0.5 rounded-md text-xs font-semibold border inline-flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 ${
+                  className={`px-2.5 py-0.5 rounded-md text-xs font-semibold border inline-flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 tabular-nums ${
                     unit.isNewWeb
                       ? 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-emerald-950/40 dark:text-emerald-300'
                       : 'bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950/40 dark:text-amber-300'
@@ -119,17 +102,15 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                   <span className="opacity-70 text-[10px] font-mono">⇄ Đổi máy chủ</span>
                 </button>
               ) : (
-                <span className={`px-2 py-0.5 rounded-md text-xs font-semibold border ${
-                  unit.isNewWeb
-                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300'
-                    : 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-300'
+                <span className={`px-2 py-0.5 rounded-md text-xs font-semibold border tabular-nums ${
+                  unit.isNewWeb ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300' : 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-300'
                 }`}>
                   {unit.isNewWeb ? 'Đã trỏ web mới (.189)' : 'Đang duy trì web cũ (.181)'}
                 </span>
               )}
             </div>
 
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#004776] dark:text-foreground">
+            <h1 className="text-[22px] sm:text-[24px] font-[650] tracking-tight text-[#004776] dark:text-foreground">
               {unit.name}
             </h1>
 
@@ -141,20 +122,20 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
           </div>
         </div>
 
-        <div className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/60 min-w-[200px] space-y-1.5 text-center lg:text-right">
+        <div className="p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/60 min-w-[200px] space-y-1.5 text-center lg:text-right">
           <div className="text-xs text-muted-foreground font-medium">Độ hoàn thiện tổng quan</div>
-          <div className={`text-3xl font-bold font-mono ${scoreColor}`}>{unit.completenessScore}%</div>
+          <div className={`text-[28px] sm:text-[32px] font-[650] font-mono tabular-nums ${scoreColor}`}>{unit.completenessScore}%</div>
           <div className="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
             <div className={`h-full rounded-full transition-all duration-500 ${barColor}`} style={{ width: `${unit.completenessScore}%` }} />
           </div>
         </div>
       </div>
 
-      {/* SQUARE TABLE (NGUYÊN DẠNG BẢNG VUÔNG) - Style matching User Portal Image 4 */}
-      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs overflow-hidden">
-        <div className="p-3.5 border-b border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/40">
-          <h2 className="text-sm sm:text-base font-bold text-[#004776] dark:text-foreground">
-            Bảng đánh giá vuông chi tiết ({criteria.length} tiêu chuẩn)
+      {/* SQUARE TABLE (NGUYÊN DẠNG BẢNG VUÔNG) */}
+      <div className="rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-[0_1px_2px_rgba(15,23,42,0.03)] overflow-hidden">
+        <div className="p-3.5 border-b border-slate-200/80 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/40">
+          <h2 className="text-[16px] font-semibold text-[#004776] dark:text-foreground">
+            Bảng đánh giá chi tiết ({criteria.length} tiêu chuẩn)
           </h2>
           <p className="text-xs text-muted-foreground mt-0.5">
             Cơ cấu 4 cột: Nội dung tiêu chuẩn • Chấm điểm • Đánh giá tổng quan • Ghi chú Admin
@@ -164,11 +145,11 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[960px]">
             <thead>
-              <tr className="bg-slate-50/90 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 text-xs font-bold text-[#004776] dark:text-sky-300 uppercase tracking-wider">
-                <th className="p-3 w-[26%] border-r border-slate-200 dark:border-slate-800">1. Nội dung tiêu chuẩn</th>
-                <th className="p-3 w-[24%] border-r border-slate-200 dark:border-slate-800 text-center">2. Chấm điểm</th>
-                <th className="p-3 w-[28%] border-r border-slate-200 dark:border-slate-800">3. Đánh giá tổng quan</th>
-                <th className="p-3 w-[22%]">4. Ghi chú Admin</th>
+              <tr className="bg-slate-50/90 dark:bg-slate-900/90 border-b border-slate-200/80 dark:border-slate-800 text-xs font-semibold text-[#004776] dark:text-sky-300 uppercase tracking-wider">
+                <th className="p-2.5 sm:p-3 w-[26%] border-r border-slate-200/80 dark:border-slate-800">1. Nội dung tiêu chuẩn</th>
+                <th className="p-2.5 sm:p-3 w-[24%] border-r border-slate-200/80 dark:border-slate-800 text-center">2. Chấm điểm</th>
+                <th className="p-2.5 sm:p-3 w-[28%] border-r border-slate-200/80 dark:border-slate-800">3. Đánh giá tổng quan</th>
+                <th className="p-2.5 sm:p-3 w-[22%]">4. Ghi chú Admin</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80 text-xs sm:text-sm">
@@ -180,64 +161,75 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                 return (
                   <tr key={c.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors align-top">
                     {/* Cột 1: Nội dung tiêu chuẩn */}
-                    <td className="p-3 border-r border-slate-200 dark:border-slate-800 space-y-1">
+                    <td className="p-2.5 sm:p-3 border-r border-slate-200/80 dark:border-slate-800 space-y-1">
                       <div className="flex items-center gap-1.5">
                         <span className="px-2 py-0.5 rounded-md text-xs font-mono font-bold bg-[#0072BC]/10 text-[#004776] dark:text-sky-300">
                           {c.code}
                         </span>
                         <span className="text-[11px] text-muted-foreground font-semibold">Tỷ trọng: {c.weight}%</span>
                       </div>
-                      <h3 className="font-bold text-sm text-[#004776] dark:text-foreground">{c.name}</h3>
+                      <h3 className="font-semibold text-sm text-[#004776] dark:text-foreground">{c.name}</h3>
                       <p className="text-xs text-muted-foreground leading-relaxed">{c.description}</p>
                     </td>
 
-                    {/* Cột 2: Chấm điểm (Nút pastel dịu mắt) */}
-                    <td className="p-3 border-r border-slate-200 dark:border-slate-800 space-y-1.5">
-                      <button
-                        type="button"
-                        onClick={() => onUpdateRating(unit.id, c.id, 'pass')}
-                        className={`w-full min-h-[34px] px-3 py-1 rounded-lg text-xs font-semibold transition-all border flex items-center justify-center gap-1.5 ${
-                          currentRating === 'pass'
-                            ? 'bg-emerald-50 text-emerald-800 border-emerald-300 dark:bg-emerald-950 dark:text-emerald-300 dark:border-emerald-700'
-                            : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:border-emerald-200 hover:bg-emerald-50/50 hover:text-emerald-800'
-                        }`}
-                      >
-                        <span>✓</span><span>Đạt (100% điểm)</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => onUpdateRating(unit.id, c.id, 'warning')}
-                        className={`w-full min-h-[34px] px-3 py-1 rounded-lg text-xs font-semibold transition-all border flex items-center justify-center gap-1.5 ${
-                          currentRating === 'warning'
-                            ? 'bg-amber-50 text-amber-900 border-amber-300 dark:bg-amber-950 dark:text-amber-300 dark:border-amber-700'
-                            : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:border-amber-200 hover:bg-amber-50/50 hover:text-amber-800'
-                        }`}
-                      >
-                        <span>⏱</span><span>Cần sửa (50% điểm)</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => onUpdateRating(unit.id, c.id, 'fail')}
-                        className={`w-full min-h-[34px] px-3 py-1 rounded-lg text-xs font-semibold transition-all border flex items-center justify-center gap-1.5 ${
-                          currentRating === 'fail'
-                            ? 'bg-rose-50 text-rose-900 border-rose-300 dark:bg-rose-950 dark:text-rose-300 dark:border-rose-700'
-                            : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:border-rose-200 hover:bg-rose-50/50 hover:text-rose-800'
-                        }`}
-                      >
-                        <span>✕</span><span>Không đạt (0 điểm)</span>
-                      </button>
+                    {/* Cột 2: Chấm điểm (Segmented control ngang) */}
+                    <td className="p-2.5 sm:p-3 border-r border-slate-200/80 dark:border-slate-800 align-top">
+                      <div className="flex items-center gap-1 p-1 rounded-lg bg-slate-100/80 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800">
+                        <button
+                          type="button"
+                          onClick={() => onUpdateRating(unit.id, c.id, 'pass')}
+                          className={`flex-1 min-h-[34px] px-1.5 py-1 rounded-md text-xs font-semibold transition-all inline-flex items-center justify-center gap-1 ${
+                            currentRating === 'pass'
+                              ? 'bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-300 shadow-2xs'
+                              : 'text-slate-600 dark:text-slate-400 hover:text-emerald-800 hover:bg-white/60 dark:hover:bg-slate-800'
+                          }`}
+                          title="Đạt: 100% điểm"
+                        >
+                          <span>✓</span>
+                          <span>Đạt</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => onUpdateRating(unit.id, c.id, 'warning')}
+                          className={`flex-1 min-h-[34px] px-1.5 py-1 rounded-md text-xs font-semibold transition-all inline-flex items-center justify-center gap-1 ${
+                            currentRating === 'warning'
+                              ? 'bg-amber-50 text-amber-900 border border-amber-300 dark:bg-amber-950 dark:text-amber-300 shadow-2xs'
+                              : 'text-slate-600 dark:text-slate-400 hover:text-amber-800 hover:bg-white/60 dark:hover:bg-slate-800'
+                          }`}
+                          title="Cần sửa: 50% điểm"
+                        >
+                          <span>◐</span>
+                          <span>Cần sửa</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => onUpdateRating(unit.id, c.id, 'fail')}
+                          className={`flex-1 min-h-[34px] px-1.5 py-1 rounded-md text-xs font-semibold transition-all inline-flex items-center justify-center gap-1 ${
+                            currentRating === 'fail'
+                              ? 'bg-rose-50 text-rose-900 border border-rose-300 dark:bg-rose-950 dark:text-rose-300 shadow-2xs'
+                              : 'text-slate-600 dark:text-slate-400 hover:text-rose-700 hover:bg-white/60 dark:hover:bg-slate-800'
+                          }`}
+                          title="Chưa đạt: 0 điểm"
+                        >
+                          <span>×</span>
+                          <span>Chưa đạt</span>
+                        </button>
+                      </div>
+                      <div className="text-[11px] text-muted-foreground text-center mt-1.5 font-mono">
+                        {currentRating === 'pass' && '100% điểm'}
+                        {currentRating === 'warning' && '50% điểm'}
+                        {currentRating === 'fail' && '0 điểm'}
+                      </div>
                     </td>
 
-                    {/* Cột 3: Đánh giá tổng quan (Style matching info card in Image 5) */}
-                    <td className="p-3 border-r border-slate-200 dark:border-slate-800 space-y-1.5 text-xs">
-                      <div className={`p-3 rounded-xl border leading-relaxed ${
+                    {/* Cột 3: Đánh giá tổng quan */}
+                    <td className="p-2.5 sm:p-3 border-r border-slate-200/80 dark:border-slate-800 space-y-1 text-xs">
+                      <div className={`p-2.5 rounded-lg border leading-relaxed ${
                         currentRating === 'pass' ? 'border-emerald-200 bg-emerald-50/70 text-emerald-900 dark:border-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-200' :
                         currentRating === 'warning' ? 'border-amber-200 bg-amber-50/70 text-amber-900 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-200' :
                         'border-rose-200 bg-rose-50/70 text-rose-900 dark:border-rose-900 dark:bg-rose-950/40 dark:text-rose-200'
                       }`}>
-                        <div className="font-bold mb-1">
+                        <div className="font-semibold mb-0.5">
                           {currentRating === 'pass' && '✓ Tiêu chuẩn ĐẠT:'}
                           {currentRating === 'warning' && '⚠ Điểm CẦN CHỈNH SỬA:'}
                           {currentRating === 'fail' && '✕ Lỗi KHÔNG ĐẠT:'}
@@ -258,7 +250,7 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                       </button>
 
                       {isExpanded && (
-                        <div className="space-y-1 pt-1.5 border-t border-slate-200 dark:border-slate-800 text-[11px]">
+                        <div className="space-y-1 pt-1.5 border-t border-slate-200/80 dark:border-slate-800 text-[11px]">
                           <div className="text-emerald-700 dark:text-emerald-400"><strong>Đạt:</strong> {c.passCondition}</div>
                           <div className="text-amber-700 dark:text-amber-400"><strong>Cần sửa:</strong> {c.warningCondition}</div>
                           <div className="text-rose-700 dark:text-rose-400"><strong>Không đạt:</strong> {c.failCondition}</div>
@@ -266,14 +258,14 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                       )}
                     </td>
 
-                    {/* Cột 4: Ghi chú Admin (Style matching textarea in Image 4) */}
-                    <td className="p-3 space-y-1">
+                    {/* Cột 4: Ghi chú Admin */}
+                    <td className="p-2.5 sm:p-3 space-y-1">
                       <textarea
-                        rows={3}
+                        rows={2}
                         value={currentNote}
                         onChange={(e) => onUpdateNote(unit.id, c.id, e.target.value)}
                         placeholder="Admin ghi chú lại nội dung cần lưu ý..."
-                        className="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900 text-xs text-[#004776] dark:text-foreground leading-relaxed focus:ring-2 focus:ring-[#0072BC]/20 focus:bg-background focus:border-[#0072BC] outline-none resize-y min-h-[84px]"
+                        className="w-full p-2 rounded-lg border border-slate-200/80 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900 text-xs text-[#004776] dark:text-foreground leading-relaxed focus:ring-1 focus:ring-[#0072BC] focus:bg-background outline-none resize-y min-h-[52px]"
                       />
                       {currentNote.trim() && (
                         <span className="inline-flex items-center gap-1 text-[11px] text-emerald-600 dark:text-emerald-400 font-medium px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">

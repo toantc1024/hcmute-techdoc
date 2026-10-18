@@ -132,8 +132,8 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
         avgScore={avgScore}
       />
 
-      {/* Main Content Workspace - Centered Balanced 80% Layout */}
-      <main className="flex-1 w-full max-w-[1240px] mx-auto px-4 sm:px-6 py-6 pb-20">
+      {/* Main Content Workspace - Institutional Layout max-w-[1440px] */}
+      <main className="flex-1 w-full max-w-[1440px] mx-auto px-5 lg:px-6 py-6 pb-20">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center p-20 space-y-4">
             <div className="animate-spin size-10 border-4 border-[#0072BC] border-t-transparent rounded-full" />
