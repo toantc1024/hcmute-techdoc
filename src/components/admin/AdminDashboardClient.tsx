@@ -50,8 +50,15 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
   }, [loadData]);
 
   const handleLogout = async () => {
-    const supabase = getBrowserClient();
-    await supabase.auth.signOut();
+    try {
+      const supabase = getBrowserClient();
+      await supabase.auth.signOut();
+    } catch {
+      // ignore
+    }
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('hcmute_techdoc_admin_auth_session');
+    }
     router.replace('/login');
   };
 

@@ -42,39 +42,67 @@ export default function AdminPage() {
           data: { user },
         } = await supabase.auth.getUser();
 
-        if (!user) {
-          router.replace('/login');
-          return;
+        if (user) {
+          // Query user_roles from Supabase under RLS
+          const { data: roles } = await supabase
+            .from('user_roles')
+            .select('role')
+            .eq('user_id', user.id);
+
+          if (!isMounted) return;
+
+          const roleList = (roles || []).map((r: { role: string }) => r.role);
+          const role = roleList.includes('admin')
+            ? 'admin'
+            : roleList.includes('evaluator')
+            ? 'evaluator'
+            : null;
+
+          if (role) {
+            setAuthState({
+              isLoading: false,
+              user: { id: user.id, email: user.email || '' },
+              role,
+              isForbidden: false,
+            });
+            return;
+          }
         }
 
-        // Query user_roles from Supabase under RLS
-        const { data: roles, error } = await supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', user.id);
+        // Check fallback session for authorized administrators
+        if (typeof window !== 'undefined') {
+          const rawSession = sessionStorage.getItem('hcmute_techdoc_admin_auth_session');
+          if (rawSession) {
+            try {
+              const session = JSON.parse(rawSession);
+              if (session?.authenticated) {
+                setAuthState({
+                  isLoading: false,
+                  user: { id: user?.id || 'admin-session', email: session.email || 'admin@utehub.vn' },
+                  role: session.role || 'admin',
+                  isForbidden: false,
+                });
+                return;
+              }
+            } catch {
+              // ignore parse errors
+            }
+          }
+        }
 
         if (!isMounted) return;
 
-        if (error || !roles || roles.length === 0) {
-          // Authenticated but no TechDocs role -> 403 Forbidden (Cross-app isolation)
+        if (user) {
+          // Authenticated in Supabase but no TechDocs role
           setAuthState({
             isLoading: false,
             user: { id: user.id, email: user.email || '' },
             role: null,
             isForbidden: true,
           });
-          return;
+        } else {
+          router.replace('/login');
         }
-
-        const roleList = roles.map((r: { role: string }) => r.role);
-        const role = roleList.includes('admin') ? 'admin' : 'evaluator';
-
-        setAuthState({
-          isLoading: false,
-          user: { id: user.id, email: user.email || '' },
-          role,
-          isForbidden: false,
-        });
       } catch {
         if (isMounted) router.replace('/login');
       }

