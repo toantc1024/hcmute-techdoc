@@ -183,26 +183,26 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                     </span>
                   </td>
 
-                  {/* 7 Khối màu tiêu chuẩn - Dịu mắt, pastel thanh lịch */}
+                  {/* 7 Khối màu tiêu chuẩn - Màu full ô vuông, bỏ nút bên trong */}
                   {criteria.map((c) => {
                     const critCode = c.id || c.code;
                     const rating = u.criteriaRatings?.[critCode];
                     const isHovered = hoveredCell?.unitId === u.id && hoveredCell?.critCode === critCode;
 
-                    let bgClasses = 'bg-slate-50/70 text-slate-400 border-slate-200/60 dark:bg-slate-800/40 dark:border-slate-800';
+                    let bgClasses = 'bg-slate-50/70 text-slate-400 hover:bg-slate-100/80 dark:bg-slate-800/30 dark:hover:bg-slate-800/60';
                     let mainText = '-';
                     let subText = '';
 
                     if (rating === 'pass') {
-                      bgClasses = 'bg-emerald-50/90 hover:bg-emerald-100 text-emerald-800 border-emerald-200/90 dark:bg-emerald-950/40 dark:hover:bg-emerald-950/70 dark:text-emerald-300 dark:border-emerald-800/80';
+                      bgClasses = 'bg-emerald-50 hover:bg-emerald-100/90 text-emerald-800 dark:bg-emerald-950/40 dark:hover:bg-emerald-950/70 dark:text-emerald-300';
                       mainText = `+${c.weight || 15}`;
                       subText = 'Đạt';
                     } else if (rating === 'warning') {
-                      bgClasses = 'bg-amber-50/90 hover:bg-amber-100 text-amber-800 border-amber-200/90 dark:bg-amber-950/40 dark:hover:bg-amber-950/70 dark:text-amber-300 dark:border-amber-800/80';
+                      bgClasses = 'bg-amber-50 hover:bg-amber-100/90 text-amber-900 dark:bg-amber-950/40 dark:hover:bg-amber-950/70 dark:text-amber-300';
                       mainText = `+${Math.round((c.weight || 15) * 0.5)}`;
                       subText = 'Sửa';
                     } else if (rating === 'fail') {
-                      bgClasses = 'bg-rose-50/90 hover:bg-rose-100 text-rose-800 border-rose-200/90 dark:bg-rose-950/40 dark:hover:bg-rose-950/70 dark:text-rose-300 dark:border-rose-800/80';
+                      bgClasses = 'bg-rose-50 hover:bg-rose-100/90 text-rose-800 dark:bg-rose-950/40 dark:hover:bg-rose-950/70 dark:text-rose-300';
                       mainText = '0';
                       subText = 'Lỗi';
                     }
@@ -210,7 +210,7 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                     return (
                       <td
                         key={critCode}
-                        className="py-1 px-1 text-center w-16 border-l border-slate-200/80 dark:border-slate-800 select-none relative"
+                        className={`text-center w-16 border-l border-slate-200 dark:border-slate-800 select-none relative cursor-pointer transition-colors p-0 align-middle ${bgClasses}`}
                         onMouseEnter={() => setHoveredCell({ unitId: u.id, critCode })}
                         onMouseLeave={() => setHoveredCell(null)}
                         onClick={(e) => {
@@ -218,14 +218,16 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                           handleCellClick(u, critCode, rating);
                         }}
                       >
-                        <div className={`h-9 w-full rounded-md flex flex-col items-center justify-center transition-colors cursor-pointer border ${bgClasses}`}>
+                        <div className="w-full py-2.5 px-1 flex flex-col items-center justify-center">
                           <span className="font-bold font-mono text-xs leading-none">{mainText}</span>
-                          {subText && <span className="text-[9px] font-medium leading-none mt-0.5 opacity-90">{subText}</span>}
+                          {subText && (
+                            <span className="text-[10px] font-medium leading-none mt-1 opacity-90">{subText}</span>
+                          )}
                         </div>
 
                         {/* Tooltip */}
                         {isHovered && (
-                          <div className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-1.5 w-60 p-2.5 rounded-lg bg-slate-900 text-white text-xs pointer-events-none text-left leading-relaxed">
+                          <div className="absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-1.5 w-60 p-2.5 rounded-lg bg-slate-900 text-white text-xs pointer-events-none text-left leading-relaxed shadow-lg">
                             <div className="font-bold text-amber-300 pb-1 border-b border-slate-700 mb-1">
                               {c.code}: {c.name} ({c.weight}%)
                             </div>
