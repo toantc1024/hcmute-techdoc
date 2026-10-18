@@ -42,10 +42,10 @@ export const ScoreboardFilterBar: React.FC<ScoreboardFilterBarProps> = ({
   const staffList = ['Phi', 'Cal', 'Nhân', 'Chị Ngân'];
 
   return (
-    <div className="p-3.5 sm:p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-3">
-      {/* Row 1: Fast Filter Pills by Department Group + View Mode Switcher */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800/80 pb-3">
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+    <div className="p-5 sm:p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-4">
+      {/* Row 1: Fast Filter Pills by Department Group + View Mode Switcher (Scaled 1.3x) */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800/80 pb-4">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
           {groups.map((g) => {
             const active = selectedGroup === g.key;
             return (
@@ -53,10 +53,10 @@ export const ScoreboardFilterBar: React.FC<ScoreboardFilterBarProps> = ({
                 key={g.key}
                 type="button"
                 onClick={() => onGroupChange(g.key)}
-                className={`min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all select-none ${
+                className={`min-h-[46px] px-5 py-2.5 rounded-xl text-sm sm:text-base font-bold whitespace-nowrap transition-all select-none cursor-pointer ${
                   active
-                    ? 'bg-[#0072BC] text-white shadow-xs'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                    ? 'bg-[#0072BC] text-white shadow-sm'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                 }`}
               >
                 {g.label}
@@ -67,40 +67,40 @@ export const ScoreboardFilterBar: React.FC<ScoreboardFilterBarProps> = ({
 
         {/* View Mode Toggle */}
         {viewMode && onViewModeChange && (
-          <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shrink-0 self-start sm:self-auto">
+          <div className="inline-flex items-center gap-1.5 p-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shrink-0 self-start sm:self-auto">
             <button
               type="button"
               onClick={() => onViewModeChange('matrix')}
-              className={`min-h-[36px] px-3 py-1 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1.5 ${
+              className={`min-h-[40px] px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all inline-flex items-center gap-2 cursor-pointer ${
                 viewMode === 'matrix'
                   ? 'bg-white dark:bg-slate-900 text-[#0072BC] dark:text-sky-300 shadow-2xs'
                   : 'text-slate-500 hover:text-[#004776] dark:hover:text-slate-200'
               }`}
             >
-              <span>▦</span>
+              <span className="text-base">▦</span>
               <span>Ma trận ICPC</span>
             </button>
             <button
               type="button"
               onClick={() => onViewModeChange('cards')}
-              className={`min-h-[36px] px-3 py-1 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1.5 ${
+              className={`min-h-[40px] px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all inline-flex items-center gap-2 cursor-pointer ${
                 viewMode === 'cards'
                   ? 'bg-white dark:bg-slate-900 text-[#0072BC] dark:text-sky-300 shadow-2xs'
                   : 'text-slate-500 hover:text-[#004776] dark:hover:text-slate-200'
               }`}
             >
-              <span>☰</span>
+              <span className="text-base">☰</span>
               <span>Danh sách</span>
             </button>
           </div>
         )}
       </div>
 
-      {/* Row 2: Search Input & Dropdowns (min-h-[44px] touch target) */}
-      <div className="flex flex-col md:flex-row gap-2.5 items-stretch md:items-center">
+      {/* Row 2: Search Input & Dropdowns (min-h-[50px] scaled 1.3x) */}
+      <div className="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
         <div className="relative flex-1">
-          <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-muted-foreground text-xs">
-            <svg className="size-4 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-muted-foreground text-sm">
+            <svg className="size-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </span>
@@ -109,24 +109,24 @@ export const ScoreboardFilterBar: React.FC<ScoreboardFilterBarProps> = ({
             placeholder="Tìm theo tên khoa, viện, tên miền (fit, feee...), cán bộ..."
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full min-h-[44px] pl-10 pr-9 rounded-xl border border-slate-200 dark:border-slate-800 bg-background text-sm text-[#004776] dark:text-foreground placeholder:text-muted-foreground leading-[2.05] focus:ring-2 focus:ring-[#0072BC]/20 focus:border-[#0072BC] outline-hidden transition-all"
+            className="w-full min-h-[50px] pl-12 pr-10 rounded-xl border border-slate-200 dark:border-slate-800 bg-background text-base text-[#004776] dark:text-foreground placeholder:text-muted-foreground leading-[2.05] focus:ring-2 focus:ring-[#0072BC]/20 focus:border-[#0072BC] outline-hidden transition-all"
           />
           {searchTerm && (
             <button
               type="button"
               onClick={() => onSearchChange('')}
-              className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground"
+              className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-muted-foreground hover:text-foreground text-base"
             >
               ✕
             </button>
           )}
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2.5">
           <select
             value={selectedWebType}
             onChange={(e) => onWebTypeChange(e.target.value)}
-            className="min-h-[44px] px-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-background text-xs sm:text-sm font-semibold text-[#004776] dark:text-foreground focus:ring-2 focus:ring-[#0072BC]/20 outline-hidden transition-all cursor-pointer"
+            className="min-h-[50px] px-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-background text-sm sm:text-base font-semibold text-[#004776] dark:text-foreground focus:ring-2 focus:ring-[#0072BC]/20 outline-hidden transition-all cursor-pointer"
           >
             <option value="all">Tất cả máy chủ</option>
             <option value="new">Web mới (.189)</option>
@@ -136,7 +136,7 @@ export const ScoreboardFilterBar: React.FC<ScoreboardFilterBarProps> = ({
           <select
             value={selectedStaff}
             onChange={(e) => onStaffChange(e.target.value)}
-            className="min-h-[44px] px-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-background text-xs sm:text-sm font-semibold text-[#004776] dark:text-foreground focus:ring-2 focus:ring-[#0072BC]/20 outline-hidden transition-all cursor-pointer"
+            className="min-h-[50px] px-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-background text-sm sm:text-base font-semibold text-[#004776] dark:text-foreground focus:ring-2 focus:ring-[#0072BC]/20 outline-hidden transition-all cursor-pointer"
           >
             <option value="all">Tất cả cán bộ</option>
             {staffList.map((s) => (
@@ -150,7 +150,7 @@ export const ScoreboardFilterBar: React.FC<ScoreboardFilterBarProps> = ({
             <button
               type="button"
               onClick={onReset}
-              className="min-h-[44px] px-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-100 dark:hover:bg-slate-800 text-xs sm:text-sm font-bold text-[#004776] dark:text-sky-300 transition-colors inline-flex items-center gap-1.5 shadow-2xs"
+              className="min-h-[50px] px-4.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-100 dark:hover:bg-slate-800 text-sm sm:text-base font-bold text-[#004776] dark:text-sky-300 transition-colors inline-flex items-center gap-2 shadow-2xs cursor-pointer"
             >
               <span>↻</span>
               <span>Đặt lại</span>

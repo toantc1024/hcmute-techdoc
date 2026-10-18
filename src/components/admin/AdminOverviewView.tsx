@@ -98,77 +98,81 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
   ];
 
   return (
-    <div className="space-y-5 animate-in fade-in duration-200">
-      {/* ROW 1: 4 STATS CARDS (Matching Mẫu 1 & 3) */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex items-center justify-between gap-3">
+    <div className="w-full space-y-6 animate-in fade-in duration-200">
+      {/* ROW 1: 4 STATS CARDS (Scaled 1.3x) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
+        {/* Card 1 */}
+        <div className="p-6 sm:p-7 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex items-center justify-between gap-4">
           <div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-[#004776] dark:text-foreground font-mono">
-              {stats.total} <span className="text-sm font-sans font-bold text-muted-foreground">đơn vị</span>
+            <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#004776] dark:text-foreground font-mono">
+              {stats.total} <span className="text-base font-sans font-bold text-muted-foreground">đơn vị</span>
             </div>
-            <div className="text-xs font-semibold text-muted-foreground mt-0.5">Tổng số website</div>
-            <div className="text-[11px] text-slate-500 mt-1">100% thuộc HCM-UTE</div>
+            <div className="text-sm sm:text-base font-bold text-slate-700 dark:text-slate-300 mt-1">Tổng số website</div>
+            <div className="text-xs sm:text-sm text-slate-500 font-medium mt-1">100% thuộc HCM-UTE</div>
           </div>
-          <div className="size-11 rounded-xl bg-blue-50 dark:bg-blue-950/60 p-2 flex items-center justify-center border border-blue-100 dark:border-blue-900 shrink-0">
-            <img src={brandConfig.logoUrl} alt="HCM-UTE" className="size-7 object-contain" />
+          <div className="size-14 sm:size-16 rounded-xl bg-blue-50 dark:bg-blue-950/60 p-2.5 flex items-center justify-center border border-blue-100 dark:border-blue-900 shrink-0">
+            <img src={brandConfig.logoUrl} alt="HCM-UTE" className="size-10 sm:size-11 object-contain" />
           </div>
         </div>
 
-        <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex items-center justify-between gap-3">
+        {/* Card 2 */}
+        <div className="p-6 sm:p-7 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex items-center justify-between gap-4">
           <div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">
+            <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-emerald-600 dark:text-emerald-400 font-mono">
               {stats.avgScore}%
             </div>
-            <div className="text-xs font-semibold text-muted-foreground mt-0.5">Đã hoàn thiện</div>
-            <div className="text-[11px] text-slate-500 mt-1">{stats.passUnits}/{stats.total} website đạt</div>
+            <div className="text-sm sm:text-base font-bold text-slate-700 dark:text-slate-300 mt-1">Đã hoàn thiện</div>
+            <div className="text-xs sm:text-sm text-slate-500 font-medium mt-1">{stats.passUnits}/{stats.total} website đạt</div>
           </div>
-          <div className="size-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-900 shrink-0 text-xl font-bold">
+          <div className="size-14 sm:size-16 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-900 shrink-0 text-2xl font-black">
             ✓
           </div>
         </div>
 
-        <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex items-center justify-between gap-3">
+        {/* Card 3 */}
+        <div className="p-6 sm:p-7 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex items-center justify-between gap-4">
           <div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-[#0072BC] dark:text-sky-300 font-mono">
+            <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0072BC] dark:text-sky-300 font-mono">
               {totalViews.toLocaleString()}
             </div>
-            <div className="text-xs font-semibold text-muted-foreground mt-0.5">Tổng lượt xem</div>
-            <div className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium mt-1">↑ 12% so với tuần trước</div>
+            <div className="text-sm sm:text-base font-bold text-slate-700 dark:text-slate-300 mt-1">Tổng lượt xem</div>
+            <div className="text-xs sm:text-sm text-emerald-600 dark:text-emerald-400 font-semibold mt-1">↑ 12% so với tuần trước</div>
           </div>
-          <div className="size-11 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-[#0072BC] dark:text-sky-300 flex items-center justify-center border border-sky-100 dark:border-sky-900 shrink-0 text-lg">
+          <div className="size-14 sm:size-16 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-[#0072BC] dark:text-sky-300 flex items-center justify-center border border-sky-100 dark:border-sky-900 shrink-0 text-2xl">
             👁
           </div>
         </div>
 
-        <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex items-center justify-between gap-3">
+        {/* Card 4 */}
+        <div className="p-6 sm:p-7 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex items-center justify-between gap-4">
           <div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-rose-600 dark:text-rose-400 font-mono">
-              {totalChapters} <span className="text-sm font-sans font-bold text-muted-foreground">chương</span>
+            <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-rose-600 dark:text-rose-400 font-mono">
+              {totalChapters} <span className="text-base font-sans font-bold text-muted-foreground">chương</span>
             </div>
-            <div className="text-xs font-semibold text-muted-foreground mt-0.5">Quản lý tài liệu</div>
-            <div className="text-[11px] text-slate-500 mt-1">1,256 mục tài liệu</div>
+            <div className="text-sm sm:text-base font-bold text-slate-700 dark:text-slate-300 mt-1">Quản lý tài liệu</div>
+            <div className="text-xs sm:text-sm text-slate-500 font-medium mt-1">1,256 mục tài liệu</div>
           </div>
-          <div className="size-11 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center border border-rose-100 dark:border-rose-900 shrink-0 text-lg">
+          <div className="size-14 sm:size-16 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center border border-rose-100 dark:border-rose-900 shrink-0 text-2xl">
             📄
           </div>
         </div>
       </div>
 
-      {/* ROW 2: 2 CHARTS SIDE BY SIDE (Extracted for Rule 15 <300 lines) */}
+      {/* ROW 2: 2 CHARTS SIDE BY SIDE (Scaled 1.3x) */}
       <AdminOverviewCharts stats={stats} />
 
-      {/* ROW 3: FAST FILTER TABS & SEARCH (Matching Mẫu 3) */}
-      <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-3">
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 border-b border-slate-100 dark:border-slate-800/80">
+      {/* ROW 3: FAST FILTER TABS & SEARCH (Scaled 1.3x) */}
+      <div className="p-5 sm:p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-4">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 border-b border-slate-100 dark:border-slate-800/80">
           {groupFilterTabs.map((t) => (
             <button
               key={t.key}
               type="button"
               onClick={() => setSelectedGroup(t.key)}
-              className={`min-h-[38px] px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+              className={`min-h-[46px] px-5 py-2.5 rounded-xl text-sm sm:text-base font-bold whitespace-nowrap transition-all cursor-pointer ${
                 selectedGroup === t.key
                   ? 'bg-[#0072BC] text-white shadow-xs'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
               }`}
             >
               {t.label}
@@ -176,9 +180,9 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
           ))}
         </div>
 
-        <div className="flex flex-col md:flex-row gap-2.5 items-stretch md:items-center justify-between">
+        <div className="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
           <div className="relative flex-1">
-            <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-muted-foreground text-xs">
+            <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-muted-foreground text-sm">
               🔍
             </span>
             <input
@@ -186,24 +190,24 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
               placeholder="Tìm kiếm theo đơn vị, website, cán bộ phụ trách..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full min-h-[42px] pl-9 pr-8 rounded-xl border border-slate-200 dark:border-slate-800 bg-background text-sm text-[#004776] dark:text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-[#0072BC]/20 focus:border-[#0072BC] outline-none"
+              className="w-full min-h-[50px] pl-12 pr-10 rounded-xl border border-slate-200 dark:border-slate-800 bg-background text-base text-[#004776] dark:text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-[#0072BC]/20 focus:border-[#0072BC] outline-none"
             />
             {searchTerm && (
               <button
                 type="button"
                 onClick={() => setSearchTerm('')}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground"
+                className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-muted-foreground hover:text-foreground text-base"
               >
                 ✕
               </button>
             )}
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2.5">
             <select
               value={selectedWebType}
               onChange={(e) => setSelectedWebType(e.target.value)}
-              className="min-h-[42px] px-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-background text-xs font-semibold text-[#004776] dark:text-foreground cursor-pointer"
+              className="min-h-[50px] px-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-background text-sm sm:text-base font-semibold text-[#004776] dark:text-foreground cursor-pointer"
             >
               <option value="all">Tất cả máy chủ</option>
               <option value="new">Web mới (.189)</option>
@@ -213,7 +217,7 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
             <select
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
-              className="min-h-[42px] px-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-background text-xs font-semibold text-[#004776] dark:text-foreground cursor-pointer"
+              className="min-h-[50px] px-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-background text-sm sm:text-base font-semibold text-[#004776] dark:text-foreground cursor-pointer"
             >
               <option value="all">Tất cả trạng thái</option>
               <option value="pass">Đạt chuẩn (≥80%)</option>
@@ -225,7 +229,7 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
               <button
                 type="button"
                 onClick={onSwitchToUnitsTab}
-                className="min-h-[42px] px-3.5 rounded-xl border border-[#0072BC]/30 bg-blue-50 dark:bg-blue-950/40 text-[#0072BC] dark:text-sky-300 text-xs font-bold hover:bg-blue-100 transition-colors inline-flex items-center gap-1.5"
+                className="min-h-[50px] px-5 rounded-xl border border-[#0072BC]/30 bg-blue-50 dark:bg-blue-950/40 text-[#0072BC] dark:text-sky-300 text-sm sm:text-base font-bold hover:bg-blue-100 transition-colors inline-flex items-center gap-2 cursor-pointer shadow-2xs"
               >
                 <span>Xem ma trận đầy đủ →</span>
               </button>
@@ -234,7 +238,7 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
         </div>
       </div>
 
-      {/* ROW 4: ICPC MATRIX TABLE */}
+      {/* ROW 4: ICPC MATRIX TABLE (Full Width) */}
       <ScoreboardMatrix
         units={filteredUnits}
         criteria={criteria}

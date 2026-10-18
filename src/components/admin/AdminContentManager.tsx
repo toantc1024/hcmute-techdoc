@@ -46,7 +46,7 @@ export const AdminContentManager: React.FC<AdminContentManagerProps> = ({
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="w-full space-y-6">
       {/* Search & Filter Toolbar */}
       <div className="p-4 sm:p-5 rounded-xl border border-border bg-card shadow-xs">
         <div className="flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">

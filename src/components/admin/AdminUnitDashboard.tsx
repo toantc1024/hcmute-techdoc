@@ -92,25 +92,25 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
   ];
 
   return (
-    <div className="space-y-4">
-      {/* 4 KPI Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+    <div className="w-full space-y-6">
+      {/* 4 KPI Cards (Scaled 1.3x) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         {kpis.map((k) => (
           <div
             key={k.title}
             onClick={() => k.key !== 'score' && setSelectedWebType(k.key === selectedWebType ? 'all' : k.key)}
-            className={`p-4 rounded-xl border bg-white dark:bg-[#132238] shadow-xs transition-all ${
+            className={`p-6 sm:p-7 rounded-xl border bg-white dark:bg-[#132238] shadow-xs transition-all ${
               k.key !== 'score' ? 'cursor-pointer hover:border-slate-300' : ''
             } ${k.isSelected ? `border-2 ${k.activeBorder} shadow-sm` : 'border-slate-200 dark:border-slate-800'}`}
           >
-            <div className="flex items-center justify-between text-xs text-muted-foreground font-medium">
+            <div className="flex items-center justify-between text-sm font-bold text-slate-600 dark:text-slate-300">
               <span>{k.title}</span>
-              <span className="p-1 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-xs font-bold flex items-center justify-center size-6">{k.icon}</span>
+              <span className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-base font-bold flex items-center justify-center size-10 shrink-0">{k.icon}</span>
             </div>
-            <div className="text-xl sm:text-2xl font-bold text-[#004776] dark:text-foreground mt-2">
+            <div className="text-3xl sm:text-4xl font-black font-mono text-[#004776] dark:text-foreground mt-3">
               {k.value}
             </div>
-            <div className="text-[11px] text-muted-foreground mt-0.5">{k.sub}</div>
+            <div className="text-xs sm:text-sm text-slate-500 font-medium mt-1">{k.sub}</div>
           </div>
         ))}
       </div>

@@ -88,37 +88,37 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
   };
 
   return (
-    <div className="space-y-5 animate-in fade-in duration-200">
-      {/* Top Banner (Matching Mẫu 2 & 4) */}
-      <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="flex items-center gap-3.5">
-          <div className="size-11 rounded-xl bg-white dark:bg-blue-950/60 p-1.5 border border-slate-200/90 dark:border-slate-800 shadow-2xs shrink-0 flex items-center justify-center">
-            <img src={brandConfig.logoUrl} alt="HCM-UTE Logo" className="size-8 object-contain" />
+    <div className="w-full space-y-6 animate-in fade-in duration-200">
+      {/* Top Banner (Matching Mẫu 2 & 4, Scaled 1.3x) */}
+      <div className="p-6 sm:p-7 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <div className="size-14 rounded-xl bg-blue-50 dark:bg-blue-950/60 p-2 border border-blue-100 dark:border-blue-900 shadow-2xs shrink-0 flex items-center justify-center">
+            <img src={brandConfig.logoUrl} alt="HCM-UTE Logo" className="size-10 object-contain" />
           </div>
           <div>
             <div className="flex items-center gap-2">
               <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+              <span className="text-xs sm:text-sm font-bold text-emerald-700 dark:text-emerald-400">
                 Đo lường thời gian thực từ {startDate}
               </span>
             </div>
-            <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[#004776] dark:text-foreground">
+            <h2 className="text-xl sm:text-2xl font-black tracking-tight text-[#004776] dark:text-foreground">
               Phân tích dữ liệu &amp; Xu hướng truy cập chuyên mục
             </h2>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="p-2.5 px-4 rounded-xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 text-right min-w-[130px]">
-            <div className="text-[11px] text-muted-foreground font-medium">Tổng lượt xem</div>
-            <div className="text-xl font-extrabold font-mono text-[#0072BC] dark:text-sky-300">
+          <div className="p-3 px-5 rounded-xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 text-right min-w-[150px]">
+            <div className="text-xs text-muted-foreground font-semibold">Tổng lượt xem</div>
+            <div className="text-2xl sm:text-3xl font-black font-mono text-[#0072BC] dark:text-sky-300">
               {totalViews.toLocaleString()}
             </div>
           </div>
           <button
             type="button"
             onClick={handleResetViews}
-            className="min-h-[40px] px-3.5 py-1.5 rounded-xl border border-rose-200 dark:border-rose-900 bg-rose-50/70 hover:bg-rose-100 text-rose-700 dark:text-rose-300 text-xs font-semibold transition-all shadow-xs"
+            className="min-h-[46px] px-4.5 rounded-xl border border-rose-200 dark:border-rose-900 bg-rose-50/70 hover:bg-rose-100 text-rose-700 dark:text-rose-300 text-xs sm:text-sm font-bold transition-all shadow-xs cursor-pointer"
           >
             Đặt lại về 0
           </button>

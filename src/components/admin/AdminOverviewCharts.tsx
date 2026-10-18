@@ -27,26 +27,26 @@ interface AdminOverviewChartsProps {
 
 export const AdminOverviewCharts: React.FC<AdminOverviewChartsProps> = ({ stats }) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      {/* Chart 1: Tiến độ theo nhóm đơn vị */}
-      <div className="p-5 sm:p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-4">
-        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 pb-3">
-          <h3 className="font-bold text-sm sm:text-base text-[#004776] dark:text-foreground">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 w-full">
+      {/* Chart 1: Tiến độ theo nhóm đơn vị (Scaled 1.3x) */}
+      <div className="p-6 sm:p-7 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-5">
+        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 pb-3.5">
+          <h3 className="font-extrabold text-base sm:text-lg text-[#004776] dark:text-foreground">
             Tiến độ theo nhóm đơn vị
           </h3>
-          <span className="text-xs text-muted-foreground font-mono">4 khối chính</span>
+          <span className="text-xs sm:text-sm text-muted-foreground font-mono font-bold">4 khối chính</span>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 pt-1">
           {stats.groups.map((g) => (
-            <div key={g.key} className="space-y-1.5">
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-semibold text-slate-700 dark:text-slate-300">{g.label}</span>
-                <span className="font-mono font-bold text-[#004776] dark:text-sky-300">
+            <div key={g.key} className="space-y-2">
+              <div className="flex items-center justify-between text-sm sm:text-base">
+                <span className="font-bold text-slate-700 dark:text-slate-300">{g.label}</span>
+                <span className="font-mono font-black text-[#004776] dark:text-sky-300">
                   {g.completed}/{g.count} ({g.pct}%)
                 </span>
               </div>
-              <div className="w-full bg-slate-100 dark:bg-slate-800 h-3 rounded-full overflow-hidden">
+              <div className="w-full bg-slate-100 dark:bg-slate-800 h-4 sm:h-5 rounded-full overflow-hidden shadow-inner">
                 <div
                   className={`h-full ${g.color} rounded-full transition-all duration-500`}
                   style={{ width: `${g.pct}%` }}
@@ -57,18 +57,18 @@ export const AdminOverviewCharts: React.FC<AdminOverviewChartsProps> = ({ stats 
         </div>
       </div>
 
-      {/* Chart 2: Tỷ lệ hoàn thiện tổng thể (Donut SVG Chart) */}
-      <div className="p-5 sm:p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-4">
-        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 pb-3">
-          <h3 className="font-bold text-sm sm:text-base text-[#004776] dark:text-foreground">
+      {/* Chart 2: Tỷ lệ hoàn thiện tổng thể (Donut Chart Scaled 1.3x) */}
+      <div className="p-6 sm:p-7 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-5">
+        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 pb-3.5">
+          <h3 className="font-extrabold text-base sm:text-lg text-[#004776] dark:text-foreground">
             Tỷ lệ hoàn thiện tổng thể
           </h3>
-          <span className="text-xs text-muted-foreground font-mono">7 tiêu chuẩn</span>
+          <span className="text-xs sm:text-sm text-muted-foreground font-mono font-bold">7 tiêu chuẩn cốt lõi</span>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-2">
-          {/* Donut graphic */}
-          <div className="relative size-36 shrink-0 flex items-center justify-center">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-8 pt-2">
+          {/* Donut graphic scaled up */}
+          <div className="relative size-44 sm:size-52 shrink-0 flex items-center justify-center">
             <svg className="size-full -rotate-90" viewBox="0 0 100 100">
               <circle cx="50" cy="50" r="38" fill="none" stroke="#E2E8F0" strokeWidth="12" className="dark:stroke-slate-800" />
               <circle
@@ -85,44 +85,44 @@ export const AdminOverviewCharts: React.FC<AdminOverviewChartsProps> = ({ stats 
               />
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-              <span className="text-2xl font-black font-mono text-[#004776] dark:text-foreground">
+              <span className="text-3xl sm:text-4xl font-black font-mono text-[#004776] dark:text-foreground">
                 {stats.avgScore}%
               </span>
-              <span className="text-[10px] text-muted-foreground leading-none">
+              <span className="text-xs sm:text-sm text-muted-foreground font-semibold mt-1">
                 {stats.passUnits}/{stats.total} website
               </span>
             </div>
           </div>
 
-          {/* Legend list */}
-          <div className="space-y-2 text-xs w-full sm:w-auto">
+          {/* Legend list scaled up */}
+          <div className="space-y-3 text-sm sm:text-base w-full sm:w-auto">
             <div className="flex items-center justify-between sm:justify-start gap-4">
-              <div className="flex items-center gap-2">
-                <span className="size-2.5 rounded-full bg-emerald-500" />
-                <span className="text-slate-600 dark:text-slate-300 font-medium">Đạt chuẩn (≥80%)</span>
+              <div className="flex items-center gap-2.5">
+                <span className="size-3 rounded-full bg-emerald-500" />
+                <span className="text-slate-700 dark:text-slate-300 font-semibold">Đạt chuẩn (≥80%)</span>
               </div>
-              <strong className="font-mono text-emerald-600 dark:text-emerald-400">{stats.passUnits}</strong>
+              <strong className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">{stats.passUnits}</strong>
             </div>
             <div className="flex items-center justify-between sm:justify-start gap-4">
-              <div className="flex items-center gap-2">
-                <span className="size-2.5 rounded-full bg-amber-400" />
-                <span className="text-slate-600 dark:text-slate-300 font-medium">Cần sửa (50-79%)</span>
+              <div className="flex items-center gap-2.5">
+                <span className="size-3 rounded-full bg-amber-400" />
+                <span className="text-slate-700 dark:text-slate-300 font-semibold">Cần sửa (50-79%)</span>
               </div>
-              <strong className="font-mono text-amber-600 dark:text-amber-400">{stats.warningUnits}</strong>
+              <strong className="font-mono text-amber-600 dark:text-amber-400 font-bold">{stats.warningUnits}</strong>
             </div>
             <div className="flex items-center justify-between sm:justify-start gap-4">
-              <div className="flex items-center gap-2">
-                <span className="size-2.5 rounded-full bg-rose-500" />
-                <span className="text-slate-600 dark:text-slate-300 font-medium">Chưa đạt (&lt;50%)</span>
+              <div className="flex items-center gap-2.5">
+                <span className="size-3 rounded-full bg-rose-500" />
+                <span className="text-slate-700 dark:text-slate-300 font-semibold">Chưa đạt (&lt;50%)</span>
               </div>
-              <strong className="font-mono text-rose-600 dark:text-rose-400">{stats.failUnits}</strong>
+              <strong className="font-mono text-rose-600 dark:text-rose-400 font-bold">{stats.failUnits}</strong>
             </div>
             <div className="flex items-center justify-between sm:justify-start gap-4">
-              <div className="flex items-center gap-2">
-                <span className="size-2.5 rounded-full bg-slate-300 dark:bg-slate-700" />
-                <span className="text-slate-600 dark:text-slate-300 font-medium">Chưa chấm</span>
+              <div className="flex items-center gap-2.5">
+                <span className="size-3 rounded-full bg-slate-300 dark:bg-slate-700" />
+                <span className="text-slate-700 dark:text-slate-300 font-semibold">Chưa chấm</span>
               </div>
-              <strong className="font-mono text-slate-500">{stats.unratedUnits}</strong>
+              <strong className="font-mono text-slate-500 font-bold">{stats.unratedUnits}</strong>
             </div>
           </div>
         </div>

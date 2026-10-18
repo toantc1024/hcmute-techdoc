@@ -12,7 +12,6 @@ import {
 } from '@/models/admin.model';
 import { techdocsDbService } from '@/services/techdocs-db.service';
 import { getBrowserClient } from '@/lib/supabase/client';
-import { AdminSidebar } from './AdminSidebar';
 import { AdminTopBar } from './AdminTopBar';
 import { AdminOverviewView } from './AdminOverviewView';
 import { AdminUnitDashboard } from './AdminUnitDashboard';
@@ -29,7 +28,6 @@ interface AdminDashboardClientProps {
 export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user, role }) => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<AdminTab>('overview');
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSecurityModalOpen, setIsSecurityModalOpen] = useState(false);
 
   const initial = techdocsDbService.getInstantData();
@@ -106,86 +104,79 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
 
   const totalViews = sections.reduce((sum, s) => sum + s.viewCount, 0);
   const totalChapters = new Set(sections.map((s) => s.chapterNumber)).size || 8;
+  const avgScore = units.length > 0 ? Math.round(units.reduce((sum, u) => sum + u.completenessScore, 0) / units.length) : 72;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0B1525] text-foreground flex">
-      {/* Left Navigation Sidebar */}
-      <AdminSidebar
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0B1525] text-foreground flex flex-col">
+      {/* Top Header Bar with Edge-to-Edge Navigation */}
+      <AdminTopBar
         activeTab={activeTab}
         onTabChange={setActiveTab}
         onOpenSecurity={() => setIsSecurityModalOpen(true)}
-        isOpenMobile={isMobileMenuOpen}
-        onCloseMobile={() => setIsMobileMenuOpen(false)}
+        onLogout={handleLogout}
+        userEmail={user.email}
+        userRole={role}
+        totalViews={totalViews}
+        avgScore={avgScore}
       />
 
-      {/* Main Content Workspace */}
-      <div className="flex-1 flex flex-col min-w-0 lg:pl-64">
-        {/* Top Header Bar */}
-        <AdminTopBar
-          onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
-          onLogout={handleLogout}
-          userEmail={user.email}
-          userRole={role}
-        />
+      {/* Main Content Workspace - Edge-to-Edge Full Width */}
+      <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 xl:px-10 py-6 pb-20">
+        {isLoading ? (
+          <div className="flex flex-col items-center justify-center p-20 space-y-4">
+            <div className="animate-spin size-10 border-4 border-[#0072BC] border-t-transparent rounded-full" />
+            <p className="text-base text-muted-foreground font-semibold">Đang đồng bộ dữ liệu thời gian thực từ Supabase Cloud...</p>
+          </div>
+        ) : (
+          <>
+            {activeTab === 'overview' && (
+              <AdminOverviewView
+                units={units}
+                criteria={criteria}
+                totalViews={totalViews}
+                totalChapters={totalChapters}
+                onUpdateRating={handleUpdateUnitRating}
+                onUpdateNote={handleUpdateUnitNote}
+                onSwitchToUnitsTab={() => setActiveTab('units')}
+              />
+            )}
 
-        {/* View Content */}
-        <main className="flex-1 p-4 sm:p-6 max-w-7xl w-full mx-auto pb-16">
-          {isLoading ? (
-            <div className="flex flex-col items-center justify-center p-16 space-y-4">
-              <div className="animate-spin size-8 border-3 border-[#0072BC] border-t-transparent rounded-full" />
-              <p className="text-sm text-muted-foreground font-medium">Đang tải dữ liệu từ Supabase Cloud...</p>
-            </div>
-          ) : (
-            <>
-              {activeTab === 'overview' && (
-                <AdminOverviewView
-                  units={units}
-                  criteria={criteria}
-                  totalViews={totalViews}
-                  totalChapters={totalChapters}
-                  onUpdateRating={handleUpdateUnitRating}
-                  onUpdateNote={handleUpdateUnitNote}
-                  onSwitchToUnitsTab={() => setActiveTab('units')}
-                />
-              )}
+            {activeTab === 'units' && (
+              <AdminUnitDashboard
+                units={units}
+                criteria={criteria}
+                onUpdateRating={handleUpdateUnitRating}
+                onUpdateNote={handleUpdateUnitNote}
+              />
+            )}
 
-              {activeTab === 'units' && (
-                <AdminUnitDashboard
-                  units={units}
-                  criteria={criteria}
-                  onUpdateRating={handleUpdateUnitRating}
-                  onUpdateNote={handleUpdateUnitNote}
-                />
-              )}
+            {activeTab === 'analytics' && (
+              <AdminAnalyticsView
+                sections={sections}
+                onUpdateSections={setSections}
+              />
+            )}
 
-              {activeTab === 'analytics' && (
-                <AdminAnalyticsView
-                  sections={sections}
-                  onUpdateSections={setSections}
-                />
-              )}
+            {activeTab === 'progress' && (
+              <AdminProgressManager
+                phases={phases}
+                criteria={criteria}
+                onAddCriterion={(c) => setCriteria((prev) => [...prev, { ...c, id: `crit_${Date.now()}` }])}
+                onUpdateCriterion={(c) => setCriteria((prev) => prev.map((item) => (item.id === c.id ? c : item)))}
+                onDeleteCriterion={(id) => setCriteria((prev) => prev.filter((item) => item.id !== id))}
+              />
+            )}
 
-              {activeTab === 'progress' && (
-                <AdminProgressManager
-                  phases={phases}
-                  criteria={criteria}
-                  onAddCriterion={(c) => setCriteria((prev) => [...prev, { ...c, id: `crit_${Date.now()}` }])}
-                  onUpdateCriterion={(c) => setCriteria((prev) => prev.map((item) => (item.id === c.id ? c : item)))}
-                  onDeleteCriterion={(id) => setCriteria((prev) => prev.filter((item) => item.id !== id))}
-                />
-              )}
-
-              {activeTab === 'content' && (
-                <AdminContentManager
-                  sections={sections}
-                  onToggleVisibility={handleToggleDocSectionVisibility}
-                  onUpdateSection={handleUpdateDocSection}
-                />
-              )}
-            </>
-          )}
-        </main>
-      </div>
+            {activeTab === 'content' && (
+              <AdminContentManager
+                sections={sections}
+                onToggleVisibility={handleToggleDocSectionVisibility}
+                onUpdateSection={handleUpdateDocSection}
+              />
+            )}
+          </>
+        )}
+      </main>
 
       {/* Security & RLS Modal */}
       <AdminSecurityModal
