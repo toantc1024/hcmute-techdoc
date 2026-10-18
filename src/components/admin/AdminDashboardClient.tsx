@@ -28,15 +28,15 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<AdminTab>('units');
   const [isSecurityModalOpen, setIsSecurityModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const initial = techdocsDbService.getInstantData();
+  const [isLoading, setIsLoading] = useState(!initial.fromDatabase && initial.units.length === 0);
 
-  const [sections, setSections] = useState<DocSectionItem[]>([]);
-  const [criteria, setCriteria] = useState<EvaluationCriterion[]>([]);
-  const [units, setUnits] = useState<UnitWebsiteItem[]>([]);
-  const [phases, setPhases] = useState<ProjectPhase[]>([]);
+  const [sections, setSections] = useState<DocSectionItem[]>(initial.sections);
+  const [criteria, setCriteria] = useState<EvaluationCriterion[]>(initial.criteria);
+  const [units, setUnits] = useState<UnitWebsiteItem[]>(initial.units);
+  const [phases, setPhases] = useState<ProjectPhase[]>(initial.phases);
 
   const loadData = useCallback(async () => {
-    setIsLoading(true);
     const data = await techdocsDbService.fetchDashboardData();
     setSections(data.sections);
     setCriteria(data.criteria);

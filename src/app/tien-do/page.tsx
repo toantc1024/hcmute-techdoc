@@ -9,9 +9,10 @@ import { ScoreboardMatrix } from '@/components/scoreboard/ScoreboardMatrix';
 import { ScoreboardFilterBar } from '@/components/scoreboard/ScoreboardFilterBar';
 
 export default function TienDoPage() {
-  const [units, setUnits] = useState<UnitWebsiteItem[]>([]);
-  const [criteria, setCriteria] = useState<EvaluationCriterion[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const initial = techdocsDbService.getInstantData();
+  const [units, setUnits] = useState<UnitWebsiteItem[]>(initial.units);
+  const [criteria, setCriteria] = useState<EvaluationCriterion[]>(initial.criteria);
+  const [isLoading, setIsLoading] = useState(!initial.fromDatabase && initial.units.length === 0);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStaff, setSelectedStaff] = useState<string>('all');
@@ -21,7 +22,6 @@ export default function TienDoPage() {
 
   useEffect(() => {
     async function load() {
-      setIsLoading(true);
       const data = await techdocsDbService.fetchDashboardData();
       setUnits(data.units);
       setCriteria(data.criteria);
