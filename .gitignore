@@ -38,3 +38,5 @@ next-env.d.ts
 *.ppt
 *.code-workspace
 .env*
+!.env.example
+

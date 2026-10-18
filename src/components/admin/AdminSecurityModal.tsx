@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { getBrowserClient } from '@/lib/supabase/client';
 import { securityService, AuditLogItem } from '@/services/security.service';
 
 interface AdminSecurityModalProps {
@@ -10,11 +11,47 @@ interface AdminSecurityModalProps {
 
 export const AdminSecurityModal: React.FC<AdminSecurityModalProps> = ({ isOpen, onClose }) => {
   const [logs, setLogs] = useState<AuditLogItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (isOpen) {
-      setLogs(securityService.getAuditLogs());
-    }
+    if (!isOpen) return;
+
+    const fetchLogs = async () => {
+      setIsLoading(true);
+      try {
+        const supabase = getBrowserClient();
+        const { data: dbLogs, error } = await supabase
+          .from('audit_logs')
+          .select('id, created_at, action, detail, status_level, source, actor_id')
+          .order('created_at', { ascending: false })
+          .limit(25);
+
+        if (!error && dbLogs && dbLogs.length > 0) {
+          const mapped: AuditLogItem[] = (dbLogs as Array<Record<string, unknown>>).map((l) => ({
+            id: String(l.id),
+            timestamp: new Date(String(l.created_at)).toLocaleTimeString('vi-VN', {
+              hour: '2-digit',
+              minute: '2-digit',
+              day: '2-digit',
+              month: '2-digit',
+            }),
+            action: String(l.action) as AuditLogItem['action'],
+            actor: l.source === 'system' ? 'system' : l.actor_id ? 'authenticated_user' : 'anon',
+            detail: String(l.detail || ''),
+            status: (l.status_level as AuditLogItem['status']) || 'info',
+          }));
+          setLogs(mapped);
+        } else {
+          setLogs(securityService.getAuditLogs());
+        }
+      } catch {
+        setLogs(securityService.getAuditLogs());
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchLogs();
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -35,7 +72,7 @@ export const AdminSecurityModal: React.FC<AdminSecurityModalProps> = ({ isOpen, 
                 Trung tâm giám sát & Biện pháp an ninh
               </h3>
               <p className="text-xs text-muted-foreground">
-                Tiêu chuẩn bảo mật hệ thống quản trị HCM-UTE TechDoc
+                Tiêu chuẩn an toàn dữ liệu & Row Level Security (RLS) HCMUTE TechDoc
               </p>
             </div>
           </div>
@@ -50,41 +87,41 @@ export const AdminSecurityModal: React.FC<AdminSecurityModalProps> = ({ isOpen, 
 
         {/* Content */}
         <div className="p-6 space-y-5 overflow-y-auto">
-          {/* 4 Security Badges */}
+          {/* Security Badges */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
             <div className="p-3.5 rounded-xl border border-emerald-200/60 dark:border-emerald-900/60 bg-emerald-50/40 dark:bg-emerald-950/20">
               <div className="font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5">
-                <span>✓ Mật mã học SHA-256</span>
+                <span>✓ Supabase SSR Session Cookie</span>
               </div>
               <p className="text-muted-foreground mt-1">
-                Mật khẩu được băm trực tiếp qua Web Crypto API, không lưu trữ chuỗi thô trong mã nguồn.
+                Xác thực máy chủ với JWT HttpOnly cookie, loại bỏ hoàn toàn mật mã tĩnh client hay sessionStorage.
               </p>
             </div>
 
             <div className="p-3.5 rounded-xl border border-blue-200/60 dark:border-blue-900/60 bg-blue-50/40 dark:bg-blue-950/20">
               <div className="font-bold text-blue-800 dark:text-blue-300 flex items-center gap-1.5">
-                <span>✓ Chống dò quét Brute-Force</span>
+                <span>✓ Row Level Security (RLS)</span>
               </div>
               <p className="text-muted-foreground mt-1">
-                Tự động khóa 60 giây sau 5 lần nhập sai liên tiếp, đếm ngược trực tiếp trên màn hình.
+                Mặc định từ chối (Default Deny) trên toàn bộ 10 bảng dữ liệu TechDocs, cách ly tuyệt đối với ứng dụng khác.
               </p>
             </div>
 
             <div className="p-3.5 rounded-xl border border-indigo-200/60 dark:border-indigo-900/60 bg-indigo-50/40 dark:bg-indigo-950/20">
               <div className="font-bold text-indigo-800 dark:text-indigo-300 flex items-center gap-1.5">
-                <span>✓ Hết hạn phiên tự động (30m)</span>
+                <span>✓ RBAC Phân quyền Vai trò</span>
               </div>
               <p className="text-muted-foreground mt-1">
-                Tự động đăng xuất nếu không có tương tác sau 30 phút nhằm bảo vệ dữ liệu khi rời máy.
+                Phân quyền độc lập (Admin / Evaluator). Chống tự nâng quyền và chống can thiệp trạng thái xuất bản.
               </p>
             </div>
 
             <div className="p-3.5 rounded-xl border border-purple-200/60 dark:border-purple-900/60 bg-purple-50/40 dark:bg-purple-950/20">
               <div className="font-bold text-purple-800 dark:text-purple-300 flex items-center gap-1.5">
-                <span>✓ Tiêu chuẩn TC-06 Báo cáo</span>
+                <span>✓ Nhật ký kiểm toán bất biến</span>
               </div>
               <p className="text-muted-foreground mt-1">
-                Khử trùng dữ liệu XSS và kiểm soát chặt chẽ thông tin định danh cá nhân sinh viên & GV.
+                Bảo vệ bởi Database Triggers: cấm sửa, cấm xóa nhật ký và cưỡng chế thời gian authoritative server now().
               </p>
             </div>
           </div>
@@ -93,8 +130,9 @@ export const AdminSecurityModal: React.FC<AdminSecurityModalProps> = ({ isOpen, 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <h4 className="text-sm font-bold text-[#004776] dark:text-foreground">
-                Nhật ký kiểm toán an ninh (Audit Trail - {logs.length} sự kiện)
+                Nhật ký kiểm toán an ninh (Audit Logs - {logs.length} sự kiện)
               </h4>
+              {isLoading && <span className="text-xs text-muted-foreground animate-pulse">Đang tải...</span>}
             </div>
 
             <div className="border border-border rounded-xl divide-y divide-border/60 max-h-56 overflow-y-auto bg-background text-xs">

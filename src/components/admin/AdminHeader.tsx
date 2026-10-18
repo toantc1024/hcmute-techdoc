@@ -10,8 +10,8 @@ interface AdminHeaderProps {
   onReset: () => void;
   onLogout: () => void;
   onOpenSecurity?: () => void;
-  onOpenSupabase?: () => void;
-  isSupabaseConnected?: boolean;
+  userEmail?: string;
+  userRole?: 'admin' | 'evaluator';
   totalViews: number;
   totalUnits: number;
   avgScore: number;
@@ -23,11 +23,11 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
   onReset,
   onLogout,
   onOpenSecurity,
-  onOpenSupabase,
-  isSupabaseConnected,
+  userEmail,
+  userRole = 'admin',
   totalViews,
   totalUnits,
-  avgScore
+  avgScore,
 }) => {
   const tabs: { key: AdminTab; label: string; badge?: string | number }[] = [
     { key: 'content', label: 'Quản lý nội dung', badge: '8 chương' },
@@ -50,11 +50,23 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
               />
             </div>
             <div className="space-y-0.5">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-[#004776] dark:bg-blue-950/80 dark:text-sky-300">
-                  Cổng quản trị hệ thống
+              <div className="flex flex-wrap items-center gap-2">
+                <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${
+                  userRole === 'admin'
+                    ? 'bg-blue-100 text-[#004776] dark:bg-blue-950/80 dark:text-sky-300'
+                    : 'bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300'
+                }`}>
+                  {userRole === 'admin' ? 'Quản trị viên (Admin)' : 'Đánh giá viên (Evaluator)'}
                 </span>
-                <span className="text-xs text-muted-foreground">Cập nhật: Tháng 10/2026</span>
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300">
+                  <span className="size-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse" />
+                  Supabase RLS Protected
+                </span>
+                {userEmail && (
+                  <span className="text-xs text-muted-foreground hidden sm:inline">
+                    • {userEmail}
+                  </span>
+                )}
               </div>
               <h1 className="text-lg sm:text-2xl font-bold tracking-tight text-[#004776] dark:text-foreground">
                 Quản trị HCM-UTE TechDoc & Tiến độ 51 website
@@ -76,18 +88,6 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
               </div>
             </div>
 
-            {onOpenSupabase && (
-              <button
-                type="button"
-                onClick={onOpenSupabase}
-                className="inline-flex items-center justify-center min-h-[44px] px-3.5 rounded-xl text-xs sm:text-sm font-medium border border-emerald-200 dark:border-emerald-900 bg-emerald-50/50 dark:bg-emerald-950/20 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100/60 transition-colors"
-                title="Cấu hình kết nối Cơ sở dữ liệu Supabase Cloud"
-              >
-                <span className={`size-2 rounded-full mr-1.5 ${isSupabaseConnected ? 'bg-emerald-500' : 'bg-amber-500'}`} />
-                <span>Supabase Cloud</span>
-              </button>
-            )}
-
             {onOpenSecurity && (
               <button
                 type="button"
@@ -102,17 +102,19 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
               </button>
             )}
 
-            <button
-              type="button"
-              onClick={onReset}
-              className="inline-flex items-center justify-center min-h-[44px] px-3.5 rounded-xl text-xs sm:text-sm font-medium border border-border bg-background hover:bg-muted text-muted-foreground hover:text-[#004776] transition-colors focus:ring-2 focus:ring-[#0072BC]/20 outline-hidden"
-              title="Khôi phục dữ liệu ban đầu theo biên bản rà soát"
-            >
-              <svg className="size-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-              Khôi phục mặc định
-            </button>
+            {userRole === 'admin' && (
+              <button
+                type="button"
+                onClick={onReset}
+                className="inline-flex items-center justify-center min-h-[44px] px-3.5 rounded-xl text-xs sm:text-sm font-medium border border-border bg-background hover:bg-muted text-muted-foreground hover:text-[#004776] transition-colors focus:ring-2 focus:ring-[#0072BC]/20 outline-hidden"
+                title="Khôi phục dữ liệu ban đầu theo biên bản rà soát"
+              >
+                <svg className="size-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Khôi phục mặc định
+              </button>
+            )}
 
             <button
               type="button"

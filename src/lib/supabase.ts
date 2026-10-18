@@ -1,37 +1,27 @@
+/**
+ * @deprecated LEGACY CLIENT ONLY.
+ * For client components use: import { getBrowserClient } from '@/lib/supabase/client';
+ * For server components/actions use: import { createClient } from '@/lib/supabase/server';
+ *
+ * Credentials MUST come exclusively from environment variables, NEVER localStorage.
+ */
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const STORAGE_KEYS = {
-  URL: 'hcmute_techdoc_supabase_url',
-  ANON_KEY: 'hcmute_techdoc_supabase_anon_key',
-};
-
 export function getSupabaseCredentials(): { url: string; anonKey: string } {
-  let url = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-  let anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-
-  if (typeof window !== 'undefined') {
-    const savedUrl = localStorage.getItem(STORAGE_KEYS.URL);
-    const savedKey = localStorage.getItem(STORAGE_KEYS.ANON_KEY);
-    if (savedUrl) url = savedUrl;
-    if (savedKey) anonKey = savedKey;
-  }
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const anonKey =
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    '';
 
   return { url: url.trim(), anonKey: anonKey.trim() };
 }
 
-export function saveSupabaseCredentials(url: string, anonKey: string): void {
-  if (typeof window !== 'undefined') {
-    if (url.trim()) {
-      localStorage.setItem(STORAGE_KEYS.URL, url.trim());
-    } else {
-      localStorage.removeItem(STORAGE_KEYS.URL);
-    }
-    if (anonKey.trim()) {
-      localStorage.setItem(STORAGE_KEYS.ANON_KEY, anonKey.trim());
-    } else {
-      localStorage.removeItem(STORAGE_KEYS.ANON_KEY);
-    }
-  }
+/**
+ * @deprecated Saving credentials to localStorage is disabled for security.
+ */
+export function saveSupabaseCredentials(_url: string, _anonKey: string): void {
+  // Disabled: Credentials must be configured via environment variables (.env.local / Vercel)
 }
 
 let cachedClient: SupabaseClient | null = null;
