@@ -3,8 +3,10 @@
 import React, { useEffect } from 'react';
 
 export interface StatusConfirmData {
-  type: 'unit_server' | 'section_visibility';
+  type: 'unit_server' | 'section_visibility' | 'unit_rating';
   id: number | string;
+  criterionId?: string;
+  ratingValue?: 'pass' | 'warning' | 'fail';
   name: string;
   subText?: string;
   currentLabel: string;
@@ -51,7 +53,11 @@ export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = (
           </div>
           <div className="space-y-0.5">
             <h3 className="text-[17px] font-[650] text-[#004776] dark:text-foreground">
-              {data.type === 'unit_server' ? 'Xác nhận chuyển trạng thái máy chủ' : 'Xác nhận thay đổi hiển thị'}
+              {data.type === 'unit_server'
+                ? 'Xác nhận chuyển trạng thái máy chủ'
+                : data.type === 'unit_rating'
+                ? 'Xác nhận thay đổi điểm tiêu chí'
+                : 'Xác nhận thay đổi hiển thị'}
             </h3>
             <p className="text-xs text-muted-foreground">
               Kiểm tra thông tin trước khi ghi nhận vào hệ thống
@@ -63,7 +69,11 @@ export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = (
         <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 space-y-2.5">
           <div>
             <div className="text-[11px] font-medium text-muted-foreground uppercase tracking-wide">
-              {data.type === 'unit_server' ? 'Đơn vị áp dụng' : 'Chuyên mục tài liệu'}
+              {data.type === 'unit_server'
+                ? 'Đơn vị áp dụng'
+                : data.type === 'unit_rating'
+                ? 'Đơn vị & Tiêu chí nghiệm thu'
+                : 'Chuyên mục tài liệu'}
             </div>
             <div className="text-sm font-semibold text-slate-800 dark:text-slate-100 line-clamp-1">
               {data.name}
@@ -85,9 +95,11 @@ export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = (
             </div>
             <span className="text-slate-400 font-bold">→</span>
             <div className={`flex-1 p-2 rounded-lg border text-center ${
-              data.isPositive
-                ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 text-emerald-800 dark:text-emerald-300 font-semibold'
-                : 'bg-amber-50 dark:bg-amber-950/40 border-amber-300 text-amber-900 dark:text-amber-300 font-semibold'
+              data.ratingValue === 'fail'
+                ? 'bg-rose-50 dark:bg-rose-950/40 border-rose-300 text-rose-800 dark:text-rose-300 font-semibold'
+                : data.ratingValue === 'warning'
+                ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-300 text-amber-900 dark:text-amber-300 font-semibold'
+                : 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 text-emerald-800 dark:text-emerald-300 font-semibold'
             }`}>
               <div className="text-[10px] opacity-75 mb-0.5">Chuyển sang</div>
               <span>{data.nextLabel}</span>
@@ -98,6 +110,8 @@ export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = (
         <p className="text-[11px] text-muted-foreground leading-relaxed">
           {data.type === 'unit_server'
             ? 'Thay đổi sẽ cập nhật bảng ma trận 51 đơn vị, tính lại điểm nghiệm thu và đồng bộ thời gian thực toàn trường.'
+            : data.type === 'unit_rating'
+            ? 'Thay đổi sẽ cập nhật điểm đánh giá tiêu chí, tính lại phần trăm hoàn thiện (%) của đơn vị và đồng bộ thời gian thực.'
             : 'Thay đổi sẽ cập nhật ngay quyền hiển thị của chuyên mục trên Cổng tra cứu TechDoc.'}
         </p>
 

@@ -11,6 +11,7 @@ import {
   CriterionRating,
 } from '@/models/admin.model';
 import { techdocsDbService } from '@/services/techdocs-db.service';
+import { computeUnitScore } from '@/services/admin.service';
 import { getBrowserClient } from '@/lib/supabase/client';
 import { AdminTopBar } from './AdminTopBar';
 import { AdminOverviewView } from './AdminOverviewView';
@@ -45,10 +46,10 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
     try {
       const data = await techdocsDbService.fetchDashboardData();
       if (data) {
-        if (Array.isArray(data.sections) && data.sections.length > 0) setSections(data.sections);
-        if (Array.isArray(data.criteria) && data.criteria.length > 0) setCriteria(data.criteria);
-        if (Array.isArray(data.units) && data.units.length > 0) setUnits(data.units);
-        if (Array.isArray(data.phases) && data.phases.length > 0) setPhases(data.phases);
+        if (data.sections?.length) setSections(data.sections);
+        if (data.criteria?.length) setCriteria(data.criteria);
+        if (data.units?.length) setUnits(data.units);
+        if (data.phases?.length) setPhases(data.phases);
       }
     } catch {} finally {
       setIsLoading(false);
@@ -60,24 +61,19 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
     let channel: any = null;
     try {
       const supabase = getBrowserClient();
-      if (supabase && typeof supabase.channel === 'function') {
+      if (supabase?.channel) {
         channel = supabase.channel('techdocs_realtime_sync');
-        channel
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'doc_sections' }, () => loadData())
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'unit_ratings' }, () => loadData())
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'unit_rating_items' }, () => loadData())
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'organizational_units' }, () => loadData())
-          .on('broadcast', { event: 'view_sync' }, (payload: any) => {
-            if (payload?.payload?.sections && Array.isArray(payload.payload.sections)) setSections(payload.payload.sections);
-          })
-          .subscribe();
+        ['doc_sections', 'unit_ratings', 'unit_rating_items', 'organizational_units'].forEach((tbl) => {
+          channel.on('postgres_changes', { event: '*', schema: 'public', table: tbl }, () => loadData());
+        });
+        channel.on('broadcast', { event: 'view_sync' }, (p: any) => {
+          if (p?.payload?.sections && Array.isArray(p.payload.sections)) setSections(p.payload.sections);
+        }).subscribe();
       }
     } catch {}
 
     const handleStorage = (e: StorageEvent) => {
-      if (e.key === 'hcmute_techdoc_views_is_reset' || e.key === 'hcmute_techdoc_live_views' || e.key?.includes('cache')) {
-        loadData();
-      }
+      if (e.key === 'hcmute_techdoc_views_is_reset' || e.key === 'hcmute_techdoc_live_views' || e.key?.includes('cache')) loadData();
     };
     const handleViewUpdate = (e: Event) => {
       const ce = e as CustomEvent<{ updated: DocSectionItem[] }>;
@@ -89,12 +85,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
     window.addEventListener('hcmute_techdoc_view_reset', handleViewUpdate);
 
     return () => {
-      try {
-        if (channel) {
-          const supabase = getBrowserClient();
-          supabase.removeChannel(channel);
-        }
-      } catch {}
+      try { if (channel) getBrowserClient()?.removeChannel(channel); } catch {}
       window.removeEventListener('storage', handleStorage);
       window.removeEventListener('hcmute_techdoc_view_increment', handleViewUpdate);
       window.removeEventListener('hcmute_techdoc_view_reset', handleViewUpdate);
@@ -102,10 +93,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
   }, [loadData]);
 
   const handleLogout = async () => {
-    try {
-      const supabase = getBrowserClient();
-      await supabase.auth.signOut();
-    } catch {}
+    try { await getBrowserClient()?.auth.signOut(); } catch {}
     if (typeof window !== 'undefined') {
       sessionStorage.removeItem('hcmute_techdoc_admin_auth_session');
       localStorage.removeItem('hcmute_techdoc_admin_auth_session');
@@ -113,11 +101,30 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
     router.replace('/login');
   };
 
-  const handleUpdateUnitRating = async (unitId: number, criterionId: string, rating: CriterionRating) => {
-    setUnits((prev) =>
-      prev.map((u) => (u.id !== unitId ? u : { ...u, criteriaRatings: { ...u.criteriaRatings, [criterionId]: rating } }))
-    );
-    await techdocsDbService.updateUnitRatingItem(unitId, criterionId, rating);
+  const handleUpdateUnitRating = (unitId: number, criterionId: string, rating: CriterionRating) => {
+    const target = units.find((u) => u.id === unitId);
+    if (!target) return;
+    const crit = criteria.find((c) => c.id === criterionId || c.code === criterionId);
+    const cur = target.criteriaRatings?.[criterionId] || target.criteriaRatings?.[crit?.id || ''] || 'warning';
+    if (cur === rating) return;
+
+    const ratingMap: Record<CriterionRating, string> = {
+      pass: '✓ Đạt (100% điểm)',
+      warning: '◐ Cần sửa (50% điểm)',
+      fail: '✕ Chưa đạt (0% điểm)',
+    };
+
+    setPendingConfirm({
+      type: 'unit_rating',
+      id: unitId,
+      criterionId: crit?.code || criterionId,
+      ratingValue: rating,
+      name: target.name,
+      subText: crit ? `Tiêu chí [${crit.code}] ${crit.name} (${crit.weight}%)` : `Tiêu chí ${criterionId}`,
+      currentLabel: ratingMap[cur] || cur,
+      nextLabel: ratingMap[rating] || rating,
+      isPositive: rating === 'pass',
+    });
   };
 
   const handleUpdateUnitNote = async (unitId: number, criterionId: string, note: string) => {
@@ -171,6 +178,18 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
           })
         );
         await techdocsDbService.updateUnitServerStatus(unitId, nextVal);
+      } else if (pendingConfirm.type === 'unit_rating') {
+        const unitId = Number(pendingConfirm.id);
+        const critId = pendingConfirm.criterionId!;
+        const rating = pendingConfirm.ratingValue!;
+        setUnits((prev) =>
+          prev.map((u) => {
+            if (u.id !== unitId) return u;
+            const nextRatings = { ...u.criteriaRatings, [critId]: rating };
+            return { ...u, criteriaRatings: nextRatings, completenessScore: computeUnitScore(nextRatings, criteria) };
+          })
+        );
+        await techdocsDbService.updateUnitRatingItem(unitId, critId, rating);
       } else if (pendingConfirm.type === 'section_visibility') {
         const sectionId = String(pendingConfirm.id);
         let updatedTarget: DocSectionItem | undefined;
@@ -226,22 +245,15 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
           <>
             {activeTab === 'overview' && (
               <AdminOverviewView
-                units={safeUnits}
-                criteria={safeCriteria}
-                totalViews={totalViews}
-                totalChapters={totalChapters}
-                onUpdateRating={handleUpdateUnitRating}
-                onUpdateNote={handleUpdateUnitNote}
-                onToggleServerStatus={handleToggleUnitServerStatus}
-                onSwitchToUnitsTab={() => setActiveTab('units')}
+                units={safeUnits} criteria={safeCriteria} totalViews={totalViews} totalChapters={totalChapters}
+                onUpdateRating={handleUpdateUnitRating} onUpdateNote={handleUpdateUnitNote}
+                onToggleServerStatus={handleToggleUnitServerStatus} onSwitchToUnitsTab={() => setActiveTab('units')}
               />
             )}
             {activeTab === 'units' && (
               <AdminUnitDashboard
-                units={safeUnits}
-                criteria={safeCriteria}
-                onUpdateRating={handleUpdateUnitRating}
-                onUpdateNote={handleUpdateUnitNote}
+                units={safeUnits} criteria={safeCriteria}
+                onUpdateRating={handleUpdateUnitRating} onUpdateNote={handleUpdateUnitNote}
                 onToggleServerStatus={handleToggleUnitServerStatus}
               />
             )}
@@ -250,8 +262,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
             )}
             {activeTab === 'progress' && (
               <AdminProgressManager
-                phases={safePhases}
-                criteria={safeCriteria}
+                phases={safePhases} criteria={safeCriteria}
                 onAddCriterion={(c) => setCriteria((prev) => [...prev, { ...c, id: `crit_${Date.now()}` }])}
                 onUpdateCriterion={(c) => setCriteria((prev) => prev.map((item) => (item.id === c.id ? c : item)))}
                 onDeleteCriterion={(id) => setCriteria((prev) => prev.filter((item) => item.id !== id))}
@@ -259,9 +270,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
             )}
             {activeTab === 'content' && (
               <AdminContentManager
-                sections={safeSections}
-                onToggleVisibility={handleToggleDocSectionVisibility}
-                onUpdateSection={handleUpdateDocSection}
+                sections={safeSections} onToggleVisibility={handleToggleDocSectionVisibility} onUpdateSection={handleUpdateDocSection}
               />
             )}
           </>
