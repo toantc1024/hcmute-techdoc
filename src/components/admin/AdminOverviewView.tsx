@@ -75,25 +75,20 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
     });
   }, [safeUnits, selectedGroup, selectedWebType, selectedStatus, searchTerm]);
 
-  if (inspectingUnit) {
+  const activeInspectingUnit = inspectingUnit ? (units.find((x) => x.id === inspectingUnit.id) || inspectingUnit) : null;
+  if (activeInspectingUnit) {
     return (
       <AdminUnitEvaluationView
-        unit={inspectingUnit}
+        unit={activeInspectingUnit}
         allUnits={units}
         criteria={criteria}
         onBack={() => setInspectingUnit(null)}
         onSelectUnit={(next) => setInspectingUnit(next)}
         onUpdateRating={(unitId, critId, rating) => {
           onUpdateRating(unitId, critId, rating);
-          const found = units.find((x) => x.id === unitId);
-          if (found) setInspectingUnit(found);
         }}
         onUpdateNote={onUpdateNote || (() => {})}
-        onToggleServerStatus={(id) => {
-          if (onToggleServerStatus) onToggleServerStatus(id);
-          const found = units.find((x) => x.id === id);
-          if (found) setInspectingUnit({ ...found, isNewWeb: !found.isNewWeb });
-        }}
+        onToggleServerStatus={onToggleServerStatus}
       />
     );
   }

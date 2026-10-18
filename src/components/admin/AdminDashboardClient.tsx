@@ -19,6 +19,7 @@ import { AdminAnalyticsView } from './AdminAnalyticsView';
 import { AdminProgressManager } from './AdminProgressManager';
 import { AdminContentManager } from './AdminContentManager';
 import { AdminSecurityModal } from './AdminSecurityModal';
+import { AdminStatusConfirmModal, StatusConfirmData } from './AdminStatusConfirmModal';
 
 interface AdminDashboardClientProps {
   user: { id: string; email: string };
@@ -29,6 +30,8 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<AdminTab>('overview');
   const [isSecurityModalOpen, setIsSecurityModalOpen] = useState(false);
+  const [pendingConfirm, setPendingConfirm] = useState<StatusConfirmData | null>(null);
+  const [isConfirming, setIsConfirming] = useState(false);
 
   const initial = techdocsDbService.getInstantData();
   const [isLoading, setIsLoading] = useState(!initial.fromDatabase && (!initial.units || initial.units.length === 0));
@@ -54,17 +57,16 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
 
   useEffect(() => {
     loadData();
-
     let channel: any = null;
     try {
       const supabase = getBrowserClient();
       if (supabase && typeof supabase.channel === 'function') {
         channel = supabase.channel('techdocs_realtime_sync');
         channel
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'doc_sections' }, () => { loadData(); })
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'unit_ratings' }, () => { loadData(); })
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'unit_rating_items' }, () => { loadData(); })
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'organizational_units' }, () => { loadData(); })
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'doc_sections' }, () => loadData())
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'unit_ratings' }, () => loadData())
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'unit_rating_items' }, () => loadData())
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'organizational_units' }, () => loadData())
           .on('broadcast', { event: 'view_sync' }, (payload: any) => {
             if (payload?.payload?.sections && Array.isArray(payload.payload.sections)) setSections(payload.payload.sections);
           })
@@ -77,12 +79,12 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
         loadData();
       }
     };
-    window.addEventListener('storage', handleStorage);
-
     const handleViewUpdate = (e: Event) => {
       const ce = e as CustomEvent<{ updated: DocSectionItem[] }>;
       if (ce.detail?.updated && Array.isArray(ce.detail.updated)) setSections(ce.detail.updated);
     };
+
+    window.addEventListener('storage', handleStorage);
     window.addEventListener('hcmute_techdoc_view_increment', handleViewUpdate);
     window.addEventListener('hcmute_techdoc_view_reset', handleViewUpdate);
 
@@ -103,9 +105,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
     try {
       const supabase = getBrowserClient();
       await supabase.auth.signOut();
-    } catch {
-      // ignore
-    }
+    } catch {}
     if (typeof window !== 'undefined') {
       sessionStorage.removeItem('hcmute_techdoc_admin_auth_session');
       localStorage.removeItem('hcmute_techdoc_admin_auth_session');
@@ -115,50 +115,82 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
 
   const handleUpdateUnitRating = async (unitId: number, criterionId: string, rating: CriterionRating) => {
     setUnits((prev) =>
-      prev.map((u) => {
-        if (u.id !== unitId) return u;
-        const nextRatings = { ...u.criteriaRatings, [criterionId]: rating };
-        return { ...u, criteriaRatings: nextRatings };
-      })
+      prev.map((u) => (u.id !== unitId ? u : { ...u, criteriaRatings: { ...u.criteriaRatings, [criterionId]: rating } }))
     );
     await techdocsDbService.updateUnitRatingItem(unitId, criterionId, rating);
   };
 
   const handleUpdateUnitNote = async (unitId: number, criterionId: string, note: string) => {
     setUnits((prev) =>
-      prev.map((u) => {
-        if (u.id !== unitId) return u;
-        const nextNotes = { ...(u.criteriaNotes || {}), [criterionId]: note };
-        return { ...u, criteriaNotes: nextNotes };
-      })
+      prev.map((u) => (u.id !== unitId ? u : { ...u, criteriaNotes: { ...(u.criteriaNotes || {}), [criterionId]: note } }))
     );
-    const targetUnit = units.find((u) => u.id === unitId);
-    const currentRating = targetUnit?.criteriaRatings[criterionId] || 'warning';
-    await techdocsDbService.updateUnitRatingItem(unitId, criterionId, currentRating, note);
+    const target = units.find((u) => u.id === unitId);
+    await techdocsDbService.updateUnitRatingItem(unitId, criterionId, target?.criteriaRatings[criterionId] || 'warning', note);
   };
 
-  const handleToggleUnitServerStatus = async (unitId: number) => {
-    let nextVal = false;
-    setUnits((prev) =>
-      prev.map((u) => {
-        if (u.id !== unitId) return u;
-        nextVal = !u.isNewWeb;
-        return { ...u, isNewWeb: nextVal };
-      })
-    );
-    await techdocsDbService.updateUnitServerStatus(unitId, nextVal);
+  const handleToggleUnitServerStatus = (unitId: number) => {
+    const target = units.find((u) => u.id === unitId);
+    if (!target) return;
+    setPendingConfirm({
+      type: 'unit_server',
+      id: unitId,
+      name: target.name,
+      subText: target.domain,
+      currentLabel: target.isNewWeb ? 'Web mới (.189)' : 'Web cũ (.181)',
+      nextLabel: target.isNewWeb ? 'Web cũ (.181)' : 'Web mới (.189)',
+      isPositive: !target.isNewWeb,
+    });
   };
 
-  const handleToggleDocSectionVisibility = async (id: string) => {
-    const updated = sections.map((s) => (s.id === id ? { ...s, isVisible: !s.isVisible } : s));
-    setSections(updated);
-    const target = updated.find((s) => s.id === id);
-    if (target) await techdocsDbService.updateDocSection(target);
+  const handleToggleDocSectionVisibility = (id: string) => {
+    const target = sections.find((s) => s.id === id);
+    if (!target) return;
+    setPendingConfirm({
+      type: 'section_visibility',
+      id,
+      name: target.pageTitle,
+      subText: `${target.chapterTitle} • ID: ${target.id}`,
+      currentLabel: target.isVisible ? 'Đang hiển thị' : 'Đang tạm ẩn',
+      nextLabel: target.isVisible ? 'Tạm ẩn' : 'Hiển thị',
+      isPositive: !target.isVisible,
+    });
+  };
+
+  const handleExecuteConfirmedStatus = async () => {
+    if (!pendingConfirm) return;
+    setIsConfirming(true);
+    try {
+      if (pendingConfirm.type === 'unit_server') {
+        const unitId = Number(pendingConfirm.id);
+        let nextVal = false;
+        setUnits((prev) =>
+          prev.map((u) => {
+            if (u.id !== unitId) return u;
+            nextVal = !u.isNewWeb;
+            return { ...u, isNewWeb: nextVal };
+          })
+        );
+        await techdocsDbService.updateUnitServerStatus(unitId, nextVal);
+      } else if (pendingConfirm.type === 'section_visibility') {
+        const sectionId = String(pendingConfirm.id);
+        let updatedTarget: DocSectionItem | undefined;
+        setSections((prev) => {
+          const nextList = prev.map((s) => (s.id === sectionId ? { ...s, isVisible: !s.isVisible } : s));
+          updatedTarget = nextList.find((s) => s.id === sectionId);
+          return nextList;
+        });
+        if (updatedTarget) await techdocsDbService.updateDocSection(updatedTarget);
+      }
+    } catch (e) {
+      console.error('Execute status change error:', e);
+    } finally {
+      setIsConfirming(false);
+      setPendingConfirm(null);
+    }
   };
 
   const handleUpdateDocSection = async (updated: DocSectionItem) => {
-    const list = sections.map((s) => (s.id === updated.id ? updated : s));
-    setSections(list);
+    setSections((prev) => prev.map((s) => (s.id === updated.id ? updated : s)));
     await techdocsDbService.updateDocSection(updated);
   };
 
@@ -173,7 +205,6 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#0B1525] text-foreground flex flex-col">
-      {/* Top Header Bar with Edge-to-Edge Navigation */}
       <AdminTopBar
         activeTab={activeTab}
         onTabChange={setActiveTab}
@@ -185,7 +216,6 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
         avgScore={avgScore}
       />
 
-      {/* Main Content Workspace - Institutional Layout max-w-[1440px] */}
       <main className="flex-1 w-full max-w-[1440px] mx-auto px-5 lg:px-6 py-6 pb-20">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center p-20 space-y-4">
@@ -206,7 +236,6 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
                 onSwitchToUnitsTab={() => setActiveTab('units')}
               />
             )}
-
             {activeTab === 'units' && (
               <AdminUnitDashboard
                 units={safeUnits}
@@ -216,14 +245,9 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
                 onToggleServerStatus={handleToggleUnitServerStatus}
               />
             )}
-
             {activeTab === 'analytics' && (
-              <AdminAnalyticsView
-                sections={safeSections}
-                onUpdateSections={setSections}
-              />
+              <AdminAnalyticsView sections={safeSections} onUpdateSections={setSections} />
             )}
-
             {activeTab === 'progress' && (
               <AdminProgressManager
                 phases={safePhases}
@@ -233,7 +257,6 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
                 onDeleteCriterion={(id) => setCriteria((prev) => prev.filter((item) => item.id !== id))}
               />
             )}
-
             {activeTab === 'content' && (
               <AdminContentManager
                 sections={safeSections}
@@ -245,10 +268,12 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
         )}
       </main>
 
-      {/* Security & RLS Modal */}
-      <AdminSecurityModal
-        isOpen={isSecurityModalOpen}
-        onClose={() => setIsSecurityModalOpen(false)}
+      <AdminSecurityModal isOpen={isSecurityModalOpen} onClose={() => setIsSecurityModalOpen(false)} />
+      <AdminStatusConfirmModal
+        data={pendingConfirm}
+        onConfirm={handleExecuteConfirmedStatus}
+        onCancel={() => setPendingConfirm(null)}
+        isLoading={isConfirming}
       />
     </div>
   );
