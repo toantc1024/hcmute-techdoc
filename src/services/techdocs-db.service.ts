@@ -24,8 +24,21 @@ let memoryCache: { data: TechDocsDashboardData; timestamp: number } | null = nul
 
 export const techdocsDbService = {
   getInstantData(): TechDocsDashboardData {
+    const isReset = typeof window !== 'undefined' && localStorage.getItem('hcmute_techdoc_views_is_reset') === 'true';
+    let liveViews: Record<string, number> = {};
+    if (isReset && typeof window !== 'undefined') {
+      try { liveViews = JSON.parse(localStorage.getItem('hcmute_techdoc_live_views') || '{}'); } catch {}
+    }
+    const applyViews = (data: TechDocsDashboardData): TechDocsDashboardData => {
+      if (!isReset) return data;
+      return {
+        ...data,
+        sections: data.sections.map((s) => ({ ...s, viewCount: liveViews[s.id] || 0 })),
+      };
+    };
+
     if (memoryCache && Date.now() - memoryCache.timestamp < CACHE_TTL_MS) {
-      return memoryCache.data;
+      return applyViews(memoryCache.data);
     }
     if (typeof window !== 'undefined') {
       try {
@@ -33,15 +46,16 @@ export const techdocsDbService = {
         if (raw) {
           const parsed = JSON.parse(raw);
           if (parsed && Array.isArray(parsed.units) && parsed.units.length > 0) {
-            memoryCache = { data: parsed, timestamp: Date.now() };
-            return parsed;
+            const adjusted = applyViews(parsed);
+            memoryCache = { data: adjusted, timestamp: Date.now() };
+            return adjusted;
           }
         }
       } catch {
         // storage fallback
       }
     }
-    return this.getFallbackSeedData();
+    return applyViews(this.getFallbackSeedData());
   },
 
   setCache(data: TechDocsDashboardData): void {
@@ -145,22 +159,32 @@ export const techdocsDbService = {
         };
       });
 
-      // Map doc sections
-      const sections: DocSectionItem[] = (secRes.data || []).map((s: Record<string, unknown>) => ({
-        id: String(s.section_key),
-        slug: String(s.slug),
-        chapterNumber: Number(s.chapter_number || 1),
-        chapterTitle: String(s.chapter_title || ''),
-        pageTitle: String(s.page_title || ''),
-        pageSlug: String(s.slug || ''),
-        summary: String(s.summary || ''),
-        luong: s.luong_type as DocSectionItem['luong'],
-        isVisible: Boolean(s.is_visible),
-        viewCount: Number(s.view_count || 0),
-        readingTimeMinutes: Number(s.reading_time_minutes || 1),
-        lastUpdated: String(s.last_updated || ''),
-        tags: Array.isArray(s.tags) ? s.tags : [],
-      }));
+      // Map doc sections with reset state awareness
+      const isResetViews = typeof window !== 'undefined' && localStorage.getItem('hcmute_techdoc_views_is_reset') === 'true';
+      let liveViews: Record<string, number> = {};
+      if (typeof window !== 'undefined') {
+        try { liveViews = JSON.parse(localStorage.getItem('hcmute_techdoc_live_views') || '{}'); } catch {}
+      }
+
+      const sections: DocSectionItem[] = (secRes.data || []).map((s: Record<string, unknown>) => {
+        const secKey = String(s.section_key);
+        const finalViews = isResetViews ? (liveViews[secKey] || 0) : Number(s.view_count || 0);
+        return {
+          id: secKey,
+          slug: String(s.slug),
+          chapterNumber: Number(s.chapter_number || 1),
+          chapterTitle: String(s.chapter_title || ''),
+          pageTitle: String(s.page_title || ''),
+          pageSlug: String(s.slug || ''),
+          summary: String(s.summary || ''),
+          luong: s.luong_type as DocSectionItem['luong'],
+          isVisible: Boolean(s.is_visible),
+          viewCount: finalViews,
+          readingTimeMinutes: Number(s.reading_time_minutes || 1),
+          lastUpdated: String(s.last_updated || ''),
+          tags: Array.isArray(s.tags) ? s.tags : [],
+        };
+      });
 
       // Map project phases
       const phases: ProjectPhase[] = (phaseRes.data || []).map((p: Record<string, unknown>) => ({
@@ -172,15 +196,7 @@ export const techdocsDbService = {
         completionRate: Number(p.completion_rate || 0),
       }));
 
-      const result: TechDocsDashboardData = {
-        sections,
-        criteria,
-        units,
-        phases,
-        periodId,
-        fromDatabase: true,
-      };
-
+      const result: TechDocsDashboardData = { sections, criteria, units, phases, periodId, fromDatabase: true };
       this.setCache(result);
       return result;
     } catch {
@@ -188,94 +204,83 @@ export const techdocsDbService = {
     }
   },
 
-  async updateUnitRatingItem(
-    unitLegacyId: number,
-    criterionCode: string,
-    rating: CriterionRating,
-    note?: string
-  ): Promise<boolean> {
+  async updateUnitRatingItem(unitLegacyId: number, criterionCode: string, rating: CriterionRating, note?: string): Promise<boolean> {
     const supabase = getBrowserClient();
     try {
       this.invalidateCache();
-      const { data: unit } = await supabase
-        .from('organizational_units')
-        .select('id')
-        .eq('legacy_id', unitLegacyId)
-        .maybeSingle();
+      const { data: unit } = await supabase.from('organizational_units').select('id').eq('legacy_id', unitLegacyId).maybeSingle();
       if (!unit) return false;
-
-      const { data: period } = await supabase
-        .from('evaluation_periods')
-        .select('id')
-        .eq('is_active', true)
-        .maybeSingle();
+      const { data: period } = await supabase.from('evaluation_periods').select('id').eq('is_active', true).maybeSingle();
       if (!period) return false;
-
-      const { data: ratingRow } = await supabase
-        .from('unit_ratings')
-        .select('id')
-        .eq('unit_id', unit.id)
-        .eq('period_id', period.id)
-        .maybeSingle();
+      const { data: ratingRow } = await supabase.from('unit_ratings').select('id').eq('unit_id', unit.id).eq('period_id', period.id).maybeSingle();
       if (!ratingRow) return false;
-
-      const { data: crit } = await supabase
-        .from('evaluation_criteria')
-        .select('id')
-        .eq('code', criterionCode)
-        .maybeSingle();
+      const { data: crit } = await supabase.from('evaluation_criteria').select('id').eq('code', criterionCode).maybeSingle();
       if (!crit) return false;
 
       const { error } = await supabase.from('unit_rating_items').upsert(
-        {
-          rating_id: ratingRow.id,
-          criterion_id: crit.id,
-          rating,
-          note: note || '',
-          updated_at: new Date().toISOString(),
-        },
+        { rating_id: ratingRow.id, criterion_id: crit.id, rating, note: note || '', updated_at: new Date().toISOString() },
         { onConflict: 'rating_id,criterion_id' }
       );
-
       return !error;
-    } catch {
-      return false;
-    }
+    } catch { return false; }
   },
 
   async updateUnitServerStatus(unitLegacyId: number, isNewWeb: boolean): Promise<boolean> {
     const supabase = getBrowserClient();
     this.invalidateCache();
-    const { error } = await supabase
-      .from('organizational_units')
-      .update({ is_new_web: isNewWeb, updated_at: new Date().toISOString() })
-      .eq('legacy_id', unitLegacyId);
+    const { error } = await supabase.from('organizational_units').update({ is_new_web: isNewWeb, updated_at: new Date().toISOString() }).eq('legacy_id', unitLegacyId);
     return !error;
   },
 
   async updateDocSection(section: DocSectionItem): Promise<boolean> {
     const supabase = getBrowserClient();
     this.invalidateCache();
-    const { error } = await supabase
-      .from('doc_sections')
-      .update({
-        is_visible: section.isVisible,
-        view_count: section.viewCount,
-        last_updated: new Date().toISOString().split('T')[0],
-        updated_at: new Date().toISOString(),
-      })
-      .eq('section_key', section.id);
+    const { error } = await supabase.from('doc_sections').update({
+      is_visible: section.isVisible, view_count: section.viewCount,
+      last_updated: new Date().toISOString().split('T')[0], updated_at: new Date().toISOString(),
+    }).eq('section_key', section.id);
     return !error;
   },
 
-  async resetDocSectionViews(): Promise<boolean> {
+  async resetDocSectionViews(zeroedSections?: DocSectionItem[]): Promise<boolean> {
     const supabase = getBrowserClient();
     this.invalidateCache();
-    const { error } = await supabase
-      .from('doc_sections')
-      .update({ view_count: 0, updated_at: new Date().toISOString() })
-      .neq('section_key', '');
-    return !error;
+    let updated: DocSectionItem[] = [];
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('hcmute_techdoc_views_is_reset', 'true');
+      const nowStr = new Date().toLocaleString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' });
+      localStorage.setItem('hcmute_techdoc_views_start_date', nowStr);
+      localStorage.removeItem('hcmute_techdoc_live_views');
+      const cur = this.getInstantData();
+      updated = (zeroedSections || cur.sections).map((s) => ({ ...s, viewCount: 0 }));
+      this.setCache({ ...cur, sections: updated });
+      window.dispatchEvent(new CustomEvent('hcmute_techdoc_view_reset', { detail: { updated } }));
+    }
+    try {
+      await supabase.from('doc_sections').update({ view_count: 0, updated_at: new Date().toISOString() }).neq('section_key', '');
+      supabase.channel('techdocs_realtime_sync').send({ type: 'broadcast', event: 'view_sync', payload: { sections: updated } });
+    } catch { /* RLS fallback */ }
+    return true;
+  },
+
+  async incrementDocSectionView(sectionKey: string): Promise<DocSectionItem[]> {
+    const cur = this.getInstantData();
+    let liveViews: Record<string, number> = {};
+    if (typeof window !== 'undefined') {
+      try { liveViews = JSON.parse(localStorage.getItem('hcmute_techdoc_live_views') || '{}'); } catch {}
+      liveViews[sectionKey] = (liveViews[sectionKey] || 0) + 1;
+      localStorage.setItem('hcmute_techdoc_live_views', JSON.stringify(liveViews));
+    }
+    const updated = cur.sections.map((s) => (s.id === sectionKey ? { ...s, viewCount: s.viewCount + 1 } : s));
+    this.setCache({ ...cur, sections: updated });
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('hcmute_techdoc_view_increment', { detail: { sectionKey, updated } }));
+    }
+    try {
+      const supabase = getBrowserClient();
+      supabase.channel('techdocs_realtime_sync').send({ type: 'broadcast', event: 'view_sync', payload: { sections: updated } });
+    } catch { /* fallback */ }
+    return updated;
   },
 
   getFallbackSeedData(): TechDocsDashboardData {

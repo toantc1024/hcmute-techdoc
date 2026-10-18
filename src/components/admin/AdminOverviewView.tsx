@@ -145,7 +145,9 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
               {totalViews.toLocaleString()}
             </div>
             <div className="text-[14px] sm:text-[15px] font-semibold text-slate-700 dark:text-slate-300 mt-1">Tổng lượt xem</div>
-            <div className="text-[11px] sm:text-[12px] text-emerald-700 dark:text-emerald-400 font-medium mt-0.5">↑ 12% so với tuần trước</div>
+            <div className="text-[11px] sm:text-[12px] text-emerald-700 dark:text-emerald-400 font-medium mt-0.5">
+              {totalViews === 0 ? 'Đã đặt lại về 0 (Sẵn sàng đếm)' : 'Thời gian thực từ hệ thống'}
+            </div>
           </div>
           <div className="size-11 rounded-lg bg-blue-50/80 dark:bg-blue-950/60 text-[#0072BC] dark:text-sky-300 flex items-center justify-center border border-blue-100 dark:border-blue-900 shrink-0">
             <svg className="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
@@ -162,7 +164,7 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
               {totalChapters} <span className="text-xs font-sans font-medium text-muted-foreground">chương</span>
             </div>
             <div className="text-[14px] sm:text-[15px] font-semibold text-slate-700 dark:text-slate-300 mt-1">Quản lý tài liệu</div>
-            <div className="text-[11px] sm:text-[12px] text-slate-500 font-medium mt-0.5">1,256 mục tài liệu</div>
+            <div className="text-[11px] sm:text-[12px] text-slate-500 font-medium mt-0.5">29 chuyên đề / bài hướng dẫn</div>
           </div>
           <div className="size-11 rounded-lg bg-slate-50 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 flex items-center justify-center border border-slate-200/80 dark:border-slate-700 shrink-0">
             <svg className="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>

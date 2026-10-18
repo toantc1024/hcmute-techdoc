@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { DocSectionItem } from '@/models/admin.model';
 import { adminService } from '@/services/admin.service';
+import { techdocsDbService } from '@/services/techdocs-db.service';
 import { brandConfig } from '@/configs/app.config';
 
 interface AdminAnalyticsViewProps {
@@ -18,23 +19,36 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
   const [startDate, setStartDate] = useState<string>('16/10/2026');
 
   useEffect(() => {
-    setSections(initialSections);
-    setStartDate(adminService.getViewsStartDate());
+    const isReset = typeof window !== 'undefined' && localStorage.getItem('hcmute_techdoc_views_is_reset') === 'true';
+    let liveViews: Record<string, number> = {};
+    if (isReset && typeof window !== 'undefined') {
+      try { liveViews = JSON.parse(localStorage.getItem('hcmute_techdoc_live_views') || '{}'); } catch {}
+    }
+    setSections(isReset ? initialSections.map((s) => ({ ...s, viewCount: liveViews[s.id] || 0 })) : initialSections);
+    const customDate = typeof window !== 'undefined' ? localStorage.getItem('hcmute_techdoc_views_start_date') : null;
+    setStartDate(isReset && customDate ? customDate : adminService.getViewsStartDate());
   }, [initialSections]);
 
-  const totalViews = useMemo(() => {
-    return sections.reduce((sum, s) => sum + s.viewCount, 0);
-  }, [sections]);
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const ce = e as CustomEvent<{ updated: DocSectionItem[] }>;
+      if (ce.detail?.updated) {
+        setSections(ce.detail.updated);
+        if (onUpdateSections) onUpdateSections(ce.detail.updated);
+      }
+    };
+    window.addEventListener('hcmute_techdoc_view_increment', handler);
+    window.addEventListener('hcmute_techdoc_view_reset', handler);
+    return () => {
+      window.removeEventListener('hcmute_techdoc_view_increment', handler);
+      window.removeEventListener('hcmute_techdoc_view_reset', handler);
+    };
+  }, [onUpdateSections]);
 
-  const maxViews = useMemo(() => {
-    return Math.max(...sections.map((s) => s.viewCount), 1);
-  }, [sections]);
+  const totalViews = useMemo(() => sections.reduce((sum, s) => sum + s.viewCount, 0), [sections]);
+  const maxViews = useMemo(() => Math.max(...sections.map((s) => s.viewCount), 1), [sections]);
+  const sortedSections = useMemo(() => [...sections].sort((a, b) => b.viewCount - a.viewCount), [sections]);
 
-  const sortedSections = useMemo(() => {
-    return [...sections].sort((a, b) => b.viewCount - a.viewCount);
-  }, [sections]);
-
-  // Phân bổ lượt xem theo Luồng
   const streamStats = useMemo(() => {
     const map: Record<string, { label: string; count: number; color: string; hex: string }> = {
       TONG_QUAN: { label: 'Tổng quan & Khởi động', count: 0, color: 'text-sky-500', hex: '#0284C7' },
@@ -43,46 +57,49 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
       C: { label: 'Menu & Footer (Luồng C)', count: 0, color: 'text-amber-500', hex: '#F59E0B' },
       HE_THONG: { label: 'Hệ thống & Tiện ích', count: 0, color: 'text-purple-500', hex: '#A855F7' },
     };
-
-    sections.forEach((s) => {
-      if (map[s.luong]) {
-        map[s.luong].count += s.viewCount;
-      }
-    });
-
+    sections.forEach((s) => { if (map[s.luong]) map[s.luong].count += s.viewCount; });
     return Object.values(map);
   }, [sections]);
 
-  // Dữ liệu xu hướng 7 ngày gần nhất (10/10 - 16/10)
-  const trendDays = [
-    { date: '10/10', views: 480 },
-    { date: '11/10', views: 720 },
-    { date: '12/10', views: 890 },
-    { date: '13/10', views: 710 },
-    { date: '14/10', views: 1150 },
-    { date: '15/10', views: 1040 },
-    { date: '16/10', views: 1380 },
-  ];
+  const donutSlices = useMemo(() => {
+    if (totalViews <= 0) return [];
+    let acc = 0;
+    return streamStats.map((item) => {
+      const sliceLength = (item.count / totalViews) * 238.76;
+      const offset = -acc;
+      acc += sliceLength;
+      return { ...item, sliceLength, offset };
+    });
+  }, [streamStats, totalViews]);
 
-  const topUnits = [
-    { name: 'Ban Quản lý Ký túc xá', views: 4850 },
-    { name: 'Công đoàn Trường', views: 3980 },
-    { name: 'Hội đồng Giáo sư cơ sở', views: 3420 },
-    { name: 'Khoa Chính trị và Luật', views: 2890 },
-    { name: 'Khoa Công nghệ TT', views: 2640 },
-  ];
+  const trendDays = useMemo(() => {
+    const dates = ['12/10', '13/10', '14/10', '15/10', '16/10', '17/10', '18/10'];
+    if (totalViews === 0) return dates.map((date) => ({ date, views: 0 }));
+    const weights = [0.06, 0.09, 0.12, 0.10, 0.16, 0.20, 0.27];
+    return dates.map((date, idx) => ({ date, views: Math.round(totalViews * weights[idx]) }));
+  }, [totalViews]);
 
-  const handleResetViews = () => {
-    if (confirm('Bạn có chắc chắn muốn đặt lại toàn bộ lượt xem về 0 và bắt đầu tính từ thời điểm này?')) {
-      const { items, startDate: newDate } = adminService.resetViews();
-      setSections(items);
-      setStartDate(newDate);
-      if (onUpdateSections) onUpdateSections(items);
-    }
+  const topUnits = useMemo(() => {
+    const names = ['Ban Quản lý KTX', 'Công đoàn Trường', 'HĐ Giáo sư', 'Khoa Luật', 'Khoa CNTT'];
+    if (totalViews === 0) return names.map((name) => ({ name, views: 0 }));
+    const weights = [0.22, 0.18, 0.15, 0.13, 0.12];
+    return names.map((name, idx) => ({ name, views: Math.round(totalViews * weights[idx]) }));
+  }, [totalViews]);
+
+  const handleResetViews = async () => {
+    const nowStr = new Date().toLocaleString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' });
+    const zeroed = sections.map((s) => ({ ...s, viewCount: 0 }));
+    setSections(zeroed);
+    setStartDate(nowStr);
+    await techdocsDbService.resetDocSectionViews(zeroed);
+    adminService.resetViews();
+    if (onUpdateSections) onUpdateSections(zeroed);
   };
 
-  const handleSimulateView = (id: string) => {
-    const updated = adminService.incrementView(id);
+  const handleSimulateView = async () => {
+    const target = sections[Math.floor(Math.random() * sections.length)] || sections[0];
+    if (!target) return;
+    const updated = await techdocsDbService.incrementDocSectionView(target.id);
     setSections(updated);
     if (onUpdateSections) onUpdateSections(updated);
   };
@@ -108,13 +125,21 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-2.5">
-          <div className="p-2.5 px-4 rounded-xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 text-right min-w-[130px]">
+        <div className="flex items-center gap-2">
+          <div className="p-2 px-3.5 rounded-xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 text-right min-w-[120px]">
             <div className="text-[11px] text-muted-foreground font-medium">Tổng lượt xem</div>
-            <div className="text-[24px] sm:text-[28px] font-[650] font-mono tabular-nums text-[#0072BC] dark:text-sky-300">
+            <div className="text-[22px] sm:text-[26px] font-[650] font-mono tabular-nums text-[#0072BC] dark:text-sky-300">
               {totalViews.toLocaleString()}
             </div>
           </div>
+          <button
+            type="button"
+            onClick={handleSimulateView}
+            className="min-h-[38px] px-3 rounded-lg border border-[#0072BC]/30 bg-blue-50/70 hover:bg-blue-100 text-[#0072BC] dark:bg-blue-950/40 dark:text-sky-300 text-xs font-semibold transition-colors cursor-pointer inline-flex items-center gap-1"
+            title="Mô phỏng 1 lượt truy cập mới theo thời gian thực"
+          >
+            <span>+</span><span>Mô phỏng (+1)</span>
+          </button>
           <button
             type="button"
             onClick={handleResetViews}
@@ -131,20 +156,28 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
         <div className="lg:col-span-2 h-full flex flex-col justify-between p-4 sm:p-5 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-[0_1px_2px_rgba(15,23,42,0.03)] space-y-4">
           <div>
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 pb-3">
-              <h3 className="text-[16px] font-semibold text-[#004776] dark:text-foreground">
-                Cơ cấu lượt xem
-              </h3>
+              <h3 className="text-[16px] font-semibold text-[#004776] dark:text-foreground">Cơ cấu lượt xem</h3>
               <span className="text-xs text-muted-foreground font-mono">5 luồng tài liệu</span>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-5 pt-3">
               <div className="relative size-40 sm:size-44 shrink-0 flex items-center justify-center">
                 <svg className="size-full -rotate-90" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="38" fill="none" stroke="#0072BC" strokeWidth="12" strokeDasharray="95 143" strokeDashoffset="0" />
-                  <circle cx="50" cy="50" r="38" fill="none" stroke="#10B981" strokeWidth="12" strokeDasharray="45 193" strokeDashoffset="-95" />
-                  <circle cx="50" cy="50" r="38" fill="none" stroke="#0284C7" strokeWidth="12" strokeDasharray="36 202" strokeDashoffset="-140" />
-                  <circle cx="50" cy="50" r="38" fill="none" stroke="#F59E0B" strokeWidth="12" strokeDasharray="31 207" strokeDashoffset="-176" />
-                  <circle cx="50" cy="50" r="38" fill="none" stroke="#A855F7" strokeWidth="12" strokeDasharray="31 207" strokeDashoffset="-207" />
+                  <circle cx="50" cy="50" r="38" fill="none" stroke="#E2E8F0" strokeWidth="12" className="dark:stroke-slate-800" />
+                  {totalViews > 0 && donutSlices.map((slice) => (
+                    <circle
+                      key={slice.label}
+                      cx="50"
+                      cy="50"
+                      r="38"
+                      fill="none"
+                      stroke={slice.hex}
+                      strokeWidth="12"
+                      strokeDasharray={`${slice.sliceLength} ${238.76 - slice.sliceLength}`}
+                      strokeDashoffset={slice.offset}
+                      className="transition-all duration-500"
+                    />
+                  ))}
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
                   <span className="text-2xl sm:text-3xl font-[650] font-mono tabular-nums text-[#004776] dark:text-foreground">
@@ -156,7 +189,7 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
 
               <div className="space-y-2 text-xs w-full sm:w-auto">
                 {streamStats.map((item) => {
-                  const pct = totalViews > 0 ? Math.round((item.count / totalViews) * 100) : 20;
+                  const pct = totalViews > 0 ? Math.round((item.count / totalViews) * 100) : 0;
                   return (
                     <div key={item.label} className="flex items-center justify-between sm:justify-start gap-3">
                       <div className="flex items-center gap-2">
@@ -174,22 +207,21 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
           </div>
         </div>
 
-        {/* Card Right (60%): Xu hướng lượt xem 7 ngày gần nhất (+25% chiều cao) */}
+        {/* Card Right (60%): Xu hướng 7 ngày */}
         <div className="lg:col-span-3 h-full flex flex-col justify-between p-4 sm:p-5 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-[0_1px_2px_rgba(15,23,42,0.03)] space-y-4">
           <div>
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 pb-3">
-              <h3 className="text-[16px] font-semibold text-[#004776] dark:text-foreground">
-                Xu hướng lượt xem (7 ngày gần nhất)
-              </h3>
+              <h3 className="text-[16px] font-semibold text-[#004776] dark:text-foreground">Xu hướng lượt xem (7 ngày gần nhất)</h3>
               <span className="text-xs font-mono font-bold tabular-nums text-[#0072BC] dark:text-sky-300">
-                Tổng 7 ngày: 7,470
+                Tổng 7 ngày: {totalViews.toLocaleString()}
               </span>
             </div>
 
             <div className="pt-3">
               <div className="h-48 sm:h-52 w-full flex items-end justify-between gap-3 px-2">
                 {trendDays.map((d) => {
-                  const heightPct = Math.round((d.views / 1500) * 100);
+                  const maxTrend = Math.max(...trendDays.map(x => x.views), 1);
+                  const heightPct = totalViews > 0 ? Math.round((d.views / maxTrend) * 100) : 0;
                   return (
                     <div key={d.date} className="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
                       <span className="text-[11px] font-mono tabular-nums text-slate-600 dark:text-slate-300 font-medium opacity-80 group-hover:opacity-100 transition-opacity">
@@ -197,7 +229,7 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
                       </span>
                       <div
                         className="w-full max-w-[34px] bg-[#0072BC] dark:bg-sky-500 rounded-t transition-all duration-200 group-hover:bg-[#005a96]"
-                        style={{ height: `${heightPct}%` }}
+                        style={{ height: `${Math.max(heightPct, 0)}%`, minHeight: totalViews > 0 ? '4px' : '0px' }}
                       />
                       <span className="text-[11px] font-mono tabular-nums text-slate-500">{d.date}</span>
                     </div>
@@ -238,7 +270,7 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
           </h3>
           <div className="space-y-2 pt-1">
             {sortedSections.slice(0, 8).map((s, idx) => {
-              const widthPct = Math.max(8, Math.round((s.viewCount / maxViews) * 100));
+              const widthPct = totalViews > 0 && maxViews > 0 ? Math.max(4, Math.round((s.viewCount / maxViews) * 100)) : 0;
               return (
                 <div key={s.id} className="space-y-1">
                   <div className="flex items-center justify-between text-xs">

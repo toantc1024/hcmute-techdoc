@@ -49,6 +49,39 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
 
   useEffect(() => {
     loadData();
+
+    const supabase = getBrowserClient();
+    const channel = supabase
+      .channel('techdocs_realtime_sync')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'doc_sections' }, () => { loadData(); })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'unit_ratings' }, () => { loadData(); })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'unit_rating_items' }, () => { loadData(); })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'organizational_units' }, () => { loadData(); })
+      .on('broadcast', { event: 'view_sync' }, (payload) => {
+        if (payload?.payload?.sections) setSections(payload.payload.sections);
+      })
+      .subscribe();
+
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === 'hcmute_techdoc_views_is_reset' || e.key === 'hcmute_techdoc_live_views' || e.key === 'hcmute_techdoc_dashboard_cache_v2') {
+        loadData();
+      }
+    };
+    window.addEventListener('storage', handleStorage);
+
+    const handleViewUpdate = (e: Event) => {
+      const ce = e as CustomEvent<{ updated: DocSectionItem[] }>;
+      if (ce.detail?.updated) setSections(ce.detail.updated);
+    };
+    window.addEventListener('hcmute_techdoc_view_increment', handleViewUpdate);
+    window.addEventListener('hcmute_techdoc_view_reset', handleViewUpdate);
+
+    return () => {
+      supabase.removeChannel(channel);
+      window.removeEventListener('storage', handleStorage);
+      window.removeEventListener('hcmute_techdoc_view_increment', handleViewUpdate);
+      window.removeEventListener('hcmute_techdoc_view_reset', handleViewUpdate);
+    };
   }, [loadData]);
 
   const handleLogout = async () => {
