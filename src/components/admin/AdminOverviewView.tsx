@@ -34,13 +34,15 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
   const [selectedStatus, setSelectedStatus] = useState<string>('all');
   const [inspectingUnit, setInspectingUnit] = useState<UnitWebsiteItem | null>(null);
 
+  const safeUnits = useMemo(() => (Array.isArray(units) ? units : []), [units]);
+
   const stats: OverviewChartStats = useMemo(() => {
-    const total = units.length || 51;
-    const passUnits = units.filter((u) => u.completenessScore >= 80).length;
-    const warningUnits = units.filter((u) => u.completenessScore >= 50 && u.completenessScore < 80).length;
-    const failUnits = units.filter((u) => u.completenessScore > 0 && u.completenessScore < 50).length;
-    const unratedUnits = units.filter((u) => u.completenessScore === 0).length;
-    const avgScore = Math.round(units.reduce((acc, u) => acc + u.completenessScore, 0) / (total || 1));
+    const total = safeUnits.length || 51;
+    const passUnits = safeUnits.filter((u) => u.completenessScore >= 80).length;
+    const warningUnits = safeUnits.filter((u) => u.completenessScore >= 50 && u.completenessScore < 80).length;
+    const failUnits = safeUnits.filter((u) => u.completenessScore > 0 && u.completenessScore < 50).length;
+    const unratedUnits = safeUnits.filter((u) => u.completenessScore === 0).length;
+    const avgScore = Math.round(safeUnits.reduce((acc, u) => acc + (u.completenessScore || 0), 0) / (total || 1));
 
     const groups = [
       { key: 'khoa-vien', label: 'Khoa & Viện', color: 'bg-emerald-500/80' },
@@ -48,7 +50,7 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
       { key: 'trung-tam', label: 'Trung tâm', color: 'bg-indigo-500/80' },
       { key: 'doan-the', label: 'Đoàn thể', color: 'bg-amber-500/80' },
     ].map((g) => {
-      const gUnits = units.filter((u) => u.group === g.key);
+      const gUnits = safeUnits.filter((u) => u.group === g.key);
       const count = gUnits.length;
       const completed = gUnits.filter((u) => u.completenessScore >= 70).length;
       const pct = count > 0 ? Math.round((completed / count) * 100) : 100;
@@ -56,10 +58,10 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
     });
 
     return { total, passUnits, warningUnits, failUnits, unratedUnits, avgScore, groups };
-  }, [units]);
+  }, [safeUnits]);
 
   const filteredUnits = useMemo(() => {
-    return units.filter((u) => {
+    return safeUnits.filter((u) => {
       if (selectedGroup !== 'all' && u.group !== selectedGroup) return false;
       if (selectedWebType === 'new' && !u.isNewWeb) return false;
       if (selectedWebType === 'old' && u.isNewWeb) return false;
@@ -71,7 +73,7 @@ export const AdminOverviewView: React.FC<AdminOverviewViewProps> = ({
       const term = searchTerm.toLowerCase();
       return u.name.toLowerCase().includes(term) || u.domain.toLowerCase().includes(term) || u.staff.toLowerCase().includes(term);
     });
-  }, [units, selectedGroup, selectedWebType, selectedStatus, searchTerm]);
+  }, [safeUnits, selectedGroup, selectedWebType, selectedStatus, searchTerm]);
 
   if (inspectingUnit) {
     return (

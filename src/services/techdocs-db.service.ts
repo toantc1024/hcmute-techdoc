@@ -17,23 +17,28 @@ export interface TechDocsDashboardData {
   fromDatabase: boolean;
 }
 
-const CACHE_KEY = 'hcmute_techdoc_dashboard_cache_v2';
+const CACHE_KEY = 'hcmute_techdoc_dashboard_cache_v3';
 const CACHE_TTL_MS = 60 * 1000; // 60s in-memory freshness
 
 let memoryCache: { data: TechDocsDashboardData; timestamp: number } | null = null;
 
 export const techdocsDbService = {
   getInstantData(): TechDocsDashboardData {
+    const fallback = this.getFallbackSeedData();
     const isReset = typeof window !== 'undefined' && localStorage.getItem('hcmute_techdoc_views_is_reset') === 'true';
     let liveViews: Record<string, number> = {};
     if (isReset && typeof window !== 'undefined') {
       try { liveViews = JSON.parse(localStorage.getItem('hcmute_techdoc_live_views') || '{}'); } catch {}
     }
     const applyViews = (data: TechDocsDashboardData): TechDocsDashboardData => {
-      if (!isReset) return data;
+      const rawSecs = Array.isArray(data?.sections) && data.sections.length > 0 ? data.sections : fallback.sections;
+      const rawUnits = Array.isArray(data?.units) && data.units.length > 0 ? data.units : fallback.units;
+      const rawCrit = Array.isArray(data?.criteria) && data.criteria.length > 0 ? data.criteria : fallback.criteria;
+      const rawPhases = Array.isArray(data?.phases) && data.phases.length > 0 ? data.phases : fallback.phases;
       return {
         ...data,
-        sections: data.sections.map((s) => ({ ...s, viewCount: liveViews[s.id] || 0 })),
+        units: rawUnits, criteria: rawCrit, phases: rawPhases,
+        sections: isReset ? rawSecs.map((s) => ({ ...s, viewCount: liveViews[s.id] || 0 })) : rawSecs,
       };
     };
 
@@ -45,17 +50,15 @@ export const techdocsDbService = {
         const raw = sessionStorage.getItem(CACHE_KEY) || localStorage.getItem(CACHE_KEY);
         if (raw) {
           const parsed = JSON.parse(raw);
-          if (parsed && Array.isArray(parsed.units) && parsed.units.length > 0) {
+          if (parsed && typeof parsed === 'object') {
             const adjusted = applyViews(parsed);
             memoryCache = { data: adjusted, timestamp: Date.now() };
             return adjusted;
           }
         }
-      } catch {
-        // storage fallback
-      }
+      } catch {}
     }
-    return applyViews(this.getFallbackSeedData());
+    return applyViews(fallback);
   },
 
   setCache(data: TechDocsDashboardData): void {
@@ -65,9 +68,7 @@ export const techdocsDbService = {
         const str = JSON.stringify(data);
         sessionStorage.setItem(CACHE_KEY, str);
         localStorage.setItem(CACHE_KEY, str);
-      } catch {
-        // quota fallback
-      }
+      } catch {}
     }
   },
 

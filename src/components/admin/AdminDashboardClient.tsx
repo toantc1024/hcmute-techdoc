@@ -31,39 +31,49 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
   const [isSecurityModalOpen, setIsSecurityModalOpen] = useState(false);
 
   const initial = techdocsDbService.getInstantData();
-  const [isLoading, setIsLoading] = useState(!initial.fromDatabase && initial.units.length === 0);
+  const [isLoading, setIsLoading] = useState(!initial.fromDatabase && (!initial.units || initial.units.length === 0));
 
-  const [sections, setSections] = useState<DocSectionItem[]>(initial.sections);
-  const [criteria, setCriteria] = useState<EvaluationCriterion[]>(initial.criteria);
-  const [units, setUnits] = useState<UnitWebsiteItem[]>(initial.units);
-  const [phases, setPhases] = useState<ProjectPhase[]>(initial.phases);
+  const [sections, setSections] = useState<DocSectionItem[]>(Array.isArray(initial?.sections) ? initial.sections : []);
+  const [criteria, setCriteria] = useState<EvaluationCriterion[]>(Array.isArray(initial?.criteria) ? initial.criteria : []);
+  const [units, setUnits] = useState<UnitWebsiteItem[]>(Array.isArray(initial?.units) ? initial.units : []);
+  const [phases, setPhases] = useState<ProjectPhase[]>(Array.isArray(initial?.phases) ? initial.phases : []);
 
   const loadData = useCallback(async () => {
-    const data = await techdocsDbService.fetchDashboardData();
-    setSections(data.sections);
-    setCriteria(data.criteria);
-    setUnits(data.units);
-    setPhases(data.phases);
-    setIsLoading(false);
+    try {
+      const data = await techdocsDbService.fetchDashboardData();
+      if (data) {
+        if (Array.isArray(data.sections) && data.sections.length > 0) setSections(data.sections);
+        if (Array.isArray(data.criteria) && data.criteria.length > 0) setCriteria(data.criteria);
+        if (Array.isArray(data.units) && data.units.length > 0) setUnits(data.units);
+        if (Array.isArray(data.phases) && data.phases.length > 0) setPhases(data.phases);
+      }
+    } catch {} finally {
+      setIsLoading(false);
+    }
   }, []);
 
   useEffect(() => {
     loadData();
 
-    const supabase = getBrowserClient();
-    const channel = supabase
-      .channel('techdocs_realtime_sync')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'doc_sections' }, () => { loadData(); })
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'unit_ratings' }, () => { loadData(); })
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'unit_rating_items' }, () => { loadData(); })
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'organizational_units' }, () => { loadData(); })
-      .on('broadcast', { event: 'view_sync' }, (payload) => {
-        if (payload?.payload?.sections) setSections(payload.payload.sections);
-      })
-      .subscribe();
+    let channel: any = null;
+    try {
+      const supabase = getBrowserClient();
+      if (supabase && typeof supabase.channel === 'function') {
+        channel = supabase.channel('techdocs_realtime_sync');
+        channel
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'doc_sections' }, () => { loadData(); })
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'unit_ratings' }, () => { loadData(); })
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'unit_rating_items' }, () => { loadData(); })
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'organizational_units' }, () => { loadData(); })
+          .on('broadcast', { event: 'view_sync' }, (payload: any) => {
+            if (payload?.payload?.sections && Array.isArray(payload.payload.sections)) setSections(payload.payload.sections);
+          })
+          .subscribe();
+      }
+    } catch {}
 
     const handleStorage = (e: StorageEvent) => {
-      if (e.key === 'hcmute_techdoc_views_is_reset' || e.key === 'hcmute_techdoc_live_views' || e.key === 'hcmute_techdoc_dashboard_cache_v2') {
+      if (e.key === 'hcmute_techdoc_views_is_reset' || e.key === 'hcmute_techdoc_live_views' || e.key?.includes('cache')) {
         loadData();
       }
     };
@@ -71,13 +81,18 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
 
     const handleViewUpdate = (e: Event) => {
       const ce = e as CustomEvent<{ updated: DocSectionItem[] }>;
-      if (ce.detail?.updated) setSections(ce.detail.updated);
+      if (ce.detail?.updated && Array.isArray(ce.detail.updated)) setSections(ce.detail.updated);
     };
     window.addEventListener('hcmute_techdoc_view_increment', handleViewUpdate);
     window.addEventListener('hcmute_techdoc_view_reset', handleViewUpdate);
 
     return () => {
-      supabase.removeChannel(channel);
+      try {
+        if (channel) {
+          const supabase = getBrowserClient();
+          supabase.removeChannel(channel);
+        }
+      } catch {}
       window.removeEventListener('storage', handleStorage);
       window.removeEventListener('hcmute_techdoc_view_increment', handleViewUpdate);
       window.removeEventListener('hcmute_techdoc_view_reset', handleViewUpdate);
@@ -147,9 +162,14 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
     await techdocsDbService.updateDocSection(updated);
   };
 
-  const totalViews = sections.reduce((sum, s) => sum + s.viewCount, 0);
-  const totalChapters = new Set(sections.map((s) => s.chapterNumber)).size || 8;
-  const avgScore = units.length > 0 ? Math.round(units.reduce((sum, u) => sum + u.completenessScore, 0) / units.length) : 72;
+  const safeSections = Array.isArray(sections) ? sections : [];
+  const safeUnits = Array.isArray(units) ? units : [];
+  const safeCriteria = Array.isArray(criteria) ? criteria : [];
+  const safePhases = Array.isArray(phases) ? phases : [];
+
+  const totalViews = safeSections.reduce((sum, s) => sum + (s?.viewCount || 0), 0);
+  const totalChapters = new Set(safeSections.map((s) => s?.chapterNumber || 1)).size || 8;
+  const avgScore = safeUnits.length > 0 ? Math.round(safeUnits.reduce((sum, u) => sum + (u?.completenessScore || 0), 0) / safeUnits.length) : 72;
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#0B1525] text-foreground flex flex-col">
@@ -176,8 +196,8 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
           <>
             {activeTab === 'overview' && (
               <AdminOverviewView
-                units={units}
-                criteria={criteria}
+                units={safeUnits}
+                criteria={safeCriteria}
                 totalViews={totalViews}
                 totalChapters={totalChapters}
                 onUpdateRating={handleUpdateUnitRating}
@@ -189,8 +209,8 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
 
             {activeTab === 'units' && (
               <AdminUnitDashboard
-                units={units}
-                criteria={criteria}
+                units={safeUnits}
+                criteria={safeCriteria}
                 onUpdateRating={handleUpdateUnitRating}
                 onUpdateNote={handleUpdateUnitNote}
                 onToggleServerStatus={handleToggleUnitServerStatus}
@@ -199,15 +219,15 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
 
             {activeTab === 'analytics' && (
               <AdminAnalyticsView
-                sections={sections}
+                sections={safeSections}
                 onUpdateSections={setSections}
               />
             )}
 
             {activeTab === 'progress' && (
               <AdminProgressManager
-                phases={phases}
-                criteria={criteria}
+                phases={safePhases}
+                criteria={safeCriteria}
                 onAddCriterion={(c) => setCriteria((prev) => [...prev, { ...c, id: `crit_${Date.now()}` }])}
                 onUpdateCriterion={(c) => setCriteria((prev) => prev.map((item) => (item.id === c.id ? c : item)))}
                 onDeleteCriterion={(id) => setCriteria((prev) => prev.filter((item) => item.id !== id))}
@@ -216,7 +236,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
 
             {activeTab === 'content' && (
               <AdminContentManager
-                sections={sections}
+                sections={safeSections}
                 onToggleVisibility={handleToggleDocSectionVisibility}
                 onUpdateSection={handleUpdateDocSection}
               />
