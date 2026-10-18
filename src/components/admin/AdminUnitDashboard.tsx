@@ -85,32 +85,76 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
   }
 
   const kpis = [
-    { key: 'all', title: 'Tổng số website', value: `${stats.total} đơn vị`, sub: '100% thuộc HCM-UTE', icon: <img src={brandConfig.logoUrl} alt="HCM-UTE" className="size-4 object-contain" />, activeBorder: 'border-[#0072BC]', isSelected: selectedWebType === 'all' },
-    { key: 'new', title: 'Đã trỏ web mới (.189)', value: `${stats.newWebCount} (${Math.round((stats.newWebCount / stats.total) * 100)}%)`, sub: 'Giao diện chuẩn mới', icon: <span className="text-emerald-600 font-bold">✓</span>, activeBorder: 'border-emerald-500', isSelected: selectedWebType === 'new' },
-    { key: 'old', title: 'Tạm duy trì web cũ (.181)', value: `${stats.oldWebCount} (${Math.round((stats.oldWebCount / stats.total) * 100)}%)`, sub: 'Chờ chuyển dữ liệu', icon: <span className="text-amber-600 font-bold">⏱</span>, activeBorder: 'border-amber-500', isSelected: selectedWebType === 'old' },
-    { key: 'score', title: 'Độ hoàn thiện trung bình', value: `${stats.avgScore}%`, sub: '7 tiêu chuẩn cốt lõi', icon: <span className="text-[#0072BC] font-bold">📈</span>, activeBorder: 'border-[#0072BC]', isSelected: false },
+    {
+      key: 'all',
+      title: 'Tổng số website',
+      value: `${stats.total} đơn vị`,
+      sub: '100% thuộc HCM-UTE',
+      icon: <img src={brandConfig.logoUrl} alt="HCM-UTE" className="size-4 object-contain" />,
+      activeBorder: 'border-[#0072BC]',
+      isSelected: selectedWebType === 'all',
+    },
+    {
+      key: 'new',
+      title: 'Đã trỏ web mới (.189)',
+      value: `${stats.newWebCount} (${Math.round((stats.newWebCount / stats.total) * 100)}%)`,
+      sub: 'Giao diện chuẩn mới',
+      icon: (
+        <svg className="size-4 text-emerald-700 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      ),
+      activeBorder: 'border-emerald-600',
+      isSelected: selectedWebType === 'new',
+    },
+    {
+      key: 'old',
+      title: 'Tạm duy trì web cũ (.181)',
+      value: `${stats.oldWebCount} (${Math.round((stats.oldWebCount / stats.total) * 100)}%)`,
+      sub: 'Chờ chuyển dữ liệu',
+      icon: (
+        <svg className="size-4 text-amber-700 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+      activeBorder: 'border-amber-600',
+      isSelected: selectedWebType === 'old',
+    },
+    {
+      key: 'score',
+      title: 'Độ hoàn thiện trung bình',
+      value: `${stats.avgScore}%`,
+      sub: '7 tiêu chuẩn cốt lõi',
+      icon: (
+        <svg className="size-4 text-[#0072BC] dark:text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+        </svg>
+      ),
+      activeBorder: 'border-[#0072BC]',
+      isSelected: false,
+    },
   ];
 
   return (
-    <div className="w-full space-y-6">
-      {/* 4 KPI Cards (Scaled 1.3x) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+    <div className="w-full space-y-5">
+      {/* 4 KPI Cards - Tinh gọn, icon tối giản */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
         {kpis.map((k) => (
           <div
             key={k.title}
             onClick={() => k.key !== 'score' && setSelectedWebType(k.key === selectedWebType ? 'all' : k.key)}
-            className={`p-6 sm:p-7 rounded-xl border bg-white dark:bg-[#132238] shadow-xs transition-all ${
+            className={`p-4 sm:p-5 rounded-xl border bg-white dark:bg-[#132238] transition-colors ${
               k.key !== 'score' ? 'cursor-pointer hover:border-slate-300' : ''
-            } ${k.isSelected ? `border-2 ${k.activeBorder} shadow-sm` : 'border-slate-200 dark:border-slate-800'}`}
+            } ${k.isSelected ? `border-2 ${k.activeBorder}` : 'border-slate-200 dark:border-slate-800'}`}
           >
-            <div className="flex items-center justify-between text-sm font-bold text-slate-600 dark:text-slate-300">
+            <div className="flex items-center justify-between text-xs font-semibold text-slate-600 dark:text-slate-300">
               <span>{k.title}</span>
-              <span className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-base font-bold flex items-center justify-center size-10 shrink-0">{k.icon}</span>
+              <span className="p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700 flex items-center justify-center size-8 shrink-0">{k.icon}</span>
             </div>
-            <div className="text-3xl sm:text-4xl font-black font-mono text-[#004776] dark:text-foreground mt-3">
+            <div className="text-2xl sm:text-3xl font-bold font-mono text-[#004776] dark:text-foreground mt-2">
               {k.value}
             </div>
-            <div className="text-xs sm:text-sm text-slate-500 font-medium mt-1">{k.sub}</div>
+            <div className="text-[11px] text-slate-500 font-medium mt-0.5">{k.sub}</div>
           </div>
         ))}
       </div>
@@ -131,7 +175,7 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
         hasActiveFilters={hasActiveFilters}
       />
 
-      {/* Main Scoreboard: ICPC Matrix or Detailed Table */}
+      {/* Main Scoreboard: Matrix or Detailed Table */}
       {viewMode === 'matrix' ? (
         <ScoreboardMatrix
           units={filteredUnits}
@@ -141,11 +185,11 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
           isAdmin={true}
         />
       ) : (
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] overflow-hidden shadow-xs">
-          <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/60 dark:bg-slate-900/40">
-            <h2 className="text-sm font-bold text-[#004776] dark:text-foreground flex items-center gap-2">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] overflow-hidden">
+          <div className="px-4 py-2.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/60 dark:bg-slate-900/40">
+            <h2 className="text-xs sm:text-sm font-bold text-[#004776] dark:text-foreground flex items-center gap-2">
               <span>Danh sách chi tiết 51 website</span>
-              <span className="px-2 py-0.5 rounded-lg text-xs font-semibold bg-blue-100 text-[#004776] dark:bg-blue-950/80 dark:text-sky-300">
+              <span className="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-blue-100/80 text-[#004776] dark:bg-blue-950 dark:text-sky-300">
                 {filteredUnits.length} đơn vị
               </span>
             </h2>
@@ -157,27 +201,27 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
               <thead>
                 <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/80 text-xs font-semibold text-slate-600 dark:text-slate-300">
                   <th className="py-2.5 px-3 text-center w-12">STT</th>
-                  <th className="py-2.5 px-4">Đơn vị & Tên miền</th>
+                  <th className="py-2.5 px-4">Đơn vị &amp; Tên miền</th>
                   <th className="py-2.5 px-3 w-28">Cán bộ</th>
                   <th className="py-2.5 px-3 w-36">Trạng thái</th>
                   <th className="py-2.5 px-4 w-40">Độ hoàn thiện</th>
                   <th className="py-2.5 px-4 w-28 text-right">Thao tác</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80 text-sm">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80 text-xs sm:text-sm">
                 {filteredUnits.map((u) => {
-                  const scoreColor = u.completenessScore >= 80 ? 'text-emerald-600' : u.completenessScore >= 50 ? 'text-amber-600' : 'text-rose-600';
-                  const barBg = u.completenessScore >= 80 ? 'bg-emerald-500' : u.completenessScore >= 50 ? 'bg-amber-500' : 'bg-rose-500';
+                  const scoreColor = u.completenessScore >= 80 ? 'text-emerald-700' : u.completenessScore >= 50 ? 'text-amber-700' : 'text-rose-700';
+                  const barBg = u.completenessScore >= 80 ? 'bg-emerald-500/80' : u.completenessScore >= 50 ? 'bg-amber-500/80' : 'bg-rose-500/80';
                   return (
                     <tr
                       key={u.id}
                       onClick={() => setInspectingUnit(u)}
                       className="hover:bg-slate-50/70 dark:hover:bg-slate-900/40 cursor-pointer transition-colors"
                     >
-                      <td className="py-3 px-3 text-center font-mono text-xs text-muted-foreground">{u.stt}</td>
-                      <td className="py-3 px-4">
+                      <td className="py-2.5 px-3 text-center font-mono text-xs text-muted-foreground">{u.stt}</td>
+                      <td className="py-2.5 px-4">
                         <div className="flex items-center gap-2.5">
-                          <div className="size-8 rounded-full bg-blue-50 dark:bg-blue-950/60 text-[#0072BC] dark:text-sky-300 font-bold text-xs flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900">
+                          <div className="size-7 rounded-full bg-blue-50 dark:bg-blue-950/60 text-[#0072BC] dark:text-sky-300 font-bold text-xs flex items-center justify-center shrink-0 border border-blue-100 dark:border-blue-900">
                             {u.stt}
                           </div>
                           <div>
@@ -189,20 +233,20 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
                           </div>
                         </div>
                       </td>
-                      <td className="py-3 px-3">
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs text-slate-700 dark:text-slate-300 font-medium">
+                      <td className="py-2.5 px-3">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs text-slate-700 dark:text-slate-300 font-medium">
                           {u.staff}
                         </span>
                       </td>
-                      <td className="py-3 px-3">
-                        <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium border ${
-                          u.isNewWeb ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-amber-50 text-amber-700 border-amber-200'
+                      <td className="py-2.5 px-3">
+                        <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-medium border ${
+                          u.isNewWeb ? 'bg-emerald-50 text-emerald-800 border-emerald-200/80' : 'bg-amber-50 text-amber-800 border-amber-200/80'
                         }`}>
                           <span className={`size-1.5 rounded-full ${u.isNewWeb ? 'bg-emerald-500' : 'bg-amber-500'}`} />
                           <span>{u.isNewWeb ? 'Web mới (.189)' : 'Web cũ (.181)'}</span>
                         </span>
                       </td>
-                      <td className="py-3 px-4">
+                      <td className="py-2.5 px-4">
                         <div className="space-y-1">
                           <div className="flex justify-between items-center text-xs font-bold font-mono">
                             <span className={scoreColor}>{u.completenessScore}%</span>
@@ -210,16 +254,16 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
                               {u.completenessScore >= 80 ? 'Tốt' : u.completenessScore >= 50 ? 'Cần sửa' : 'Chưa đạt'}
                             </span>
                           </div>
-                          <div className="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                          <div className="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
                             <div className={`h-full rounded-full transition-all duration-300 ${barBg}`} style={{ width: `${u.completenessScore}%` }} />
                           </div>
                         </div>
                       </td>
-                      <td className="py-3 px-4 text-right">
+                      <td className="py-2.5 px-4 text-right">
                         <button
                           type="button"
                           onClick={(e) => { e.stopPropagation(); setInspectingUnit(u); }}
-                          className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-[#0072BC] text-[#0072BC] dark:text-sky-300 bg-white dark:bg-slate-900 hover:bg-slate-50 text-xs font-semibold inline-flex items-center gap-1 shadow-2xs transition-colors"
+                          className="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-[#0072BC] text-[#0072BC] dark:text-sky-300 bg-white dark:bg-slate-900 hover:bg-slate-50 text-xs font-semibold inline-flex items-center gap-1 transition-colors"
                         >
                           Chấm điểm →
                         </button>

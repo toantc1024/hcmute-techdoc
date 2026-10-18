@@ -21,8 +21,6 @@ export const AdminTopBar: React.FC<AdminTopBarProps> = ({
   onTabChange,
   onOpenSecurity,
   onLogout,
-  userEmail,
-  userRole = 'admin',
   totalViews = 22080,
   avgScore = 72,
 }) => {
@@ -33,55 +31,93 @@ export const AdminTopBar: React.FC<AdminTopBarProps> = ({
       const now = new Date();
       const time = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
       const date = now.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
-      setTimeStr(`${time} ${date}`);
+      setTimeStr(`${time} · ${date}`);
     };
     updateTime();
     const interval = setInterval(updateTime, 1000 * 60);
     return () => clearInterval(interval);
   }, []);
 
-  const navTabs: { key: AdminTab; label: string; icon: string; badge?: string }[] = [
-    { key: 'overview', label: 'Tổng quan', icon: '🏠', badge: 'Mẫu 1 & 3' },
-    { key: 'units', label: 'Đơn vị & Website', icon: '🏢', badge: `${avgScore}% Đạt` },
-    { key: 'analytics', label: 'Lượt xem & Thống kê', icon: '📊', badge: totalViews.toLocaleString() },
-    { key: 'progress', label: 'Kế hoạch & Tiêu chuẩn', icon: '📋', badge: '7 Tiêu chuẩn' },
-    { key: 'content', label: 'Quản lý tài liệu', icon: '📖', badge: '8 Chương' },
+  const navTabs: {
+    key: AdminTab;
+    label: string;
+    icon: React.ReactNode;
+    badge?: string;
+  }[] = [
+    {
+      key: 'overview',
+      label: 'Tổng quan',
+      icon: (
+        <svg className="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1V10" />
+        </svg>
+      ),
+      badge: 'Mẫu 1 & 3',
+    },
+    {
+      key: 'units',
+      label: 'Đơn vị & Website',
+      icon: (
+        <svg className="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+        </svg>
+      ),
+      badge: `${avgScore}% Đạt`,
+    },
+    {
+      key: 'analytics',
+      label: 'Lượt xem & Thống kê',
+      icon: (
+        <svg className="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+      ),
+      badge: totalViews.toLocaleString(),
+    },
+    {
+      key: 'progress',
+      label: 'Kế hoạch & Tiêu chuẩn',
+      icon: (
+        <svg className="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+        </svg>
+      ),
+      badge: '7 Tiêu chuẩn',
+    },
+    {
+      key: 'content',
+      label: 'Quản lý tài liệu',
+      icon: (
+        <svg className="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+      ),
+      badge: '8 Chương',
+    },
   ];
 
   return (
-    <header className="w-full bg-white dark:bg-[#132238] border-b border-slate-200 dark:border-slate-800 shadow-2xs">
-      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10 py-4 sm:py-5 space-y-4">
-        {/* ROW 1: Header Brand, Badges, Clock & Actions (Scaled 1.3x) */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="size-13 sm:size-14 rounded-xl bg-blue-50 dark:bg-blue-950/80 p-2 border border-blue-100 dark:border-blue-900 shadow-2xs shrink-0 flex items-center justify-center">
-              <img src={brandConfig.logoUrl} alt="HCM-UTE Logo" className="size-10 sm:size-11 object-contain" />
+    <header className="w-full bg-white dark:bg-[#132238] border-b border-slate-200 dark:border-slate-800">
+      <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 py-3 space-y-3">
+        {/* ROW 1: Brand Title & Elegant Minimalist Actions */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="size-10 sm:size-11 rounded-lg bg-blue-50/80 dark:bg-blue-950/60 p-1.5 border border-blue-100 dark:border-blue-900 shrink-0 flex items-center justify-center">
+              <img src={brandConfig.logoUrl} alt="HCM-UTE Logo" className="size-7 sm:size-8 object-contain" />
             </div>
-            <div className="space-y-1">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center px-3 py-1 rounded-xl text-xs sm:text-sm font-bold bg-blue-100/80 text-[#004776] dark:bg-blue-950 dark:text-sky-300 border border-blue-200/80 dark:border-blue-900">
-                  {userRole === 'admin' ? 'Quản trị viên (Admin)' : 'Đánh giá viên'}
-                </span>
-                <span className="inline-flex items-center px-3 py-1 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-900">
-                  <span className="size-2 rounded-full bg-emerald-500 mr-2 animate-pulse" />
-                  Supabase RLS Protected
-                </span>
-                {userEmail && (
-                  <span className="text-xs sm:text-sm text-muted-foreground hidden sm:inline font-mono">
-                    • {userEmail}
-                  </span>
-                )}
-              </div>
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-[#004776] dark:text-foreground">
-                Quản trị HCM-UTE TechDoc &amp; Tiến độ 51 website
+            <div>
+              <h1 className="text-lg sm:text-xl font-bold tracking-tight text-[#004776] dark:text-foreground">
+                Quản trị HCM-UTE TechDoc
               </h1>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
             {timeStr && (
-              <div className="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-mono font-bold text-slate-700 dark:text-slate-300">
-                <span className="text-[#0072BC] dark:text-sky-400">🕒</span>
+              <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 text-xs font-mono text-slate-600 dark:text-slate-400">
+                <svg className="size-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
                 <span>{timeStr}</span>
               </div>
             )}
@@ -90,34 +126,43 @@ export const AdminTopBar: React.FC<AdminTopBarProps> = ({
               <button
                 type="button"
                 onClick={onOpenSecurity}
-                className="inline-flex items-center justify-center min-h-[46px] px-4 rounded-xl text-xs sm:text-sm font-bold border border-blue-200 dark:border-blue-900 bg-blue-50/60 dark:bg-blue-950/40 text-[#004776] dark:text-sky-300 hover:bg-blue-100 transition-all shadow-2xs active:scale-[0.98] cursor-pointer"
+                className="inline-flex items-center gap-1.5 min-h-[36px] px-3 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-900/50 text-slate-700 dark:text-slate-300 hover:bg-slate-100 transition-colors cursor-pointer"
                 title="Xem trung tâm giám sát an ninh & nhật ký kiểm toán"
               >
-                <span>🛡️ Báo cáo &amp; RLS</span>
+                <svg className="size-3.5 text-[#0072BC]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <span>Báo cáo &amp; RLS</span>
               </button>
             )}
 
             <Link
               href="/"
-              className="inline-flex items-center justify-center min-h-[46px] px-4 rounded-xl text-xs sm:text-sm font-bold border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-100 text-[#004776] dark:text-sky-300 transition-all shadow-2xs active:scale-[0.98]"
+              className="inline-flex items-center gap-1.5 min-h-[36px] px-3 rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 bg-background hover:bg-slate-100 text-slate-700 dark:text-slate-300 transition-colors"
               title="Về cổng tài liệu người dùng"
             >
-              <span>← Cổng tài liệu</span>
+              <svg className="size-3.5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              <span>Cổng tài liệu</span>
             </Link>
 
             <button
               type="button"
               onClick={onLogout}
-              className="inline-flex items-center justify-center min-h-[46px] px-5 rounded-xl text-xs sm:text-sm font-bold bg-[#0072BC] hover:bg-[#005a96] text-white shadow-xs transition-all active:scale-[0.98] cursor-pointer"
+              className="inline-flex items-center gap-1.5 min-h-[36px] px-3.5 rounded-lg text-xs font-semibold bg-[#0072BC] hover:bg-[#005a96] text-white transition-colors cursor-pointer"
               title="Đăng xuất khỏi phiên quản trị"
             >
-              <span>Đăng xuất ➔</span>
+              <span>Đăng xuất</span>
+              <svg className="size-3.5 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
             </button>
           </div>
         </div>
 
-        {/* ROW 2: Navigation Tabs (Scaled 1.3x, Edge-to-Edge) */}
-        <nav className="flex items-center gap-2 overflow-x-auto no-scrollbar pt-2 border-t border-slate-100 dark:border-slate-800/80" aria-label="Admin Navigation Tabs">
+        {/* ROW 2: Compact Minimalist Tabs */}
+        <nav className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-2 border-t border-slate-100 dark:border-slate-800" aria-label="Admin Navigation Tabs">
           {navTabs.map((t) => {
             const isActive = activeTab === t.key;
             return (
@@ -125,20 +170,20 @@ export const AdminTopBar: React.FC<AdminTopBarProps> = ({
                 key={t.key}
                 type="button"
                 onClick={() => onTabChange(t.key)}
-                className={`min-h-[48px] px-5 py-2.5 rounded-xl text-sm sm:text-base font-bold whitespace-nowrap transition-all inline-flex items-center gap-2.5 cursor-pointer ${
+                className={`min-h-[38px] px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-colors inline-flex items-center gap-2 cursor-pointer ${
                   isActive
-                    ? 'bg-[#0072BC] text-white shadow-md shadow-blue-500/15'
-                    : 'bg-slate-100/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-[#004776]'
+                    ? 'bg-[#0072BC] text-white'
+                    : 'bg-slate-100/70 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 hover:bg-slate-200/70 hover:text-[#004776]'
                 }`}
               >
                 <span>{t.icon}</span>
                 <span>{t.label}</span>
                 {t.badge && (
                   <span
-                    className={`px-2 py-0.5 rounded-lg text-xs font-bold ${
+                    className={`px-1.5 py-0.5 rounded text-[11px] font-medium ${
                       isActive
                         ? 'bg-white/20 text-white'
-                        : 'bg-slate-200/80 dark:bg-slate-700 text-slate-700 dark:text-slate-200'
+                        : 'bg-slate-200/70 dark:bg-slate-700/80 text-slate-600 dark:text-slate-300'
                     }`}
                   >
                     {t.badge}

@@ -34,21 +34,21 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
   };
 
   const scoreColor =
-    unit.completenessScore >= 80 ? 'text-emerald-600' :
-    unit.completenessScore >= 50 ? 'text-amber-600' : 'text-rose-600';
+    unit.completenessScore >= 80 ? 'text-emerald-700 dark:text-emerald-400' :
+    unit.completenessScore >= 50 ? 'text-amber-700 dark:text-amber-400' : 'text-rose-700 dark:text-rose-400';
 
   const barColor =
-    unit.completenessScore >= 80 ? 'bg-emerald-500' :
-    unit.completenessScore >= 50 ? 'bg-amber-500' : 'bg-rose-500';
+    unit.completenessScore >= 80 ? 'bg-emerald-500/80' :
+    unit.completenessScore >= 50 ? 'bg-amber-500/80' : 'bg-rose-500/80';
 
   return (
     <div className="space-y-4 animate-in fade-in duration-200">
-      {/* Top Navigation - Style matching User Portal Image 4 */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs">
+      {/* Top Navigation */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238]">
         <button
           type="button"
           onClick={onBack}
-          className="min-h-[44px] px-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-50 dark:hover:bg-slate-900 text-xs font-semibold text-[#004776] dark:text-sky-300 transition-colors inline-flex items-center gap-1.5 shadow-2xs"
+          className="min-h-[40px] px-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-background hover:bg-slate-50 dark:hover:bg-slate-900 text-xs font-semibold text-[#004776] dark:text-sky-300 transition-colors inline-flex items-center gap-1.5"
         >
           <span>←</span>
           <span>Quay lại danh sách 51 đơn vị</span>
@@ -172,15 +172,15 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                       <p className="text-xs text-muted-foreground leading-relaxed">{c.description}</p>
                     </td>
 
-                    {/* Cột 2: Chấm điểm (Buttons styled like portal action buttons) */}
+                    {/* Cột 2: Chấm điểm (Nút pastel dịu mắt) */}
                     <td className="p-3 border-r border-slate-200 dark:border-slate-800 space-y-1.5">
                       <button
                         type="button"
                         onClick={() => onUpdateRating(unit.id, c.id, 'pass')}
-                        className={`w-full min-h-[34px] px-3 py-1 rounded-xl text-xs font-semibold transition-all border flex items-center justify-center gap-1.5 ${
+                        className={`w-full min-h-[34px] px-3 py-1 rounded-lg text-xs font-semibold transition-all border flex items-center justify-center gap-1.5 ${
                           currentRating === 'pass'
-                            ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
-                            : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-700'
+                            ? 'bg-emerald-50 text-emerald-800 border-emerald-300 dark:bg-emerald-950 dark:text-emerald-300 dark:border-emerald-700'
+                            : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:border-emerald-200 hover:bg-emerald-50/50 hover:text-emerald-800'
                         }`}
                       >
                         <span>✓</span><span>Đạt (100% điểm)</span>
@@ -189,22 +189,22 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                       <button
                         type="button"
                         onClick={() => onUpdateRating(unit.id, c.id, 'warning')}
-                        className={`w-full min-h-[34px] px-3 py-1 rounded-xl text-xs font-semibold transition-all border flex items-center justify-center gap-1.5 ${
+                        className={`w-full min-h-[34px] px-3 py-1 rounded-lg text-xs font-semibold transition-all border flex items-center justify-center gap-1.5 ${
                           currentRating === 'warning'
-                            ? 'bg-amber-500 text-white border-amber-500 shadow-2xs'
-                            : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:border-amber-300 hover:bg-amber-50 hover:text-amber-700'
+                            ? 'bg-amber-50 text-amber-900 border-amber-300 dark:bg-amber-950 dark:text-amber-300 dark:border-amber-700'
+                            : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:border-amber-200 hover:bg-amber-50/50 hover:text-amber-800'
                         }`}
                       >
-                        <span>⚠</span><span>Cần sửa (50% điểm)</span>
+                        <span>⏱</span><span>Cần sửa (50% điểm)</span>
                       </button>
 
                       <button
                         type="button"
                         onClick={() => onUpdateRating(unit.id, c.id, 'fail')}
-                        className={`w-full min-h-[34px] px-3 py-1 rounded-xl text-xs font-semibold transition-all border flex items-center justify-center gap-1.5 ${
+                        className={`w-full min-h-[34px] px-3 py-1 rounded-lg text-xs font-semibold transition-all border flex items-center justify-center gap-1.5 ${
                           currentRating === 'fail'
-                            ? 'bg-rose-600 text-white border-rose-600 shadow-2xs'
-                            : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:border-rose-300 hover:bg-rose-50 hover:text-rose-700'
+                            ? 'bg-rose-50 text-rose-900 border-rose-300 dark:bg-rose-950 dark:text-rose-300 dark:border-rose-700'
+                            : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:border-rose-200 hover:bg-rose-50/50 hover:text-rose-800'
                         }`}
                       >
                         <span>✕</span><span>Không đạt (0 điểm)</span>

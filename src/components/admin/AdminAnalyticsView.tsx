@@ -89,11 +89,11 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
 
   return (
     <div className="w-full space-y-6 animate-in fade-in duration-200">
-      {/* Top Banner (Matching Mẫu 2 & 4, Scaled 1.3x) */}
-      <div className="p-6 sm:p-7 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div className="size-14 rounded-xl bg-blue-50 dark:bg-blue-950/60 p-2 border border-blue-100 dark:border-blue-900 shadow-2xs shrink-0 flex items-center justify-center">
-            <img src={brandConfig.logoUrl} alt="HCM-UTE Logo" className="size-10 object-contain" />
+      {/* Top Banner */}
+      <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="size-11 rounded-lg bg-blue-50/80 dark:bg-blue-950/60 p-1.5 border border-blue-100 dark:border-blue-900 shrink-0 flex items-center justify-center">
+            <img src={brandConfig.logoUrl} alt="HCM-UTE Logo" className="size-8 object-contain" />
           </div>
           <div>
             <div className="flex items-center gap-2">
@@ -108,27 +108,27 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="p-3 px-5 rounded-xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 text-right min-w-[150px]">
-            <div className="text-xs text-muted-foreground font-semibold">Tổng lượt xem</div>
-            <div className="text-2xl sm:text-3xl font-black font-mono text-[#0072BC] dark:text-sky-300">
+        <div className="flex items-center gap-2.5">
+          <div className="p-2.5 px-4 rounded-lg bg-blue-50/80 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 text-right min-w-[130px]">
+            <div className="text-[11px] text-muted-foreground font-medium">Tổng lượt xem</div>
+            <div className="text-xl sm:text-2xl font-bold font-mono text-[#0072BC] dark:text-sky-300">
               {totalViews.toLocaleString()}
             </div>
           </div>
           <button
             type="button"
             onClick={handleResetViews}
-            className="min-h-[46px] px-4.5 rounded-xl border border-rose-200 dark:border-rose-900 bg-rose-50/70 hover:bg-rose-100 text-rose-700 dark:text-rose-300 text-xs sm:text-sm font-bold transition-all shadow-xs cursor-pointer"
+            className="min-h-[38px] px-3.5 rounded-lg border border-rose-200 dark:border-rose-900 bg-rose-50/70 hover:bg-rose-100 text-rose-700 dark:text-rose-300 text-xs font-semibold transition-colors cursor-pointer"
           >
             Đặt lại về 0
           </button>
         </div>
       </div>
 
-      {/* ROW 1: 2 CHARTS: Donut Breakdown + 7-Day Area Trend */}
+      {/* ROW 1: 2 CHARTS */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Card Left: Cơ cấu lượt xem theo chuyên mục */}
-        <div className="p-5 sm:p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-4">
+        <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] space-y-4">
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 pb-3">
             <h3 className="font-bold text-sm sm:text-base text-[#004776] dark:text-foreground">
               Cơ cấu lượt xem theo chuyên mục
@@ -172,8 +172,8 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
           </div>
         </div>
 
-        {/* Card Right: Xu hướng lượt xem 7 ngày gần nhất (Area chart) */}
-        <div className="p-5 sm:p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-4">
+        {/* Card Right: Xu hướng lượt xem 7 ngày gần nhất */}
+        <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] space-y-4">
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 pb-3">
             <h3 className="font-bold text-sm sm:text-base text-[#004776] dark:text-foreground">
               Xu hướng lượt xem (7 ngày gần nhất)
@@ -208,15 +208,15 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
       {/* ROW 2: Top đơn vị + Top 8 chuyên mục */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Top đơn vị */}
-        <div className="p-5 sm:p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-3">
+        <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] space-y-3">
           <h3 className="font-bold text-sm sm:text-base text-[#004776] dark:text-foreground pb-2 border-b border-slate-100 dark:border-slate-800/80">
             Top đơn vị có lượt xem nhiều nhất
           </h3>
-          <div className="space-y-2.5">
+          <div className="space-y-2">
             {topUnits.map((u, i) => (
-              <div key={u.name} className="flex items-center justify-between text-xs p-2 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
+              <div key={u.name} className="flex items-center justify-between text-xs p-2 rounded-lg bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
                 <div className="flex items-center gap-2">
-                  <span className="size-5 rounded-lg bg-blue-100 dark:bg-blue-950 text-[#0072BC] font-mono font-bold text-[11px] flex items-center justify-center">
+                  <span className="size-5 rounded-md bg-blue-100 dark:bg-blue-950 text-[#0072BC] font-mono font-bold text-[11px] flex items-center justify-center">
                     {i + 1}
                   </span>
                   <span className="font-semibold text-slate-700 dark:text-slate-200">{u.name}</span>
@@ -228,7 +228,7 @@ export const AdminAnalyticsView: React.FC<AdminAnalyticsViewProps> = ({
         </div>
 
         {/* Top 8 chuyên mục */}
-        <div className="p-5 sm:p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] shadow-xs space-y-3">
+        <div className="p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#132238] space-y-3">
           <h3 className="font-bold text-sm sm:text-base text-[#004776] dark:text-foreground pb-2 border-b border-slate-100 dark:border-slate-800/80">
             Top 8 chuyên mục được xem nhiều nhất
           </h3>
