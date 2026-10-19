@@ -1,12 +1,11 @@
-'use client';
-
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { CriterionRating } from '@/models/admin.model';
 
 export interface StatusConfirmData {
   type: 'unit_server' | 'section_visibility' | 'unit_rating';
   id: number | string;
   criterionId?: string;
-  ratingValue?: 'pass' | 'warning' | 'fail';
+  ratingValue?: CriterionRating;
   name: string;
   subText?: string;
   currentLabel: string;
@@ -16,10 +15,47 @@ export interface StatusConfirmData {
 
 interface AdminStatusConfirmModalProps {
   data: StatusConfirmData | null;
-  onConfirm: () => void;
+  onConfirm: (selectedRating?: CriterionRating) => void;
   onCancel: () => void;
   isLoading?: boolean;
 }
+
+const RATING_CHOICES: {
+  key: CriterionRating;
+  label: string;
+  scoreLabel: string;
+  activeColor: string;
+  badgeColor: string;
+}[] = [
+  {
+    key: 'pass',
+    label: '✓ Đạt',
+    scoreLabel: '100% (+15đ)',
+    activeColor: 'border-emerald-500 bg-emerald-50/90 text-emerald-900 ring-2 ring-emerald-500/20 dark:bg-emerald-950/60 dark:text-emerald-200 dark:border-emerald-500',
+    badgeColor: 'bg-emerald-500 text-white',
+  },
+  {
+    key: 'warning',
+    label: '◐ Cần sửa',
+    scoreLabel: '50% (+7.5đ)',
+    activeColor: 'border-amber-500 bg-amber-50/90 text-amber-900 ring-2 ring-amber-500/20 dark:bg-amber-950/60 dark:text-amber-200 dark:border-amber-500',
+    badgeColor: 'bg-amber-500 text-white',
+  },
+  {
+    key: 'fail',
+    label: '✕ Chưa đạt',
+    scoreLabel: '0% (0đ)',
+    activeColor: 'border-rose-500 bg-rose-50/90 text-rose-900 ring-2 ring-rose-500/20 dark:bg-rose-950/60 dark:text-rose-200 dark:border-rose-500',
+    badgeColor: 'bg-rose-500 text-white',
+  },
+  {
+    key: 'none',
+    label: '— Chưa chấm',
+    scoreLabel: 'Bỏ điểm / Mặc định',
+    activeColor: 'border-slate-500 bg-slate-100 text-slate-900 ring-2 ring-slate-500/20 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-500',
+    badgeColor: 'bg-slate-500 text-white',
+  },
+];
 
 export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = ({
   data,
@@ -27,6 +63,16 @@ export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = (
   onCancel,
   isLoading = false,
 }) => {
+  const [selectedRating, setSelectedRating] = useState<CriterionRating>(
+    data?.ratingValue || 'pass'
+  );
+
+  useEffect(() => {
+    if (data?.ratingValue) {
+      setSelectedRating(data.ratingValue);
+    }
+  }, [data]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && data) onCancel();
@@ -56,11 +102,13 @@ export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = (
               {data.type === 'unit_server'
                 ? 'Xác nhận chuyển trạng thái máy chủ'
                 : data.type === 'unit_rating'
-                ? 'Xác nhận thay đổi điểm tiêu chí'
+                ? 'Đánh giá điểm tiêu chí đơn vị'
                 : 'Xác nhận thay đổi hiển thị'}
             </h3>
             <p className="text-xs text-muted-foreground">
-              Kiểm tra thông tin trước khi ghi nhận vào hệ thống
+              {data.type === 'unit_rating'
+                ? 'Chọn 1 trong 4 mức đánh giá bên dưới để ghi nhận'
+                : 'Kiểm tra thông tin trước khi ghi nhận vào hệ thống'}
             </p>
           </div>
         </div>
@@ -85,26 +133,61 @@ export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = (
             )}
           </div>
 
-          {/* Before -> After Comparison */}
-          <div className="pt-2 border-t border-slate-200/60 dark:border-slate-800 flex items-center justify-between gap-2 text-xs">
-            <div className="flex-1 p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700 text-center">
-              <div className="text-[10px] text-muted-foreground mb-0.5">Hiện tại</div>
-              <span className="font-semibold text-slate-700 dark:text-slate-300">
-                {data.currentLabel}
-              </span>
+          {/* If unit_rating: show 4 selectable rating options */}
+          {data.type === 'unit_rating' ? (
+            <div className="pt-2 border-t border-slate-200/60 dark:border-slate-800 space-y-2">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-semibold text-slate-700 dark:text-slate-300">
+                  Chọn 1 trong 4 mức tiêu chí:
+                </span>
+                <span className="text-[11px] text-muted-foreground">
+                  Hiện tại: <strong className="text-slate-800 dark:text-slate-200">{data.currentLabel}</strong>
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                {RATING_CHOICES.map((choice) => {
+                  const isSelected = selectedRating === choice.key;
+                  return (
+                    <button
+                      key={choice.key}
+                      type="button"
+                      onClick={() => setSelectedRating(choice.key)}
+                      className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
+                        isSelected
+                          ? choice.activeColor
+                          : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold">{choice.label}</span>
+                        {isSelected && (
+                          <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${choice.badgeColor}`}>
+                            Đang chọn
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-[10px] opacity-80 mt-1 font-mono">{choice.scoreLabel}</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-            <span className="text-slate-400 font-bold">→</span>
-            <div className={`flex-1 p-2 rounded-lg border text-center ${
-              data.ratingValue === 'fail'
-                ? 'bg-rose-50 dark:bg-rose-950/40 border-rose-300 text-rose-800 dark:text-rose-300 font-semibold'
-                : data.ratingValue === 'warning'
-                ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-300 text-amber-900 dark:text-amber-300 font-semibold'
-                : 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 text-emerald-800 dark:text-emerald-300 font-semibold'
-            }`}>
-              <div className="text-[10px] opacity-75 mb-0.5">Chuyển sang</div>
-              <span>{data.nextLabel}</span>
+          ) : (
+            /* Before -> After Comparison for server status and visibility */
+            <div className="pt-2 border-t border-slate-200/60 dark:border-slate-800 flex items-center justify-between gap-2 text-xs">
+              <div className="flex-1 p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700 text-center">
+                <div className="text-[10px] text-muted-foreground mb-0.5">Hiện tại</div>
+                <span className="font-semibold text-slate-700 dark:text-slate-300">
+                  {data.currentLabel}
+                </span>
+              </div>
+              <span className="text-slate-400 font-bold">→</span>
+              <div className="flex-1 p-2 rounded-lg border text-center bg-blue-50 dark:bg-blue-950/40 border-blue-300 text-[#0072BC] dark:text-sky-300 font-semibold">
+                <div className="text-[10px] opacity-75 mb-0.5">Chuyển sang</div>
+                <span>{data.nextLabel}</span>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <p className="text-[11px] text-muted-foreground leading-relaxed">
@@ -127,9 +210,9 @@ export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = (
           </button>
           <button
             type="button"
-            onClick={onConfirm}
+            onClick={() => onConfirm(data.type === 'unit_rating' ? selectedRating : undefined)}
             disabled={isLoading}
-            className="min-h-[38px] px-4 rounded-xl bg-[#0072BC] hover:bg-[#005a96] text-white text-xs font-semibold transition-all cursor-pointer shadow-sm active:scale-95 disabled:opacity-50 inline-flex items-center gap-1.5"
+            className="min-h-[38px] px-5 rounded-xl bg-[#0072BC] hover:bg-[#005a96] text-white text-xs font-semibold transition-all cursor-pointer shadow-sm active:scale-95 disabled:opacity-50 inline-flex items-center gap-1.5"
           >
             {isLoading ? 'Đang cập nhật...' : 'Xác nhận thay đổi'}
           </button>

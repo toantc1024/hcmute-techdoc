@@ -21,7 +21,7 @@ export interface DocSectionItem {
   tags: string[];
 }
 
-export type CriterionRating = 'pass' | 'warning' | 'fail';
+export type CriterionRating = 'pass' | 'warning' | 'fail' | 'none';
 
 export interface EvaluationCriterion {
   id: string;

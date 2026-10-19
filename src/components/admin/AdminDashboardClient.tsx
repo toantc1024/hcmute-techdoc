@@ -112,6 +112,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
       pass: '✓ Đạt (100% điểm)',
       warning: '◐ Cần sửa (50% điểm)',
       fail: '✕ Chưa đạt (0% điểm)',
+      none: '— Chưa chấm',
     };
 
     setPendingConfirm({
@@ -121,7 +122,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
       ratingValue: rating,
       name: target.name,
       subText: crit ? `Tiêu chí [${crit.code}] ${crit.name} (${crit.weight}%)` : `Tiêu chí ${criterionId}`,
-      currentLabel: ratingMap[cur] || cur,
+      currentLabel: ratingMap[cur || 'none'] || (cur || '— Chưa chấm'),
       nextLabel: ratingMap[rating] || rating,
       isPositive: rating === 'pass',
     });
@@ -163,7 +164,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
     });
   };
 
-  const handleExecuteConfirmedStatus = async () => {
+  const handleExecuteConfirmedStatus = async (overrideRating?: CriterionRating) => {
     if (!pendingConfirm) return;
     setIsConfirming(true);
     try {
@@ -181,11 +182,16 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
       } else if (pendingConfirm.type === 'unit_rating') {
         const unitId = Number(pendingConfirm.id);
         const critId = pendingConfirm.criterionId!;
-        const rating = pendingConfirm.ratingValue!;
+        const rating: CriterionRating = overrideRating || pendingConfirm.ratingValue || 'pass';
         setUnits((prev) =>
           prev.map((u) => {
             if (u.id !== unitId) return u;
-            const nextRatings = { ...u.criteriaRatings, [critId]: rating };
+            const nextRatings = { ...u.criteriaRatings };
+            if (rating === 'none') {
+              delete nextRatings[critId];
+            } else {
+              nextRatings[critId] = rating;
+            }
             return { ...u, criteriaRatings: nextRatings, completenessScore: computeUnitScore(nextRatings, criteria) };
           })
         );
