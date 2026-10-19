@@ -11,7 +11,7 @@ const ADMIN_PASSKEY_HASH = '0a5de87db3d6c7d52645c1581269a880b1bbc613abc8e4c8e0f5
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('admin@hcmute.edu.vn');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -132,7 +132,7 @@ export default function LoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@utehub.vn"
+              placeholder="admin@hcmute.edu.vn hoặc email đơn vị"
               required
               disabled={isLoading}
               className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-[#0072BC]/20 focus:border-[#0072BC] outline-hidden transition-all disabled:opacity-60"

@@ -1,4 +1,5 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import { ShieldCheck } from 'lucide-react';
 import { brandConfig } from './app.config';
 
 export function baseOptions(): BaseLayoutProps {
@@ -24,6 +25,18 @@ export function baseOptions(): BaseLayoutProps {
       { text: "Theo vai trò", url: "/docs/01-khoi-dong-va-tong-quan/06-huong-dan-theo-vai-tro" },
       { text: "Xử lý sự cố", url: "/docs/06-kiem-tra-va-tro-ly/05-trung-tam-xu-ly-su-co" },
       { text: "Phím tắt", url: "/docs/06-kiem-tra-va-tro-ly/04-tra-cuu-thuat-ngu-va-phim-tat" },
+      {
+        type: 'icon',
+        url: '/login',
+        text: 'Quản trị hệ thống',
+        label: 'Đăng nhập Quản trị',
+        icon: (
+          <span title="Đăng nhập Quản trị" className="inline-flex items-center justify-center">
+            <ShieldCheck className="size-4.5" />
+          </span>
+        ),
+        secondary: true,
+      },
     ],
   };
 }
