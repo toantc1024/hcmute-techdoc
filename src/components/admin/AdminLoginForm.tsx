@@ -130,7 +130,7 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({ onLoginSuccess }
             Đăng nhập hệ thống quản trị
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground">
-            Cổng quản trị HCMUTE TechDoc & Giám sát tiến độ 51 website
+            Cổng quản trị HCMUTE TechDoc
           </p>
         </div>
 
