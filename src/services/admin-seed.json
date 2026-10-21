@@ -275,7 +275,8 @@
         "crit_info": "warning"
       },
       "completenessScore": 79,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 26
     },
     {
       "id": 2,
@@ -296,7 +297,8 @@
         "crit_info": "fail"
       },
       "completenessScore": 7,
-      "notes": "Tên miền chính: WEB CŨ (404)"
+      "notes": "Tên miền chính: WEB CŨ (404)",
+      "prevRank": 51
     },
     {
       "id": 3,
@@ -317,7 +319,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 16
     },
     {
       "id": 4,
@@ -338,7 +341,8 @@
         "crit_info": "fail"
       },
       "completenessScore": 43,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 41
     },
     {
       "id": 5,
@@ -359,7 +363,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 13
     },
     {
       "id": 6,
@@ -380,7 +385,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 14
     },
     {
       "id": 7,
@@ -401,7 +407,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 19
     },
     {
       "id": 8,
@@ -422,7 +429,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 100,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 5
     },
     {
       "id": 9,
@@ -443,7 +451,8 @@
         "crit_info": "warning"
       },
       "completenessScore": 79,
-      "notes": "Tên miền chính: WEB CŨ (404)"
+      "notes": "Tên miền chính: WEB CŨ (404)",
+      "prevRank": 25
     },
     {
       "id": 10,
@@ -464,7 +473,8 @@
         "crit_info": "warning"
       },
       "completenessScore": 64,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 32
     },
     {
       "id": 11,
@@ -485,7 +495,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 100,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 2
     },
     {
       "id": 12,
@@ -506,7 +517,8 @@
         "crit_info": "warning"
       },
       "completenessScore": 57,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 37
     },
     {
       "id": 13,
@@ -527,7 +539,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 100,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 8
     },
     {
       "id": 14,
@@ -548,7 +561,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 18
     },
     {
       "id": 15,
@@ -569,7 +583,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 100,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 11
     },
     {
       "id": 16,
@@ -590,7 +605,8 @@
         "crit_info": "fail"
       },
       "completenessScore": 36,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 42
     },
     {
       "id": 17,
@@ -611,7 +627,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 17
     },
     {
       "id": 18,
@@ -632,7 +649,8 @@
         "crit_info": "warning"
       },
       "completenessScore": 64,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 30
     },
     {
       "id": 19,
@@ -653,7 +671,8 @@
         "crit_info": "warning"
       },
       "completenessScore": 64,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 34
     },
     {
       "id": 20,
@@ -674,7 +693,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 100,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 7
     },
     {
       "id": 21,
@@ -695,7 +715,8 @@
         "crit_info": "warning"
       },
       "completenessScore": 79,
-      "notes": "Tên miền chính: WEB CŨ (NXDOMAIN)"
+      "notes": "Tên miền chính: WEB CŨ (NXDOMAIN)",
+      "prevRank": 27
     },
     {
       "id": 22,
@@ -716,7 +737,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 100,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 6
     },
     {
       "id": 23,
@@ -737,7 +759,8 @@
         "crit_info": "warning"
       },
       "completenessScore": 64,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 33
     },
     {
       "id": 24,
@@ -758,7 +781,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 100,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 10
     },
     {
       "id": 25,
@@ -779,7 +803,8 @@
         "crit_info": "warning"
       },
       "completenessScore": 64,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 36
     },
     {
       "id": 26,
@@ -800,7 +825,8 @@
         "crit_info": "warning"
       },
       "completenessScore": 71,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 29
     },
     {
       "id": 27,
@@ -821,7 +847,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 22
     },
     {
       "id": 28,
@@ -842,7 +869,8 @@
         "crit_info": "fail"
       },
       "completenessScore": 36,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 43
     },
     {
       "id": 29,
@@ -863,7 +891,8 @@
         "crit_info": "fail"
       },
       "completenessScore": 36,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 48
     },
     {
       "id": 30,
@@ -884,7 +913,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 23
     },
     {
       "id": 31,
@@ -905,7 +935,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 100,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 3
     },
     {
       "id": 32,
@@ -926,7 +957,8 @@
         "crit_info": "fail"
       },
       "completenessScore": 43,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 39
     },
     {
       "id": 33,
@@ -947,7 +979,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 24
     },
     {
       "id": 34,
@@ -968,7 +1001,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 20
     },
     {
       "id": 35,
@@ -989,7 +1023,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 100,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 12
     },
     {
       "id": 36,
@@ -1010,7 +1045,8 @@
         "crit_info": "fail"
       },
       "completenessScore": 21,
-      "notes": "Tên miền chính: LỖI IP .188 & 404"
+      "notes": "Tên miền chính: LỖI IP .188 & 404",
+      "prevRank": 50
     },
     {
       "id": 37,
@@ -1031,7 +1067,8 @@
         "crit_info": "warning"
       },
       "completenessScore": 71,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 31
     },
     {
       "id": 38,
@@ -1052,7 +1089,8 @@
         "crit_info": "fail"
       },
       "completenessScore": 36,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 47
     },
     {
       "id": 39,
@@ -1073,7 +1111,8 @@
         "crit_info": "fail"
       },
       "completenessScore": 36,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 45
     },
     {
       "id": 40,
@@ -1094,7 +1133,8 @@
         "crit_info": "fail"
       },
       "completenessScore": 36,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 44
     },
     {
       "id": 41,
@@ -1115,7 +1155,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 21
     },
     {
       "id": 42,
@@ -1136,7 +1177,8 @@
         "crit_info": "warning"
       },
       "completenessScore": 71,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 28
     },
     {
       "id": 43,
@@ -1157,7 +1199,8 @@
         "crit_info": "fail"
       },
       "completenessScore": 43,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 40
     },
     {
       "id": 44,
@@ -1178,7 +1221,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 100,
-      "notes": "Tên miền chính: WEB RIÊNG OJS"
+      "notes": "Tên miền chính: WEB RIÊNG OJS",
+      "prevRank": 9
     },
     {
       "id": 45,
@@ -1199,7 +1243,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 100,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 1
     },
     {
       "id": 46,
@@ -1220,7 +1265,8 @@
         "crit_info": "fail"
       },
       "completenessScore": 29,
-      "notes": "Tên miền chính: SAI IP 45.252..."
+      "notes": "Tên miền chính: SAI IP 45.252...",
+      "prevRank": 49
     },
     {
       "id": 47,
@@ -1241,7 +1287,8 @@
         "crit_info": "fail"
       },
       "completenessScore": 43,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 38
     },
     {
       "id": 48,
@@ -1262,7 +1309,8 @@
         "crit_info": "fail"
       },
       "completenessScore": 43,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 35
     },
     {
       "id": 49,
@@ -1283,7 +1331,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)"
+      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "prevRank": 15
     },
     {
       "id": 50,
@@ -1304,7 +1353,8 @@
         "crit_info": "fail"
       },
       "completenessScore": 36,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 46
     },
     {
       "id": 51,
@@ -1325,7 +1375,8 @@
         "crit_info": "pass"
       },
       "completenessScore": 100,
-      "notes": "Tên miền chính: WEB MỚI (.189)"
+      "notes": "Tên miền chính: WEB MỚI (.189)",
+      "prevRank": 4
     }
   ]
 }

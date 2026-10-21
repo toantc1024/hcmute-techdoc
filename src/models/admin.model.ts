@@ -49,6 +49,7 @@ export interface UnitWebsiteItem {
   criteriaRatings: Record<string, CriterionRating>;
   criteriaNotes?: Record<string, string>;
   completenessScore: number; // 0 - 100%
+  prevRank?: number; // Thứ hạng kỳ trước (dùng tính biến động tăng/tụt hạng)
   notes?: string;
   contactEmail?: string;
   contactPhone?: string;

@@ -154,6 +154,7 @@ export const techdocsDbService = {
           criteriaRatings,
           criteriaNotes,
           completenessScore: rInfo ? Math.round(Number(rInfo.total_score)) : 0,
+          prevRank: Number((seedData.units as unknown as UnitWebsiteItem[]).find((su) => su.id === Number(u.legacy_id))?.prevRank || u.sort_order || 1),
           notes: String(rInfo?.admin_notes || ''),
           contactEmail: u.contact_email ? String(u.contact_email) : undefined,
           contactPhone: u.contact_phone ? String(u.contact_phone) : undefined,

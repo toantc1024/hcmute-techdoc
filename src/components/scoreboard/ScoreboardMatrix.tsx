@@ -13,24 +13,16 @@ interface ScoreboardMatrixProps {
 }
 
 export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
-  units,
-  criteria,
-  onSelectUnit,
-  onUpdateRating,
-  onToggleServerStatus,
-  isAdmin = false,
+  units, criteria, onSelectUnit, onUpdateRating, onToggleServerStatus, isAdmin = false,
 }) => {
   const [hoveredCell, setHoveredCell] = useState<{ unitId: number; critCode: string } | null>(null);
 
   const rankedUnits = useMemo(() => {
     return [...units].sort((a, b) => {
-      if (b.completenessScore !== a.completenessScore) {
-        return b.completenessScore - a.completenessScore;
-      }
+      if (b.completenessScore !== a.completenessScore) return b.completenessScore - a.completenessScore;
       const aPass = Object.values(a.criteriaRatings || {}).filter((r) => r === 'pass').length;
       const bPass = Object.values(b.criteriaRatings || {}).filter((r) => r === 'pass').length;
-      if (bPass !== aPass) return bPass - aPass;
-      return a.name.localeCompare(b.name, 'vi');
+      return bPass !== aPass ? bPass - aPass : a.name.localeCompare(b.name, 'vi');
     });
   }, [units]);
 
@@ -67,6 +59,12 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
           <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700">
             <span>- Chưa chấm</span>
           </span>
+          <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground font-normal border-l border-slate-200 dark:border-slate-700 pl-2 ml-1">
+            <span>Hạng:</span>
+            <span className="text-emerald-700 dark:text-emerald-400 font-bold font-mono">↑ tăng</span>
+            <span className="text-slate-300 dark:text-slate-600">/</span>
+            <span className="text-rose-700 dark:text-rose-400 font-bold font-mono">↓ tụt</span>
+          </span>
         </div>
       </div>
 
@@ -95,6 +93,8 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
           <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80 text-xs sm:text-sm">
             {rankedUnits.map((u, rankIdx) => {
               const rank = rankIdx + 1;
+              const prevRank = u.prevRank ?? rank;
+              const rankDiff = prevRank - rank;
               const passCount = Object.values(u.criteriaRatings || {}).filter((r) => r === 'pass').length;
               const hasAlert = u.completenessScore < 50 || !u.isNewWeb;
 
@@ -113,10 +113,34 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                   }`}
                 >
                   {/* Hạng - Sticky left-0 */}
-                  <td className="sticky left-0 z-10 bg-white dark:bg-[#132238] group-hover:bg-slate-50 dark:group-hover:bg-slate-800/60 py-2 px-2 text-center transition-colors">
-                    <span className={`inline-flex items-center justify-center size-6 rounded text-xs border tabular-nums font-mono ${rankBadge}`}>
-                      {rank}
-                    </span>
+                  <td className="sticky left-0 z-10 bg-white dark:bg-[#132238] group-hover:bg-slate-50 dark:group-hover:bg-slate-800/60 py-1.5 px-1 text-center transition-colors">
+                    <div className="flex flex-col items-center justify-center -space-y-0.5">
+                      <span className={`inline-flex items-center justify-center size-6 rounded text-xs border tabular-nums font-mono ${rankBadge}`}>
+                        {rank}
+                      </span>
+                      {rankDiff > 0 ? (
+                        <span
+                          className="inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-mono tracking-tight"
+                          title={`Tăng ${rankDiff} bậc (kỳ trước #${prevRank})`}
+                        >
+                          <span>↑</span><span>{rankDiff}</span>
+                        </span>
+                      ) : rankDiff < 0 ? (
+                        <span
+                          className="inline-flex items-center gap-0.5 text-[10px] font-bold text-rose-600 dark:text-rose-400 font-mono tracking-tight"
+                          title={`Tụt ${Math.abs(rankDiff)} bậc (kỳ trước #${prevRank})`}
+                        >
+                          <span>↓</span><span>{Math.abs(rankDiff)}</span>
+                        </span>
+                      ) : (
+                        <span
+                          className="text-[10px] font-medium text-slate-400 dark:text-slate-500 font-mono leading-none"
+                          title={`Giữ nguyên thứ hạng #${rank}`}
+                        >
+                          —
+                        </span>
+                      )}
+                    </div>
                   </td>
 
                   {/* Đơn vị & Website - Sticky left-12 */}
