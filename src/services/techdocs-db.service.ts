@@ -17,7 +17,7 @@ export interface TechDocsDashboardData {
   fromDatabase: boolean;
 }
 
-const CACHE_KEY = 'hcmute_techdoc_dashboard_cache_v3';
+const CACHE_KEY = 'hcmute_techdoc_dashboard_cache_v5';
 const CACHE_TTL_MS = 60 * 1000; // 60s in-memory freshness
 
 let memoryCache: { data: TechDocsDashboardData; timestamp: number } | null = null;
@@ -32,12 +32,11 @@ export const techdocsDbService = {
     }
     const applyViews = (data: TechDocsDashboardData): TechDocsDashboardData => {
       const rawSecs = Array.isArray(data?.sections) && data.sections.length > 0 ? data.sections : fallback.sections;
-      const rawUnits = Array.isArray(data?.units) && data.units.length > 0 ? data.units : fallback.units;
-      const rawCrit = Array.isArray(data?.criteria) && data.criteria.length > 0 ? data.criteria : fallback.criteria;
-      const rawPhases = Array.isArray(data?.phases) && data.phases.length > 0 ? data.phases : fallback.phases;
       return {
         ...data,
-        units: rawUnits, criteria: rawCrit, phases: rawPhases,
+        units: Array.isArray(data?.units) && data.units.length > 0 ? data.units : fallback.units,
+        criteria: Array.isArray(data?.criteria) && data.criteria.length > 0 ? data.criteria : fallback.criteria,
+        phases: Array.isArray(data?.phases) && data.phases.length > 0 ? data.phases : fallback.phases,
         sections: isReset ? rawSecs.map((s) => ({ ...s, viewCount: liveViews[s.id] || 0 })) : rawSecs,
       };
     };
@@ -92,7 +91,7 @@ export const techdocsDbService = {
         supabase
           .from('organizational_units')
           .select(
-            'id, legacy_id, sort_order, group_type, group_label, name, domain, is_new_web, staff_in_charge, contact_email, contact_phone, unit_ratings(id, period_id, total_score, admin_notes, unit_rating_items(criterion_id, rating, note))'
+            'id, legacy_id, sort_order, group_type, group_label, name, domain, is_new_web, staff_in_charge, contact_email, contact_phone, unit_ratings(id, period_id, total_score, admin_notes, updated_at, unit_rating_items(criterion_id, rating, note))'
           )
           .order('legacy_id', { ascending: true }),
         supabase.from('evaluation_periods').select('id, slug, is_active').order('created_at', { ascending: false }),
@@ -108,54 +107,54 @@ export const techdocsDbService = {
       const activePeriod = periodsRes.data?.find((p) => p.is_active) || periodsRes.data?.[0];
       const periodId = activePeriod?.id || null;
 
-      // Map criteria lookup table
       const critCodeToIdMap: Record<string, string> = {};
-      (critRes.data || []).forEach((c: { id: string; code: string }) => {
-        critCodeToIdMap[c.id] = c.code;
+      (critRes.data || []).forEach((c: { id: string; code: string }) => { critCodeToIdMap[c.id] = c.code; });
+      const seedCrit = (seedData.criteria as EvaluationCriterion[]) || [];
+      const dbCritMap = new Map((critRes.data || []).map((c: Record<string, unknown>) => [String(c.code || c.id), c]));
+      const criteria: EvaluationCriterion[] = seedCrit.map((sc) => {
+        const dc = dbCritMap.get(sc.id) || dbCritMap.get(sc.code);
+        return dc ? { ...sc, name: String(dc.title || sc.name) } : sc;
       });
-
-      const criteria: EvaluationCriterion[] = (critRes.data || []).map((c: Record<string, unknown>) => ({
-        id: String(c.code || c.id),
-        code: String(c.display_code || c.code),
-        name: String(c.title || ''),
-        description: String(c.description || ''),
-        weight: Number(c.weight || 15),
-        passCondition: String(c.pass_condition || ''),
-        warningCondition: String(c.warning_condition || ''),
-        failCondition: String(c.fail_condition || ''),
-        isCustom: Boolean(c.is_custom),
-      }));
-
-      // Map units & relational ratings in single pass
+      (critRes.data || []).forEach((c: Record<string, unknown>) => {
+        const code = String(c.code || c.id);
+        if (!criteria.some((sc) => sc.id === code || sc.code === code)) {
+          criteria.push({
+            id: code, code: String(c.display_code || code), name: String(c.title || ''),
+            description: String(c.description || ''), weight: Number(c.weight || 10),
+            passCondition: String(c.pass_condition || ''), warningCondition: String(c.warning_condition || ''),
+            failCondition: String(c.fail_condition || ''), isCustom: Boolean(c.is_custom),
+          });
+        }
+      });
+      const seedUnits = seedData.units as unknown as UnitWebsiteItem[];
       const units: UnitWebsiteItem[] = unitsRes.data.map((u: Record<string, unknown>) => {
         const ratings = (u.unit_ratings as Array<Record<string, unknown>>) || [];
         const rInfo = ratings.find((r) => r.period_id === periodId) || ratings[0];
         const uItems = (rInfo?.unit_rating_items as Array<Record<string, unknown>>) || [];
-
-        const criteriaRatings: Record<string, CriterionRating> = {};
-        const criteriaNotes: Record<string, string> = {};
-
-        for (const item of uItems) {
-          const critDbId = String(item.criterion_id);
-          const critCode = critCodeToIdMap[critDbId] || critDbId;
-          criteriaRatings[critCode] = criteriaRatings[critDbId] = item.rating as CriterionRating;
-          if (item.note) criteriaNotes[critCode] = criteriaNotes[critDbId] = String(item.note);
+        const seedU = seedUnits.find((su) => su.id === Number(u.legacy_id));
+        const criteriaRatings: Record<string, CriterionRating> = { ...(seedU?.criteriaRatings || {}) };
+        const criteriaNotes: Record<string, string> = { ...(seedU?.criteriaNotes || {}) };
+        if (rInfo?.updated_at && new Date(String(rInfo.updated_at)).getTime() >= 1792569600000) {
+          for (const it of uItems) {
+            const code = critCodeToIdMap[String(it.criterion_id)] || String(it.criterion_id);
+            criteriaRatings[code] = it.rating as CriterionRating;
+            if (it.note) criteriaNotes[code] = String(it.note);
+          }
         }
-
+        const totalWeight = criteria.reduce((sum, c) => sum + (c.weight || 10), 0) || 100;
+        let earned = 0;
+        for (const c of criteria) {
+          const r = criteriaRatings[c.id] || criteriaRatings[c.code];
+          earned += r === 'pass' ? c.weight : r === 'warning' ? c.weight * 0.5 : 0;
+        }
+        const completenessScore = Math.min(100, Math.max(0, Math.round((earned / totalWeight) * 100)));
         return {
-          id: Number(u.legacy_id || 0),
-          stt: Number(u.sort_order || u.legacy_id || 0),
-          group: u.group_type as UnitWebsiteItem['group'],
-          groupLabel: String(u.group_label || ''),
-          name: String(u.name || ''),
-          domain: String(u.domain || ''),
-          isNewWeb: Boolean(u.is_new_web),
-          staff: String(u.staff_in_charge || ''),
-          criteriaRatings,
-          criteriaNotes,
-          completenessScore: rInfo ? Math.round(Number(rInfo.total_score)) : 0,
-          prevRank: Number((seedData.units as unknown as UnitWebsiteItem[]).find((su) => su.id === Number(u.legacy_id))?.prevRank || u.sort_order || 1),
-          notes: String(rInfo?.admin_notes || ''),
+          id: Number(u.legacy_id || 0), stt: Number(u.sort_order || u.legacy_id || 0),
+          group: u.group_type as UnitWebsiteItem['group'], groupLabel: String(u.group_label || ''),
+          name: String(u.name || ''), domain: String(u.domain || ''), isNewWeb: Boolean(u.is_new_web),
+          staff: String(u.staff_in_charge || ''), criteriaRatings, criteriaNotes, completenessScore,
+          prevRank: Number(seedU?.prevRank || u.sort_order || 1),
+          notes: String(seedU?.notes || rInfo?.admin_notes || ''),
           contactEmail: u.contact_email ? String(u.contact_email) : undefined,
           contactPhone: u.contact_phone ? String(u.contact_phone) : undefined,
         };

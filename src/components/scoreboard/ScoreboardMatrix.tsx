@@ -95,7 +95,7 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
               const rank = rankIdx + 1;
               const prevRank = u.prevRank ?? rank;
               const rankDiff = prevRank - rank;
-              const passCount = Object.values(u.criteriaRatings || {}).filter((r) => r === 'pass').length;
+              const passCount = criteria.filter((c) => (u.criteriaRatings?.[c.id] || u.criteriaRatings?.[c.code]) === 'pass').length;
               const hasAlert = u.completenessScore < 50 || !u.isNewWeb;
 
               const rankBadge =
