@@ -72,9 +72,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
       }
     } catch {}
 
-    const handleStorage = (e: StorageEvent) => {
-      if (e.key === 'hcmute_techdoc_views_is_reset' || e.key === 'hcmute_techdoc_live_views' || e.key?.includes('cache')) loadData();
-    };
+    const handleStorage = (e: StorageEvent) => { if (e.key === 'hcmute_techdoc_views_is_reset' || e.key === 'hcmute_techdoc_live_views' || e.key?.includes('cache')) loadData(); };
     const handleViewUpdate = (e: Event) => {
       const ce = e as CustomEvent<{ updated: DocSectionItem[] }>;
       if (ce.detail?.updated && Array.isArray(ce.detail.updated)) setSections(ce.detail.updated);
@@ -105,7 +103,8 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
     const target = units.find((u) => u.id === unitId);
     if (!target) return;
     const crit = criteria.find((c) => c.id === criterionId || c.code === criterionId);
-    const cur = target.criteriaRatings?.[criterionId] || target.criteriaRatings?.[crit?.id || ''] || 'warning';
+    const canonicalId = crit?.id || criterionId;
+    const cur = target.criteriaRatings?.[canonicalId] || target.criteriaRatings?.[criterionId] || target.criteriaRatings?.[crit?.code || ''] || 'none';
     if (cur === rating) return;
 
     const ratingMap: Record<CriterionRating, string> = {
@@ -118,11 +117,11 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
     setPendingConfirm({
       type: 'unit_rating',
       id: unitId,
-      criterionId: crit?.code || criterionId,
+      criterionId: canonicalId,
       ratingValue: rating,
       name: target.name,
       subText: crit ? `Tiêu chí [${crit.code}] ${crit.name} (${crit.weight}%)` : `Tiêu chí ${criterionId}`,
-      currentLabel: ratingMap[cur || 'none'] || (cur || '— Chưa chấm'),
+      currentLabel: ratingMap[cur] || cur || '— Chưa chấm',
       nextLabel: ratingMap[rating] || rating,
       isPositive: rating === 'pass',
     });
@@ -171,31 +170,49 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
       if (pendingConfirm.type === 'unit_server') {
         const unitId = Number(pendingConfirm.id);
         let nextVal = false;
-        setUnits((prev) =>
-          prev.map((u) => {
+        let updatedList: UnitWebsiteItem[] = [];
+        setUnits((prev) => {
+          const list = prev.map((u) => {
             if (u.id !== unitId) return u;
             nextVal = !u.isNewWeb;
             return { ...u, isNewWeb: nextVal };
-          })
-        );
+          });
+          updatedList = list;
+          return list;
+        });
+        const curData = techdocsDbService.getInstantData();
+        techdocsDbService.setCache({ ...curData, units: updatedList });
         await techdocsDbService.updateUnitServerStatus(unitId, nextVal);
       } else if (pendingConfirm.type === 'unit_rating') {
         const unitId = Number(pendingConfirm.id);
         const critId = pendingConfirm.criterionId!;
         const rating: CriterionRating = overrideRating || pendingConfirm.ratingValue || 'pass';
-        setUnits((prev) =>
-          prev.map((u) => {
+        const crit = criteria.find((c) => c.id === critId || c.code === critId);
+        const canonicalId = crit?.id || critId;
+        const displayCode = crit?.code || critId;
+
+        let updatedList: UnitWebsiteItem[] = [];
+        setUnits((prev) => {
+          const list = prev.map((u) => {
             if (u.id !== unitId) return u;
             const nextRatings = { ...u.criteriaRatings };
             if (rating === 'none') {
+              delete nextRatings[canonicalId];
+              delete nextRatings[displayCode];
               delete nextRatings[critId];
             } else {
+              nextRatings[canonicalId] = rating;
+              if (displayCode) nextRatings[displayCode] = rating;
               nextRatings[critId] = rating;
             }
             return { ...u, criteriaRatings: nextRatings, completenessScore: computeUnitScore(nextRatings, criteria) };
-          })
-        );
-        await techdocsDbService.updateUnitRatingItem(unitId, critId, rating);
+          });
+          updatedList = list;
+          return list;
+        });
+        const curData = techdocsDbService.getInstantData();
+        techdocsDbService.setCache({ ...curData, units: updatedList });
+        await techdocsDbService.updateUnitRatingItem(unitId, canonicalId, rating);
       } else if (pendingConfirm.type === 'section_visibility') {
         const sectionId = String(pendingConfirm.id);
         let updatedTarget: DocSectionItem | undefined;
@@ -231,14 +248,8 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#0B1525] text-foreground flex flex-col">
       <AdminTopBar
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        onOpenSecurity={() => setIsSecurityModalOpen(true)}
-        onLogout={handleLogout}
-        userEmail={user.email}
-        userRole={role}
-        totalViews={totalViews}
-        avgScore={avgScore}
+        activeTab={activeTab} onTabChange={setActiveTab} onOpenSecurity={() => setIsSecurityModalOpen(true)}
+        onLogout={handleLogout} userEmail={user.email} userRole={role} totalViews={totalViews} avgScore={avgScore}
       />
 
       <main className="flex-1 w-full max-w-[1440px] mx-auto px-5 lg:px-6 py-6 pb-20">
@@ -263,9 +274,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
                 onToggleServerStatus={handleToggleUnitServerStatus}
               />
             )}
-            {activeTab === 'analytics' && (
-              <AdminAnalyticsView sections={safeSections} onUpdateSections={setSections} />
-            )}
+            {activeTab === 'analytics' && <AdminAnalyticsView sections={safeSections} onUpdateSections={setSections} />}
             {activeTab === 'progress' && (
               <AdminProgressManager
                 phases={safePhases} criteria={safeCriteria}
@@ -284,12 +293,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
       </main>
 
       <AdminSecurityModal isOpen={isSecurityModalOpen} onClose={() => setIsSecurityModalOpen(false)} />
-      <AdminStatusConfirmModal
-        data={pendingConfirm}
-        onConfirm={handleExecuteConfirmedStatus}
-        onCancel={() => setPendingConfirm(null)}
-        isLoading={isConfirming}
-      />
+      <AdminStatusConfirmModal data={pendingConfirm} onConfirm={handleExecuteConfirmedStatus} onCancel={() => setPendingConfirm(null)} isLoading={isConfirming} />
     </div>
   );
 };

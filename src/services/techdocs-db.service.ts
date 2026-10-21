@@ -208,14 +208,13 @@ export const techdocsDbService = {
   async updateUnitRatingItem(unitLegacyId: number, criterionCode: string, rating: CriterionRating, note?: string): Promise<boolean> {
     const supabase = getBrowserClient();
     try {
-      this.invalidateCache();
       const { data: unit } = await supabase.from('organizational_units').select('id').eq('legacy_id', unitLegacyId).maybeSingle();
       if (!unit) return false;
       const { data: period } = await supabase.from('evaluation_periods').select('id').eq('is_active', true).maybeSingle();
       if (!period) return false;
       const { data: ratingRow } = await supabase.from('unit_ratings').select('id').eq('unit_id', unit.id).eq('period_id', period.id).maybeSingle();
       if (!ratingRow) return false;
-      const { data: crit } = await supabase.from('evaluation_criteria').select('id').eq('code', criterionCode).maybeSingle();
+      const { data: crit } = await supabase.from('evaluation_criteria').select('id').or(`code.eq.${criterionCode},display_code.eq.${criterionCode}`).maybeSingle();
       if (!crit) return false;
 
       const { error } = rating === 'none'
@@ -288,12 +287,9 @@ export const techdocsDbService = {
 
   getFallbackSeedData(): TechDocsDashboardData {
     return {
-      sections: seedData.docSections as DocSectionItem[],
-      criteria: seedData.criteria as EvaluationCriterion[],
-      units: seedData.units as unknown as UnitWebsiteItem[],
-      phases: seedData.phases as ProjectPhase[],
-      periodId: null,
-      fromDatabase: false,
+      sections: seedData.docSections as DocSectionItem[], criteria: seedData.criteria as EvaluationCriterion[],
+      units: seedData.units as unknown as UnitWebsiteItem[], phases: seedData.phases as ProjectPhase[],
+      periodId: null, fromDatabase: false,
     };
   },
 };

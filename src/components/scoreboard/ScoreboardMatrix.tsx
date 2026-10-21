@@ -205,7 +205,7 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                   {/* 7 Khối màu tiêu chuẩn - Màu full ô vuông, bỏ nút bên trong */}
                   {criteria.map((c) => {
                     const critCode = c.id || c.code;
-                    const rating = u.criteriaRatings?.[critCode];
+                    const rating = u.criteriaRatings?.[c.id] || u.criteriaRatings?.[c.code] || u.criteriaRatings?.[critCode];
                     const isHovered = hoveredCell?.unitId === u.id && hoveredCell?.critCode === critCode;
 
                     let bgClasses = 'bg-slate-50/70 text-slate-400 hover:bg-slate-100/80 dark:bg-slate-800/30 dark:hover:bg-slate-800/60';
@@ -234,7 +234,7 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                         onMouseLeave={() => setHoveredCell(null)}
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleCellClick(u, critCode, rating);
+                          handleCellClick(u, c.id || critCode, rating);
                         }}
                       >
                         <div className="w-full py-2.5 px-1 flex flex-col items-center justify-center">
