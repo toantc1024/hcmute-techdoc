@@ -190,14 +190,8 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
           const list = prev.map((u) => {
             if (u.id !== unitId) return u;
             const nextRatings = { ...u.criteriaRatings };
-            if (rating === 'none') {
-              delete nextRatings[canonicalId];
-              delete nextRatings[displayCode];
-              delete nextRatings[critId];
-            } else {
-              nextRatings[canonicalId] = nextRatings[critId] = rating;
-              if (displayCode) nextRatings[displayCode] = rating;
-            }
+            nextRatings[canonicalId] = nextRatings[critId] = rating;
+            if (displayCode) nextRatings[displayCode] = rating;
             const nextNotes = { ...(u.criteriaNotes || {}) };
             nextNotes[canonicalId] = nextNotes[critId] = note;
             if (displayCode) nextNotes[displayCode] = note;

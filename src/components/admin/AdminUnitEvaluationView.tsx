@@ -154,7 +154,7 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80 text-xs sm:text-sm">
               {criteria.map((c) => {
-                const currentRating = unit.criteriaRatings[c.id] || unit.criteriaRatings[c.code] || 'warning';
+                const currentRating = unit.criteriaRatings[c.id] || unit.criteriaRatings[c.code] || 'none';
                 const currentNote = unit.criteriaNotes?.[c.id] || unit.criteriaNotes?.[c.code] || '';
                 const isExpanded = expandedDetails[c.id];
 
@@ -172,53 +172,36 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                       <p className="text-xs text-muted-foreground leading-relaxed">{c.description}</p>
                     </td>
 
-                    {/* Cột 2: Chấm điểm (Segmented control ngang) */}
+                    {/* Cột 2: Chấm điểm (Segmented control 4 nút ngang) */}
                     <td className="p-2.5 sm:p-3 border-r border-slate-200/80 dark:border-slate-800 align-top">
-                      <div className="flex items-center gap-1 p-1 rounded-lg bg-slate-100/80 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800">
-                        <button
-                          type="button"
-                          onClick={() => onUpdateRating(unit.id, c.id, 'pass')}
-                          className={`flex-1 min-h-[34px] px-1.5 py-1 rounded-md text-xs font-semibold transition-all inline-flex items-center justify-center gap-1 ${
-                            currentRating === 'pass'
-                              ? 'bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950 dark:text-emerald-300 shadow-2xs'
-                              : 'text-slate-600 dark:text-slate-400 hover:text-emerald-800 hover:bg-white/60 dark:hover:bg-slate-800'
-                          }`}
-                          title="Đạt: 100% điểm"
-                        >
-                          <span>✓</span>
-                          <span>Đạt</span>
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => onUpdateRating(unit.id, c.id, 'warning')}
-                          className={`flex-1 min-h-[34px] px-1.5 py-1 rounded-md text-xs font-semibold transition-all inline-flex items-center justify-center gap-1 ${
-                            currentRating === 'warning'
-                              ? 'bg-amber-50 text-amber-900 border border-amber-300 dark:bg-amber-950 dark:text-amber-300 shadow-2xs'
-                              : 'text-slate-600 dark:text-slate-400 hover:text-amber-800 hover:bg-white/60 dark:hover:bg-slate-800'
-                          }`}
-                          title="Cần sửa: 50% điểm"
-                        >
-                          <span>◐</span>
-                          <span>Cần sửa</span>
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => onUpdateRating(unit.id, c.id, 'fail')}
-                          className={`flex-1 min-h-[34px] px-1.5 py-1 rounded-md text-xs font-semibold transition-all inline-flex items-center justify-center gap-1 ${
-                            currentRating === 'fail'
-                              ? 'bg-rose-50 text-rose-900 border border-rose-300 dark:bg-rose-950 dark:text-rose-300 shadow-2xs'
-                              : 'text-slate-600 dark:text-slate-400 hover:text-rose-700 hover:bg-white/60 dark:hover:bg-slate-800'
-                          }`}
-                          title="Chưa đạt: 0 điểm"
-                        >
-                          <span>×</span>
-                          <span>Chưa đạt</span>
-                        </button>
+                      <div className="grid grid-cols-2 gap-1 p-1 rounded-lg bg-slate-100/80 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800">
+                        {([
+                          { val: 'none', label: 'Chưa chấm', icon: '—', active: 'bg-slate-200 text-slate-800 border-slate-400 dark:bg-slate-800 dark:text-slate-200' },
+                          { val: 'pass', label: 'Đạt', icon: '✓', active: 'bg-emerald-50 text-emerald-800 border-emerald-300 dark:bg-emerald-950 dark:text-emerald-300' },
+                          { val: 'warning', label: 'Cần sửa', icon: '◐', active: 'bg-amber-50 text-amber-900 border-amber-300 dark:bg-amber-950 dark:text-amber-300' },
+                          { val: 'fail', label: 'Chưa đạt', icon: '×', active: 'bg-rose-50 text-rose-900 border-rose-300 dark:bg-rose-950 dark:text-rose-300' },
+                        ] as const).map((opt) => (
+                          <button
+                            key={opt.val}
+                            type="button"
+                            onClick={() => onUpdateRating(unit.id, c.id, opt.val)}
+                            className={`min-h-[30px] px-1 py-1 rounded-md text-xs font-semibold transition-all inline-flex items-center justify-center gap-1 border ${
+                              currentRating === opt.val
+                                ? `${opt.active} shadow-2xs font-bold`
+                                : 'border-transparent text-slate-600 dark:text-slate-400 hover:bg-white/60 dark:hover:bg-slate-800'
+                            }`}
+                            title={`${opt.label}: ${opt.val === 'pass' ? '100%' : opt.val === 'warning' ? '50%' : '0'} điểm`}
+                          >
+                            <span>{opt.icon}</span>
+                            <span>{opt.label}</span>
+                          </button>
+                        ))}
                       </div>
                       <div className="text-[11px] text-muted-foreground text-center mt-1.5 font-mono">
-                        {currentRating === 'pass' && '100% điểm'}
-                        {currentRating === 'warning' && '50% điểm'}
-                        {currentRating === 'fail' && '0 điểm'}
+                        {currentRating === 'none' && '— Chưa chấm (0đ)'}
+                        {currentRating === 'pass' && '✓ 100% điểm'}
+                        {currentRating === 'warning' && '◐ 50% điểm'}
+                        {currentRating === 'fail' && '× 0 điểm'}
                       </div>
                     </td>
 
@@ -227,14 +210,17 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                       <div className={`p-2.5 rounded-lg border leading-relaxed ${
                         currentRating === 'pass' ? 'border-emerald-200 bg-emerald-50/70 text-emerald-900 dark:border-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-200' :
                         currentRating === 'warning' ? 'border-amber-200 bg-amber-50/70 text-amber-900 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-200' :
-                        'border-rose-200 bg-rose-50/70 text-rose-900 dark:border-rose-900 dark:bg-rose-950/40 dark:text-rose-200'
+                        currentRating === 'fail' ? 'border-rose-200 bg-rose-50/70 text-rose-900 dark:border-rose-900 dark:bg-rose-950/40 dark:text-rose-200' :
+                        'border-slate-200 bg-slate-50/70 text-slate-700 dark:border-slate-800 dark:bg-slate-900/40 dark:text-slate-300'
                       }`}>
                         <div className="font-semibold mb-0.5">
+                          {currentRating === 'none' && '— Tiêu chuẩn CHƯA ĐÁNH GIÁ:'}
                           {currentRating === 'pass' && '✓ Tiêu chuẩn ĐẠT:'}
                           {currentRating === 'warning' && '⚠ Điểm CẦN CHỈNH SỬA:'}
                           {currentRating === 'fail' && '✕ Lỗi KHÔNG ĐẠT:'}
                         </div>
                         <div>
+                          {currentRating === 'none' && 'Chưa có dữ liệu đánh giá hoặc đang chờ kiểm tra lại.'}
                           {currentRating === 'pass' && c.passCondition}
                           {currentRating === 'warning' && c.warningCondition}
                           {currentRating === 'fail' && c.failCondition}
