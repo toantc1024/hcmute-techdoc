@@ -35,13 +35,11 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
     setExpandedDetails((prev) => ({ ...prev, [critId]: !prev[critId] }));
   };
 
-  const scoreColor =
-    unit.completenessScore >= 80 ? 'text-emerald-700 dark:text-emerald-400' :
-    unit.completenessScore >= 50 ? 'text-amber-700 dark:text-amber-400' : 'text-rose-700 dark:text-rose-400';
+  const stagingDomain = unit.domain.includes('.hcmute.edu.vn')
+    ? unit.domain.replace('.hcmute.edu.vn', '1.hcmute.edu.vn') : unit.domain;
 
-  const barColor =
-    unit.completenessScore >= 80 ? 'bg-emerald-500/80' :
-    unit.completenessScore >= 50 ? 'bg-amber-500/80' : 'bg-rose-500/80';
+  const scoreColor = unit.completenessScore >= 80 ? 'text-emerald-700 dark:text-emerald-400' : unit.completenessScore >= 50 ? 'text-amber-700 dark:text-amber-400' : 'text-rose-700 dark:text-rose-400';
+  const barColor = unit.completenessScore >= 80 ? 'bg-emerald-500/80' : unit.completenessScore >= 50 ? 'bg-amber-500/80' : 'bg-rose-500/80';
 
   return (
     <div className="space-y-4 animate-in fade-in duration-200">
@@ -66,8 +64,13 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
               #{nextUnit.stt} {nextUnit.name.slice(0, 12)}... →
             </button>
           )}
-          <a href={`https://${unit.domain}`} target="_blank" rel="noopener noreferrer" className="min-h-[40px] px-3.5 rounded-lg bg-[#0072BC] hover:bg-[#005a96] text-white text-xs font-semibold transition-colors inline-flex items-center gap-1.5 shadow-2xs">
-            <span>Mở website</span><span>↗</span>
+          {!unit.isNewWeb && (
+            <a href={`https://${stagingDomain}`} target="_blank" rel="noopener noreferrer" className="min-h-[40px] px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold transition-colors inline-flex items-center gap-1.5 shadow-2xs" title={`Mở web mới staging để chấm điểm (${stagingDomain})`}>
+              <span>Mở web mới chấm</span><span className="font-mono text-[11px] opacity-90">({stagingDomain})</span><span>↗</span>
+            </a>
+          )}
+          <a href={`https://${unit.domain}`} target="_blank" rel="noopener noreferrer" className={`min-h-[40px] px-3.5 rounded-lg text-xs font-semibold transition-colors inline-flex items-center gap-1.5 shadow-2xs ${unit.isNewWeb ? 'bg-[#0072BC] hover:bg-[#005a96] text-white' : 'border border-slate-300 dark:border-slate-700 bg-background hover:bg-slate-100 text-slate-700 dark:text-slate-300'}`}>
+            <span>{unit.isNewWeb ? 'Mở website' : 'Web cũ (.181)'}</span><span>↗</span>
           </a>
         </div>
       </div>
@@ -91,9 +94,7 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                   type="button"
                   onClick={() => onToggleServerStatus(unit.id)}
                   className={`px-2.5 py-0.5 rounded-md text-xs font-semibold border inline-flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 tabular-nums ${
-                    unit.isNewWeb
-                      ? 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-emerald-950/40 dark:text-emerald-300'
-                      : 'bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950/40 dark:text-amber-300'
+                    unit.isNewWeb ? 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-emerald-950/40 dark:text-emerald-300' : 'bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950/40 dark:text-amber-300'
                   }`}
                   title="Bấm để chuyển trạng thái máy chủ (.189 Mới ⇄ .181 Cũ)"
                 >
@@ -102,9 +103,7 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                   <span className="opacity-70 text-[10px] font-mono">⇄ Đổi máy chủ</span>
                 </button>
               ) : (
-                <span className={`px-2 py-0.5 rounded-md text-xs font-semibold border tabular-nums ${
-                  unit.isNewWeb ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300' : 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-300'
-                }`}>
+                <span className={`px-2 py-0.5 rounded-md text-xs font-semibold border tabular-nums ${unit.isNewWeb ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300' : 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-300'}`}>
                   {unit.isNewWeb ? 'Đã trỏ web mới (.189)' : 'Đang duy trì web cũ (.181)'}
                 </span>
               )}
@@ -114,8 +113,11 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
               {unit.name}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-2.5 text-xs text-muted-foreground">
               <span>Tên miền: <strong className="font-mono text-[#0072BC] dark:text-sky-400">{unit.domain}</strong></span>
+              {!unit.isNewWeb && (
+                <span>• Web mới (staging): <a href={`https://${stagingDomain}`} target="_blank" rel="noopener noreferrer" className="font-mono font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">{stagingDomain} ↗</a></span>
+              )}
               <span>•</span>
               <span>Cán bộ: <strong className="text-[#004776] dark:text-foreground">{unit.staff}</strong></span>
             </div>

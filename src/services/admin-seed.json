@@ -270,12 +270,12 @@
         "crit_brand": "pass",
         "crit_luong_a": "pass",
         "crit_luong_b": "pass",
-        "crit_luong_c": "warning",
+        "crit_luong_c": "pass",
         "crit_security": "pass",
-        "crit_info": "warning"
+        "crit_info": "pass"
       },
-      "completenessScore": 79,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 93,
+      "notes": "Đã chấm theo web mới staging (ite1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 26
     },
     {
@@ -288,16 +288,16 @@
       "isNewWeb": false,
       "staff": "Phi",
       "criteriaRatings": {
-        "crit_dns": "fail",
-        "crit_brand": "fail",
-        "crit_luong_a": "fail",
-        "crit_luong_b": "fail",
-        "crit_luong_c": "fail",
-        "crit_security": "warning",
-        "crit_info": "fail"
+        "crit_dns": "warning",
+        "crit_brand": "pass",
+        "crit_luong_a": "pass",
+        "crit_luong_b": "pass",
+        "crit_luong_c": "pass",
+        "crit_security": "pass",
+        "crit_info": "pass"
       },
-      "completenessScore": 7,
-      "notes": "Tên miền chính: WEB CŨ (404)",
+      "completenessScore": 93,
+      "notes": "Đã chấm theo web mới staging (binhphuoc1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 51
     },
     {
@@ -319,7 +319,7 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "notes": "Đã chấm theo web mới staging (feee1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 16
     },
     {
@@ -340,7 +340,7 @@
         "crit_security": "pass",
         "crit_info": "fail"
       },
-      "completenessScore": 43,
+      "completenessScore": 45,
       "notes": "Tên miền chính: WEB MỚI (.189)",
       "prevRank": 41
     },
@@ -363,7 +363,7 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "notes": "Đã chấm theo web mới staging (fme1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 13
     },
     {
@@ -385,7 +385,7 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "notes": "Đã chấm theo web mới staging (feet1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 14
     },
     {
@@ -407,7 +407,7 @@
         "crit_info": "pass"
       },
       "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "notes": "Đã chấm theo web mới staging (fcft1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 19
     },
     {
@@ -442,16 +442,16 @@
       "isNewWeb": false,
       "staff": "Phi",
       "criteriaRatings": {
-        "crit_dns": "fail",
+        "crit_dns": "warning",
         "crit_brand": "pass",
         "crit_luong_a": "pass",
         "crit_luong_b": "pass",
         "crit_luong_c": "pass",
         "crit_security": "pass",
-        "crit_info": "warning"
+        "crit_info": "pass"
       },
-      "completenessScore": 79,
-      "notes": "Tên miền chính: WEB CŨ (404)",
+      "completenessScore": 93,
+      "notes": "Đã chấm theo web mới staging (fce1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 25
     },
     {
@@ -472,7 +472,7 @@
         "crit_security": "pass",
         "crit_info": "warning"
       },
-      "completenessScore": 64,
+      "completenessScore": 65,
       "notes": "Tên miền chính: WEB MỚI (.189)",
       "prevRank": 32
     },
@@ -516,7 +516,7 @@
         "crit_security": "pass",
         "crit_info": "warning"
       },
-      "completenessScore": 57,
+      "completenessScore": 58,
       "notes": "Tên miền chính: WEB MỚI (.189)",
       "prevRank": 37
     },
@@ -552,16 +552,16 @@
       "isNewWeb": false,
       "staff": "Phi",
       "criteriaRatings": {
-        "crit_dns": "warning",
-        "crit_brand": "pass",
-        "crit_luong_a": "pass",
-        "crit_luong_b": "pass",
-        "crit_luong_c": "pass",
-        "crit_security": "pass",
-        "crit_info": "pass"
+        "crit_dns": "fail",
+        "crit_brand": "none",
+        "crit_luong_a": "none",
+        "crit_luong_b": "none",
+        "crit_luong_c": "none",
+        "crit_security": "warning",
+        "crit_info": "none"
       },
-      "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 8,
+      "notes": "Chưa khởi tạo web mới staging (ffl1.hcmute.edu.vn). Tên miền chính đang trỏ web cũ (.181).",
       "prevRank": 18
     },
     {
@@ -604,7 +604,7 @@
         "crit_security": "warning",
         "crit_info": "fail"
       },
-      "completenessScore": 36,
+      "completenessScore": 38,
       "notes": "Tên miền chính: WEB MỚI (.189)",
       "prevRank": 42
     },
@@ -622,12 +622,12 @@
         "crit_brand": "pass",
         "crit_luong_a": "pass",
         "crit_luong_b": "pass",
-        "crit_luong_c": "pass",
+        "crit_luong_c": "warning",
         "crit_security": "pass",
         "crit_info": "pass"
       },
-      "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 85,
+      "notes": "Đã chấm theo web mới staging (aao1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 17
     },
     {
@@ -642,14 +642,14 @@
       "criteriaRatings": {
         "crit_dns": "warning",
         "crit_brand": "pass",
-        "crit_luong_a": "warning",
-        "crit_luong_b": "warning",
+        "crit_luong_a": "pass",
+        "crit_luong_b": "pass",
         "crit_luong_c": "warning",
         "crit_security": "pass",
-        "crit_info": "warning"
+        "crit_info": "pass"
       },
-      "completenessScore": 64,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 85,
+      "notes": "Đã chấm theo web mới staging (nmo1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 30
     },
     {
@@ -664,14 +664,14 @@
       "criteriaRatings": {
         "crit_dns": "warning",
         "crit_brand": "pass",
-        "crit_luong_a": "warning",
-        "crit_luong_b": "warning",
+        "crit_luong_a": "pass",
+        "crit_luong_b": "pass",
         "crit_luong_c": "warning",
         "crit_security": "pass",
-        "crit_info": "warning"
+        "crit_info": "pass"
       },
-      "completenessScore": 64,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 85,
+      "notes": "Đã chấm theo web mới staging (qao1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 34
     },
     {
@@ -706,16 +706,16 @@
       "isNewWeb": false,
       "staff": "Phi",
       "criteriaRatings": {
-        "crit_dns": "fail",
+        "crit_dns": "warning",
         "crit_brand": "pass",
         "crit_luong_a": "pass",
         "crit_luong_b": "pass",
-        "crit_luong_c": "pass",
+        "crit_luong_c": "warning",
         "crit_security": "pass",
-        "crit_info": "warning"
+        "crit_info": "pass"
       },
-      "completenessScore": 79,
-      "notes": "Tên miền chính: WEB CŨ (NXDOMAIN)",
+      "completenessScore": 85,
+      "notes": "Đã chấm theo web mới staging (oia1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 27
     },
     {
@@ -752,14 +752,14 @@
       "criteriaRatings": {
         "crit_dns": "warning",
         "crit_brand": "pass",
-        "crit_luong_a": "warning",
-        "crit_luong_b": "warning",
+        "crit_luong_a": "pass",
+        "crit_luong_b": "pass",
         "crit_luong_c": "warning",
         "crit_security": "pass",
-        "crit_info": "warning"
+        "crit_info": "pass"
       },
-      "completenessScore": 64,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 85,
+      "notes": "Đã chấm theo web mới staging (emo1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 33
     },
     {
@@ -796,14 +796,14 @@
       "criteriaRatings": {
         "crit_dns": "warning",
         "crit_brand": "pass",
-        "crit_luong_a": "warning",
-        "crit_luong_b": "warning",
+        "crit_luong_a": "pass",
+        "crit_luong_b": "pass",
         "crit_luong_c": "warning",
         "crit_security": "pass",
-        "crit_info": "warning"
+        "crit_info": "pass"
       },
-      "completenessScore": 64,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 85,
+      "notes": "Đã chấm theo web mới staging (tcns1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 36
     },
     {
@@ -824,7 +824,7 @@
         "crit_security": "pass",
         "crit_info": "warning"
       },
-      "completenessScore": 71,
+      "completenessScore": 73,
       "notes": "Tên miền chính: WEB MỚI (.189)",
       "prevRank": 29
     },
@@ -842,12 +842,12 @@
         "crit_brand": "pass",
         "crit_luong_a": "pass",
         "crit_luong_b": "pass",
-        "crit_luong_c": "pass",
+        "crit_luong_c": "warning",
         "crit_security": "pass",
         "crit_info": "pass"
       },
-      "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 85,
+      "notes": "Đã chấm theo web mới staging (stiao1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 22
     },
     {
@@ -868,7 +868,7 @@
         "crit_security": "warning",
         "crit_info": "fail"
       },
-      "completenessScore": 36,
+      "completenessScore": 38,
       "notes": "Tên miền chính: WEB MỚI (.189)",
       "prevRank": 43
     },
@@ -882,16 +882,16 @@
       "isNewWeb": false,
       "staff": "Cal",
       "criteriaRatings": {
-        "crit_dns": "warning",
-        "crit_brand": "warning",
-        "crit_luong_a": "fail",
-        "crit_luong_b": "fail",
-        "crit_luong_c": "warning",
-        "crit_security": "pass",
-        "crit_info": "fail"
+        "crit_dns": "fail",
+        "crit_brand": "none",
+        "crit_luong_a": "none",
+        "crit_luong_b": "none",
+        "crit_luong_c": "none",
+        "crit_security": "warning",
+        "crit_info": "none"
       },
-      "completenessScore": 36,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 8,
+      "notes": "Chưa khởi tạo web mới staging (vanphongdanguy1.hcmute.edu.vn). Tên miền chính đang trỏ web cũ (.181).",
       "prevRank": 48
     },
     {
@@ -908,12 +908,12 @@
         "crit_brand": "pass",
         "crit_luong_a": "pass",
         "crit_luong_b": "pass",
-        "crit_luong_c": "pass",
+        "crit_luong_c": "warning",
         "crit_security": "pass",
         "crit_info": "pass"
       },
-      "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 85,
+      "notes": "Đã chấm theo web mới staging (hd1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 23
     },
     {
@@ -956,7 +956,7 @@
         "crit_security": "pass",
         "crit_info": "fail"
       },
-      "completenessScore": 43,
+      "completenessScore": 45,
       "notes": "Tên miền chính: WEB MỚI (.189)",
       "prevRank": 39
     },
@@ -974,12 +974,12 @@
         "crit_brand": "pass",
         "crit_luong_a": "pass",
         "crit_luong_b": "pass",
-        "crit_luong_c": "pass",
+        "crit_luong_c": "warning",
         "crit_security": "pass",
         "crit_info": "pass"
       },
-      "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 85,
+      "notes": "Đã chấm theo web mới staging (sdh1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 24
     },
     {
@@ -996,12 +996,12 @@
         "crit_brand": "pass",
         "crit_luong_a": "pass",
         "crit_luong_b": "pass",
-        "crit_luong_c": "pass",
+        "crit_luong_c": "warning",
         "crit_security": "pass",
         "crit_info": "pass"
       },
-      "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 85,
+      "notes": "Đã chấm theo web mới staging (lib1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 20
     },
     {
@@ -1037,15 +1037,15 @@
       "staff": "Cal",
       "criteriaRatings": {
         "crit_dns": "fail",
-        "crit_brand": "warning",
-        "crit_luong_a": "fail",
-        "crit_luong_b": "fail",
-        "crit_luong_c": "fail",
-        "crit_security": "pass",
-        "crit_info": "fail"
+        "crit_brand": "none",
+        "crit_luong_a": "none",
+        "crit_luong_b": "none",
+        "crit_luong_c": "none",
+        "crit_security": "warning",
+        "crit_info": "none"
       },
-      "completenessScore": 21,
-      "notes": "Tên miền chính: LỖI IP .188 & 404",
+      "completenessScore": 8,
+      "notes": "Chưa khởi tạo web mới staging (rerc1.hcmute.edu.vn). Tên miền chính đang trỏ web cũ (.181).",
       "prevRank": 50
     },
     {
@@ -1066,7 +1066,7 @@
         "crit_security": "pass",
         "crit_info": "warning"
       },
-      "completenessScore": 71,
+      "completenessScore": 73,
       "notes": "Tên miền chính: WEB MỚI (.189)",
       "prevRank": 31
     },
@@ -1080,16 +1080,16 @@
       "isNewWeb": false,
       "staff": "Nhân",
       "criteriaRatings": {
-        "crit_dns": "warning",
-        "crit_brand": "warning",
-        "crit_luong_a": "fail",
-        "crit_luong_b": "fail",
-        "crit_luong_c": "warning",
-        "crit_security": "pass",
-        "crit_info": "fail"
+        "crit_dns": "fail",
+        "crit_brand": "none",
+        "crit_luong_a": "none",
+        "crit_luong_b": "none",
+        "crit_luong_c": "none",
+        "crit_security": "warning",
+        "crit_info": "none"
       },
-      "completenessScore": 36,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 8,
+      "notes": "Chưa khởi tạo web mới staging (iic1.hcmute.edu.vn). Tên miền chính đang trỏ web cũ (.181).",
       "prevRank": 47
     },
     {
@@ -1102,16 +1102,16 @@
       "isNewWeb": false,
       "staff": "Cal",
       "criteriaRatings": {
-        "crit_dns": "warning",
-        "crit_brand": "warning",
-        "crit_luong_a": "fail",
-        "crit_luong_b": "fail",
-        "crit_luong_c": "warning",
-        "crit_security": "pass",
-        "crit_info": "fail"
+        "crit_dns": "fail",
+        "crit_brand": "none",
+        "crit_luong_a": "none",
+        "crit_luong_b": "none",
+        "crit_luong_c": "none",
+        "crit_security": "warning",
+        "crit_info": "none"
       },
-      "completenessScore": 36,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 8,
+      "notes": "Chưa khởi tạo web mới staging (trungtamtinhoc1.hcmute.edu.vn). Tên miền chính đang trỏ web cũ (.181).",
       "prevRank": 45
     },
     {
@@ -1124,16 +1124,16 @@
       "isNewWeb": false,
       "staff": "Phi",
       "criteriaRatings": {
-        "crit_dns": "warning",
-        "crit_brand": "warning",
-        "crit_luong_a": "fail",
-        "crit_luong_b": "fail",
-        "crit_luong_c": "warning",
-        "crit_security": "pass",
-        "crit_info": "fail"
+        "crit_dns": "fail",
+        "crit_brand": "none",
+        "crit_luong_a": "none",
+        "crit_luong_b": "none",
+        "crit_luong_c": "none",
+        "crit_security": "warning",
+        "crit_info": "none"
       },
-      "completenessScore": 36,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 8,
+      "notes": "Chưa khởi tạo web mới staging (ttnn1.hcmute.edu.vn). Tên miền chính đang trỏ web cũ (.181).",
       "prevRank": 44
     },
     {
@@ -1150,12 +1150,12 @@
         "crit_brand": "pass",
         "crit_luong_a": "pass",
         "crit_luong_b": "pass",
-        "crit_luong_c": "pass",
+        "crit_luong_c": "warning",
         "crit_security": "pass",
         "crit_info": "pass"
       },
-      "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 85,
+      "notes": "Đã chấm theo web mới staging (hldhs1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 21
     },
     {
@@ -1176,7 +1176,7 @@
         "crit_security": "pass",
         "crit_info": "warning"
       },
-      "completenessScore": 71,
+      "completenessScore": 73,
       "notes": "Tên miền chính: WEB MỚI (.189)",
       "prevRank": 28
     },
@@ -1198,7 +1198,7 @@
         "crit_security": "pass",
         "crit_info": "fail"
       },
-      "completenessScore": 43,
+      "completenessScore": 45,
       "notes": "Tên miền chính: WEB MỚI (.189)",
       "prevRank": 40
     },
@@ -1212,16 +1212,16 @@
       "isNewWeb": false,
       "staff": "Cal",
       "criteriaRatings": {
-        "crit_dns": "pass",
-        "crit_brand": "pass",
-        "crit_luong_a": "pass",
-        "crit_luong_b": "pass",
-        "crit_luong_c": "pass",
-        "crit_security": "pass",
-        "crit_info": "pass"
+        "crit_dns": "fail",
+        "crit_brand": "none",
+        "crit_luong_a": "none",
+        "crit_luong_b": "none",
+        "crit_luong_c": "none",
+        "crit_security": "warning",
+        "crit_info": "none"
       },
-      "completenessScore": 100,
-      "notes": "Tên miền chính: WEB RIÊNG OJS",
+      "completenessScore": 8,
+      "notes": "Chưa khởi tạo web mới staging (jte.edu.vn). Tên miền chính đang trỏ web cũ (.181).",
       "prevRank": 9
     },
     {
@@ -1257,15 +1257,15 @@
       "staff": "Cal",
       "criteriaRatings": {
         "crit_dns": "fail",
-        "crit_brand": "warning",
-        "crit_luong_a": "fail",
-        "crit_luong_b": "fail",
-        "crit_luong_c": "warning",
-        "crit_security": "pass",
-        "crit_info": "fail"
+        "crit_brand": "none",
+        "crit_luong_a": "none",
+        "crit_luong_b": "none",
+        "crit_luong_c": "none",
+        "crit_security": "warning",
+        "crit_info": "none"
       },
-      "completenessScore": 29,
-      "notes": "Tên miền chính: SAI IP 45.252...",
+      "completenessScore": 8,
+      "notes": "Chưa khởi tạo web mới staging (tuoitre1.hcmute.edu.vn). Tên miền chính đang trỏ web cũ (.181).",
       "prevRank": 49
     },
     {
@@ -1286,7 +1286,7 @@
         "crit_security": "pass",
         "crit_info": "fail"
       },
-      "completenessScore": 43,
+      "completenessScore": 45,
       "notes": "Tên miền chính: WEB MỚI (.189)",
       "prevRank": 38
     },
@@ -1308,7 +1308,7 @@
         "crit_security": "pass",
         "crit_info": "fail"
       },
-      "completenessScore": 43,
+      "completenessScore": 45,
       "notes": "Tên miền chính: WEB MỚI (.189)",
       "prevRank": 35
     },
@@ -1326,12 +1326,12 @@
         "crit_brand": "pass",
         "crit_luong_a": "pass",
         "crit_luong_b": "pass",
-        "crit_luong_c": "pass",
+        "crit_luong_c": "warning",
         "crit_security": "pass",
         "crit_info": "pass"
       },
-      "completenessScore": 93,
-      "notes": "Tên miền chính: WEB CŨ (.181)",
+      "completenessScore": 85,
+      "notes": "Đã chấm theo web mới staging (daotaotuxa1.hcmute.edu.vn). Tên miền chính tạm duy trì web cũ (.181).",
       "prevRank": 15
     },
     {
@@ -1352,7 +1352,7 @@
         "crit_security": "warning",
         "crit_info": "fail"
       },
-      "completenessScore": 36,
+      "completenessScore": 38,
       "notes": "Tên miền chính: WEB MỚI (.189)",
       "prevRank": 46
     },
