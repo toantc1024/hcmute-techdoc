@@ -3,12 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import {
-  DocSectionItem,
-  EvaluationCriterion,
-  UnitWebsiteItem,
-  ProjectPhase,
-  AdminTab,
-  CriterionRating,
+  DocSectionItem, EvaluationCriterion, UnitWebsiteItem, ProjectPhase, AdminTab, CriterionRating,
 } from '@/models/admin.model';
 import { techdocsDbService } from '@/services/techdocs-db.service';
 import { computeUnitScore } from '@/services/admin.service';
@@ -105,47 +100,50 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
     const crit = criteria.find((c) => c.id === criterionId || c.code === criterionId);
     const canonicalId = crit?.id || criterionId;
     const cur = target.criteriaRatings?.[canonicalId] || target.criteriaRatings?.[criterionId] || target.criteriaRatings?.[crit?.code || ''] || 'none';
-    if (cur === rating) return;
+    const currentNote = target.criteriaNotes?.[canonicalId] || target.criteriaNotes?.[criterionId] || target.criteriaNotes?.[crit?.code || ''] || '';
 
     const ratingMap: Record<CriterionRating, string> = {
-      pass: '✓ Đạt (100% điểm)',
-      warning: '◐ Cần sửa (50% điểm)',
-      fail: '✕ Chưa đạt (0% điểm)',
-      none: '— Chưa chấm',
+      pass: '✓ Đạt (100% điểm)', warning: '◐ Cần sửa (50% điểm)', fail: '✕ Chưa đạt (0% điểm)', none: '— Chưa chấm',
     };
 
     setPendingConfirm({
-      type: 'unit_rating',
-      id: unitId,
-      criterionId: canonicalId,
-      ratingValue: rating,
-      name: target.name,
+      type: 'unit_rating', id: unitId, criterionId: canonicalId, ratingValue: rating, currentNote, name: target.name,
       subText: crit ? `Tiêu chí [${crit.code}] ${crit.name} (${crit.weight}%)` : `Tiêu chí ${criterionId}`,
-      currentLabel: ratingMap[cur] || cur || '— Chưa chấm',
-      nextLabel: ratingMap[rating] || rating,
-      isPositive: rating === 'pass',
+      currentLabel: ratingMap[cur] || cur || '— Chưa chấm', nextLabel: ratingMap[rating] || rating, isPositive: rating === 'pass',
     });
   };
 
   const handleUpdateUnitNote = async (unitId: number, criterionId: string, note: string) => {
-    setUnits((prev) =>
-      prev.map((u) => (u.id !== unitId ? u : { ...u, criteriaNotes: { ...(u.criteriaNotes || {}), [criterionId]: note } }))
-    );
+    const crit = criteria.find((c) => c.id === criterionId || c.code === criterionId);
+    const canonicalId = crit?.id || criterionId;
+    const displayCode = crit?.code || criterionId;
+
+    let updatedList: UnitWebsiteItem[] = [];
+    setUnits((prev) => {
+      const list = prev.map((u) => {
+        if (u.id !== unitId) return u;
+        const nextNotes = { ...(u.criteriaNotes || {}) };
+        nextNotes[canonicalId] = nextNotes[criterionId] = note;
+        if (displayCode) nextNotes[displayCode] = note;
+        return { ...u, criteriaNotes: nextNotes };
+      });
+      updatedList = list;
+      return list;
+    });
+    const curData = techdocsDbService.getInstantData();
+    techdocsDbService.setCache({ ...curData, units: updatedList });
     const target = units.find((u) => u.id === unitId);
-    await techdocsDbService.updateUnitRatingItem(unitId, criterionId, target?.criteriaRatings[criterionId] || 'warning', note);
+    const curRating = target?.criteriaRatings?.[canonicalId] || target?.criteriaRatings?.[criterionId] || 'warning';
+    await techdocsDbService.updateUnitRatingItem(unitId, canonicalId, curRating, note);
   };
 
   const handleToggleUnitServerStatus = (unitId: number) => {
     const target = units.find((u) => u.id === unitId);
     if (!target) return;
     setPendingConfirm({
-      type: 'unit_server',
-      id: unitId,
-      name: target.name,
-      subText: target.domain,
+      type: 'unit_server', id: unitId, name: target.name, subText: target.domain,
       currentLabel: target.isNewWeb ? 'Web mới (.189)' : 'Web cũ (.181)',
-      nextLabel: target.isNewWeb ? 'Web cũ (.181)' : 'Web mới (.189)',
-      isPositive: !target.isNewWeb,
+      nextLabel: target.isNewWeb ? 'Web cũ (.181)' : 'Web mới (.189)', isPositive: !target.isNewWeb,
     });
   };
 
@@ -153,17 +151,12 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
     const target = sections.find((s) => s.id === id);
     if (!target) return;
     setPendingConfirm({
-      type: 'section_visibility',
-      id,
-      name: target.pageTitle,
-      subText: `${target.chapterTitle} • ID: ${target.id}`,
-      currentLabel: target.isVisible ? 'Đang hiển thị' : 'Đang tạm ẩn',
-      nextLabel: target.isVisible ? 'Tạm ẩn' : 'Hiển thị',
-      isPositive: !target.isVisible,
+      type: 'section_visibility', id, name: target.pageTitle, subText: `${target.chapterTitle} • ID: ${target.id}`,
+      currentLabel: target.isVisible ? 'Đang hiển thị' : 'Đang tạm ẩn', nextLabel: target.isVisible ? 'Tạm ẩn' : 'Hiển thị', isPositive: !target.isVisible,
     });
   };
 
-  const handleExecuteConfirmedStatus = async (overrideRating?: CriterionRating) => {
+  const handleExecuteConfirmedStatus = async (overrideRating?: CriterionRating, noteText?: string) => {
     if (!pendingConfirm) return;
     setIsConfirming(true);
     try {
@@ -190,6 +183,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
         const crit = criteria.find((c) => c.id === critId || c.code === critId);
         const canonicalId = crit?.id || critId;
         const displayCode = crit?.code || critId;
+        const note = noteText !== undefined ? noteText : (pendingConfirm.currentNote ?? '');
 
         let updatedList: UnitWebsiteItem[] = [];
         setUnits((prev) => {
@@ -201,18 +195,26 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
               delete nextRatings[displayCode];
               delete nextRatings[critId];
             } else {
-              nextRatings[canonicalId] = rating;
+              nextRatings[canonicalId] = nextRatings[critId] = rating;
               if (displayCode) nextRatings[displayCode] = rating;
-              nextRatings[critId] = rating;
             }
-            return { ...u, criteriaRatings: nextRatings, completenessScore: computeUnitScore(nextRatings, criteria) };
+            const nextNotes = { ...(u.criteriaNotes || {}) };
+            nextNotes[canonicalId] = nextNotes[critId] = note;
+            if (displayCode) nextNotes[displayCode] = note;
+
+            return {
+              ...u,
+              criteriaRatings: nextRatings,
+              criteriaNotes: nextNotes,
+              completenessScore: computeUnitScore(nextRatings, criteria),
+            };
           });
           updatedList = list;
           return list;
         });
         const curData = techdocsDbService.getInstantData();
         techdocsDbService.setCache({ ...curData, units: updatedList });
-        await techdocsDbService.updateUnitRatingItem(unitId, canonicalId, rating);
+        await techdocsDbService.updateUnitRatingItem(unitId, canonicalId, rating, note);
       } else if (pendingConfirm.type === 'section_visibility') {
         const sectionId = String(pendingConfirm.id);
         let updatedTarget: DocSectionItem | undefined;
@@ -236,10 +238,8 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
     await techdocsDbService.updateDocSection(updated);
   };
 
-  const safeSections = Array.isArray(sections) ? sections : [];
-  const safeUnits = Array.isArray(units) ? units : [];
-  const safeCriteria = Array.isArray(criteria) ? criteria : [];
-  const safePhases = Array.isArray(phases) ? phases : [];
+  const safeSections = Array.isArray(sections) ? sections : [], safeUnits = Array.isArray(units) ? units : [];
+  const safeCriteria = Array.isArray(criteria) ? criteria : [], safePhases = Array.isArray(phases) ? phases : [];
 
   const totalViews = safeSections.reduce((sum, s) => sum + (s?.viewCount || 0), 0);
   const totalChapters = new Set(safeSections.map((s) => s?.chapterNumber || 1)).size || 8;

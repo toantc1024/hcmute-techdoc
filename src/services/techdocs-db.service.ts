@@ -138,8 +138,8 @@ export const techdocsDbService = {
         for (const item of uItems) {
           const critDbId = String(item.criterion_id);
           const critCode = critCodeToIdMap[critDbId] || critDbId;
-          criteriaRatings[critCode] = item.rating as CriterionRating;
-          if (item.note) criteriaNotes[critCode] = String(item.note);
+          criteriaRatings[critCode] = criteriaRatings[critDbId] = item.rating as CriterionRating;
+          if (item.note) criteriaNotes[critCode] = criteriaNotes[critDbId] = String(item.note);
         }
 
         return {
@@ -217,12 +217,14 @@ export const techdocsDbService = {
       const { data: crit } = await supabase.from('evaluation_criteria').select('id').or(`code.eq.${criterionCode},display_code.eq.${criterionCode}`).maybeSingle();
       if (!crit) return false;
 
+      const upsertData: Record<string, unknown> = {
+        rating_id: ratingRow.id, criterion_id: crit.id, rating, updated_at: new Date().toISOString(),
+      };
+      if (note !== undefined) upsertData.note = note;
+
       const { error } = rating === 'none'
         ? await supabase.from('unit_rating_items').delete().eq('rating_id', ratingRow.id).eq('criterion_id', crit.id)
-        : await supabase.from('unit_rating_items').upsert(
-            { rating_id: ratingRow.id, criterion_id: crit.id, rating, note: note || '', updated_at: new Date().toISOString() },
-            { onConflict: 'rating_id,criterion_id' }
-          );
+        : await supabase.from('unit_rating_items').upsert(upsertData, { onConflict: 'rating_id,criterion_id' });
       return !error;
     } catch { return false; }
   },

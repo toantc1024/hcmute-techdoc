@@ -6,6 +6,7 @@ export interface StatusConfirmData {
   id: number | string;
   criterionId?: string;
   ratingValue?: CriterionRating;
+  currentNote?: string;
   name: string;
   subText?: string;
   currentLabel: string;
@@ -15,7 +16,7 @@ export interface StatusConfirmData {
 
 interface AdminStatusConfirmModalProps {
   data: StatusConfirmData | null;
-  onConfirm: (selectedRating?: CriterionRating) => void;
+  onConfirm: (selectedRating?: CriterionRating, note?: string) => void;
   onCancel: () => void;
   isLoading?: boolean;
 }
@@ -63,13 +64,13 @@ export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = (
   onCancel,
   isLoading = false,
 }) => {
-  const [selectedRating, setSelectedRating] = useState<CriterionRating>(
-    data?.ratingValue || 'pass'
-  );
+  const [selectedRating, setSelectedRating] = useState<CriterionRating>(data?.ratingValue || 'pass');
+  const [note, setNote] = useState<string>(data?.currentNote || '');
 
   useEffect(() => {
-    if (data?.ratingValue) {
-      setSelectedRating(data.ratingValue);
+    if (data) {
+      setSelectedRating(data.ratingValue || 'pass');
+      setNote(data.currentNote || '');
     }
   }, [data]);
 
@@ -90,7 +91,7 @@ export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = (
         role="dialog"
         aria-modal="true"
       >
-        {/* Header with swap icon */}
+        {/* Header */}
         <div className="flex items-start gap-3.5">
           <div className="size-11 rounded-xl bg-blue-50 dark:bg-blue-950/70 border border-blue-100 dark:border-blue-900 text-[#0072BC] dark:text-sky-300 flex items-center justify-center shrink-0">
             <svg className="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -107,7 +108,7 @@ export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = (
             </h3>
             <p className="text-xs text-muted-foreground">
               {data.type === 'unit_rating'
-                ? 'Chọn 1 trong 4 mức đánh giá bên dưới để ghi nhận'
+                ? 'Chọn 1 trong 4 mức đánh giá & cập nhật ghi chú bên dưới'
                 : 'Kiểm tra thông tin trước khi ghi nhận vào hệ thống'}
             </p>
           </div>
@@ -133,9 +134,9 @@ export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = (
             )}
           </div>
 
-          {/* If unit_rating: show 4 selectable rating options */}
+          {/* If unit_rating: show 4 selectable rating options + Ghi chú nhanh */}
           {data.type === 'unit_rating' ? (
-            <div className="pt-2 border-t border-slate-200/60 dark:border-slate-800 space-y-2">
+            <div className="pt-2 border-t border-slate-200/60 dark:border-slate-800 space-y-2.5">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-semibold text-slate-700 dark:text-slate-300">
                   Chọn 1 trong 4 mức tiêu chí:
@@ -171,6 +172,32 @@ export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = (
                   );
                 })}
               </div>
+
+              {/* Ghi chú nhanh liên kết trực tiếp với mục 4. Ghi chú Admin */}
+              <div className="pt-2 border-t border-slate-200/60 dark:border-slate-800 space-y-1.5">
+                <div className="flex items-center justify-between text-xs">
+                  <label htmlFor="quick-admin-note" className="font-semibold text-[#004776] dark:text-sky-300 flex items-center gap-1.5">
+                    <svg className="size-3.5 text-[#0072BC] dark:text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                    <span>Ghi chú nhanh</span>
+                    <span className="text-[10px] text-muted-foreground font-normal">(đồng bộ Cột 4. Ghi chú Admin)</span>
+                  </label>
+                  {note.trim() && (
+                    <span className="text-[10px] font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-1.5 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
+                      ✓ Đã có ghi chú
+                    </span>
+                  )}
+                </div>
+                <textarea
+                  id="quick-admin-note"
+                  rows={2}
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  placeholder="Nhập ghi chú nghiệm thu cho tiêu chí này (tự động đồng bộ với Cột 4. Ghi chú Admin)..."
+                  className="w-full p-2.5 rounded-xl border border-slate-200/80 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs text-slate-800 dark:text-slate-200 leading-relaxed focus:ring-1 focus:ring-[#0072BC] outline-none resize-y min-h-[56px] transition-all"
+                />
+              </div>
             </div>
           ) : (
             /* Before -> After Comparison for server status and visibility */
@@ -194,7 +221,7 @@ export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = (
           {data.type === 'unit_server'
             ? 'Thay đổi sẽ cập nhật bảng ma trận 51 đơn vị, tính lại điểm nghiệm thu và đồng bộ thời gian thực toàn trường.'
             : data.type === 'unit_rating'
-            ? 'Thay đổi sẽ cập nhật điểm đánh giá tiêu chí, tính lại phần trăm hoàn thiện (%) của đơn vị và đồng bộ thời gian thực.'
+            ? 'Thay đổi sẽ cập nhật điểm đánh giá, ghi chú nghiệm thu, tính lại phần trăm hoàn thiện (%) và đồng bộ thời gian thực.'
             : 'Thay đổi sẽ cập nhật ngay quyền hiển thị của chuyên mục trên Cổng tra cứu TechDoc.'}
         </p>
 
@@ -210,7 +237,7 @@ export const AdminStatusConfirmModal: React.FC<AdminStatusConfirmModalProps> = (
           </button>
           <button
             type="button"
-            onClick={() => onConfirm(data.type === 'unit_rating' ? selectedRating : undefined)}
+            onClick={() => onConfirm(data.type === 'unit_rating' ? selectedRating : undefined, data.type === 'unit_rating' ? note : undefined)}
             disabled={isLoading}
             className="min-h-[38px] px-5 rounded-xl bg-[#0072BC] hover:bg-[#005a96] text-white text-xs font-semibold transition-all cursor-pointer shadow-sm active:scale-95 disabled:opacity-50 inline-flex items-center gap-1.5"
           >

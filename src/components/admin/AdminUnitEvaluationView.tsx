@@ -154,8 +154,8 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80 text-xs sm:text-sm">
               {criteria.map((c) => {
-                const currentRating = unit.criteriaRatings[c.id] || 'warning';
-                const currentNote = unit.criteriaNotes?.[c.id] || '';
+                const currentRating = unit.criteriaRatings[c.id] || unit.criteriaRatings[c.code] || 'warning';
+                const currentNote = unit.criteriaNotes?.[c.id] || unit.criteriaNotes?.[c.code] || '';
                 const isExpanded = expandedDetails[c.id];
 
                 return (
