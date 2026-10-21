@@ -286,7 +286,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 93,
-      "notes": "CMS: 6 chuyên mục, 15 bài viết. Quyền Admin: OK. [Web mới: ite1.hcmute.edu.vn]",
+      "notes": "🌐 Đang ở IP cũ .181 [Web mới: ite1.hcmute.edu.vn]. CMS: 6 mục, 15 bài, link tốt.",
       "prevRank": 26,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 110 link: 100% thông suốt, không có link 404."
@@ -312,7 +312,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 78,
-      "notes": "CMS: 3 chuyên mục, 5 bài viết. Quyền Admin: OK. [Web mới: binhphuoc1.hcmute.edu.vn]",
+      "notes": "⏱ Cần bổ sung: thiếu danh mục (3/5 chuẩn), thiếu bài viết (5/15 bài chuẩn). [Web mới: binhphuoc1]",
       "prevRank": 51,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 107 link: 100% thông suốt, không có link 404."
@@ -338,7 +338,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 93,
-      "notes": "CMS: 42 chuyên mục, 36 bài viết. Quyền Admin: OK. [Web mới: feee1.hcmute.edu.vn]",
+      "notes": "🌐 Đang ở IP cũ .181 [Web mới: feee1.hcmute.edu.vn]. CMS: 42 mục, 36 bài, link tốt.",
       "prevRank": 16,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 119 link: 100% thông suốt, không có link 404."
@@ -364,7 +364,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 78,
-      "notes": "CMS: 31 chuyên mục, 67 bài viết. Quyền Admin: OK.",
+      "notes": "✓ Đạt chuẩn 100%: 31 chuyên mục, 67 bài viết, link thông suốt.",
       "prevRank": 41,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 109 link: 100% thông suốt, không có link 404."
@@ -390,7 +390,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 93,
-      "notes": "CMS: 14 chuyên mục, 27 bài viết. Quyền Admin: OK. [Web mới: fme1.hcmute.edu.vn]",
+      "notes": "🌐 Đang ở IP cũ .181 [Web mới: fme1.hcmute.edu.vn]. CMS: 14 mục, 27 bài, link tốt.",
       "prevRank": 13,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 116 link: 100% thông suốt, không có link 404."
@@ -416,7 +416,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 93,
-      "notes": "CMS: 32 chuyên mục, 29 bài viết. Quyền Admin: OK. [Web mới: feet1.hcmute.edu.vn]",
+      "notes": "🌐 Đang ở IP cũ .181 [Web mới: feet1.hcmute.edu.vn]. CMS: 32 mục, 29 bài, link tốt.",
       "prevRank": 14,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 105 link: 100% thông suốt, không có link 404."
@@ -442,7 +442,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 85,
-      "notes": "CMS: 13 chuyên mục, 15 bài viết. Sót link hcmutertic.com. Quyền Admin: OK. [Web mới: fcft1.hcmute.edu.vn]",
+      "notes": "⚠️ Cần sửa: Sót 1 link dev test trỏ hcmutertic.com. [Web mới: fcft1]",
       "prevRank": 19,
       "criteriaNotes": {
         "crit_luong_c": "Còn sót 1 link trỏ về server test cũ (hcmutertic.com), cần đổi sang relative link."
@@ -468,7 +468,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 93,
-      "notes": "CMS: 22 chuyên mục, 72 bài viết. Có link 404 (/fit.hcmute.edu.vn). Quyền Admin: OK.",
+      "notes": "⚠️ Cần sửa: 1 link nội bộ bị 404 (/fit.hcmute.edu.vn) & link menu giữ chỗ (#). CMS: 22 mục, 72 bài.",
       "prevRank": 5,
       "criteriaNotes": {
         "crit_luong_c": "Có 1 link lỗi 404 (/fit.hcmute.edu.vn)."
@@ -494,7 +494,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 93,
-      "notes": "CMS: 100 chuyên mục, 30 bài viết. Quyền Admin: OK. [Web mới: fce1.hcmute.edu.vn]",
+      "notes": "🌐 Đang ở IP cũ .181 [Web mới: fce1.hcmute.edu.vn]. CMS: 100 mục, 30 bài, link tốt.",
       "prevRank": 25,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 116 link: 100% thông suốt, không có link 404."
@@ -520,7 +520,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 68,
-      "notes": "CMS: 17 chuyên mục, 33 bài viết. Trang chủ 404 (chờ DNS .189). Quyền Admin: OK.",
+      "notes": "🚨 Lỗi 404: Tên miền fae.hcmute.edu.vn chưa kết nối web mới (IP cũ .181 báo 404). Chờ IT trỏ về .189.",
       "prevRank": 32,
       "criteriaNotes": {
         "crit_luong_c": "Trang chủ chưa truy cập được (HTTP 404), chờ trỏ DNS về IP .189."
@@ -546,7 +546,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 93,
-      "notes": "CMS: 32 chuyên mục, 14 bài viết. Quyền Admin: OK.",
+      "notes": "⏱ Cần bổ sung: thiếu bài viết (14/15 bài chuẩn).",
       "prevRank": 2,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 39 link: 100% thông suốt, không có link 404."
@@ -572,7 +572,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 68,
-      "notes": "CMS: 14 chuyên mục, 2 bài viết. Quyền Admin: OK.",
+      "notes": "⏱ Cần bổ sung: thiếu bài viết (2/15 bài chuẩn).",
       "prevRank": 37,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 105 link: 100% thông suốt, không có link 404."
@@ -598,7 +598,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 100,
-      "notes": "CMS: 9 chuyên mục, 48 bài viết. Quyền Admin: OK.",
+      "notes": "✓ Đạt chuẩn 100%: 9 chuyên mục, 48 bài viết, link thông suốt.",
       "prevRank": 8,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 107 link: 100% thông suốt, không có link 404."
@@ -624,7 +624,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 45,
-      "notes": "CMS: 14 chuyên mục, 9 bài viết. Quyền Admin: OK. [Web mới: ffl1.hcmute.edu.vn]",
+      "notes": "⏱ Cần bổ sung: thiếu bài viết (9/15 bài chuẩn). [Web mới: ffl1]",
       "prevRank": 18,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 0 link: 100% thông suốt, không có link 404."
@@ -650,7 +650,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 78,
-      "notes": "CMS: 5 chuyên mục, 18 bài viết. Trang chủ 404 (chờ DNS .189). Quyền Admin: OK.",
+      "notes": "🚨 Lỗi 404: Tên miền iie.hcmute.edu.vn chưa kết nối web mới (IP cũ .181 báo 404). Chờ IT trỏ về .189.",
       "prevRank": 11,
       "criteriaNotes": {
         "crit_luong_c": "Trang chủ chưa truy cập được (HTTP 404), chờ trỏ DNS về IP .189."
@@ -676,7 +676,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 65,
-      "notes": "CMS: 11 chuyên mục, 5 bài viết. Quyền Admin: OK.",
+      "notes": "⏱ Cần bổ sung: thiếu bài viết (5/15 bài chuẩn).",
       "prevRank": 42,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 38 link: 100% thông suốt, không có link 404."
@@ -702,7 +702,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 85,
-      "notes": "CMS: 28 chuyên mục, 29 bài viết. Quyền Admin: OK. [Web mới: aao1.hcmute.edu.vn]",
+      "notes": "🌐 Đang ở IP cũ .181 [Web mới: aao1.hcmute.edu.vn]. CMS: 28 mục, 29 bài, link tốt.",
       "prevRank": 17,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 47 link: 100% thông suốt, không có link 404."
@@ -728,7 +728,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 78,
-      "notes": "CMS: 13 chuyên mục, 5 bài viết. Sót link hcmutertic.com. Quyền Admin: OK. [Web mới: nmo1.hcmute.edu.vn]",
+      "notes": "⚠️ Cần sửa: Sót 4 link dev test trỏ hcmutertic.com; mới có 5/15 bài. [Web mới: nmo1]",
       "prevRank": 30,
       "criteriaNotes": {
         "crit_luong_c": "Còn sót 4 link trỏ về server test cũ (hcmutertic.com), cần đổi sang relative link."
@@ -754,7 +754,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 85,
-      "notes": "CMS: 7 chuyên mục, 23 bài viết. Quyền Admin: OK. [Web mới: qao1.hcmute.edu.vn]",
+      "notes": "🌐 Đang ở IP cũ .181 [Web mới: qao1.hcmute.edu.vn]. CMS: 7 mục, 23 bài, link tốt.",
       "prevRank": 34,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 35 link: 100% thông suốt, không có link 404."
@@ -780,7 +780,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 93,
-      "notes": "CMS: 17 chuyên mục, 7 bài viết. Quyền Admin: OK.",
+      "notes": "⏱ Cần bổ sung: thiếu bài viết (7/15 bài chuẩn).",
       "prevRank": 7,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 103 link: 100% thông suốt, không có link 404."
@@ -806,7 +806,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 85,
-      "notes": "CMS: 10 chuyên mục, 100 bài viết. Quyền Admin: OK. [Web mới: oia1.hcmute.edu.vn]",
+      "notes": "🌐 Đang ở IP cũ .181 [Web mới: oia1.hcmute.edu.vn]. CMS: 10 mục, 100 bài, link tốt.",
       "prevRank": 27,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 101 link: 100% thông suốt, không có link 404."
@@ -832,7 +832,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 93,
-      "notes": "CMS: 16 chuyên mục, 4 bài viết. Quyền Admin: OK.",
+      "notes": "⏱ Cần bổ sung: thiếu bài viết (4/15 bài chuẩn).",
       "prevRank": 6,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 46 link: 100% thông suốt, không có link 404."
@@ -858,7 +858,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 85,
-      "notes": "CMS: 8 chuyên mục, 22 bài viết. Quyền Admin: OK. [Web mới: emo1.hcmute.edu.vn]",
+      "notes": "🌐 Đang ở IP cũ .181 [Web mới: emo1.hcmute.edu.vn]. CMS: 8 mục, 22 bài, link tốt.",
       "prevRank": 33,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 32 link: 100% thông suốt, không có link 404."
@@ -884,7 +884,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 93,
-      "notes": "CMS: 18 chuyên mục, 41 bài viết. Sót link hcmutertic.com. Quyền Admin: OK.",
+      "notes": "⚠️ Cần sửa: Sót 2 link dev test trỏ hcmutertic.com.",
       "prevRank": 10,
       "criteriaNotes": {
         "crit_luong_c": "Còn sót 2 link trỏ về server test cũ (hcmutertic.com), cần đổi sang relative link."
@@ -910,7 +910,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 63,
-      "notes": "CMS: 2 chuyên mục, 0 bài viết. Quyền Admin: OK. [Web mới: tcns1.hcmute.edu.vn]",
+      "notes": "⏱ Cần bổ sung: thiếu danh mục (2/5 chuẩn), thiếu bài viết (0/15 bài chuẩn). [Web mới: tcns1]",
       "prevRank": 36,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 73 link: 100% thông suốt, không có link 404."
@@ -936,7 +936,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 65,
-      "notes": "CMS: 2 chuyên mục, 1 bài viết. Quyền Admin: OK.",
+      "notes": "⏱ Cần bổ sung: thiếu danh mục (2/5 chuẩn), thiếu bài viết (1/15 bài chuẩn).",
       "prevRank": 29,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 73 link: 100% thông suốt, không có link 404."
@@ -962,7 +962,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 78,
-      "notes": "CMS: 88 chuyên mục, 3 bài viết. Sót link hcmutertic.com. Quyền Admin: OK. [Web mới: stiao1.hcmute.edu.vn]",
+      "notes": "⚠️ Cần sửa: Sót 2 link dev test trỏ hcmutertic.com; mới có 3/15 bài. [Web mới: stiao1]",
       "prevRank": 22,
       "criteriaNotes": {
         "crit_luong_c": "Còn sót 2 link trỏ về server test cũ (hcmutertic.com), cần đổi sang relative link."
@@ -988,7 +988,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 57,
-      "notes": "CMS: 2 chuyên mục, 4 bài viết. Quyền Admin: OK.",
+      "notes": "⏱ Cần bổ sung: thiếu danh mục (2/5 chuẩn), thiếu bài viết (4/15 bài chuẩn).",
       "prevRank": 43,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 37 link: 100% thông suốt, không có link 404."
@@ -1014,7 +1014,7 @@
         "crit_admin": "warning"
       },
       "completenessScore": 18,
-      "notes": "CMS: 0 chuyên mục, 0 bài viết. Quyền Admin: OK. [Web mới: vanphongdanguy1.hcmute.edu.vn]",
+      "notes": "⏱ Cần sửa: CMS hoàn toàn trống (0 chuyên mục, 0 bài viết). [Web mới: vanphongdanguy1]",
       "prevRank": 48,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 7 link: 100% thông suốt, không có link 404."
@@ -1040,7 +1040,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 85,
-      "notes": "CMS: 11 chuyên mục, 17 bài viết. Quyền Admin: OK. [Web mới: hd1.hcmute.edu.vn]",
+      "notes": "🌐 Đang ở IP cũ .181 [Web mới: hd1.hcmute.edu.vn]. CMS: 11 mục, 17 bài, link tốt.",
       "prevRank": 23,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 46 link: 100% thông suốt, không có link 404."
@@ -1066,7 +1066,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 100,
-      "notes": "CMS: 17 chuyên mục, 43 bài viết. Quyền Admin: OK.",
+      "notes": "✓ Đạt chuẩn 100%: 17 chuyên mục, 43 bài viết, link thông suốt.",
       "prevRank": 3,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 42 link: 100% thông suốt, không có link 404."
@@ -1092,7 +1092,7 @@
         "crit_admin": "warning"
       },
       "completenessScore": 43,
-      "notes": "CMS: 0 chuyên mục, 0 bài viết. Quyền Admin: OK.",
+      "notes": "⏱ Cần sửa: CMS hoàn toàn trống (0 chuyên mục, 0 bài viết).",
       "prevRank": 39,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 0 link: 100% thông suốt, không có link 404."
@@ -1118,7 +1118,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 78,
-      "notes": "CMS: 20 chuyên mục, 3 bài viết. Sót link hcmutertic.com. Quyền Admin: OK. [Web mới: sdh1.hcmute.edu.vn]",
+      "notes": "⚠️ Cần sửa: Sót 2 link dev test trỏ hcmutertic.com; mới có 3/15 bài. [Web mới: sdh1]",
       "prevRank": 24,
       "criteriaNotes": {
         "crit_luong_c": "Còn sót 2 link trỏ về server test cũ (hcmutertic.com), cần đổi sang relative link."
@@ -1144,7 +1144,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 85,
-      "notes": "CMS: 12 chuyên mục, 100 bài viết. Quyền Admin: OK. [Web mới: lib1.hcmute.edu.vn]",
+      "notes": "🌐 Đang ở IP cũ .181 [Web mới: lib1.hcmute.edu.vn]. CMS: 12 mục, 100 bài, link tốt.",
       "prevRank": 20,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 68 link: 100% thông suốt, không có link 404."
@@ -1170,7 +1170,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 93,
-      "notes": "CMS: 5 chuyên mục, 11 bài viết. Quyền Admin: OK.",
+      "notes": "⏱ Cần bổ sung: thiếu bài viết (11/15 bài chuẩn).",
       "prevRank": 12,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 39 link: 100% thông suốt, không có link 404."
@@ -1196,7 +1196,7 @@
         "crit_admin": "warning"
       },
       "completenessScore": 18,
-      "notes": "CMS: 0 chuyên mục, 0 bài viết. Trang chủ 404 (chờ DNS .189). Quyền Admin: OK. [Web mới: rerc.hcmute.edu.vn]",
+      "notes": "🚨 Lỗi 404: Trang chủ chưa kết nối web mới; CMS trống (0 mục, 0 bài). Chờ IT cấp web .189.",
       "prevRank": 50,
       "criteriaNotes": {
         "crit_luong_c": "Trang chủ chưa truy cập được (HTTP 404), chờ trỏ DNS về IP .189."
@@ -1222,7 +1222,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 88,
-      "notes": "CMS: 7 chuyên mục, 17 bài viết. Quyền Admin: OK.",
+      "notes": "✓ Đạt chuẩn 100%: 7 chuyên mục, 17 bài viết, link thông suốt.",
       "prevRank": 31,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 37 link: 100% thông suốt, không có link 404."
@@ -1248,7 +1248,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 45,
-      "notes": "CMS: 5 chuyên mục, 6 bài viết. Quyền Admin: OK. [Web mới: iic1.hcmute.edu.vn]",
+      "notes": "⏱ Cần bổ sung: thiếu bài viết (6/15 bài chuẩn). [Web mới: iic1]",
       "prevRank": 47,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 67 link: 100% thông suốt, không có link 404."
@@ -1274,7 +1274,7 @@
         "crit_admin": "warning"
       },
       "completenessScore": 18,
-      "notes": "CMS: 0 chuyên mục, 0 bài viết. Quyền Admin: OK. [Web mới: trungtamtinhoc1.hcmute.edu.vn]",
+      "notes": "⏱ Cần sửa: CMS hoàn toàn trống (0 chuyên mục, 0 bài viết). [Web mới: trungtamtinhoc1]",
       "prevRank": 45,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 30 link: 100% thông suốt, không có link 404."
@@ -1300,7 +1300,7 @@
         "crit_admin": "warning"
       },
       "completenessScore": 25,
-      "notes": "CMS: 0 chuyên mục, 0 bài viết. 9 link giữ chỗ. Quyền Admin: OK. [Web mới: ttnn1.hcmute.edu.vn]",
+      "notes": "⏱ Cần sửa: CMS hoàn toàn trống (0 chuyên mục, 0 bài viết). [Web mới: ttnn1]",
       "prevRank": 44,
       "criteriaNotes": {
         "crit_luong_c": "Có 9 link menu đang để giữ chỗ (# hoặc javascript:void)."
@@ -1326,7 +1326,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 78,
-      "notes": "CMS: 11 chuyên mục, 3 bài viết. Sót link hcmutertic.com. Quyền Admin: OK. [Web mới: hldhs1.hcmute.edu.vn]",
+      "notes": "⚠️ Cần sửa: Sót 3 link dev test trỏ hcmutertic.com; mới có 3/15 bài. [Web mới: hldhs1]",
       "prevRank": 21,
       "criteriaNotes": {
         "crit_luong_c": "Còn sót 3 link trỏ về server test cũ (hcmutertic.com), cần đổi sang relative link."
@@ -1352,7 +1352,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 88,
-      "notes": "CMS: 11 chuyên mục, 15 bài viết. Quyền Admin: OK.",
+      "notes": "✓ Đạt chuẩn 100%: 11 chuyên mục, 15 bài viết, link thông suốt.",
       "prevRank": 28,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 60 link: 100% thông suốt, không có link 404."
@@ -1378,7 +1378,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 63,
-      "notes": "CMS: 2 chuyên mục, 14 bài viết. Quyền Admin: OK.",
+      "notes": "⏱ Cần bổ sung: thiếu danh mục (2/5 chuẩn), thiếu bài viết (14/15 bài chuẩn).",
       "prevRank": 40,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 30 link: 100% thông suốt, không có link 404."
@@ -1404,7 +1404,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 30,
-      "notes": "CMS: 1 chuyên mục, 0 bài viết. Quyền Admin: OK. [Web mới: jte1.hcmute.edu.vn]",
+      "notes": "⏱ Cần bổ sung: thiếu danh mục (1/5 chuẩn), thiếu bài viết (0/15 bài chuẩn). [Web mới: jte1]",
       "prevRank": 9,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 78 link: 100% thông suốt, không có link 404."
@@ -1430,7 +1430,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 100,
-      "notes": "CMS: 14 chuyên mục, 19 bài viết. Quyền Admin: OK.",
+      "notes": "✓ Đạt chuẩn 100%: 14 chuyên mục, 19 bài viết, link thông suốt.",
       "prevRank": 1,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 105 link: 100% thông suốt, không có link 404."
@@ -1456,7 +1456,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 38,
-      "notes": "CMS: 15 chuyên mục, 7 bài viết. Quyền Admin: OK. [Web mới: tuoitre.hcmute.edu.vn]",
+      "notes": "⏱ Cần bổ sung: thiếu bài viết (7/15 bài chuẩn). [Web mới: tuoitre]",
       "prevRank": 49,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 1 link: 100% thông suốt, không có link 404."
@@ -1482,7 +1482,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 70,
-      "notes": "CMS: 4 chuyên mục, 15 bài viết. Quyền Admin: OK.",
+      "notes": "⏱ Cần bổ sung: thiếu danh mục (4/5 chuẩn).",
       "prevRank": 38,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 30 link: 100% thông suốt, không có link 404."
@@ -1508,7 +1508,7 @@
         "crit_admin": "warning"
       },
       "completenessScore": 43,
-      "notes": "CMS: 0 chuyên mục, 0 bài viết. Quyền Admin: OK.",
+      "notes": "⏱ Cần sửa: CMS hoàn toàn trống (0 chuyên mục, 0 bài viết).",
       "prevRank": 35,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 30 link: 100% thông suốt, không có link 404."
@@ -1534,7 +1534,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 85,
-      "notes": "CMS: 19 chuyên mục, 100 bài viết. Quyền Admin: OK. [Web mới: daotaotuxa1.hcmute.edu.vn]",
+      "notes": "🌐 Đang ở IP cũ .181 [Web mới: daotaotuxa1.hcmute.edu.vn]. CMS: 19 mục, 100 bài, link tốt.",
       "prevRank": 15,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 58 link: 100% thông suốt, không có link 404."
@@ -1560,7 +1560,7 @@
         "crit_admin": "warning"
       },
       "completenessScore": 38,
-      "notes": "CMS: 0 chuyên mục, 0 bài viết. Quyền Admin: OK.",
+      "notes": "⏱ Cần sửa: CMS hoàn toàn trống (0 chuyên mục, 0 bài viết).",
       "prevRank": 46,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 30 link: 100% thông suốt, không có link 404."
@@ -1586,7 +1586,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 100,
-      "notes": "CMS: 16 chuyên mục, 16 bài viết. Quyền Admin: OK.",
+      "notes": "✓ Đạt chuẩn 100%: 16 chuyên mục, 16 bài viết, link thông suốt.",
       "prevRank": 4,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 32 link: 100% thông suốt, không có link 404."

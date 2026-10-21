@@ -1,7 +1,7 @@
 -- ==============================================================================
 -- Migration: 20261021000003_sync_links_and_menu_audit.sql
--- Description: Synchronize homepage status (200/404) and link audit findings (TC-05 Luồng C)
---              including stray hcmutertic links, broken 404 links, and placeholder links.
+-- Description: Synchronize homepage status (200/404), link audit findings (TC-05 Luồng C),
+--              and detailed error notes for all 51 units.
 -- Date: 2026-10-21
 -- Invariants:
 --   - Security First & RLS compliant.
@@ -27,7 +27,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 93.00, 'CMS: 6 chuyên mục, 15 bài viết. Quyền Admin: OK. [Web mới: ite1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 93.00, '🌐 Đang ở IP cũ .181 [Web mới: ite1.hcmute.edu.vn]. CMS: 6 mục, 15 bài, link tốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 93.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -89,7 +89,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 78.00, 'CMS: 3 chuyên mục, 5 bài viết. Quyền Admin: OK. [Web mới: binhphuoc1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 78.00, '⏱ Cần bổ sung: thiếu danh mục (3/5 chuẩn), thiếu bài viết (5/15 bài chuẩn). [Web mới: binhphuoc1]', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 78.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -151,7 +151,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 93.00, 'CMS: 42 chuyên mục, 36 bài viết. Quyền Admin: OK. [Web mới: feee1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 93.00, '🌐 Đang ở IP cũ .181 [Web mới: feee1.hcmute.edu.vn]. CMS: 42 mục, 36 bài, link tốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 93.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -213,7 +213,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 78.00, 'CMS: 31 chuyên mục, 67 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 78.00, '✓ Đạt chuẩn 100%: 31 chuyên mục, 67 bài viết, link thông suốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 78.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -275,7 +275,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 93.00, 'CMS: 14 chuyên mục, 27 bài viết. Quyền Admin: OK. [Web mới: fme1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 93.00, '🌐 Đang ở IP cũ .181 [Web mới: fme1.hcmute.edu.vn]. CMS: 14 mục, 27 bài, link tốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 93.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -337,7 +337,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 93.00, 'CMS: 32 chuyên mục, 29 bài viết. Quyền Admin: OK. [Web mới: feet1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 93.00, '🌐 Đang ở IP cũ .181 [Web mới: feet1.hcmute.edu.vn]. CMS: 32 mục, 29 bài, link tốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 93.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -399,7 +399,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 85.00, 'CMS: 13 chuyên mục, 15 bài viết. Sót link hcmutertic.com. Quyền Admin: OK. [Web mới: fcft1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 85.00, '⚠️ Cần sửa: Sót 1 link dev test trỏ hcmutertic.com. [Web mới: fcft1]', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 85.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -461,7 +461,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 93.00, 'CMS: 22 chuyên mục, 72 bài viết. Có link 404 (/fit.hcmute.edu.vn). Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 93.00, '⚠️ Cần sửa: 1 link nội bộ bị 404 (/fit.hcmute.edu.vn) & link menu giữ chỗ (#). CMS: 22 mục, 72 bài.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 93.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -523,7 +523,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 93.00, 'CMS: 100 chuyên mục, 30 bài viết. Quyền Admin: OK. [Web mới: fce1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 93.00, '🌐 Đang ở IP cũ .181 [Web mới: fce1.hcmute.edu.vn]. CMS: 100 mục, 30 bài, link tốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 93.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -585,7 +585,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 68.00, 'CMS: 17 chuyên mục, 33 bài viết. Trang chủ 404 (chờ DNS .189). Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 68.00, '🚨 Lỗi 404: Tên miền fae.hcmute.edu.vn chưa kết nối web mới (IP cũ .181 báo 404). Chờ IT trỏ về .189.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 68.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -647,7 +647,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 93.00, 'CMS: 32 chuyên mục, 14 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 93.00, '⏱ Cần bổ sung: thiếu bài viết (14/15 bài chuẩn).', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 93.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -709,7 +709,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 68.00, 'CMS: 14 chuyên mục, 2 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 68.00, '⏱ Cần bổ sung: thiếu bài viết (2/15 bài chuẩn).', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 68.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -771,7 +771,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 100.00, 'CMS: 9 chuyên mục, 48 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 100.00, '✓ Đạt chuẩn 100%: 9 chuyên mục, 48 bài viết, link thông suốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 100.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -833,7 +833,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 45.00, 'CMS: 14 chuyên mục, 9 bài viết. Quyền Admin: OK. [Web mới: ffl1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 45.00, '⏱ Cần bổ sung: thiếu bài viết (9/15 bài chuẩn). [Web mới: ffl1]', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 45.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -848,7 +848,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_brand';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_luong_a';
     IF v_crit_id IS NOT NULL THEN
@@ -864,7 +866,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_luong_c';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', 'Kiểm tra 0 link: 100% thông suốt, không có link 404.')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_security';
     IF v_crit_id IS NOT NULL THEN
@@ -874,7 +878,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_info';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_admin';
     IF v_crit_id IS NOT NULL THEN
@@ -889,7 +895,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 78.00, 'CMS: 5 chuyên mục, 18 bài viết. Trang chủ 404 (chờ DNS .189). Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 78.00, '🚨 Lỗi 404: Tên miền iie.hcmute.edu.vn chưa kết nối web mới (IP cũ .181 báo 404). Chờ IT trỏ về .189.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 78.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -951,7 +957,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 65.00, 'CMS: 11 chuyên mục, 5 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 65.00, '⏱ Cần bổ sung: thiếu bài viết (5/15 bài chuẩn).', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 65.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1013,7 +1019,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 85.00, 'CMS: 28 chuyên mục, 29 bài viết. Quyền Admin: OK. [Web mới: aao1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 85.00, '🌐 Đang ở IP cũ .181 [Web mới: aao1.hcmute.edu.vn]. CMS: 28 mục, 29 bài, link tốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 85.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1075,7 +1081,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 78.00, 'CMS: 13 chuyên mục, 5 bài viết. Sót link hcmutertic.com. Quyền Admin: OK. [Web mới: nmo1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 78.00, '⚠️ Cần sửa: Sót 4 link dev test trỏ hcmutertic.com; mới có 5/15 bài. [Web mới: nmo1]', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 78.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1137,7 +1143,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 85.00, 'CMS: 7 chuyên mục, 23 bài viết. Quyền Admin: OK. [Web mới: qao1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 85.00, '🌐 Đang ở IP cũ .181 [Web mới: qao1.hcmute.edu.vn]. CMS: 7 mục, 23 bài, link tốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 85.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1199,7 +1205,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 93.00, 'CMS: 17 chuyên mục, 7 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 93.00, '⏱ Cần bổ sung: thiếu bài viết (7/15 bài chuẩn).', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 93.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1261,7 +1267,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 85.00, 'CMS: 10 chuyên mục, 100 bài viết. Quyền Admin: OK. [Web mới: oia1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 85.00, '🌐 Đang ở IP cũ .181 [Web mới: oia1.hcmute.edu.vn]. CMS: 10 mục, 100 bài, link tốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 85.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1323,7 +1329,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 93.00, 'CMS: 16 chuyên mục, 4 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 93.00, '⏱ Cần bổ sung: thiếu bài viết (4/15 bài chuẩn).', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 93.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1385,7 +1391,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 85.00, 'CMS: 8 chuyên mục, 22 bài viết. Quyền Admin: OK. [Web mới: emo1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 85.00, '🌐 Đang ở IP cũ .181 [Web mới: emo1.hcmute.edu.vn]. CMS: 8 mục, 22 bài, link tốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 85.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1447,7 +1453,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 93.00, 'CMS: 18 chuyên mục, 41 bài viết. Sót link hcmutertic.com. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 93.00, '⚠️ Cần sửa: Sót 2 link dev test trỏ hcmutertic.com.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 93.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1509,7 +1515,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 63.00, 'CMS: 2 chuyên mục, 0 bài viết. Quyền Admin: OK. [Web mới: tcns1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 63.00, '⏱ Cần bổ sung: thiếu danh mục (2/5 chuẩn), thiếu bài viết (0/15 bài chuẩn). [Web mới: tcns1]', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 63.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1571,7 +1577,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 65.00, 'CMS: 2 chuyên mục, 1 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 65.00, '⏱ Cần bổ sung: thiếu danh mục (2/5 chuẩn), thiếu bài viết (1/15 bài chuẩn).', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 65.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1633,7 +1639,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 78.00, 'CMS: 88 chuyên mục, 3 bài viết. Sót link hcmutertic.com. Quyền Admin: OK. [Web mới: stiao1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 78.00, '⚠️ Cần sửa: Sót 2 link dev test trỏ hcmutertic.com; mới có 3/15 bài. [Web mới: stiao1]', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 78.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1695,7 +1701,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 57.00, 'CMS: 2 chuyên mục, 4 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 57.00, '⏱ Cần bổ sung: thiếu danh mục (2/5 chuẩn), thiếu bài viết (4/15 bài chuẩn).', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 57.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1757,7 +1763,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 18.00, 'CMS: 0 chuyên mục, 0 bài viết. Quyền Admin: OK. [Web mới: vanphongdanguy1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 18.00, '⏱ Cần sửa: CMS hoàn toàn trống (0 chuyên mục, 0 bài viết). [Web mới: vanphongdanguy1]', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 18.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1772,7 +1778,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_brand';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_luong_a';
     IF v_crit_id IS NOT NULL THEN
@@ -1788,7 +1796,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_luong_c';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', 'Kiểm tra 7 link: 100% thông suốt, không có link 404.')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_security';
     IF v_crit_id IS NOT NULL THEN
@@ -1798,7 +1808,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_info';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_admin';
     IF v_crit_id IS NOT NULL THEN
@@ -1813,7 +1825,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 85.00, 'CMS: 11 chuyên mục, 17 bài viết. Quyền Admin: OK. [Web mới: hd1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 85.00, '🌐 Đang ở IP cũ .181 [Web mới: hd1.hcmute.edu.vn]. CMS: 11 mục, 17 bài, link tốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 85.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1875,7 +1887,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 100.00, 'CMS: 17 chuyên mục, 43 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 100.00, '✓ Đạt chuẩn 100%: 17 chuyên mục, 43 bài viết, link thông suốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 100.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1937,7 +1949,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 43.00, 'CMS: 0 chuyên mục, 0 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 43.00, '⏱ Cần sửa: CMS hoàn toàn trống (0 chuyên mục, 0 bài viết).', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 43.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -1999,7 +2011,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 78.00, 'CMS: 20 chuyên mục, 3 bài viết. Sót link hcmutertic.com. Quyền Admin: OK. [Web mới: sdh1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 78.00, '⚠️ Cần sửa: Sót 2 link dev test trỏ hcmutertic.com; mới có 3/15 bài. [Web mới: sdh1]', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 78.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2061,7 +2073,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 85.00, 'CMS: 12 chuyên mục, 100 bài viết. Quyền Admin: OK. [Web mới: lib1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 85.00, '🌐 Đang ở IP cũ .181 [Web mới: lib1.hcmute.edu.vn]. CMS: 12 mục, 100 bài, link tốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 85.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2123,7 +2135,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 93.00, 'CMS: 5 chuyên mục, 11 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 93.00, '⏱ Cần bổ sung: thiếu bài viết (11/15 bài chuẩn).', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 93.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2185,7 +2197,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 18.00, 'CMS: 0 chuyên mục, 0 bài viết. Trang chủ 404 (chờ DNS .189). Quyền Admin: OK. [Web mới: rerc.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 18.00, '🚨 Lỗi 404: Trang chủ chưa kết nối web mới; CMS trống (0 mục, 0 bài). Chờ IT cấp web .189.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 18.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2200,7 +2212,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_brand';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_luong_a';
     IF v_crit_id IS NOT NULL THEN
@@ -2228,7 +2242,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_info';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_admin';
     IF v_crit_id IS NOT NULL THEN
@@ -2243,7 +2259,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 88.00, 'CMS: 7 chuyên mục, 17 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 88.00, '✓ Đạt chuẩn 100%: 7 chuyên mục, 17 bài viết, link thông suốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 88.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2305,7 +2321,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 45.00, 'CMS: 5 chuyên mục, 6 bài viết. Quyền Admin: OK. [Web mới: iic1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 45.00, '⏱ Cần bổ sung: thiếu bài viết (6/15 bài chuẩn). [Web mới: iic1]', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 45.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2320,7 +2336,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_brand';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_luong_a';
     IF v_crit_id IS NOT NULL THEN
@@ -2336,7 +2354,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_luong_c';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', 'Kiểm tra 67 link: 100% thông suốt, không có link 404.')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_security';
     IF v_crit_id IS NOT NULL THEN
@@ -2346,7 +2366,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_info';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_admin';
     IF v_crit_id IS NOT NULL THEN
@@ -2361,7 +2383,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 18.00, 'CMS: 0 chuyên mục, 0 bài viết. Quyền Admin: OK. [Web mới: trungtamtinhoc1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 18.00, '⏱ Cần sửa: CMS hoàn toàn trống (0 chuyên mục, 0 bài viết). [Web mới: trungtamtinhoc1]', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 18.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2376,7 +2398,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_brand';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_luong_a';
     IF v_crit_id IS NOT NULL THEN
@@ -2392,7 +2416,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_luong_c';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', 'Kiểm tra 30 link: 100% thông suốt, không có link 404.')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_security';
     IF v_crit_id IS NOT NULL THEN
@@ -2402,7 +2428,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_info';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_admin';
     IF v_crit_id IS NOT NULL THEN
@@ -2417,7 +2445,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 25.00, 'CMS: 0 chuyên mục, 0 bài viết. 9 link giữ chỗ. Quyền Admin: OK. [Web mới: ttnn1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 25.00, '⏱ Cần sửa: CMS hoàn toàn trống (0 chuyên mục, 0 bài viết). [Web mới: ttnn1]', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 25.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2432,7 +2460,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_brand';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_luong_a';
     IF v_crit_id IS NOT NULL THEN
@@ -2460,7 +2490,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_info';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_admin';
     IF v_crit_id IS NOT NULL THEN
@@ -2475,7 +2507,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 78.00, 'CMS: 11 chuyên mục, 3 bài viết. Sót link hcmutertic.com. Quyền Admin: OK. [Web mới: hldhs1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 78.00, '⚠️ Cần sửa: Sót 3 link dev test trỏ hcmutertic.com; mới có 3/15 bài. [Web mới: hldhs1]', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 78.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2537,7 +2569,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 88.00, 'CMS: 11 chuyên mục, 15 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 88.00, '✓ Đạt chuẩn 100%: 11 chuyên mục, 15 bài viết, link thông suốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 88.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2599,7 +2631,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 63.00, 'CMS: 2 chuyên mục, 14 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 63.00, '⏱ Cần bổ sung: thiếu danh mục (2/5 chuẩn), thiếu bài viết (14/15 bài chuẩn).', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 63.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2661,7 +2693,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 30.00, 'CMS: 1 chuyên mục, 0 bài viết. Quyền Admin: OK. [Web mới: jte1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 30.00, '⏱ Cần bổ sung: thiếu danh mục (1/5 chuẩn), thiếu bài viết (0/15 bài chuẩn). [Web mới: jte1]', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 30.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2676,7 +2708,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_brand';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_luong_a';
     IF v_crit_id IS NOT NULL THEN
@@ -2692,7 +2726,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_luong_c';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', 'Kiểm tra 78 link: 100% thông suốt, không có link 404.')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_security';
     IF v_crit_id IS NOT NULL THEN
@@ -2702,7 +2738,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_info';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_admin';
     IF v_crit_id IS NOT NULL THEN
@@ -2717,7 +2755,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 100.00, 'CMS: 14 chuyên mục, 19 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 100.00, '✓ Đạt chuẩn 100%: 14 chuyên mục, 19 bài viết, link thông suốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 100.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2779,7 +2817,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 38.00, 'CMS: 15 chuyên mục, 7 bài viết. Quyền Admin: OK. [Web mới: tuoitre.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 38.00, '⏱ Cần bổ sung: thiếu bài viết (7/15 bài chuẩn). [Web mới: tuoitre]', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 38.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2794,7 +2832,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_brand';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_luong_a';
     IF v_crit_id IS NOT NULL THEN
@@ -2810,7 +2850,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_luong_c';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', 'Kiểm tra 1 link: 100% thông suốt, không có link 404.')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_security';
     IF v_crit_id IS NOT NULL THEN
@@ -2820,7 +2862,9 @@ BEGIN
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_info';
     IF v_crit_id IS NOT NULL THEN
-      DELETE FROM public.unit_rating_items WHERE rating_id = v_rating_id AND criterion_id = v_crit_id;
+      INSERT INTO public.unit_rating_items (rating_id, criterion_id, rating, note)
+      VALUES (v_rating_id, v_crit_id, 'none', '')
+      ON CONFLICT (rating_id, criterion_id) DO UPDATE SET rating = 'none', note = EXCLUDED.note, updated_at = now();
     END IF;
     SELECT id INTO v_crit_id FROM public.evaluation_criteria WHERE code = 'crit_admin';
     IF v_crit_id IS NOT NULL THEN
@@ -2835,7 +2879,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 70.00, 'CMS: 4 chuyên mục, 15 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 70.00, '⏱ Cần bổ sung: thiếu danh mục (4/5 chuẩn).', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 70.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2897,7 +2941,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 43.00, 'CMS: 0 chuyên mục, 0 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 43.00, '⏱ Cần sửa: CMS hoàn toàn trống (0 chuyên mục, 0 bài viết).', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 43.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -2959,7 +3003,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = false, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 85.00, 'CMS: 19 chuyên mục, 100 bài viết. Quyền Admin: OK. [Web mới: daotaotuxa1.hcmute.edu.vn]', true)
+    VALUES (v_unit_id, v_period_id, 85.00, '🌐 Đang ở IP cũ .181 [Web mới: daotaotuxa1.hcmute.edu.vn]. CMS: 19 mục, 100 bài, link tốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 85.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -3021,7 +3065,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 38.00, 'CMS: 0 chuyên mục, 0 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 38.00, '⏱ Cần sửa: CMS hoàn toàn trống (0 chuyên mục, 0 bài viết).', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 38.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -3083,7 +3127,7 @@ BEGIN
   IF v_unit_id IS NOT NULL AND v_period_id IS NOT NULL THEN
     UPDATE public.organizational_units SET is_new_web = true, updated_at = now() WHERE id = v_unit_id;
     INSERT INTO public.unit_ratings (unit_id, period_id, total_score, admin_notes, is_published)
-    VALUES (v_unit_id, v_period_id, 100.00, 'CMS: 16 chuyên mục, 16 bài viết. Quyền Admin: OK.', true)
+    VALUES (v_unit_id, v_period_id, 100.00, '✓ Đạt chuẩn 100%: 16 chuyên mục, 16 bài viết, link thông suốt.', true)
     ON CONFLICT (unit_id, period_id) DO UPDATE SET
       total_score = 100.00,
       admin_notes = EXCLUDED.admin_notes,
@@ -3140,25 +3184,5 @@ BEGIN
     END IF;
   END IF;
 
-  -- 3. Recalculate all unit_ratings total_score based on normalized criteria weights
-  UPDATE public.unit_ratings r
-  SET total_score = sub.calc_score,
-      updated_at = now()
-  FROM (
-    SELECT 
-      i.rating_id,
-      ROUND(SUM(
-        CASE 
-          WHEN i.rating = 'pass' THEN c.weight
-          WHEN i.rating = 'warning' THEN c.weight * 0.5
-          ELSE 0
-        END
-      )) AS calc_score
-    FROM public.unit_rating_items i
-    JOIN public.evaluation_criteria c ON c.id = i.criterion_id
-    GROUP BY i.rating_id
-  ) sub
-  WHERE r.id = sub.rating_id;
-
-  RAISE NOTICE 'Successfully synchronized homepage status and link audit for all 51 units.';
+  RAISE NOTICE 'Successfully synchronized homepage status, link audit findings, and error notes for all 51 units.';
 END $$;

@@ -12,6 +12,14 @@ interface ScoreboardMatrixProps {
   isAdmin?: boolean;
 }
 
+const getNoteBadgeCls = (notes: string) => {
+  if (notes.includes('🚨') || notes.includes('Lỗi 404')) return 'bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-900/50';
+  if (notes.includes('⚠️') || notes.includes('Cần sửa')) return 'bg-amber-50 text-amber-900 border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-900/50';
+  if (notes.includes('⏱') || notes.includes('bổ sung') || notes.includes('trống')) return 'bg-orange-50 text-orange-900 border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-900/50';
+  if (notes.includes('🌐')) return 'bg-sky-50 text-sky-900 border-sky-200 dark:bg-sky-950/30 dark:text-sky-300 dark:border-sky-900/40';
+  return 'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-300 dark:border-emerald-900/40';
+};
+
 export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
   units, criteria, onSelectUnit, onUpdateRating, onToggleServerStatus, isAdmin = false,
 }) => {
@@ -27,11 +35,8 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
   }, [units]);
 
   const handleCellClick = (u: UnitWebsiteItem, critCode: string, currentRating: CriterionRating | undefined) => {
-    if (isAdmin && onUpdateRating) {
-      onUpdateRating(u.id, critCode, currentRating || 'none');
-    } else if (onSelectUnit) {
-      onSelectUnit(u);
-    }
+    if (isAdmin && onUpdateRating) onUpdateRating(u.id, critCode, currentRating || 'none');
+    else if (onSelectUnit) onSelectUnit(u);
   };
 
   return (
@@ -45,18 +50,14 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
           </span>
         </div>
         <div className="flex flex-wrap items-center gap-2 font-medium text-xs">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200/80 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800">
-            <span>✓ Đạt</span>
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-50 text-amber-800 border border-amber-200/80 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800">
-            <span>⏱ Cần sửa</span>
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-rose-50 text-rose-800 border border-rose-200/80 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-800">
-            <span>✕ Chưa đạt</span>
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700">
-            <span>- Chưa chấm</span>
-          </span>
+          {[
+            { label: '✓ Đạt', cls: 'bg-emerald-50 text-emerald-800 border-emerald-200/80 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800' },
+            { label: '⏱ Cần sửa', cls: 'bg-amber-50 text-amber-800 border-amber-200/80 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800' },
+            { label: '✕ Chưa đạt', cls: 'bg-rose-50 text-rose-800 border-rose-200/80 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-800' },
+            { label: '- Chưa chấm', cls: 'bg-slate-100 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700' },
+          ].map(b => (
+            <span key={b.label} className={`inline-flex items-center px-2.5 py-1 rounded-md border ${b.cls}`}>{b.label}</span>
+          ))}
           <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground font-normal border-l border-slate-200 dark:border-slate-700 pl-2 ml-1">
             <span>Hạng:</span>
             <span className="text-emerald-700 dark:text-emerald-400 font-bold font-mono">↑ tăng</span>
@@ -68,11 +69,12 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
 
       {/* Bảng ma trận trực quan & dịu mắt với Sticky columns */}
       <div className="overflow-x-auto w-full max-h-[680px] overflow-y-auto">
-        <table className="w-full text-left border-collapse min-w-[980px]">
+        <table className="w-full text-left border-collapse min-w-[1100px]">
           <thead>
             <tr className="sticky top-0 z-20 border-b border-slate-200 dark:border-slate-800 bg-[#004776] text-white text-xs uppercase tracking-wider font-semibold">
               <th className="sticky left-0 top-0 z-30 bg-[#004776] py-2.5 px-2.5 text-center w-12">Hạng</th>
               <th className="sticky left-12 top-0 z-30 bg-[#004776] border-r border-[#00385e] py-2.5 px-3 min-w-[240px]">Đơn vị &amp; Website</th>
+              <th className="py-2.5 px-3 text-left min-w-[280px]">Ghi chú rà soát / Tình trạng lỗi</th>
               <th className="py-2.5 px-2.5 text-center w-16" title="Số tiêu chuẩn đạt">Số TC</th>
               <th className="py-2.5 px-2.5 text-center w-20" title="Độ hoàn thiện">Điểm %</th>
               <th className="py-2.5 px-2.5 text-center w-20">Máy chủ</th>
@@ -96,11 +98,10 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
               const passCount = criteria.filter((c) => (u.criteriaRatings?.[c.id] || u.criteriaRatings?.[c.code]) === 'pass').length;
               const hasAlert = u.completenessScore < 50 || !u.isNewWeb;
 
-              const rankBadge =
-                rank === 1 ? 'bg-amber-50 text-amber-900 border-amber-200 font-bold' :
-                rank === 2 ? 'bg-slate-100 text-[#004776] border-slate-200 font-bold' :
-                rank === 3 ? 'bg-orange-50 text-orange-900 border-orange-200 font-bold' :
-                'bg-slate-50 text-slate-600 dark:bg-slate-900 dark:text-slate-400 border-slate-200/60 font-semibold';
+              const rankBadge = rank === 1 ? 'bg-amber-50 text-amber-900 border-amber-200 font-bold'
+                : rank === 2 ? 'bg-slate-100 text-[#004776] border-slate-200 font-bold'
+                : rank === 3 ? 'bg-orange-50 text-orange-900 border-orange-200 font-bold'
+                : 'bg-slate-50 text-slate-600 dark:bg-slate-900 dark:text-slate-400 border-slate-200/60 font-semibold';
 
               return (
                 <tr
@@ -117,26 +118,15 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                         {rank}
                       </span>
                       {rankDiff > 0 ? (
-                        <span
-                          className="inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-mono tracking-tight"
-                          title={`Tăng ${rankDiff} bậc (kỳ trước #${prevRank})`}
-                        >
+                        <span className="inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-mono tracking-tight" title={`Tăng ${rankDiff} bậc (kỳ trước #${prevRank})`}>
                           <span>↑</span><span>{rankDiff}</span>
                         </span>
                       ) : rankDiff < 0 ? (
-                        <span
-                          className="inline-flex items-center gap-0.5 text-[10px] font-bold text-rose-600 dark:text-rose-400 font-mono tracking-tight"
-                          title={`Tụt ${Math.abs(rankDiff)} bậc (kỳ trước #${prevRank})`}
-                        >
+                        <span className="inline-flex items-center gap-0.5 text-[10px] font-bold text-rose-600 dark:text-rose-400 font-mono tracking-tight" title={`Tụt ${Math.abs(rankDiff)} bậc (kỳ trước #${prevRank})`}>
                           <span>↓</span><span>{Math.abs(rankDiff)}</span>
                         </span>
                       ) : (
-                        <span
-                          className="text-[10px] font-medium text-slate-400 dark:text-slate-500 font-mono leading-none"
-                          title={`Giữ nguyên thứ hạng #${rank}`}
-                        >
-                          —
-                        </span>
+                        <span className="text-[10px] font-medium text-slate-400 dark:text-slate-500 font-mono leading-none" title={`Giữ nguyên thứ hạng #${rank}`}>—</span>
                       )}
                     </div>
                   </td>
@@ -147,22 +137,37 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                       <div className="min-w-0">
                         <div className="font-semibold text-sm text-[#004776] dark:text-foreground truncate flex items-center gap-1.5">
                           <span className="truncate">{u.name}</span>
-                          {hasAlert ? (
-                            <span className="size-1.5 rounded-full bg-amber-500 shrink-0" title="Cần rà soát" />
-                          ) : (
-                            <span className="size-1.5 rounded-full bg-emerald-500 shrink-0" />
-                          )}
+                          <span className={`size-1.5 rounded-full shrink-0 ${hasAlert ? 'bg-amber-500' : 'bg-emerald-500'}`} title={hasAlert ? 'Cần rà soát' : 'Đạt chuẩn'} />
                         </div>
                         <div className="flex items-center gap-1.5 text-xs font-mono mt-0.5">
                           <span className="text-[#0072BC] dark:text-sky-400 font-medium truncate">{u.domain}</span>
                           <span className="text-slate-400">·</span>
                           <span className="text-[11px] text-slate-500 font-sans">{u.groupLabel}</span>
                         </div>
+                        {u.notes && (
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate max-w-[200px] mt-0.5 opacity-85" title={u.notes}>
+                            {u.notes}
+                          </div>
+                        )}
                       </div>
                       <span className="text-[11px] font-medium text-slate-600 dark:text-slate-300 px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 shrink-0 border border-slate-200/60 dark:border-slate-700">
                         {u.staff}
                       </span>
                     </div>
+                  </td>
+
+                  {/* Ghi chú rà soát / Tình trạng lỗi */}
+                  <td className="py-2 px-3 text-left">
+                    {u.notes ? (
+                      <div
+                        className={`text-xs leading-relaxed px-2.5 py-1 rounded-md border font-medium line-clamp-2 max-w-[340px] ${getNoteBadgeCls(u.notes)}`}
+                        title={u.notes}
+                      >
+                        {u.notes}
+                      </div>
+                    ) : (
+                      <span className="text-xs text-slate-400 italic">—</span>
+                    )}
                   </td>
 
                   {/* Số TC */}
@@ -224,7 +229,7 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
                     )}
                   </td>
 
-                  {/* 7 Khối màu tiêu chuẩn - Màu full ô vuông, bỏ nút bên trong */}
+                  {/* 8 Khối màu tiêu chuẩn - Màu full ô vuông, bỏ nút bên trong */}
                   {criteria.map((c) => {
                     const critCode = c.id || c.code;
                     const rating = u.criteriaRatings?.[c.id] || u.criteriaRatings?.[c.code] || u.criteriaRatings?.[critCode];
