@@ -31,14 +31,14 @@ const RATING_CHOICES: {
   {
     key: 'pass',
     label: '✓ Đạt',
-    scoreLabel: '100% (+15đ)',
+    scoreLabel: '100% điểm',
     activeColor: 'border-emerald-500 bg-emerald-50/90 text-emerald-900 ring-2 ring-emerald-500/20 dark:bg-emerald-950/60 dark:text-emerald-200 dark:border-emerald-500',
     badgeColor: 'bg-emerald-500 text-white',
   },
   {
     key: 'warning',
     label: '◐ Cần sửa',
-    scoreLabel: '50% (+7.5đ)',
+    scoreLabel: '50% điểm',
     activeColor: 'border-amber-500 bg-amber-50/90 text-amber-900 ring-2 ring-amber-500/20 dark:bg-amber-950/60 dark:text-amber-200 dark:border-amber-500',
     badgeColor: 'bg-amber-500 text-white',
   },

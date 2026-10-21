@@ -94,22 +94,23 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
     router.replace('/login');
   };
 
-  const handleUpdateUnitRating = (unitId: number, criterionId: string, rating: CriterionRating) => {
+  const handleUpdateUnitRating = (unitId: number, criterionId: string, rating?: CriterionRating) => {
     const target = units.find((u) => u.id === unitId);
     if (!target) return;
     const crit = criteria.find((c) => c.id === criterionId || c.code === criterionId);
     const canonicalId = crit?.id || criterionId;
     const cur = target.criteriaRatings?.[canonicalId] || target.criteriaRatings?.[criterionId] || target.criteriaRatings?.[crit?.code || ''] || 'none';
     const currentNote = target.criteriaNotes?.[canonicalId] || target.criteriaNotes?.[criterionId] || target.criteriaNotes?.[crit?.code || ''] || '';
+    const activeRating = rating || cur;
 
     const ratingMap: Record<CriterionRating, string> = {
       pass: '✓ Đạt (100% điểm)', warning: '◐ Cần sửa (50% điểm)', fail: '✕ Chưa đạt (0% điểm)', none: '— Chưa chấm',
     };
 
     setPendingConfirm({
-      type: 'unit_rating', id: unitId, criterionId: canonicalId, ratingValue: rating, currentNote, name: target.name,
+      type: 'unit_rating', id: unitId, criterionId: canonicalId, ratingValue: activeRating, currentNote, name: target.name,
       subText: crit ? `Tiêu chí [${crit.code}] ${crit.name} (${crit.weight}%)` : `Tiêu chí ${criterionId}`,
-      currentLabel: ratingMap[cur] || cur || '— Chưa chấm', nextLabel: ratingMap[rating] || rating, isPositive: rating === 'pass',
+      currentLabel: ratingMap[cur] || cur || '— Chưa chấm', nextLabel: ratingMap[activeRating] || activeRating, isPositive: activeRating === 'pass',
     });
   };
 

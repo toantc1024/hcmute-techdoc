@@ -28,9 +28,7 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
 
   const handleCellClick = (u: UnitWebsiteItem, critCode: string, currentRating: CriterionRating | undefined) => {
     if (isAdmin && onUpdateRating) {
-      const next: CriterionRating =
-        currentRating === 'pass' ? 'warning' : currentRating === 'warning' ? 'fail' : currentRating === 'fail' ? 'none' : 'pass';
-      onUpdateRating(u.id, critCode, next);
+      onUpdateRating(u.id, critCode, currentRating || 'none');
     } else if (onSelectUnit) {
       onSelectUnit(u);
     }
