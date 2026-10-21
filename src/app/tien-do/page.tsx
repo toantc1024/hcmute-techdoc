@@ -79,7 +79,7 @@ export default function TienDoPage() {
                 Bảng Tiến Độ Cập Nhật 51 Website Khoa / Viện / Đơn Vị
               </h1>
               <p className="text-xs sm:text-sm text-muted-foreground max-w-3xl leading-relaxed">
-                Theo dõi trực quan độ hoàn thiện 7 tiêu chuẩn kỹ thuật cốt lõi. Dữ liệu được cập nhật liên tục từ hệ thống đánh giá Nhà trường.
+                Theo dõi trực quan độ hoàn thiện 8 tiêu chuẩn kỹ thuật cốt lõi (TC-01 đến TC-08). Dữ liệu được cập nhật liên tục từ hệ thống đánh giá Nhà trường.
               </p>
             </div>
 
@@ -198,7 +198,7 @@ export default function TienDoPage() {
               {/* Danh sách 7 tiêu chuẩn */}
               <div className="space-y-1.5 pt-1">
                 <div className="text-xs font-bold text-foreground uppercase tracking-wider">
-                  Trạng thái 7 tiêu chuẩn:
+                  Trạng thái {criteria.length} tiêu chuẩn kỹ thuật:
                 </div>
                 <div className="space-y-1 max-h-48 overflow-y-auto pr-1">
                   {criteria.map((c) => {

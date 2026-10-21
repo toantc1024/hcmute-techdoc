@@ -84,7 +84,7 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
     { key: 'all', title: 'Tổng số website', value: `${stats.total} đơn vị`, sub: '100% thuộc HCM-UTE', icon: <img src={brandConfig.logoUrl} alt="HCM-UTE" className="size-4 object-contain" />, activeBorder: 'border-[#0072BC]', isSelected: selectedWebType === 'all' },
     { key: 'new', title: 'Đã trỏ web mới (.189)', value: `${stats.newWebCount} (${Math.round((stats.newWebCount / stats.total) * 100)}%)`, sub: 'Giao diện chuẩn mới', icon: <svg className="size-4 text-emerald-700 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>, activeBorder: 'border-emerald-600', isSelected: selectedWebType === 'new' },
     { key: 'old', title: 'Tạm duy trì web cũ (.181)', value: `${stats.oldWebCount} (${Math.round((stats.oldWebCount / stats.total) * 100)}%)`, sub: 'Chờ chuyển dữ liệu', icon: <svg className="size-4 text-amber-700 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>, activeBorder: 'border-amber-600', isSelected: selectedWebType === 'old' },
-    { key: 'score', title: 'Độ hoàn thiện trung bình', value: `${stats.avgScore}%`, sub: '7 tiêu chuẩn cốt lõi', icon: <svg className="size-4 text-[#0072BC] dark:text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>, activeBorder: 'border-[#0072BC]', isSelected: false },
+    { key: 'score', title: 'Độ hoàn thiện trung bình', value: `${stats.avgScore}%`, sub: '8 tiêu chuẩn cốt lõi', icon: <svg className="size-4 text-[#0072BC] dark:text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>, activeBorder: 'border-[#0072BC]', isSelected: false },
   ];
 
   return (
@@ -146,7 +146,7 @@ export const AdminUnitDashboard: React.FC<AdminUnitDashboardProps> = ({
                 {filteredUnits.length} đơn vị
               </span>
             </h2>
-            <span className="text-xs text-muted-foreground hidden sm:inline">Bấm hàng để thẩm định 7 tiêu chuẩn</span>
+            <span className="text-xs text-muted-foreground hidden sm:inline">Bấm hàng để thẩm định các tiêu chuẩn</span>
           </div>
 
           <div className="overflow-x-auto">

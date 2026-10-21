@@ -66,7 +66,7 @@ export const AdminOverviewCharts: React.FC<AdminOverviewChartsProps> = ({ stats 
             <h3 className="text-[16px] font-semibold text-[#004776] dark:text-foreground">
               Tỷ lệ hoàn thiện tổng thể
             </h3>
-            <span className="text-xs text-muted-foreground font-mono">7 tiêu chuẩn cốt lõi</span>
+            <span className="text-xs text-muted-foreground font-mono">8 tiêu chuẩn cốt lõi</span>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-3">

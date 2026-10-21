@@ -48,13 +48,13 @@ export const ScoreboardMatrix: React.FC<ScoreboardMatrixProps> = ({
         </div>
         <div className="flex flex-wrap items-center gap-2 font-medium text-xs">
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200/80 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800">
-            <span>✓ Đạt (+15đ)</span>
+            <span>✓ Đạt</span>
           </span>
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-50 text-amber-800 border border-amber-200/80 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800">
-            <span>⏱ Cần sửa (+7.5đ)</span>
+            <span>⏱ Cần sửa</span>
           </span>
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-rose-50 text-rose-800 border border-rose-200/80 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-800">
-            <span>✕ Chưa đạt (0đ)</span>
+            <span>✕ Chưa đạt</span>
           </span>
           <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-slate-100 text-slate-600 border border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700">
             <span>- Chưa chấm</span>
