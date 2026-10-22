@@ -14,6 +14,7 @@ import { AdminUnitDashboard } from './AdminUnitDashboard';
 import { AdminAnalyticsView } from './AdminAnalyticsView';
 import { AdminProgressManager } from './AdminProgressManager';
 import { AdminContentManager } from './AdminContentManager';
+import { AdminIssueManager } from './AdminIssueManager';
 import { AdminSecurityModal } from './AdminSecurityModal';
 import { AdminStatusConfirmModal, StatusConfirmData } from './AdminStatusConfirmModal';
 
@@ -283,6 +284,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
                 sections={safeSections} onToggleVisibility={handleToggleDocSectionVisibility} onUpdateSection={handleUpdateDocSection}
               />
             )}
+            {activeTab === 'issues' && <AdminIssueManager />}
           </>
         )}
       </main>

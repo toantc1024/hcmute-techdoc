@@ -26,6 +26,8 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
   onToggleServerStatus,
 }) => {
   const [expandedDetails, setExpandedDetails] = useState<Record<string, boolean>>({});
+  const [draftNotes, setDraftNotes] = useState<Record<string, string>>({});
+  const [savedStatus, setSavedStatus] = useState<Record<string, boolean>>({});
 
   const currentIndex = allUnits.findIndex((u) => u.id === unit.id);
   const prevUnit = currentIndex > 0 ? allUnits[currentIndex - 1] : null;
@@ -247,19 +249,37 @@ export const AdminUnitEvaluationView: React.FC<AdminUnitEvaluationViewProps> = (
                     </td>
 
                     {/* Cột 4: Ghi chú Admin */}
-                    <td className="p-2.5 sm:p-3 space-y-1">
+                    <td className="p-2.5 sm:p-3 space-y-1.5">
                       <textarea
                         rows={2}
-                        value={currentNote}
-                        onChange={(e) => onUpdateNote(unit.id, c.id, e.target.value)}
+                        value={draftNotes[c.id] ?? currentNote}
+                        onChange={(e) => setDraftNotes((prev) => ({ ...prev, [c.id]: e.target.value }))}
                         placeholder="Admin ghi chú lại nội dung cần lưu ý..."
                         className="w-full p-2 rounded-lg border border-slate-200/80 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900 text-xs text-[#004776] dark:text-foreground leading-relaxed focus:ring-1 focus:ring-[#0072BC] focus:bg-background outline-none resize-y min-h-[52px]"
                       />
-                      {currentNote.trim() && (
-                        <span className="inline-flex items-center gap-1 text-[11px] text-emerald-600 dark:text-emerald-400 font-medium px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
-                          ✓ Đã lưu ghi chú
-                        </span>
-                      )}
+                      <div className="flex items-center justify-between gap-1.5 pt-0.5">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const val = draftNotes[c.id] ?? currentNote;
+                            onUpdateNote(unit.id, c.id, val);
+                            setSavedStatus((prev) => ({ ...prev, [c.id]: true }));
+                            setTimeout(() => setSavedStatus((prev) => ({ ...prev, [c.id]: false })), 3000);
+                          }}
+                          className="px-2.5 py-1 rounded-md bg-[#0072BC] hover:bg-[#005a96] text-white text-[11px] font-semibold transition-all cursor-pointer shadow-2xs active:scale-95 inline-flex items-center gap-1"
+                        >
+                          <span>💾</span><span>Lưu ghi chú</span>
+                        </button>
+                        {savedStatus[c.id] ? (
+                          <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold animate-in fade-in">
+                            ✓ Đã lưu thành công!
+                          </span>
+                        ) : currentNote.trim() ? (
+                          <span className="text-[10px] text-muted-foreground">
+                            ✓ Đã có ghi chú
+                          </span>
+                        ) : null}
+                      </div>
                     </td>
                   </tr>
                 );

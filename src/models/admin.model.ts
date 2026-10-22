@@ -64,4 +64,23 @@ export interface ProjectPhase {
   completionRate: number; // %
 }
 
-export type AdminTab = 'overview' | 'units' | 'analytics' | 'progress' | 'content';
+export type AdminTab = 'overview' | 'units' | 'analytics' | 'progress' | 'content' | 'issues';
+
+export type IssueStatus = 'khong_xu_ly' | 'da_xu_ly' | 'dang_xu_ly';
+
+export type IssuePriority = 1 | 2 | 3; // 1: Cấp độ 1 (Khẩn cấp/Cao), 2: Cấp độ 2 (Trung bình), 3: Cấp độ 3 (Thấp)
+
+export interface SystemIssueItem {
+  id: string;
+  stt: number;
+  status: IssueStatus;
+  content: string; // Nội dung (Text)
+  images: string[]; // Danh sách ảnh (data URL hoặc link ảnh đính kèm)
+  solutionPlan: string; // PA Chỉnh sửa (Phương án xử lý)
+  priority: IssuePriority; // Ưu tiên (cấp độ 1, 2, 3)
+  notes: string; // Note (Ghi chú thêm)
+  reporterName?: string; // Người ghi chú
+  createdAt?: string;
+  updatedAt?: string;
+}
+
