@@ -8,6 +8,7 @@ import {
 import { techdocsDbService } from '@/services/techdocs-db.service';
 import { computeUnitScore } from '@/services/admin.service';
 import { getBrowserClient } from '@/lib/supabase/client';
+import { AdminSidebar } from './AdminSidebar';
 import { AdminTopBar } from './AdminTopBar';
 import { AdminOverviewView } from './AdminOverviewView';
 import { AdminUnitDashboard } from './AdminUnitDashboard';
@@ -26,6 +27,7 @@ interface AdminDashboardClientProps {
 export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user, role }) => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<AdminTab>('overview');
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isSecurityModalOpen, setIsSecurityModalOpen] = useState(false);
   const [pendingConfirm, setPendingConfirm] = useState<StatusConfirmData | null>(null);
   const [isConfirming, setIsConfirming] = useState(false);
@@ -117,20 +119,15 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
 
   const handleUpdateUnitNote = async (unitId: number, criterionId: string, note: string) => {
     const crit = criteria.find((c) => c.id === criterionId || c.code === criterionId);
-    const canonicalId = crit?.id || criterionId;
-    const displayCode = crit?.code || criterionId;
-
+    const canonicalId = crit?.id || criterionId, displayCode = crit?.code || criterionId;
     let updatedList: UnitWebsiteItem[] = [];
     setUnits((prev) => {
-      const list = prev.map((u) => {
+      updatedList = prev.map((u) => {
         if (u.id !== unitId) return u;
-        const nextNotes = { ...(u.criteriaNotes || {}) };
-        nextNotes[canonicalId] = nextNotes[criterionId] = note;
-        if (displayCode) nextNotes[displayCode] = note;
+        const nextNotes = { ...(u.criteriaNotes || {}), [canonicalId]: note, [criterionId]: note, ...(displayCode ? { [displayCode]: note } : {}) };
         return { ...u, criteriaNotes: nextNotes };
       });
-      updatedList = list;
-      return list;
+      return updatedList;
     });
     const curData = techdocsDbService.getInstantData();
     techdocsDbService.setCache({ ...curData, units: updatedList });
@@ -180,33 +177,19 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
         await techdocsDbService.updateUnitServerStatus(unitId, nextVal);
       } else if (pendingConfirm.type === 'unit_rating') {
         const unitId = Number(pendingConfirm.id);
-        const critId = pendingConfirm.criterionId!;
-        const rating: CriterionRating = overrideRating || pendingConfirm.ratingValue || 'pass';
+        const critId = pendingConfirm.criterionId!, rating: CriterionRating = overrideRating || pendingConfirm.ratingValue || 'pass';
         const crit = criteria.find((c) => c.id === critId || c.code === critId);
-        const canonicalId = crit?.id || critId;
-        const displayCode = crit?.code || critId;
+        const canonicalId = crit?.id || critId, displayCode = crit?.code || critId;
         const note = noteText !== undefined ? noteText : (pendingConfirm.currentNote ?? '');
-
         let updatedList: UnitWebsiteItem[] = [];
         setUnits((prev) => {
-          const list = prev.map((u) => {
+          updatedList = prev.map((u) => {
             if (u.id !== unitId) return u;
-            const nextRatings = { ...u.criteriaRatings };
-            nextRatings[canonicalId] = nextRatings[critId] = rating;
-            if (displayCode) nextRatings[displayCode] = rating;
-            const nextNotes = { ...(u.criteriaNotes || {}) };
-            nextNotes[canonicalId] = nextNotes[critId] = note;
-            if (displayCode) nextNotes[displayCode] = note;
-
-            return {
-              ...u,
-              criteriaRatings: nextRatings,
-              criteriaNotes: nextNotes,
-              completenessScore: computeUnitScore(nextRatings, criteria),
-            };
+            const nextRatings = { ...u.criteriaRatings, [canonicalId]: rating, [critId]: rating, ...(displayCode ? { [displayCode]: rating } : {}) };
+            const nextNotes = { ...(u.criteriaNotes || {}), [canonicalId]: note, [critId]: note, ...(displayCode ? { [displayCode]: note } : {}) };
+            return { ...u, criteriaRatings: nextRatings, criteriaNotes: nextNotes, completenessScore: computeUnitScore(nextRatings, criteria) };
           });
-          updatedList = list;
-          return list;
+          return updatedList;
         });
         const curData = techdocsDbService.getInstantData();
         techdocsDbService.setCache({ ...curData, units: updatedList });
@@ -242,52 +225,60 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({ user
   const avgScore = safeUnits.length > 0 ? Math.round(safeUnits.reduce((sum, u) => sum + (u?.completenessScore || 0), 0) / safeUnits.length) : 72;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0B1525] text-foreground flex flex-col">
-      <AdminTopBar
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0B1525] text-foreground flex flex-col lg:flex-row">
+      <AdminSidebar
         activeTab={activeTab} onTabChange={setActiveTab} onOpenSecurity={() => setIsSecurityModalOpen(true)}
         onLogout={handleLogout} userEmail={user.email} userRole={role} totalViews={totalViews} avgScore={avgScore}
+        isOpenMobile={isMobileNavOpen} onCloseMobile={() => setIsMobileNavOpen(false)}
       />
 
-      <main className="flex-1 w-full max-w-[1440px] mx-auto px-5 lg:px-6 py-6 pb-20">
-        {isLoading ? (
-          <div className="flex flex-col items-center justify-center p-20 space-y-4">
-            <div className="animate-spin size-10 border-4 border-[#0072BC] border-t-transparent rounded-full" />
-            <p className="text-base text-muted-foreground font-semibold">Đang đồng bộ dữ liệu thời gian thực từ Supabase Cloud...</p>
-          </div>
-        ) : (
-          <>
-            {activeTab === 'overview' && (
-              <AdminOverviewView
-                units={safeUnits} criteria={safeCriteria} totalViews={totalViews} totalChapters={totalChapters}
-                onUpdateRating={handleUpdateUnitRating} onUpdateNote={handleUpdateUnitNote}
-                onToggleServerStatus={handleToggleUnitServerStatus} onSwitchToUnitsTab={() => setActiveTab('units')}
-              />
-            )}
-            {activeTab === 'units' && (
-              <AdminUnitDashboard
-                units={safeUnits} criteria={safeCriteria}
-                onUpdateRating={handleUpdateUnitRating} onUpdateNote={handleUpdateUnitNote}
-                onToggleServerStatus={handleToggleUnitServerStatus}
-              />
-            )}
-            {activeTab === 'analytics' && <AdminAnalyticsView sections={safeSections} onUpdateSections={setSections} />}
-            {activeTab === 'progress' && (
-              <AdminProgressManager
-                phases={safePhases} criteria={safeCriteria}
-                onAddCriterion={(c) => setCriteria((prev) => [...prev, { ...c, id: `crit_${Date.now()}` }])}
-                onUpdateCriterion={(c) => setCriteria((prev) => prev.map((item) => (item.id === c.id ? c : item)))}
-                onDeleteCriterion={(id) => setCriteria((prev) => prev.filter((item) => item.id !== id))}
-              />
-            )}
-            {activeTab === 'content' && (
-              <AdminContentManager
-                sections={safeSections} onToggleVisibility={handleToggleDocSectionVisibility} onUpdateSection={handleUpdateDocSection}
-              />
-            )}
-            {activeTab === 'issues' && <AdminIssueManager />}
-          </>
-        )}
-      </main>
+      <div className="flex-1 flex flex-col min-w-0">
+        <AdminTopBar
+          activeTab={activeTab} onOpenSecurity={() => setIsSecurityModalOpen(true)}
+          onLogout={handleLogout} onToggleMobileSidebar={() => setIsMobileNavOpen(true)}
+        />
+
+        <main className="flex-1 w-full max-w-[1440px] mx-auto px-4 sm:px-6 py-6 pb-20">
+          {isLoading ? (
+            <div className="flex flex-col items-center justify-center p-20 space-y-4">
+              <div className="animate-spin size-10 border-4 border-[#0072BC] border-t-transparent rounded-full" />
+              <p className="text-base text-muted-foreground font-semibold">Đang đồng bộ dữ liệu thời gian thực từ Supabase Cloud...</p>
+            </div>
+          ) : (
+            <>
+              {activeTab === 'overview' && (
+                <AdminOverviewView
+                  units={safeUnits} criteria={safeCriteria} totalViews={totalViews} totalChapters={totalChapters}
+                  onUpdateRating={handleUpdateUnitRating} onUpdateNote={handleUpdateUnitNote}
+                  onToggleServerStatus={handleToggleUnitServerStatus} onSwitchToUnitsTab={() => setActiveTab('units')}
+                />
+              )}
+              {activeTab === 'units' && (
+                <AdminUnitDashboard
+                  units={safeUnits} criteria={safeCriteria}
+                  onUpdateRating={handleUpdateUnitRating} onUpdateNote={handleUpdateUnitNote}
+                  onToggleServerStatus={handleToggleUnitServerStatus}
+                />
+              )}
+              {activeTab === 'analytics' && <AdminAnalyticsView sections={safeSections} onUpdateSections={setSections} />}
+              {activeTab === 'progress' && (
+                <AdminProgressManager
+                  phases={safePhases} criteria={safeCriteria}
+                  onAddCriterion={(c) => setCriteria((prev) => [...prev, { ...c, id: `crit_${Date.now()}` }])}
+                  onUpdateCriterion={(c) => setCriteria((prev) => prev.map((item) => (item.id === c.id ? c : item)))}
+                  onDeleteCriterion={(id) => setCriteria((prev) => prev.filter((item) => item.id !== id))}
+                />
+              )}
+              {activeTab === 'content' && (
+                <AdminContentManager
+                  sections={safeSections} onToggleVisibility={handleToggleDocSectionVisibility} onUpdateSection={handleUpdateDocSection}
+                />
+              )}
+              {activeTab === 'issues' && <AdminIssueManager />}
+            </>
+          )}
+        </main>
+      </div>
 
       <AdminSecurityModal isOpen={isSecurityModalOpen} onClose={() => setIsSecurityModalOpen(false)} />
       <AdminStatusConfirmModal data={pendingConfirm} onConfirm={handleExecuteConfirmedStatus} onCancel={() => setPendingConfirm(null)} isLoading={isConfirming} />
