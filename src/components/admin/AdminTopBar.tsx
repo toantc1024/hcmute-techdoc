@@ -67,7 +67,7 @@ export const AdminTopBar: React.FC<AdminTopBarProps> = ({
   const currentTabInfo = TAB_TITLES[activeTab] || TAB_TITLES.overview;
 
   return (
-    <header className="w-full bg-white dark:bg-[#132238] border-b border-slate-200/80 dark:border-slate-800 sticky top-0 z-20 shadow-2xs">
+    <header className="w-full bg-white dark:bg-[#132238] border-b border-slate-200/80 dark:border-slate-800 sticky top-0 z-20">
       <div className="w-full px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
         {/* Left: Mobile hamburger & Active Tab Title */}
         <div className="flex items-center gap-3">
