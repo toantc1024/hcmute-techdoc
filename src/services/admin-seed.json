@@ -364,7 +364,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 78,
-      "notes": "✓ Đạt chuẩn 100%: 31 chuyên mục, 67 bài viết, link thông suốt.",
+      "notes": "⏱ Đạt 78đ: CMS phong phú (31 chuyên mục, 67 bài viết); cần chuẩn hóa banner 2.4:1, sửa link menu giữ chỗ (#) và bổ sung thông tin phòng/email liên hệ.",
       "prevRank": 41,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 109 link: 100% thông suốt, không có link 404."
@@ -887,7 +887,7 @@
       "notes": "⚠️ Cần sửa: Sót 2 link dev test trỏ hcmutertic.com.",
       "prevRank": 10,
       "criteriaNotes": {
-        "crit_luong_c": "Còn sót 2 link trỏ về server test cũ (hcmutertic.com), cần đổi sang relative link."
+        "crit_luong_c": "Sót 2 link dev test trỏ hcmutertic.com trên menu."
       }
     },
     {
@@ -1222,7 +1222,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 88,
-      "notes": "✓ Đạt chuẩn 100%: 7 chuyên mục, 17 bài viết, link thông suốt.",
+      "notes": "⏱ Đạt khá (88đ): 7 chuyên mục, 17 bài viết, link tốt; cần tối ưu kích thước banner 2.4:1 và bổ sung số máy lẻ Ext/phòng làm việc.",
       "prevRank": 31,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 37 link: 100% thông suốt, không có link 404."
@@ -1352,7 +1352,7 @@
         "crit_admin": "pass"
       },
       "completenessScore": 88,
-      "notes": "✓ Đạt chuẩn 100%: 11 chuyên mục, 15 bài viết, link thông suốt.",
+      "notes": "⏱ Đạt khá (88đ): 11 chuyên mục, 15 bài viết, link tốt; cần cập nhật banner nhận diện riêng và bổ sung số phòng làm việc.",
       "prevRank": 28,
       "criteriaNotes": {
         "crit_luong_c": "Kiểm tra 60 link: 100% thông suốt, không có link 404."
